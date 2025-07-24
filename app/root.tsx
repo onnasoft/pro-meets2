@@ -22,7 +22,11 @@ export const links: LinksFunction = () => [
   },
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+interface LayoutProps {
+  readonly children: React.ReactNode;
+}
+
+export function Layout({ children }: LayoutProps) {
   return (
     <html lang="en">
       <head>
