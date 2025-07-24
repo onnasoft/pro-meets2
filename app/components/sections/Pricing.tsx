@@ -1,136 +1,163 @@
-import { Briefcase, CalendarCheck, DollarSign, Link, Mic, Users, Video } from "lucide-react";
+import { Check, ChevronRight, Star } from "lucide-react";
+import { motion } from "framer-motion";
 
-export default function Pricing() {
+export function Pricing() {
+  const plans = [
+    {
+      name: "Gratis",
+      price: "$0",
+      userPrice: "siempre gratis",
+      description: "Perfecto para probar la plataforma",
+      cta: "Regístrate ahora",
+      popular: false,
+      features: [
+        "1 usuario",
+        "5 entrevistas/mes",
+        "Grabación básica (40 min máx)",
+        "Agendamiento simple",
+        "Soporte por email",
+        "Acceso a la comunidad",
+      ],
+      buttonVariant: "outline",
+    },
+    {
+      name: "Profesional",
+      price: "$29",
+      userPrice: "por usuario/mes",
+      description: "Para equipos de reclutamiento",
+      cta: "Comenzar prueba gratis",
+      popular: true,
+      features: [
+        "Usuarios ilimitados",
+        "50 entrevistas/usuario/mes",
+        "Grabación HD + transcripción",
+        "Evaluación colaborativa",
+        "Integraciones con ATS",
+        "Soporte prioritario",
+        "Plantillas personalizables",
+      ],
+      buttonVariant: "primary",
+    },
+    {
+      name: "Empresa",
+      price: "$59",
+      userPrice: "por usuario/mes",
+      description: "Funciones avanzadas para equipos",
+      cta: "Ver demostración",
+      popular: false,
+      features: [
+        "Todo en Profesional +",
+        "Entrevistas ilimitadas",
+        "Analíticas avanzadas",
+        "SSO y seguridad empresarial",
+        "Onboarding dedicado",
+        "API completa",
+        "SLA 99.9% uptime",
+      ],
+      buttonVariant: "outline",
+    },
+  ];
+
   return (
-    <section id="precios" className="py-20 sm:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 flex items-center justify-center">
-          <DollarSign className="h-8 w-8 text-purple-600 mr-3" /> Planes y
-          Precios
-        </h2>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-12">
-          Elige el plan que mejor se adapte a las necesidades de tu equipo de
-          reclutamiento.
-        </p>
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Plan Básico */}
-          <div className="bg-gray-50 p-8 rounded-lg shadow-md border-2 border-transparent hover:border-purple-600 transition-all duration-300">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Básico</h3>
-            <p className="text-4xl font-extrabold text-purple-700 mb-4">
-              $29<span className="text-lg font-normal text-gray-600">/mes</span>
-            </p>
-            <p className="text-gray-700 mb-6">
-              Ideal para equipos pequeños o reclutadores individuales.
-            </p>
-            <ul className="text-gray-600 text-left space-y-2 mb-8">
-              <li className="flex items-center">
-                <CalendarCheck className="h-5 w-5 mr-2 text-green-500" />{" "}
-                Agendamiento ilimitado
-              </li>
-              <li className="flex items-center">
-                <Video className="h-5 w-5 mr-2 text-green-500" /> Video
-                entrevistas (hasta 10/mes)
-              </li>
-              <li className="flex items-center">
-                <Users className="h-5 w-5 mr-2 text-green-500" /> Gestión de 50
-                candidatos activos
-              </li>
-              <li className="flex items-center">
-                <Mic className="h-5 w-5 mr-2 text-green-500" /> Grabación de
-                entrevistas (limitado)
-              </li>
-            </ul>
-            <a
-              href="#"
-              className="block w-full px-6 py-3 bg-purple-700 text-white font-semibold rounded-full hover:bg-purple-800 transition-colors duration-200"
-            >
-              Elegir Plan Básico
-            </a>
-          </div>
+    <section id="pricing" className="py-20 bg-white">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-4xl font-bold text-gray-900 mb-4"
+          >
+            Precios simples por usuario
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
+          >
+            Paga solo por lo que necesitas y escala con tu equipo
+          </motion.p>
+        </div>
 
-          {/* Plan Profesional */}
-          <div className="bg-white p-8 rounded-lg shadow-xl border-2 border-purple-600 transform scale-105">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Profesional
-            </h3>
-            <p className="text-4xl font-extrabold text-purple-700 mb-4">
-              $79<span className="text-lg font-normal text-gray-600">/mes</span>
-            </p>
-            <p className="text-gray-700 mb-6">
-              Perfecto para equipos en crecimiento con mayores necesidades.
-            </p>
-            <ul className="text-gray-600 text-left space-y-2 mb-8">
-              <li className="flex items-center">
-                <CalendarCheck className="h-5 w-5 mr-2 text-green-500" />{" "}
-                Agendamiento ilimitado
-              </li>
-              <li className="flex items-center">
-                <Video className="h-5 w-5 mr-2 text-green-500" /> Video
-                entrevistas ilimitadas
-              </li>
-              <li className="flex items-center">
-                <Users className="h-5 w-5 mr-2 text-green-500" /> Gestión de 500
-                candidatos activos
-              </li>
-              <li className="flex items-center">
-                <Mic className="h-5 w-5 mr-2 text-green-500" /> Grabación y
-                análisis avanzados
-              </li>
-              <li className="flex items-center">
-                <Briefcase className="h-5 w-5 mr-2 text-green-500" />{" "}
-                Colaboración en equipo
-              </li>
-              <li className="flex items-center">
-                <Link className="h-5 w-5 mr-2 text-green-500" /> Personalización
-                de marca
-              </li>
-            </ul>
-            <a
-              href="#"
-              className="block w-full px-6 py-3 bg-purple-700 text-white font-semibold rounded-full hover:bg-purple-800 transition-colors duration-200"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {plans.map((plan, index) => (
+            <motion.div
+              key={plan.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className={`relative rounded-2xl overflow-hidden ${
+                plan.popular
+                  ? "border-2 border-primary-500 shadow-lg"
+                  : "border border-gray-200"
+              } bg-white`}
             >
-              Elegir Plan Profesional
-            </a>
-          </div>
+              {plan.popular && (
+                <div className="absolute top-0 right-0 bg-primary-500 text-white text-xs font-bold px-4 py-1 transform translate-x-2 -translate-y-2 rotate-12 flex items-center">
+                  <Star className="w-3 h-3 mr-1" />
+                  POPULAR
+                </div>
+              )}
 
-          {/* Plan Empresa */}
-          <div className="bg-gray-50 p-8 rounded-lg shadow-md border-2 border-transparent hover:border-purple-600 transition-all duration-300">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Empresa</h3>
-            <p className="text-4xl font-extrabold text-purple-700 mb-4">
-              Personalizado
-            </p>
-            <p className="text-gray-700 mb-6">
-              Soluciones a medida para grandes organizaciones.
-            </p>
-            <ul className="text-gray-600 text-left space-y-2 mb-8">
-              <li className="flex items-center">
-                <CalendarCheck className="h-5 w-5 mr-2 text-green-500" /> Todas
-                las funciones Profesional
-              </li>
-              <li className="flex items-center">
-                <Video className="h-5 w-5 mr-2 text-green-500" /> Soporte
-                prioritario 24/7
-              </li>
-              <li className="flex items-center">
-                <Users className="h-5 w-5 mr-2 text-green-500" /> Integraciones
-                avanzadas
-              </li>
-              <li className="flex items-center">
-                <Mic className="h-5 w-5 mr-2 text-green-500" /> Seguridad y
-                cumplimiento empresarial
-              </li>
-              <li className="flex items-center">
-                <Briefcase className="h-5 w-5 mr-2 text-green-500" /> Gestión de
-                cuentas dedicada
-              </li>
-            </ul>
-            <a
-              href="#"
-              className="block w-full px-6 py-3 bg-purple-700 text-white font-semibold rounded-full hover:bg-purple-800 transition-colors duration-200"
-            >
-              Contactar Ventas
-            </a>
-          </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  {plan.name}
+                </h3>
+                <div className="flex items-end mb-1">
+                  <span className="text-4xl font-bold text-gray-900">
+                    {plan.price}
+                  </span>
+                </div>
+                <p className="text-gray-500 text-sm mb-4">{plan.userPrice}</p>
+                <p className="text-gray-600 mb-6">{plan.description}</p>
+
+                <button
+                  className={`w-full py-3 px-6 rounded-lg font-bold flex items-center justify-center gap-2 transition-colors mb-6 ${
+                    plan.buttonVariant === "primary"
+                      ? "bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800"
+                      : "border border-primary-600 text-primary-600 hover:bg-primary-50"
+                  }`}
+                >
+                  {plan.cta}
+                  {plan.buttonVariant !== "primary" && (
+                    <ChevronRight className="w-4 h-4" />
+                  )}
+                </button>
+
+                <div className="pt-6 border-t border-gray-200">
+                  <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
+                    Incluye:
+                  </h4>
+                  <ul className="space-y-3">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start">
+                        <Check
+                          className={`w-5 h-5 ${
+                            plan.name === "Gratis"
+                              ? "text-gray-400"
+                              : "text-green-500"
+                          } mt-0.5 mr-2 flex-shrink-0`}
+                        />
+                        <span
+                          className={`${
+                            plan.name === "Gratis" && i > 2
+                              ? "text-gray-400"
+                              : "text-gray-700"
+                          }`}
+                        >
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

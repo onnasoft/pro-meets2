@@ -1,38 +1,42 @@
-"use client";
-
 import React, { useEffect, useMemo, useState } from "react";
-// Asegúrate de tener 'lucide-react' instalado para los iconos
-import { CalendarCheck, Video, Users, Lightbulb, TrendingUp } from 'lucide-react'; 
+import {
+  CalendarCheck,
+  Video,
+  Users,
+  Lightbulb,
+  TrendingUp,
+  ChevronRight,
+  Rocket,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 const translations: Record<string, Record<string, string>> = {
   es: {
-    titlePrefix: "Tu Reclutamiento, ",
-    titleSuffix: "Simplificado.",
+    titlePrefix: "Transforma tu ",
+    titleSuffix: "proceso de reclutamiento",
     subtitle:
-      "ProMeets centraliza el agendamiento, videollamadas, ATS y grabación de entrevistas. Contrata más rápido, mejor y con toda la información.",
-    typing1: "Más Eficiente",
-    typing2: "Más Inteligente",
-    typing3: "Más Colaborativo",
-    typing4: "Más Rápido",
-    ctaDemo: "Solicitar Demo Gratuita",
-    ctaFeatures: "Explorar Características",
-    poweredBy: "Impulsando el éxito en reclutamiento con:",
+      "La plataforma todo-en-uno para agendar entrevistas, realizar videollamadas, gestionar candidatos y grabar sesiones.",
+    typing1: "Automatizado",
+    typing2: "Inteligente",
+    typing3: "Eficiente",
+    typing4: "Colaborativo",
+    ctaDemo: "Solicitar Demo",
+    ctaFeatures: "Ver Funcionalidades",
+    poweredBy: "Potenciado con tecnología avanzada:",
   },
   en: {
-    titlePrefix: "Your Recruitment, ",
-    titleSuffix: "Simplified.",
+    titlePrefix: "Transform your ",
+    titleSuffix: "hiring process",
     subtitle:
-      "ProMeets centralizes scheduling, video calls, ATS, and interview recording. Hire faster, smarter, and with complete insights.",
-    typing1: "More Efficient",
-    typing2: "More Intelligent",
-    typing3: "More Collaborative",
-    typing4: "Faster Hiring",
-    ctaDemo: "Request Free Demo",
+      "The all-in-one platform to schedule interviews, conduct video calls, manage candidates and record sessions.",
+    typing1: "Automated",
+    typing2: "Smart",
+    typing3: "Efficient",
+    typing4: "Collaborative",
+    ctaDemo: "Request Demo",
     ctaFeatures: "Explore Features",
-    poweredBy: "Driving recruitment success with:",
+    poweredBy: "Powered by advanced technology:",
   },
-  // Puedes añadir más idiomas aquí
 };
 
 interface HeroProps {
@@ -40,7 +44,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ language }) => {
-  const t = translations[language] || translations.es; // Default to Spanish
+  const t = translations[language] || translations.es;
 
   const words = useMemo(
     () => [t.typing1, t.typing2, t.typing3, t.typing4],
@@ -77,94 +81,134 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
     return () => clearTimeout(timer);
   }, [charIndex, isDeleting, wordIndex, words]);
 
-  // Particle effect (manteniendo la misma lógica visual de fondo)
+  // Floating animation for the mockup
   useEffect(() => {
-    const createParticle = () => {
-      const particle = document.createElement("div");
-      particle.className = "particle"; // Asegúrate de tener estilos CSS para '.particle'
-      particle.style.left = Math.random() * 100 + "%";
-      particle.style.width = Math.random() * 4 + 2 + "px";
-      particle.style.height = particle.style.width;
-      particle.style.animationDuration = Math.random() * 3 + 5 + "s";
-      particle.style.opacity = (Math.random() * 0.5 + 0.2).toString();
+    const elements = document.querySelectorAll(".floating");
+    const handleAnimation = () => {
+      elements.forEach((el) => {
+        if (!(el instanceof HTMLElement)) return;
+        if (!el.dataset.offset) return;
 
-      const container = document.getElementById("particles-container");
-      if (container) {
-        container.appendChild(particle);
-        setTimeout(() => particle.remove(), 8000);
-      }
+        const y =
+          Math.sin(Date.now() / 1000 + Number(el.dataset.offset) * 1000) * 10;
+        el.style.transform = `translateY(${y}px)`;
+      });
+      requestAnimationFrame(handleAnimation);
     };
-
-    const interval = setInterval(createParticle, 300);
-    return () => clearInterval(interval);
+    handleAnimation();
   }, []);
 
-  // Iconos o "conceptos clave" que impulsan el reclutamiento
   const recruitmentPillars = [
-    { icon: <CalendarCheck className="w-8 h-8 md:w-10 md:h-10 text-purple-600" />, title: "Eficiencia" },
-    { icon: <Video className="w-8 h-8 md:w-10 md:h-10 text-purple-600" />, title: "Conexión" },
-    { icon: <Users className="w-8 h-8 md:w-10 md:h-10 text-purple-600" />, title: "Colaboración" },
-    { icon: <Lightbulb className="w-8 h-8 md:w-10 md:h-10 text-purple-600" />, title: "Inteligencia" },
-    { icon: <TrendingUp className="w-8 h-8 md:w-10 md:h-10 text-purple-600" />, title: "Crecimiento" },
+    { icon: <CalendarCheck className="w-6 h-6" />, title: "Agendamiento" },
+    { icon: <Video className="w-6 h-6" />, title: "Videollamadas" },
+    { icon: <Users className="w-6 h-6" />, title: "Colaboración" },
+    { icon: <Lightbulb className="w-6 h-6" />, title: "Inteligencia" },
+    { icon: <TrendingUp className="w-6 h-6" />, title: "Analíticas" },
   ];
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center hero-pattern overflow-hidden bg-gradient-to-br from-purple-50 to-indigo-100" // Fondo más suave para ProMeets
-    >
-      {/* Fondo con formas flotantes y partículas - Puedes mantener la misma lógica o ajustarla */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        <div className="absolute top-0 left-0 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-0 left-1/4 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-      </div>
-      <div id="particles-container" className="absolute inset-0"></div> {/* Necesitará estilos CSS para '.particle' */}
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
-        <div className="animate-fade-in-up">
-          <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 break-words leading-tight text-gray-900">
-            {t.titlePrefix}
-            <span className="gradient-text bg-gradient-to-r from-purple-700 to-indigo-700 text-transparent bg-clip-text">
-              {t.titleSuffix}
-            </span>
-            <br />
-            <span className="typing-animation text-purple-700">{typingText}</span>
-          </h1>
-          <p className="text-gray-700 mb-8 max-w-md sm:max-w-xl md:max-w-3xl mx-auto animate-fade-in-down break-words text-lg">
-            {t.subtitle}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up">
-            <Link
-              to="/demo" // Ajusta el enlace según tu ruta de demo
-              className="px-8 py-4 bg-purple-700 text-white font-bold rounded-full text-lg shadow-lg hover:bg-purple-800 transition-all duration-300 transform hover:scale-105"
-            >
-              <i className="fas fa-rocket mr-2"></i> {t.ctaDemo}
-            </Link>
-            <Link
-              to="#caracteristicas" // Enlaza a la sección de características de tu página
-              className="px-8 py-4 border-2 border-purple-700 text-purple-700 font-bold rounded-full text-lg shadow-lg hover:bg-purple-700 hover:text-white transition-all duration-300 transform hover:scale-105"
-            >
-              {t.ctaFeatures}
-            </Link>
-          </div>
+    <section className="relative overflow-hidden bg-gradient-to-br from-white to-primary-50 min-h-[90vh] flex items-center">
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-5">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary-200 blur-3xl"></div>
+          <div className="absolute top-2/3 left-2/3 w-64 h-64 rounded-full bg-secondary-700 blur-3xl"></div>
+          <div className="absolute top-1/3 right-1/4 w-64 h-64 rounded-full bg-primary-300 blur-3xl"></div>
         </div>
+      </div>
 
-        <div className="mt-16 animate-slide-up">
-          <p className="text-gray-600 mb-6 text-sm uppercase tracking-wider">
-            {t.poweredBy}
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 max-w-4xl mx-auto">
-            {recruitmentPillars.map((pillar) => (
-              <div
-                key={pillar.title}
-                className="flex flex-col items-center p-3 rounded-lg hover:bg-purple-50 transition-colors duration-200"
-                title={pillar.title}
+      {/* Content */}
+      <div className="relative container mx-auto px-6 py-20 md:py-24 lg:py-32">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          {/* Text content */}
+          <div className="lg:w-1/2 text-center lg:text-left">
+            <div className="mb-8">
+              <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-primary-100 text-primary-800 mb-4">
+                ✨ La nueva forma de reclutar
+              </span>
+            </div>
+
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              {t.titlePrefix}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-700">
+                {t.titleSuffix}
+              </span>
+            </h1>
+
+            <div className="h-12 mb-6">
+              <span className="text-2xl md:text-3xl font-medium text-primary-600">
+                {typingText}
+                <span className="animate-pulse">|</span>
+              </span>
+            </div>
+
+            <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto lg:mx-0">
+              {t.subtitle}
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Link
+                to="/demo"
+                className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg shadow-primary hover:shadow-primary-md transition-all hover:scale-[1.02]"
               >
-                {pillar.icon}
-                <span className="text-sm font-semibold text-gray-700 mt-2">{pillar.title}</span>
+                <Rocket className="w-5 h-5" />
+                {t.ctaDemo}
+              </Link>
+              <Link
+                to="#features"
+                className="flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-800 font-medium rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all hover:scale-[1.02]"
+              >
+                {t.ctaFeatures}
+                <ChevronRight className="w-5 h-5" />
+              </Link>
+            </div>
+
+            <div className="mt-12">
+              <p className="text-sm text-gray-500 mb-4">{t.poweredBy}</p>
+              <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+                {recruitmentPillars.map((pillar) => (
+                  <div
+                    key={pillar.title}
+                    className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm border border-gray-100 hover:border-primary-200 transition-colors"
+                  >
+                    <div className="text-primary-500">{pillar.icon}</div>
+                    <span className="text-sm font-medium">{pillar.title}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+          </div>
+
+          {/* Mockup image */}
+          <div className="lg:w-1/2 relative">
+            <div className="relative floating" data-offset="0">
+              <div className="absolute -top-10 -left-10 w-64 h-64 rounded-2xl bg-primary-100/50 border border-primary-200/50"></div>
+              <div className="absolute -bottom-10 -right-10 w-64 h-64 rounded-2xl bg-primary-200/50 border border-primary-300/50"></div>
+              <div className="relative z-10 bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+                <div className="h-8 bg-gray-100 border-b border-gray-200 flex items-center px-3 gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                </div>
+                <div className="p-4 bg-gradient-to-br from-primary-50 to-primary-100 h-96 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 flex items-center justify-center text-white">
+                      <Video className="w-8 h-8" />
+                    </div>
+                    <h3 className="font-semibold text-lg mb-2">
+                      Entrevista programada
+                    </h3>
+                    <p className="text-gray-600 text-sm max-w-xs mx-auto">
+                      Reunión con Carlos M. para puesto de Desarrollador
+                      Frontend
+                    </p>
+                    <button className="mt-6 px-6 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg text-sm font-medium hover:from-primary-600 hover:to-primary-700 transition-colors">
+                      Unirse ahora
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

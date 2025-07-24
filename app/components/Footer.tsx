@@ -50,7 +50,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="#precios"
+                href="#pricing"
                 className="hover:text-purple-400 transition-colors duration-200"
               >
                 Precios

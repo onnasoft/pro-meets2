@@ -1,15 +1,15 @@
-import Header from "../components/Header";
-import Hero from "../components/sections/Hero";
-import ProblemSolution from "../components/sections/ProblemSolution";
-import Features from "../components/sections/Features";
-import Benefits from "../components/sections/Benefits";
-import Testimonials from "../components/sections/Testimonials";
-import Integrations from "../components/sections/Integrations";
-import Pricing from "../components/sections/Pricing";
-import Footer from "../components/Footer";
-import FrequentAskedQuestions from "../components/sections/FrequentAskedQuestions";
-import CallToAction from "../components/sections/CallToAction";
+import Header from "~/components/Header";
+import Hero from "~/components/sections/Hero";
+import Footer from "~/components/Footer";
+import { CallToAction } from "~/components/sections/CallToAction";
 import { MetaFunction } from "@remix-run/react";
+import { KeyBenefits } from "~/components/sections/KeyBenefits";
+import { ProductShowcase } from "~/components/sections/ProductShowcase";
+import { CompetitorComparison } from "~/components/sections/CompetitorComparison";
+import { WorkflowIntegration } from "~/components/sections/WorkflowIntegration";
+import { WhoBenefits } from "~/components/sections/WhoBenefits";
+import { FrequentAskedQuestions } from "~/components/sections/FrequentAskedQuestions";
+import { Pricing } from "~/components/sections/Pricing";
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,13 +24,13 @@ export default function IndexPage() {
       <Header />
       <main>
         <Hero language="es" />
-        <ProblemSolution />
-        <Features />
-        <Benefits />
-        <Testimonials />
-        <Integrations />
-        <Pricing />
+        <KeyBenefits />
+        <ProductShowcase />
+        <CompetitorComparison />
+        <WorkflowIntegration />
+        <WhoBenefits />
         <FrequentAskedQuestions />
+        <Pricing />
         <CallToAction />
       </main>
       <Footer />
