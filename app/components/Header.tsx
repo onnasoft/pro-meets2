@@ -1,10 +1,27 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import {
+  Menu,
+  X,
+  User,
+  MessageSquare,
+  BookOpen,
+  ChevronDown,
+} from "lucide-react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [language, setLanguage] = useState("es");
+  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+
+  const languages = [
+    { code: "es", name: "Español", flag: "🇪🇸" },
+    { code: "en", name: "English", flag: "🇬🇧" },
+    { code: "fr", name: "Français", flag: "🇫🇷" },
+    { code: "ja", name: "日本語", flag: "🇯🇵" },
+    { code: "zh", name: "中文", flag: "🇨🇳" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,10 +32,20 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { name: "Características", href: "#features" },
-    { name: "Beneficios", href: "#benefits" },
-    { name: "Precios", href: "#pricing" },
+    {
+      name: "Blog",
+      href: "/blog",
+      icon: <BookOpen className="w-5 h-5 mr-2" />,
+    },
   ];
+
+  const handleLanguageChange = (langCode: string) => {
+    setLanguage(langCode);
+    setShowLanguageDropdown(false);
+    // Aquí puedes agregar lógica para cambiar el idioma de la aplicación
+  };
+
+  const currentLanguage = languages.find((lang) => lang.code === language);
 
   return (
     <header
@@ -30,40 +57,85 @@ export default function Header() {
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+          {/* Logo al lado izquierdo */}
           <Link
             to="/"
-            className="flex items-center space-x-2 focus:outline-none focus:ring-primary-500 rounded-md"
+            className="flex items-center focus:outline-none focus:ring-primary-500 rounded-md"
           >
             <img src="/logo.png" alt="ProMeets" className="h-10" />
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.href}
-                className="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm uppercase tracking-wider px-2 py-2 rounded-md hover:bg-primary-50"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
+          {/* Navegación desktop - ahora a la derecha */}
+          <div className="flex items-center space-x-6">
+            <nav className="hidden md:flex items-center space-x-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="flex items-center text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm uppercase tracking-wider px-3 py-2 rounded-md hover:bg-primary-50"
+                >
+                  {link.icon}
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
 
-          <div className="hidden md:flex items-center space-x-4">
-            <Link
-              to="/login"
-              className="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200"
-            >
-              Login
-            </Link>
-            <Link
-              to="/demo"
-              className="px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-lg hover:from-primary-600 hover:to-primary-700 transition-all duration-200 shadow-primary hover:shadow-primary-md"
-            >
-              Contacto
-            </Link>
+            {/* Botones de acción */}
+            <div className="hidden md:flex items-center space-x-4">
+              <Link
+                to="/login"
+                className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 px-3 py-2"
+              >
+                <User className="w-5 h-5 mr-2" />
+                Iniciar sesión
+              </Link>
+              <Link
+                to="/signup"
+                className="px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-lg hover:from-primary-600 hover:to-primary-700 transition-all duration-200 shadow-primary hover:shadow-primary-md flex items-center"
+              >
+                <MessageSquare className="w-5 h-5 mr-2" />
+                Registrarse
+              </Link>
+
+              {/* Selector de idioma - ahora después del botón de registro */}
+              <div className="relative ml-2">
+                <button
+                  onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+                  className="flex items-center text-gray-700 hover:text-primary-600 transition-colors duration-200 px-3 py-2 rounded-md"
+                >
+                  <span className="text-xl mr-1">{currentLanguage?.flag}</span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      showLanguageDropdown ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {showLanguageDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50 overflow-hidden">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => handleLanguageChange(lang.code)}
+                        className={`flex items-center w-full text-left px-4 py-2 text-sm ${
+                          language === lang.code
+                            ? "bg-primary-50 text-primary-600"
+                            : "text-gray-700 hover:bg-gray-100"
+                        }`}
+                      >
+                        <span className="text-xl mr-3">{lang.flag}</span>
+                        <span>
+                          {lang.name} ({lang.code.toUpperCase()})
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
+          {/* Menú móvil */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -83,6 +155,7 @@ export default function Header() {
         </div>
       </div>
 
+      {/* Menú móvil desplegable */}
       <div
         className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
           isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
@@ -93,26 +166,56 @@ export default function Header() {
             <Link
               key={link.name}
               to={link.href}
-              className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200"
+              className="flex items-center px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200"
               onClick={() => setIsOpen(false)}
             >
+              {link.icon}
               {link.name}
             </Link>
           ))}
-          <div className="pt-4 border-t border-gray-200">
+
+          {/* Selector de idioma móvil */}
+          <div className="px-3 py-3">
+            <div className="text-sm font-medium text-gray-500 mb-2">Idioma</div>
+            <div className="space-y-2">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => {
+                    handleLanguageChange(lang.code);
+                    setIsOpen(false);
+                  }}
+                  className={`flex items-center w-full px-3 py-2 text-sm rounded-md text-left ${
+                    language === lang.code
+                      ? "bg-primary-50 text-primary-600"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  <span className="text-xl mr-3">{lang.flag}</span>
+                  <span>
+                    {lang.name} ({lang.code.toUpperCase()})
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="pt-4 border-t border-gray-200 space-y-3">
             <Link
               to="/login"
-              className="block w-full px-4 py-3 text-center rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200 mb-3"
+              className="flex items-center justify-center w-full px-4 py-3 text-center rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200"
               onClick={() => setIsOpen(false)}
             >
-              Login
+              <User className="w-5 h-5 mr-2" />
+              Iniciar sesión
             </Link>
             <Link
-              to="/demo"
-              className="block w-full px-4 py-3 text-center rounded-md bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold hover:from-primary-600 hover:to-primary-700 transition-all duration-200 shadow-primary"
+              to="/signup"
+              className="flex items-center justify-center w-full px-4 py-3 text-center rounded-md bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold hover:from-primary-600 hover:to-primary-700 transition-all duration-200 shadow-primary"
               onClick={() => setIsOpen(false)}
             >
-              Contacto
+              <MessageSquare className="w-5 h-5 mr-2" />
+              Registrarse
             </Link>
           </div>
         </div>
