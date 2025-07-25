@@ -4,7 +4,7 @@ import { CallToAction } from "~/components/sections/CallToAction";
 import { MetaFunction, useLoaderData } from "@remix-run/react";
 import { languageLoader } from "~/loaders/language";
 import { motion } from "framer-motion";
-import { Mail, User, Lock, Briefcase, ChevronRight } from "lucide-react";
+import { Mail, User, Lock, Briefcase } from "lucide-react";
 
 export { languageLoader as loader };
 
