@@ -1,4 +1,3 @@
-"use client";
 
 import React, { useEffect, useMemo, useState } from "react";
 import {
@@ -12,8 +11,9 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Language } from "~/utils/language";
 
-const translations: Record<string, Record<string, string>> = {
+const translations = {
   es: {
     titlePrefix: "Transforma tu ",
     titleSuffix: "proceso de reclutamiento",
@@ -26,6 +26,18 @@ const translations: Record<string, Record<string, string>> = {
     ctaDemo: "Solicitar Demo",
     ctaFeatures: "Ver Funcionalidades",
     poweredBy: "Potenciado con tecnología avanzada:",
+    newRecruitment: "✨ La nueva forma de reclutar",
+    scheduledInterview: "Entrevista programada",
+    frontendPosition:
+      "Reunión con Carlos M. para puesto de Desarrollador Frontend",
+    joinNow: "Unirse ahora",
+    recruitmentPillars: {
+      scheduling: "Agendamiento",
+      videoCalls: "Videollamadas",
+      collaboration: "Colaboración",
+      intelligence: "Inteligencia",
+      analytics: "Analíticas",
+    },
   },
   en: {
     titlePrefix: "Transform your ",
@@ -39,11 +51,95 @@ const translations: Record<string, Record<string, string>> = {
     ctaDemo: "Request Demo",
     ctaFeatures: "Explore Features",
     poweredBy: "Powered by advanced technology:",
+    newRecruitment: "✨ The new way to recruit",
+    scheduledInterview: "Scheduled interview",
+    frontendPosition: "Meeting with Carlos M. for Frontend Developer position",
+    joinNow: "Join now",
+    recruitmentPillars: {
+      scheduling: "Scheduling",
+      videoCalls: "Video Calls",
+      collaboration: "Collaboration",
+      intelligence: "Intelligence",
+      analytics: "Analytics",
+    },
+  },
+  fr: {
+    titlePrefix: "Transformez votre ",
+    titleSuffix: "processus de recrutement",
+    subtitle:
+      "La plateforme tout-en-un pour planifier des entretiens, effectuer des appels vidéo, gérer les candidats et enregistrer des sessions.",
+    typing1: "Automatisé",
+    typing2: "Intelligent",
+    typing3: "Efficace",
+    typing4: "Collaboratif",
+    ctaDemo: "Demander une démo",
+    ctaFeatures: "Voir les fonctionnalités",
+    poweredBy: "Propulsé par une technologie avancée :",
+    newRecruitment: "✨ La nouvelle façon de recruter",
+    scheduledInterview: "Entretien programmé",
+    frontendPosition:
+      "Réunion avec Carlos M. pour le poste de Développeur Frontend",
+    joinNow: "Rejoindre maintenant",
+    recruitmentPillars: {
+      scheduling: "Planification",
+      videoCalls: "Appels vidéo",
+      collaboration: "Collaboration",
+      intelligence: "Intelligence",
+      analytics: "Analytique",
+    },
+  },
+  ja: {
+    titlePrefix: "あなたの",
+    titleSuffix: "採用プロセスを変革",
+    subtitle:
+      "面接のスケジュール、ビデオ通話の実施、候補者の管理、セッションの記録ができるオールインワンプラットフォーム。",
+    typing1: "自動化",
+    typing2: "スマート",
+    typing3: "効率的",
+    typing4: "協力的",
+    ctaDemo: "デモをリクエスト",
+    ctaFeatures: "機能を見る",
+    poweredBy: "高度な技術で構築:",
+    newRecruitment: "✨ 新しい採用方法",
+    scheduledInterview: "予定された面接",
+    frontendPosition:
+      "フロントエンド開発者ポジションについてのCarlos M.との面談",
+    joinNow: "今すぐ参加",
+    recruitmentPillars: {
+      scheduling: "スケジューリング",
+      videoCalls: "ビデオ通話",
+      collaboration: "コラボレーション",
+      intelligence: "インテリジェンス",
+      analytics: "分析",
+    },
+  },
+  zh: {
+    titlePrefix: "改变你的",
+    titleSuffix: "招聘流程",
+    subtitle: "一体化平台，用于安排面试、进行视频通话、管理候选人和录制会话。",
+    typing1: "自动化",
+    typing2: "智能",
+    typing3: "高效",
+    typing4: "协作",
+    ctaDemo: "请求演示",
+    ctaFeatures: "查看功能",
+    poweredBy: "由先进技术驱动：",
+    newRecruitment: "✨ 新的招聘方式",
+    scheduledInterview: "已安排的面试",
+    frontendPosition: "与Carlos M.会面讨论前端开发职位",
+    joinNow: "立即加入",
+    recruitmentPillars: {
+      scheduling: "日程安排",
+      videoCalls: "视频通话",
+      collaboration: "协作",
+      intelligence: "智能",
+      analytics: "分析",
+    },
   },
 };
 
 interface HeroProps {
-  readonly language: string;
+  readonly language: Language;
 }
 
 const Hero: React.FC<HeroProps> = ({ language }) => {
@@ -96,13 +192,32 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
     },
   };
 
-  const recruitmentPillars = [
-    { icon: <CalendarCheck className="w-6 h-6" />, title: "Agendamiento" },
-    { icon: <Video className="w-6 h-6" />, title: "Videollamadas" },
-    { icon: <Users className="w-6 h-6" />, title: "Colaboración" },
-    { icon: <Lightbulb className="w-6 h-6" />, title: "Inteligencia" },
-    { icon: <TrendingUp className="w-6 h-6" />, title: "Analíticas" },
-  ];
+  // Traducir los pilares de reclutamiento
+  const recruitmentPillars = useMemo(
+    () => [
+      {
+        icon: <CalendarCheck className="w-6 h-6" />,
+        title: t.recruitmentPillars.scheduling,
+      },
+      {
+        icon: <Video className="w-6 h-6" />,
+        title: t.recruitmentPillars.videoCalls,
+      },
+      {
+        icon: <Users className="w-6 h-6" />,
+        title: t.recruitmentPillars.collaboration,
+      },
+      {
+        icon: <Lightbulb className="w-6 h-6" />,
+        title: t.recruitmentPillars.intelligence,
+      },
+      {
+        icon: <TrendingUp className="w-6 h-6" />,
+        title: t.recruitmentPillars.analytics,
+      },
+    ],
+    [language]
+  );
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-white to-primary-50 min-h-[90vh] flex items-center">
@@ -132,7 +247,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
           <div className="lg:w-1/2 text-center lg:text-left">
             <motion.div className="mb-8">
               <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-primary-100 text-primary-800 mb-4">
-                ✨ La nueva forma de reclutar
+                {t.newRecruitment}
               </span>
             </motion.div>
 
@@ -238,19 +353,18 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
                       <Video className="w-8 h-8" />
                     </motion.div>
                     <h3 className="font-semibold text-lg mb-2">
-                      Entrevista programada
+                      {t.scheduledInterview}
                     </h3>
                     <p className="text-gray-600 text-sm max-w-xs mx-auto">
-                      Reunión con Carlos M. para puesto de Desarrollador
-                      Frontend
+                      {t.frontendPosition}
                     </p>
-                    <motion.button
+                    <br />
+                    <Link
+                      to="/signup"
                       className="mt-6 px-6 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg text-sm font-medium hover:from-primary-600 hover:to-primary-700 transition-colors"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
                     >
-                      Unirse ahora
-                    </motion.button>
+                      {t.joinNow}
+                    </Link>
                   </div>
                 </div>
               </motion.div>

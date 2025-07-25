@@ -8,20 +8,61 @@ import {
   BookOpen,
   ChevronDown,
 } from "lucide-react";
+import useLanguageStore from "~/store/language";
+import { Language } from "~/utils/language";
 
-export default function Header() {
+const translations = {
+  en: {
+    blog: "Blog",
+    login: "Login",
+    signup: "Sign Up",
+    language: "Language",
+  },
+  es: {
+    blog: "Blog",
+    login: "Iniciar sesión",
+    signup: "Registrarse",
+    language: "Idioma",
+  },
+  fr: {
+    blog: "Blog",
+    login: "Connexion",
+    signup: "S'inscrire",
+    language: "Langue",
+  },
+  ja: {
+    blog: "ブログ",
+    login: "ログイン",
+    signup: "サインアップ",
+    language: "言語",
+  },
+  zh: {
+    blog: "博客",
+    login: "登录",
+    signup: "注册",
+    language: "语言",
+  },
+};
+
+interface HeaderProps {
+  readonly language: Language;
+}
+
+export default function Header({ language }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [language, setLanguage] = useState("es");
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+  const { setLanguage } = useLanguageStore((state) => state);
 
-  const languages = [
-    { code: "es", name: "Español", flag: "🇪🇸" },
+  const languages: { code: Language; name: string; flag: string }[] = [
     { code: "en", name: "English", flag: "🇬🇧" },
+    { code: "es", name: "Español", flag: "🇪🇸" },
     { code: "fr", name: "Français", flag: "🇫🇷" },
     { code: "ja", name: "日本語", flag: "🇯🇵" },
     { code: "zh", name: "中文", flag: "🇨🇳" },
   ];
+
+  const t = translations[language] || translations.en;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,13 +74,13 @@ export default function Header() {
 
   const navLinks = [
     {
-      name: "Blog",
+      name: t.blog,
       href: "/blog",
       icon: <BookOpen className="w-5 h-5 mr-2" />,
     },
   ];
 
-  const handleLanguageChange = (langCode: string) => {
+  const handleLanguageChange = (langCode: Language) => {
     setLanguage(langCode);
     setShowLanguageDropdown(false);
     // Aquí puedes agregar lógica para cambiar el idioma de la aplicación
@@ -87,14 +128,14 @@ export default function Header() {
                 className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 px-3 py-2"
               >
                 <User className="w-5 h-5 mr-2" />
-                Iniciar sesión
+                {t.login}
               </Link>
               <Link
                 to="/signup"
                 className="px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-lg hover:from-primary-600 hover:to-primary-700 transition-all duration-200 shadow-primary hover:shadow-primary-md flex items-center"
               >
                 <MessageSquare className="w-5 h-5 mr-2" />
-                Registrarse
+                {t.signup}
               </Link>
 
               {/* Selector de idioma - ahora después del botón de registro */}
@@ -176,7 +217,9 @@ export default function Header() {
 
           {/* Selector de idioma móvil */}
           <div className="px-3 py-3">
-            <div className="text-sm font-medium text-gray-500 mb-2">Idioma</div>
+            <div className="text-sm font-medium text-gray-500 mb-2">
+              {t.language}
+            </div>
             <div className="space-y-2">
               {languages.map((lang) => (
                 <button
@@ -207,7 +250,7 @@ export default function Header() {
               onClick={() => setIsOpen(false)}
             >
               <User className="w-5 h-5 mr-2" />
-              Iniciar sesión
+              {t.login}
             </Link>
             <Link
               to="/signup"
@@ -215,7 +258,7 @@ export default function Header() {
               onClick={() => setIsOpen(false)}
             >
               <MessageSquare className="w-5 h-5 mr-2" />
-              Registrarse
+              {t.signup}
             </Link>
           </div>
         </div>
