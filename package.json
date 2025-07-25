@@ -18,6 +18,7 @@
     "framer-motion": "^12.23.9",
     "http-errors-enhanced": "^3.0.2",
     "isbot": "^5.1.28",
+    "joi": "^17.13.3",
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

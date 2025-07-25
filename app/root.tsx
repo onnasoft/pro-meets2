@@ -4,6 +4,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
@@ -22,11 +23,20 @@ export const links: LinksFunction = () => [
   },
 ];
 
+export const loader = () => {
+  return {
+    ENV: {
+      PUBLIC_API_URL: process.env.PUBLIC_API_URL,
+    },
+  };
+};
+
 interface LayoutProps {
   readonly children: React.ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
+  const { ENV } = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -34,6 +44,11 @@ export function Layout({ children }: LayoutProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(ENV)};`,
+          }}
+        />
       </head>
       <body>
         {children}

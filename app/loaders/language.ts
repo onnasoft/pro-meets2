@@ -16,9 +16,15 @@ export async function languageLoader({
     })
   );
 
-  const languageState = JSON.parse(cookies.language || "{}");
+  let languageState: { state: { language: Language | "" } } = {
+    state: { language: "" },
+  };
 
-  let language = (languageState.state.language ||
+  try {
+    languageState = JSON.parse(cookies.language || "{}");
+  } catch {}
+
+  let language = (languageState?.state?.language ||
     request.headers.get("Accept-Language")?.split(",")[0]) as Language;
 
   if (!Object.values(languages).includes(language)) {

@@ -354,19 +354,19 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
     {
       name: t.scheduling.name,
       description: t.scheduling.description,
-      image: "/screenshots/scheduling.png",
+      image: "/screenshots/scheduling.webp",
       stats: t.scheduling.stats,
     },
     {
       name: t.interviews.name,
       description: t.interviews.description,
-      image: "/screenshots/interview.png",
+      image: "/screenshots/interview.webp",
       stats: t.interviews.stats,
     },
     {
       name: t.evaluation.name,
       description: t.evaluation.description,
-      image: "/screenshots/evaluation.png",
+      image: "/screenshots/evaluation.webp",
       stats: t.evaluation.stats,
     },
   ];

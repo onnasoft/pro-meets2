@@ -15,7 +15,6 @@ const BlogLayout = ({ sidebar, content }: BlogLayoutProps) => {
       className="container mx-auto pb-20 px-4 sm:px-6 lg:px-8"
     >
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Columna de artículos (izquierda) */}
         <motion.div 
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -25,7 +24,6 @@ const BlogLayout = ({ sidebar, content }: BlogLayoutProps) => {
           {content}
         </motion.div>
 
-        {/* Columna de categorías (derecha) */}
         <motion.div 
           initial={{ x: 20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}

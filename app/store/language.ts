@@ -9,14 +9,14 @@ const cookieStorage = {
     return match ? decodeURIComponent(match[2]) : null;
   },
   setItem: (name: string, value: string): void => {
-    document.cookie = `${name}=${encodeURIComponent(
-      value
-    )}; path=/; max-age=31536000`;
+    const secureFlag = location.protocol === 'https:' ? 'Secure;' : '';
+    document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=31536000; SameSite=None; ${secureFlag}`;
   },
   removeItem: (name: string): void => {
     document.cookie = `${name}=; Max-Age=0; path=/`;
   },
 };
+
 
 interface LanguageState {
   language: Language;
