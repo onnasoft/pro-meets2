@@ -255,7 +255,7 @@ export function FrequentAskedQuestions({
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section id="frequent-asked-questions" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
         <motion.div
           initial="hidden"

@@ -1,7 +1,98 @@
 import { Video } from "lucide-react";
+import { Link } from "@remix-run/react";
+import config from "~/config";
+import { Language } from "~/utils/language";
 
-export default function Footer() {
+const translations = {
+  en: {
+    tagline: "The all-in-one solution for modern recruiting. Schedule, interview, manage and record with ease.",
+    quickLinks: "Quick Links",
+    features: "Features",
+    productShowcase: "Product Showcase",
+    competitorComparison: "Competitor Comparison",
+    howItWorks: "How It Works",
+    pricing: "Pricing",
+    faq: "FAQ",
+    blog: "Blog",
+    legalContact: "Legal & Contact",
+    privacyPolicy: "Privacy Policy",
+    terms: "Terms of Service",
+    contact: "Contact",
+    copyright: "All rights reserved."
+  },
+  es: {
+    tagline: "La solución integral para el reclutamiento moderno. Agenda, entrevista, gestiona y graba con facilidad.",
+    quickLinks: "Enlaces Rápidos",
+    features: "Características",
+    productShowcase: "Vitrina del Producto",
+    competitorComparison: "Comparación con Competidores",
+    howItWorks: "Cómo Funciona",
+    pricing: "Precios",
+    faq: "Preguntas Frecuentes",
+    blog: "Blog",
+    legalContact: "Legal y Contacto",
+    privacyPolicy: "Política de Privacidad",
+    terms: "Términos de Servicio",
+    contact: "Contacto",
+    copyright: "Todos los derechos reservados."
+  },
+  fr: {
+    tagline: "La solution tout-en-un pour le recrutement moderne. Planifiez, interviewez, gérez et enregistrez facilement.",
+    quickLinks: "Liens Rapides",
+    features: "Fonctionnalités",
+    productShowcase: "Présentation du Produit",
+    competitorComparison: "Comparaison avec les Concurrents",
+    howItWorks: "Comment ça marche",
+    pricing: "Tarifs",
+    faq: "FAQ",
+    blog: "Blog",
+    legalContact: "Légal & Contact",
+    privacyPolicy: "Politique de Confidentialité",
+    terms: "Conditions d'Utilisation",
+    contact: "Contact",
+    copyright: "Tous droits réservés."
+  },
+  ja: {
+    tagline: "現代的な採用のためのオールインワンソリューション。簡単にスケジュール、面接、管理、録画。",
+    quickLinks: "クイックリンク",
+    features: "特徴",
+    productShowcase: "製品紹介",
+    competitorComparison: "競合比較",
+    howItWorks: "使い方",
+    pricing: "価格",
+    faq: "よくある質問",
+    blog: "ブログ",
+    legalContact: "法的事項 & お問い合わせ",
+    privacyPolicy: "プライバシーポリシー",
+    terms: "利用規約",
+    contact: "お問い合わせ",
+    copyright: "全著作権所有。"
+  },
+  zh: {
+    tagline: "现代招聘的一体化解决方案。轻松安排、面试、管理和录制。",
+    quickLinks: "快速链接",
+    features: "功能",
+    productShowcase: "产品展示",
+    competitorComparison: "竞争对手比较",
+    howItWorks: "工作原理",
+    pricing: "定价",
+    faq: "常见问题",
+    blog: "博客",
+    legalContact: "法律与联系",
+    privacyPolicy: "隐私政策",
+    terms: "服务条款",
+    contact: "联系我们",
+    copyright: "版权所有。"
+  }
+};
+
+interface FooterProps {
+  readonly language: Language;
+}
+
+export default function Footer({ language }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const t = translations[language] || translations.en;
 
   return (
     <footer className="bg-gray-900 text-gray-300 py-12 px-4 sm:px-6 lg:px-8">
@@ -13,56 +104,71 @@ export default function Footer() {
             <span className="text-xl font-bold text-white">ProMeets</span>
           </div>
           <p className="text-sm leading-relaxed">
-            La solución integral para el reclutamiento moderno. Agenda,
-            entrevista, gestiona y graba con facilidad.
+            {t.tagline}
           </p>
         </div>
 
         {/* Columna 2: Enlaces Rápidos */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">
-            Enlaces Rápidos
+            {t.quickLinks}
           </h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <a
-                href="#caracteristicas"
+              <Link
+                to="#features"
                 className="hover:text-purple-400 transition-colors duration-200"
               >
-                Características
-              </a>
+                {t.features}
+              </Link>
             </li>
             <li>
-              <a
-                href="#beneficios"
+              <Link
+                to="#product-showcase"
                 className="hover:text-purple-400 transition-colors duration-200"
               >
-                Beneficios
-              </a>
+                {t.productShowcase}
+              </Link>
             </li>
             <li>
-              <a
-                href="#testimonios"
+              <Link
+                to="#competitor-comparison"
                 className="hover:text-purple-400 transition-colors duration-200"
               >
-                Testimonios
-              </a>
+                {t.competitorComparison}
+              </Link>
             </li>
             <li>
-              <a
-                href="#pricing"
+              <Link
+                to="#workflow-integration"
                 className="hover:text-purple-400 transition-colors duration-200"
               >
-                Precios
-              </a>
+                {t.howItWorks}
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="#pricing"
                 className="hover:text-purple-400 transition-colors duration-200"
               >
-                Blog
-              </a>
+                {t.pricing}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="#frequent-asked-questions"
+                className="hover:text-purple-400 transition-colors duration-200"
+              >
+                {t.faq}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/blog"
+                className="hover:text-purple-400 transition-colors duration-200"
+              >
+                {t.blog}
+              </Link>
             </li>
           </ul>
         </div>
@@ -70,40 +176,42 @@ export default function Footer() {
         {/* Columna 3: Legal y Contacto */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">
-            Legal y Contacto
+            {t.legalContact}
           </h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <a
-                href="#"
+              <Link
+                to="/privacy-policy"
                 className="hover:text-purple-400 transition-colors duration-200"
               >
-                Política de Privacidad
-              </a>
+                {t.privacyPolicy}
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/terms-of-service"
                 className="hover:text-purple-400 transition-colors duration-200"
               >
-                Términos de Servicio
-              </a>
+                {t.terms}
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/contact"
                 className="hover:text-purple-400 transition-colors duration-200"
               >
-                Contacto
-              </a>
+                {t.contact}
+              </Link>
             </li>
           </ul>
           <div className="flex space-x-4 mt-6">
-            {/* Iconos de Redes Sociales (Placeholders) */}
+            {/* Iconos de Redes Sociales */}
             <a
-              href="#"
+              href={config.linkedinUrl}
               aria-label="LinkedIn"
               className="text-gray-400 hover:text-purple-400 transition-colors duration-200"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <svg
                 className="h-6 w-6"
@@ -118,25 +226,11 @@ export default function Footer() {
                 />
               </svg>
             </a>
-            <a
-              href="#"
-              aria-label="Twitter"
-              className="text-gray-400 hover:text-purple-400 transition-colors duration-200"
-            >
-              <svg
-                className="h-6 w-6"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path d="M8.297 22.464c-2.028 0-3.93-1.002-5.048-2.704.776.092 1.57.138 2.37.138 4.636 0 8.44-3.79 8.44-8.44 0-.12-.003-.24-.007-.36.91-.658 1.696-1.474 2.32-2.396-.84.372-1.742.62-2.678.73.968-.58 1.708-1.496 2.058-2.59.866.115 1.706.176 2.52-.004-.91.54-1.928.934-3.008 1.144-.86-.91-2.08-1.478-3.44-1.478-2.606 0-4.71 2.104-4.71 4.71 0 .37.04.73.116 1.076-3.91-.196-7.37-2.07-9.69-4.91-.402.69-.634 1.49-.634 2.36 0 1.63.83 3.06 2.094 3.91-.77-.024-1.49-.234-2.12-.58v.06c0 2.28 1.624 4.18 3.774 4.6-.39.106-.8.162-1.22.162-.3 0-.59-.03-.87-.08.6 1.86 2.33 3.22 4.38 3.26-1.61.99-3.64 1.58-5.78 1.58-.37 0-.74-.02-1.1-.06 2.08 1.34 4.55 2.12 7.18 2.12" />
-              </svg>
-            </a>
           </div>
         </div>
       </div>
       <div className="text-center text-sm text-gray-500 mt-8">
-        &copy; {currentYear} ProMeets. Todos los derechos reservados.
+        &copy; {currentYear} ProMeets. {t.copyright}
       </div>
     </footer>
   );

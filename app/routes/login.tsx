@@ -248,7 +248,7 @@ export default function LoginPage() {
 
         <CallToAction language={language} />
       </main>
-      <Footer />
+      <Footer language={language} />
     </>
   );
 }

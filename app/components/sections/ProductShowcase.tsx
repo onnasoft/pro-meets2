@@ -372,7 +372,7 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-br bg-gray-50">
+    <section id="product-showcase" className="py-24 bg-gradient-to-br bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-start gap-12">
           {/* Left panel (content) */}
@@ -436,7 +436,7 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
           </div>
 
           {/* Right panel (image) */}
-          <div className="lg:w-1/2 relative h-full min-h-[500px] lg:min-h-[600px] sticky top-6">
+          <div className="lg:w-1/2 h-full min-h-[500px] lg:min-h-[600px] sticky top-6">
             <motion.div
               key={selectedIndex}
               initial={{ opacity: 0, scale: 0.95 }}

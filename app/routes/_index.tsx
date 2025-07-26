@@ -119,7 +119,7 @@ export default function IndexPage() {
         <Pricing language={language} />
         <CallToAction language={language} />
       </main>
-      <Footer />
+      <Footer language={language} />
     </>
   );
 }

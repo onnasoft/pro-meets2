@@ -229,7 +229,7 @@ const BlogPage = () => {
         <CallToAction language={language} />
       </main>
 
-      <Footer />
+      <Footer language={language} />
     </>
   );
 };

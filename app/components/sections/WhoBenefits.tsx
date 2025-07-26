@@ -214,7 +214,7 @@ export function WhoBenefits({ language }: WhoBenefitsProps) {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section id="who-benefits" className="py-20 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <motion.h2

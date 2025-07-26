@@ -337,7 +337,7 @@ export function KeyBenefits({ language }: KeyBenefitsProps) {
   };
 
   return (
-    <section id="features" className="py-24">
+    <section id="features" className="py-24 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <motion.h2

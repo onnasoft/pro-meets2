@@ -63,7 +63,7 @@ export default function SignUpPage() {
 
         <CallToAction language={language} />
       </main>
-      <Footer />
+      <Footer language={language} />
     </>
   );
 }
