@@ -16,7 +16,7 @@ const translations = {
     competitors: [
       {
         name: "ProMeets",
-        image: "/logos/promeets.png",
+        image: "/logos/promeets.webp",
         tagline: "All-in-one solution",
         pros: [
           "Specialized in recruitment",
@@ -26,13 +26,13 @@ const translations = {
       },
       {
         name: "Zoom + Calendly",
-        image: "/logos/zoom-calendly.png",
+        image: "/logos/zoom-calendly.webp",
         tagline: "Separate solutions",
         pros: ["Known tools", "Basic functionalities"],
       },
       {
         name: "Traditional ATS",
-        image: "/logos/traditional-ats.png",
+        image: "/logos/traditional-ats.webp",
         tagline: "Legacy system",
         pros: ["Candidate database", "Process tracking"],
       },
@@ -80,7 +80,7 @@ const translations = {
     competitors: [
       {
         name: "ProMeets",
-        image: "/logos/promeets.png",
+        image: "/logos/promeets.webp",
         tagline: "Solución todo-en-uno",
         pros: [
           "Especializado en reclutamiento",
@@ -90,13 +90,13 @@ const translations = {
       },
       {
         name: "Zoom + Calendly",
-        image: "/logos/zoom-calendly.png",
+        image: "/logos/zoom-calendly.webp",
         tagline: "Soluciones separadas",
         pros: ["Herramientas conocidas", "Funcionalidades básicas"],
       },
       {
         name: "ATS Tradicional",
-        image: "/logos/traditional-ats.png",
+        image: "/logos/traditional-ats.webp",
         tagline: "Sistema legacy",
         pros: ["Base de candidatos", "Seguimiento de procesos"],
       },
@@ -146,7 +146,7 @@ const translations = {
     competitors: [
       {
         name: "ProMeets",
-        image: "/logos/promeets.png",
+        image: "/logos/promeets.webp",
         tagline: "Solution tout-en-un",
         pros: [
           "Spécialisé dans le recrutement",
@@ -156,13 +156,13 @@ const translations = {
       },
       {
         name: "Zoom + Calendly",
-        image: "/logos/zoom-calendly.png",
+        image: "/logos/zoom-calendly.webp",
         tagline: "Solutions séparées",
         pros: ["Outils connus", "Fonctionnalités de base"],
       },
       {
         name: "ATS Traditionnel",
-        image: "/logos/traditional-ats.png",
+        image: "/logos/traditional-ats.webp",
         tagline: "Système legacy",
         pros: ["Base de candidats", "Suivi des processus"],
       },
@@ -212,7 +212,7 @@ const translations = {
     competitors: [
       {
         name: "ProMeets",
-        image: "/logos/promeets.png",
+        image: "/logos/promeets.webp",
         tagline: "オールインワンソリューション",
         pros: [
           "採用に特化",
@@ -222,13 +222,13 @@ const translations = {
       },
       {
         name: "Zoom + Calendly",
-        image: "/logos/zoom-calendly.png",
+        image: "/logos/zoom-calendly.webp",
         tagline: "分離されたソリューション",
         pros: ["既知のツール", "基本機能"],
       },
       {
         name: "従来のATS",
-        image: "/logos/traditional-ats.png",
+        image: "/logos/traditional-ats.webp",
         tagline: "レガシーシステム",
         pros: ["候補者データベース", "プロセス追跡"],
       },
@@ -273,19 +273,19 @@ const translations = {
     competitors: [
       {
         name: "ProMeets",
-        image: "/logos/promeets.png",
+        image: "/logos/promeets.webp",
         tagline: "一体化解决方案",
         pros: ["专注于招聘", "完全集成的工作流程", "为TA团队设计"],
       },
       {
         name: "Zoom + Calendly",
-        image: "/logos/zoom-calendly.png",
+        image: "/logos/zoom-calendly.webp",
         tagline: "分离的解决方案",
         pros: ["知名工具", "基本功能"],
       },
       {
         name: "传统ATS",
-        image: "/logos/traditional-ats.png",
+        image: "/logos/traditional-ats.webp",
         tagline: "遗留系统",
         pros: ["候选人数据库", "流程跟踪"],
       },

@@ -1,4 +1,4 @@
-export const translations = {
+const translations = {
   en: {
     title: "Create your account",
     subtitle: "Start streamlining your hiring process today",
@@ -19,7 +19,8 @@ export const translations = {
     microsoftSignup: "Continue with Microsoft",
     passwordMismatch: "Passwords do not match",
     registrationSuccessTitle: "Registration successful!",
-    registrationSuccessMessage: "We've sent a verification link to your email address. Please check your inbox and click the link to complete your registration.",
+    registrationSuccessMessage:
+      "We've sent a verification link to your email address. Please check your inbox and click the link to complete your registration.",
     didNotReceiveEmail: "Didn't receive the email?",
     resendEmail: "Resend email",
     registering: "Registering...",
@@ -27,11 +28,13 @@ export const translations = {
     errors: {
       name: "Name must be at least 2 characters",
       email: "Please enter a valid email address",
-      password: "Password must be at least 8 characters and include uppercase, lowercase and a number",
+      password:
+        "Password must be at least 8 characters and include uppercase, lowercase and a number",
       confirmPassword: "Passwords do not match",
-      company: "Company name can only contain alphanumeric characters and spaces",
+      company:
+        "Company name can only contain alphanumeric characters and spaces",
       terms: "You must accept the Terms of Service and Privacy Policy",
-    }
+    },
   },
   es: {
     title: "Crea tu cuenta",
@@ -53,7 +56,8 @@ export const translations = {
     microsoftSignup: "Continuar con Microsoft",
     passwordMismatch: "Las contraseñas no coinciden",
     registrationSuccessTitle: "¡Registro exitoso!",
-    registrationSuccessMessage: "Hemos enviado un enlace de verificación a tu correo electrónico. Por favor revisa tu bandeja de entrada y haz clic en el enlace para completar tu registro.",
+    registrationSuccessMessage:
+      "Hemos enviado un enlace de verificación a tu correo electrónico. Por favor revisa tu bandeja de entrada y haz clic en el enlace para completar tu registro.",
     didNotReceiveEmail: "¿No recibiste el correo?",
     resendEmail: "Reenviar correo",
     registering: "Registrando...",
@@ -61,15 +65,19 @@ export const translations = {
     errors: {
       name: "El nombre debe tener al menos 2 caracteres",
       email: "Por favor, introduce una dirección de correo electrónico válida",
-      password: "La contraseña debe tener al menos 8 caracteres e incluir mayúsculas, minúsculas y un número",
+      password:
+        "La contraseña debe tener al menos 8 caracteres e incluir mayúsculas, minúsculas y un número",
       confirmPassword: "Las contraseñas no coinciden",
-      company: "El nombre de la empresa solo puede contener caracteres alfanuméricos y espacios",
-      terms: "Debes aceptar los Términos de Servicio y la Política de Privacidad",
-    }
+      company:
+        "El nombre de la empresa solo puede contener caracteres alfanuméricos y espacios",
+      terms:
+        "Debes aceptar los Términos de Servicio y la Política de Privacidad",
+    },
   },
   fr: {
     title: "Créez votre compte",
-    subtitle: "Commencez à rationaliser votre processus d'embauche dès aujourd'hui",
+    subtitle:
+      "Commencez à rationaliser votre processus d'embauche dès aujourd'hui",
     nameLabel: "Nom complet",
     emailLabel: "Adresse e-mail",
     passwordLabel: "Mot de passe",
@@ -87,7 +95,8 @@ export const translations = {
     microsoftSignup: "Continuer avec Microsoft",
     passwordMismatch: "Les mots de passe ne correspondent pas",
     registrationSuccessTitle: "Inscription réussie !",
-    registrationSuccessMessage: "Nous avons envoyé un lien de vérification à votre adresse e-mail. Veuillez vérifier votre boîte de réception et cliquer sur le lien pour terminer votre inscription.",
+    registrationSuccessMessage:
+      "Nous avons envoyé un lien de vérification à votre adresse e-mail. Veuillez vérifier votre boîte de réception et cliquer sur le lien pour terminer votre inscription.",
     didNotReceiveEmail: "Vous n'avez pas reçu l'e-mail ?",
     resendEmail: "Renvoyer l'e-mail",
     registering: "Enregistrement...",
@@ -95,11 +104,14 @@ export const translations = {
     errors: {
       name: "Le nom doit comporter au moins 2 caractères",
       email: "Veuillez entrer une adresse e-mail valide",
-      password: "Le mot de passe doit comporter au moins 8 caractères et inclure des majuscules, des minuscules et un chiffre",
+      password:
+        "Le mot de passe doit comporter au moins 8 caractères et inclure des majuscules, des minuscules et un chiffre",
       confirmPassword: "Les mots de passe ne correspondent pas",
-      company: "Le nom de l'entreprise ne peut contenir que des caractères alphanumériques et des espaces",
-      terms: "Vous devez accepter les Conditions d'utilisation et la Politique de confidentialité",
-    }
+      company:
+        "Le nom de l'entreprise ne peut contenir que des caractères alphanumériques et des espaces",
+      terms:
+        "Vous devez accepter les Conditions d'utilisation et la Politique de confidentialité",
+    },
   },
   ja: {
     title: "アカウントを作成",
@@ -121,7 +133,8 @@ export const translations = {
     microsoftSignup: "Microsoftで続行",
     passwordMismatch: "パスワードが一致しません",
     registrationSuccessTitle: "登録が成功しました！",
-    registrationSuccessMessage: "確認リンクをメールアドレスに送信しました。受信トレイを確認し、リンクをクリックして登録を完了してください。",
+    registrationSuccessMessage:
+      "確認リンクをメールアドレスに送信しました。受信トレイを確認し、リンクをクリックして登録を完了してください。",
     didNotReceiveEmail: "メールが届いていませんか？",
     resendEmail: "メールを再送する",
     registering: "登録中...",
@@ -129,11 +142,12 @@ export const translations = {
     errors: {
       name: "名前は2文字以上でなければなりません",
       email: "有効なメールアドレスを入力してください",
-      password: "パスワードは8文字以上で、大文字、小文字、数字を含む必要があります",
+      password:
+        "パスワードは8文字以上で、大文字、小文字、数字を含む必要があります",
       confirmPassword: "パスワードが一致しません",
       company: "会社名は英数字とスペースのみ使用できます",
       terms: "利用規約とプライバシーポリシーに同意する必要があります",
-    }
+    },
   },
   zh: {
     title: "创建您的账户",
@@ -155,7 +169,8 @@ export const translations = {
     microsoftSignup: "通过Microsoft继续",
     passwordMismatch: "密码不匹配",
     registrationSuccessTitle: "注册成功！",
-    registrationSuccessMessage: "我们已向您的电子邮件地址发送了验证链接。请检查您的收件箱并点击链接完成注册。",
+    registrationSuccessMessage:
+      "我们已向您的电子邮件地址发送了验证链接。请检查您的收件箱并点击链接完成注册。",
     didNotReceiveEmail: "没有收到邮件？",
     resendEmail: "重新发送邮件",
     registering: "注册中...",
@@ -167,6 +182,8 @@ export const translations = {
       confirmPassword: "密码不匹配",
       company: "公司名称只能包含字母数字字符和空格",
       terms: "您必须接受服务条款和隐私政策",
-    }
-  }
+    },
+  },
 };
+
+export default translations;

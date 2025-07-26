@@ -2,8 +2,8 @@ import { Language } from "~/utils/language";
 import { motion } from "framer-motion";
 import { CheckCircle, AlertCircle } from "lucide-react";
 import { useState } from "react";
-import { translations } from "./translations";
-import { FormData } from "./types";
+import translations from "./translations";
+import { SignupFormData } from "./types";
 import { registerAuthSchema } from "./schema";
 import { register } from "~/services/auth";
 import { Link } from "@remix-run/react";
@@ -11,7 +11,7 @@ import NameField from "./fields/NameField";
 import EmailField from "./fields/EmailField";
 import PasswordField from "./fields/PasswordField";
 import CompanyField from "./fields/CompanyField";
-import TermsField from "./TermsField";
+import TermsField from "./fields/TermsField";
 
 interface SignUpFormProps {
   language: Language;
@@ -21,7 +21,7 @@ const SignUpForm = ({ language }: SignUpFormProps) => {
   const t = translations[language] || translations.en;
   const schema = registerAuthSchema(t);
 
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<SignupFormData>({
     name: "",
     email: "",
     password: "",
@@ -30,10 +30,10 @@ const SignUpForm = ({ language }: SignUpFormProps) => {
     terms: false,
   });
   const [errors, setErrors] = useState<
-    Partial<Record<keyof FormData | "global", string>>
+    Partial<Record<keyof SignupFormData | "global", string>>
   >({});
   const [touched, setTouched] = useState<
-    Partial<Record<keyof FormData, boolean>>
+    Partial<Record<keyof SignupFormData, boolean>>
   >({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -55,12 +55,12 @@ const SignUpForm = ({ language }: SignUpFormProps) => {
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name } = e.target;
     setTouched((prev) => ({ ...prev, [name]: true }));
-    validateField(name as keyof FormData);
+    validateField(name as keyof SignupFormData);
   };
 
-  const validateField = (fieldName: keyof FormData) => {
+  const validateField = (fieldName: keyof SignupFormData) => {
     const result = schema.validate(formData, { abortEarly: false });
-    const newErrors: Partial<Record<keyof FormData, string>> = {};
+    const newErrors: Partial<Record<keyof SignupFormData, string>> = {};
 
     result.error?.details.forEach((detail) => {
       if (detail.path[0] === fieldName) {
@@ -79,10 +79,10 @@ const SignUpForm = ({ language }: SignUpFormProps) => {
 
   const validateForm = () => {
     const result = schema.validate(formData, { abortEarly: false });
-    const newErrors: Partial<Record<keyof FormData, string>> = {};
+    const newErrors: Partial<Record<keyof SignupFormData, string>> = {};
 
     result.error?.details.forEach((detail) => {
-      newErrors[detail.path[0] as keyof FormData] = detail.message;
+      newErrors[detail.path[0] as keyof SignupFormData] = detail.message;
     });
 
     if (formData.password !== formData.confirmPassword) {

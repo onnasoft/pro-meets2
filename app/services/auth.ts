@@ -62,3 +62,41 @@ export async function resendVerification(email: string): Promise<void> {
     throw new Error(errorData.message || "Failed to resend verification email");
   }
 }
+
+export async function verifyEmail(token: string): Promise<void> {
+  const response = await fetch(`${config.apiUrl}/auth/verify-email`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ token }),
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const errorData: HTTPError = await response.json();
+    throw new Error(errorData.message || "Email verification failed");
+  }
+}
+
+export async function login(
+  email: string,
+  password: string,
+  rememberMe: boolean = false
+): Promise<{ message: string }> {
+  const response = await fetch(`${config.apiUrl}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username: email, password, rememberMe }),
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const errorData: HTTPError = await response.json();
+    throw new Error(errorData.message || "Login failed");
+  }
+
+  return response.json();
+}
