@@ -224,8 +224,8 @@ export default function SupportPage() {
                 {t.faqTitle}
               </h2>
               <div className="space-y-4">
-                {t.faqItems.map((item, index) => (
-                  <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden">
+                {t.faqItems.map((item) => (
+                  <div key={item.answer} className="bg-white rounded-xl shadow-md overflow-hidden">
                     <details className="group">
                       <summary className="list-none p-4 cursor-pointer flex justify-between items-center">
                         <span className="font-medium text-gray-800 group-hover:text-primary-600">
