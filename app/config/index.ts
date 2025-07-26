@@ -1,4 +1,3 @@
-
 declare global {
   interface Window {
     ENV?: {
@@ -14,6 +13,7 @@ type Config = {
 let _config: Config;
 
 if (typeof window === "undefined") {
+  console.log("Running on the server");
   _config = {
     apiUrl: process.env.PUBLIC_API_URL || "/api",
   };

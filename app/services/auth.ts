@@ -35,7 +35,8 @@ export async function register(
 
     if (Array.isArray(errorData.message)) {
       const errorMessages = errorData.message.map(
-        (error) => `${error.property}: ${Object.values(error.constraints).join(", ")}`
+        (error) =>
+          `${error.property}: ${Object.values(error.constraints).join(", ")}`
       );
       throw new Error(`Validation errors: ${errorMessages.join("; ")}`);
     }
@@ -44,4 +45,20 @@ export async function register(
   }
 
   return response.json();
+}
+
+export async function resendVerification(email: string): Promise<void> {
+  const response = await fetch(`${config.apiUrl}/auth/resend-verification`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const errorData: HTTPError = await response.json();
+    throw new Error(errorData.message || "Failed to resend verification email");
+  }
 }

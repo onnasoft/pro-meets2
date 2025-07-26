@@ -23,10 +23,14 @@ export const links: LinksFunction = () => [
   },
 ];
 
-export const loader = () => {
+interface Environment {
+  PUBLIC_API_URL: string;
+}
+
+export const loader = async () => {
   return {
     ENV: {
-      PUBLIC_API_URL: process.env.PUBLIC_API_URL,
+      PUBLIC_API_URL: process.env.PUBLIC_API_URL ?? "",
     },
   };
 };
@@ -36,7 +40,6 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
-  const { ENV } = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -44,11 +47,6 @@ export function Layout({ children }: LayoutProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.ENV = ${JSON.stringify(ENV)};`,
-          }}
-        />
       </head>
       <body>
         {children}
@@ -59,6 +57,25 @@ export function Layout({ children }: LayoutProps) {
   );
 }
 
+export function ErrorBoundary() {
+  return (
+    <Layout>
+      <h1 className="text-red-500">Something went wrong</h1>
+    </Layout>
+  );
+}
+
 export default function App() {
-  return <Outlet />;
+  const { ENV } = useLoaderData<typeof loader>();
+
+  return (
+    <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.ENV = ${JSON.stringify(ENV)};`,
+        }}
+      />
+      <Outlet />
+    </>
+  );
 }

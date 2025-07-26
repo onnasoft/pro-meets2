@@ -12,5 +12,5 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       uuid: "my-uuid-xxx",
     },
   };
-  return Response.json(jsonData);
+  return jsonData;
 };
