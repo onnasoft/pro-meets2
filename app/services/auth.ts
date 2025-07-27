@@ -106,6 +106,41 @@ export async function login(
   return response.json();
 }
 
+export async function forgotPassword(email: string): Promise<void> {
+  const response = await fetch(`${config.apiUrl}/auth/forgot-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const errorData: HTTPError = await response.json();
+    throw new Error(errorData.message || "Failed to send reset password email");
+  }
+}
+
+export async function resetPassword(
+  token: string,
+  newPassword: string
+): Promise<void> {
+  const response = await fetch(`${config.apiUrl}/auth/reset-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ token, newPassword }),
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const errorData: HTTPError = await response.json();
+    throw new Error(errorData.message || "Password reset failed");
+  }
+}
+
 export async function OAuthGoogleLogin(
   token: string
 ): Promise<LoginResponse> {
