@@ -5,13 +5,15 @@ import { useState } from "react";
 import translations from "./translations";
 import { SignupFormData } from "./types";
 import { registerAuthSchema } from "./schema";
-import { register } from "~/services/auth";
-import { Link } from "@remix-run/react";
+import { OAuthGoogleLogin, register } from "~/services/auth";
+import { Link, useNavigate } from "@remix-run/react";
 import NameField from "./fields/NameField";
 import EmailField from "./fields/EmailField";
 import PasswordField from "./fields/PasswordField";
 import CompanyField from "./fields/CompanyField";
 import TermsField from "./fields/TermsField";
+import { useGoogleLogin } from "@react-oauth/google";
+import useAuthStore from "~/store/auth";
 
 interface SignUpFormProps {
   language: Language;
@@ -41,6 +43,25 @@ const SignUpForm = ({ language }: SignUpFormProps) => {
   const [registrationStatus, setRegistrationStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+
+  const navigate = useNavigate();
+  const auth = useAuthStore();
+  const googleLogin = useGoogleLogin({
+    onSuccess: ({ access_token }) => {
+      OAuthGoogleLogin(access_token)
+        .then((response) => {
+          auth.setTokens(response.access_token, response.refresh_token);
+          navigate("/dashboard");
+        })
+        .catch((error) => {
+          setErrors((prev) => ({
+            ...prev,
+            global: error.message || t.errors.googleLoginError,
+          }));
+        });
+    },
+    onError: () => console.log("Login Failed"),
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, checked, value } = e.target;
@@ -121,6 +142,13 @@ const SignUpForm = ({ language }: SignUpFormProps) => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin({
+      enable_serial_consent: true,
+      state: "login",
+    });
   };
 
   if (registrationStatus === "success") {
@@ -250,6 +278,8 @@ const SignUpForm = ({ language }: SignUpFormProps) => {
 
         <div className="mt-6 gap-3">
           <button
+            onClick={handleGoogleLogin}
+            disabled={isSubmitting}
             type="button"
             className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
           >

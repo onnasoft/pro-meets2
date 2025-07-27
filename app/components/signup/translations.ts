@@ -34,6 +34,7 @@ const translations = {
       company:
         "Company name can only contain alphanumeric characters and spaces",
       terms: "You must accept the Terms of Service and Privacy Policy",
+      googleLoginError: "Google login failed. Please try again.",
     },
   },
   es: {
@@ -72,6 +73,8 @@ const translations = {
         "El nombre de la empresa solo puede contener caracteres alfanuméricos y espacios",
       terms:
         "Debes aceptar los Términos de Servicio y la Política de Privacidad",
+      googleLoginError:
+        "Error al iniciar sesión con Google. Por favor, inténtalo de nuevo.",
     },
   },
   fr: {
@@ -111,6 +114,7 @@ const translations = {
         "Le nom de l'entreprise ne peut contenir que des caractères alphanumériques et des espaces",
       terms:
         "Vous devez accepter les Conditions d'utilisation et la Politique de confidentialité",
+      googleLoginError: "Échec de la connexion Google. Veuillez réessayer.",
     },
   },
   ja: {
@@ -147,6 +151,8 @@ const translations = {
       confirmPassword: "パスワードが一致しません",
       company: "会社名は英数字とスペースのみ使用できます",
       terms: "利用規約とプライバシーポリシーに同意する必要があります",
+      googleLoginError:
+        "Googleログインに失敗しました。もう一度お試しください。",
     },
   },
   zh: {
@@ -182,6 +188,7 @@ const translations = {
       confirmPassword: "密码不匹配",
       company: "公司名称只能包含字母数字字符和空格",
       terms: "您必须接受服务条款和隐私政策",
+      googleLoginError: "Google登录失败。请再试一次。",
     },
   },
 };

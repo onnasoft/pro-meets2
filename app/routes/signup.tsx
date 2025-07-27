@@ -4,6 +4,8 @@ import { CallToAction } from "~/components/sections/CallToAction";
 import { MetaFunction, useLoaderData } from "@remix-run/react";
 import { languageLoader } from "~/loaders/language";
 import SignUpForm from "~/components/signup/SignUpForm";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import config from "~/config";
 
 const translations = {
   en: {
@@ -57,7 +59,9 @@ export default function SignUpPage() {
 
         <section className="container mx-auto px-6 py-12">
           <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
-            <SignUpForm language={language} />
+            <GoogleOAuthProvider clientId={config.googleClientId}>
+              <SignUpForm language={language} />
+            </GoogleOAuthProvider>
           </div>
         </section>
 

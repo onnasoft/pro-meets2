@@ -79,11 +79,16 @@ export async function verifyEmail(token: string): Promise<void> {
   }
 }
 
+interface LoginResponse {
+  access_token: string;
+  refresh_token: string;
+}
+
 export async function login(
   email: string,
   password: string,
   rememberMe: boolean = false
-): Promise<{ message: string }> {
+): Promise<LoginResponse> {
   const response = await fetch(`${config.apiUrl}/auth/login`, {
     method: "POST",
     headers: {
@@ -102,8 +107,8 @@ export async function login(
 }
 
 export async function OAuthGoogleLogin(
-  token: string,
-): Promise<{ message: string }> {
+  token: string
+): Promise<LoginResponse> {
   const response = await fetch(`${config.apiUrl}/auth/oauth/google`, {
     method: "POST",
     headers: {

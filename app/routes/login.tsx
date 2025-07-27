@@ -4,7 +4,7 @@ import { CallToAction } from "~/components/sections/CallToAction";
 import { MetaFunction, useLoaderData } from "@remix-run/react";
 import { languageLoader } from "~/loaders/language";
 import LoginForm from "~/components/login/LoginForm";
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import config from "~/config";
 
 export { languageLoader as loader };
@@ -59,9 +59,13 @@ export default function LoginPage() {
       <main>
         <div className="pt-28" />
 
-        <GoogleOAuthProvider clientId={config.googleClientId}>
-          <LoginForm language={language} />
-        </GoogleOAuthProvider>
+        <section className="container mx-auto px-6 py-12">
+          <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
+            <GoogleOAuthProvider clientId={config.googleClientId}>
+              <LoginForm language={language} />
+            </GoogleOAuthProvider>
+          </div>
+        </section>
 
         <CallToAction language={language} />
       </main>
