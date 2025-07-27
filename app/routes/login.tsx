@@ -51,8 +51,6 @@ export const meta: MetaFunction<typeof languageLoader> = ({ data }) => {
 export default function LoginPage() {
   const { language } = useLoaderData<typeof languageLoader>();
 
-  console.log("Google Client ID:", config.googleClientId);
-
   return (
     <>
       <Header language={language} />
