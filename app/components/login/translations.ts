@@ -18,6 +18,7 @@ const translations = {
       email: "Please enter a valid email address",
       password:
         "Password must be at least 8 characters and include uppercase, lowercase and a number",
+      googleLoginError: "Google login failed, please try again",
     },
   },
   es: {
@@ -39,6 +40,7 @@ const translations = {
       email: "Por favor, introduce una dirección de correo electrónico válida",
       password:
         "La contraseña debe tener al menos 8 caracteres e incluir mayúsculas, minúsculas y un número",
+      googleLoginError: "Error al iniciar sesión con Google, por favor intenta de nuevo",
     },
   },
   fr: {
@@ -60,6 +62,7 @@ const translations = {
       email: "Veuillez entrer une adresse e-mail valide",
       password:
         "Le mot de passe doit comporter au moins 8 caractères et inclure des majuscules, des minuscules et un chiffre",
+      googleLoginError: "Échec de la connexion avec Google, veuillez réessayer",
     },
   },
   ja: {
@@ -81,6 +84,7 @@ const translations = {
       email: "有効なメールアドレスを入力してください",
       password:
         "パスワードは8文字以上で、大文字、小文字、数字を含める必要があります",
+      googleLoginError: "Googleログインに失敗しました。もう一度お試しください",
     },
   },
   zh: {
@@ -100,8 +104,8 @@ const translations = {
     microsoftLogin: "通过Microsoft继续",
     errors: {
       email: "请输入有效的电子邮件地址",
-      password:
-        "密码必须至少8个字符，并且包含大写字母、小写字母和数字",
+      password: "密码必须至少8个字符，并且包含大写字母、小写字母和数字",
+      googleLoginError: "Google登录失败，请重试",
     },
   },
 };

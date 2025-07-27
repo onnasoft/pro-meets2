@@ -5,8 +5,9 @@ import translations from "./translations";
 import { loginAuthSchema } from "./schema";
 import { LoginFormData } from "./types";
 import { useState } from "react";
-import { Link } from "@remix-run/react";
-import { login } from "~/services/auth";
+import { Link, useNavigate } from "@remix-run/react";
+import { login, OAuthGoogleLogin } from "~/services/auth";
+import { useGoogleLogin } from "@react-oauth/google";
 
 interface LoginFormProps {
   readonly language: Language;
@@ -15,6 +16,7 @@ interface LoginFormProps {
 export default function LoginForm({ language }: LoginFormProps) {
   const t = translations[language] || translations.en;
   const schema = loginAuthSchema(t);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
@@ -32,6 +34,22 @@ export default function LoginForm({ language }: LoginFormProps) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: ({ access_token }) => {
+      OAuthGoogleLogin(access_token)
+        .then(() => {
+          navigate("/dashboard");
+        })
+        .catch((error) => {
+          setErrors((prev) => ({
+            ...prev,
+            global: error.message || t.errors.googleLoginError,
+          }));
+        });
+    },
+    onError: () => console.log("Login Failed"),
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, checked, value } = e.target;
@@ -85,11 +103,13 @@ export default function LoginForm({ language }: LoginFormProps) {
     if (!validateForm()) {
       return;
     }
-    
+
     setErrors((prev) => ({ ...prev, global: "" }));
     setIsSubmitting(true);
     try {
       await login(formData.email, formData.password, formData.rememberMe);
+
+      navigate("/dashboard");
     } catch (error: any) {
       setErrors((prev) => ({
         ...prev,
@@ -98,6 +118,13 @@ export default function LoginForm({ language }: LoginFormProps) {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin({
+      enable_serial_consent: true,
+      state: "login",
+    });
   };
 
   return (
@@ -276,6 +303,8 @@ export default function LoginForm({ language }: LoginFormProps) {
             <div className="mt-6 gap-3">
               <button
                 type="button"
+                onClick={handleGoogleLogin}
+                disabled={isSubmitting}
                 className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
               >
                 <svg

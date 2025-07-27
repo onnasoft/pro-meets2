@@ -31,6 +31,7 @@ export const loader = async () => {
   return {
     ENV: {
       PUBLIC_API_URL: process.env.PUBLIC_API_URL ?? "",
+      GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ?? "",
     },
   };
 };

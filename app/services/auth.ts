@@ -100,3 +100,23 @@ export async function login(
 
   return response.json();
 }
+
+export async function OAuthGoogleLogin(
+  token: string,
+): Promise<{ message: string }> {
+  const response = await fetch(`${config.apiUrl}/auth/oauth/google`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ token }),
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const errorData: HTTPError = await response.json();
+    throw new Error(errorData.message || "Google login failed");
+  }
+
+  return response.json();
+}
