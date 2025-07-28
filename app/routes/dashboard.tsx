@@ -3,22 +3,55 @@ import translations from "~/components/dashboard/translations";
 import { Sidebar } from "~/components/dashboard/Sidebar";
 import { Header } from "~/components/dashboard/Header";
 import { sessionLoader } from "~/loaders/session";
+import { Organization, User } from "~/types/models";
+import { LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { languageLoader } from "~/loaders/language";
+import { Language } from "~/utils/language";
+import { organizationsLoader } from "~/loaders/organizations";
 
-export { sessionLoader as loader } from "~/loaders/session";
+interface LoaderData {
+  language: Language;
+  user: User;
+  organizations: Organization[];
+}
+
+export async function loader(args: LoaderFunctionArgs) {
+  try {
+    const result = await Promise.all([
+      languageLoader(args),
+      sessionLoader(args),
+      organizationsLoader(args),
+    ]);
+
+    if (!result || result.length < 2) {
+      throw new Error("Failed to load necessary data");
+    }
+    if ('organizations' in result[2] === false) {
+      throw new Error("Organizations data is missing");
+    }
+    if ('user' in result[1] === false) {
+      throw new Error("User data is missing");
+    }
+
+    const languageData = result[0] as { language: Language };
+    const sessionData = result[1] as { user: User };
+    const organizationsData = result[2] as { organizations: Organization[] };
+
+    return {
+      language: languageData.language,
+      user: sessionData.user,
+      organizations: organizationsData.organizations,
+    };
+  } catch {
+    return redirect("/login");
+  }
+}
 
 export default function DashboardLayout() {
-  const { language, user } = useLoaderData<typeof sessionLoader>();
+  const { language, user, organizations } = useLoaderData<typeof loader>();
   const t = translations[language] || translations.en;
 
-  // Datos de ejemplo
-  const organizations = [
-    { id: "1", name: "Tech Solutions Inc.", current: true },
-    { id: "2", name: "Innovate Labs" },
-    { id: "3", name: "Digital Creations" },
-  ];
-
-  const currentOrganization =
-    organizations.find((org) => org.current) || organizations[0];
+  const currentOrganization = organizations[0];
 
   // Notificaciones de ejemplo
   const notifications = [
@@ -50,21 +83,14 @@ export default function DashboardLayout() {
 
   return (
     <div className="flex h-screen bg-primary-50">
-      <Sidebar
-        user={{ name: user.name, role: user.role, avatarUrl: user.avatarUrl }}
-        translations={t}
-      />
+      <Sidebar user={user} translations={t} />
 
       <div className="flex flex-col flex-1 overflow-hidden">
         <Header
           organizations={organizations}
           currentOrganization={currentOrganization}
           notifications={notifications}
-          user={{
-            name: user.name,
-            email: user.email,
-            avatarUrl: user.avatarUrl,
-          }}
+          user={user}
           translations={t}
         />
 

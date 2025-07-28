@@ -39,6 +39,7 @@ export async function getOrganizations(): Promise<Organization[]> {
 export async function createOrganization(
   payload: Create<Organization>
 ): Promise<Organization> {
+  console.log("Creating organization with payload:", payload);
   const response = await fetch(`${config.apiUrl}/organizations`, {
     method: "POST",
     headers: {

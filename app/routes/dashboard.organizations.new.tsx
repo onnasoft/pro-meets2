@@ -3,6 +3,7 @@ import { useState } from "react";
 import Joi from "joi";
 import { Building2, Globe, MapPin, Phone, Users } from "lucide-react";
 import { languageLoader } from "~/loaders/language";
+import { createOrganization } from "~/services/organizations";
 
 export { languageLoader as loader } from "~/loaders/language";
 
@@ -289,32 +290,26 @@ export default function NewOrganizationPage() {
       return;
     }
 
+    const processedData = {
+      ...value,
+      members: value.members
+        ? value.members
+            .split(",")
+            .map((e: string) => e.trim())
+            .filter(Boolean)
+        : [],
+    };
+
     try {
-      // Procesar miembros antes de enviar
-      const processedData = {
-        ...value,
-        members: value.members
-          ? value.members
-              .split(",")
-              .map((e: string) => e.trim())
-              .filter(Boolean)
-          : [],
-      };
+      const response = await createOrganization(processedData);
+      if (!response) throw new Error(t.errorMessage);
 
-      const response = await fetch("/api/organizations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(processedData),
-        credentials: "include",
-      });
-
-      if (!response.ok) throw new Error(t.errorMessage);
-
-      const data = await response.json();
+      const data = response;
       navigate(`/dashboard/organizations/${data.id}`, {
         state: { successMessage: t.successMessage },
       });
-    } catch {
+    } catch (error) {
+      console.error("Error creating organization:", error);
       setErrors({ submit: t.errorMessage });
     } finally {
       setIsSubmitting(false);

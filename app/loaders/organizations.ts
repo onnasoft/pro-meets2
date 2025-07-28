@@ -1,12 +1,12 @@
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
-import { User } from "~/types/models";
+import { Organization } from "~/types/models";
 import config from "~/config";
 
 interface LoaderData {
-  user: User;
+  organizations: Organization[];
 }
 
-export async function sessionLoader(args: LoaderFunctionArgs) {
+export async function organizationsLoader(args: LoaderFunctionArgs) {
   try {
     const cookieHeader = args.request.headers.get("Cookie") || "";
     const cookies = Object.fromEntries(
@@ -21,7 +21,7 @@ export async function sessionLoader(args: LoaderFunctionArgs) {
       throw new Error("Access token not found in cookies");
     }
 
-    const userResponse = await fetch(`${config.apiUrl}/auth/session`, {
+    const userResponse = await fetch(`${config.apiUrl}/organizations`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -34,12 +34,12 @@ export async function sessionLoader(args: LoaderFunctionArgs) {
       throw new Error("Failed to fetch user session");
     }
 
-    const user = (await userResponse.json()) as User;
-    if (!user || !user.id) {
-      throw new Error("User not found in session");
+    const organizations = (await userResponse.json()).data as Organization[];
+    if (!organizations || organizations.length === 0) {
+      throw new Error("No organizations found");
     }
 
-    return { user } as LoaderData;
+    return { organizations } as LoaderData;
   } catch {
     return redirect("/login");
   }

@@ -25,7 +25,7 @@ export type User = {
 };
 
 export interface Organization {
-  id: number;
+  id: string;
   name: string;
   description?: string | null;
   website?: string | null;
@@ -38,7 +38,7 @@ export interface Organization {
 }
 
 export interface OrganizationMember {
-  id: number;
+  id: string;
   email: string;
   role: "admin" | "member" | "guest";
   status: "pending" | "active" | "rejected";
