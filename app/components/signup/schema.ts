@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { translations } from "./translations";
+import translations from "./translations";
 
 export const registerAuthSchema = (t: typeof translations.en) =>
   Joi.object({

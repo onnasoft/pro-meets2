@@ -7,6 +7,7 @@ import {
   MessageSquare,
   BookOpen,
   ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import useLanguageStore from "~/store/language";
 import { Language } from "~/utils/language";
@@ -52,6 +53,7 @@ export default function Header({ language }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+  const [showMobileLanguageDropdown, setShowMobileLanguageDropdown] = useState(false); // Nuevo estado para móvil
   const { setLanguage } = useLanguageStore((state) => state);
 
   const languages: { code: Language; name: string; flag: string }[] = [
@@ -83,7 +85,7 @@ export default function Header({ language }: HeaderProps) {
   const handleLanguageChange = (langCode: Language) => {
     setLanguage(langCode);
     setShowLanguageDropdown(false);
-    // Aquí puedes agregar lógica para cambiar el idioma de la aplicación
+    setShowMobileLanguageDropdown(false);
   };
 
   const currentLanguage = languages.find((lang) => lang.code === language);
@@ -215,31 +217,49 @@ export default function Header({ language }: HeaderProps) {
             </Link>
           ))}
 
-          {/* Selector de idioma móvil */}
-          <div className="px-3 py-3">
-            <div className="text-sm font-medium text-gray-500 mb-2">
-              {t.language}
-            </div>
-            <div className="space-y-2">
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => {
-                    handleLanguageChange(lang.code);
-                    setIsOpen(false);
-                  }}
-                  className={`flex items-center w-full px-3 py-2 text-sm rounded-md text-left ${
-                    language === lang.code
-                      ? "bg-primary-50 text-primary-600"
-                      : "text-gray-700 hover:bg-gray-100"
-                  }`}
-                >
-                  <span className="text-xl mr-3">{lang.flag}</span>
-                  <span>
-                    {lang.name} ({lang.code.toUpperCase()})
-                  </span>
-                </button>
-              ))}
+          {/* Selector de idioma móvil - ahora como acordeón */}
+          <div className="px-3 py-2">
+            <button
+              onClick={() => setShowMobileLanguageDropdown(!showMobileLanguageDropdown)}
+              className="flex items-center justify-between w-full px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200"
+            >
+              <div className="flex items-center">
+                <span className="text-xl mr-3">{currentLanguage?.flag}</span>
+                <span>{t.language}</span>
+              </div>
+              {showMobileLanguageDropdown ? (
+                <ChevronUp className="w-5 h-5" />
+              ) : (
+                <ChevronDown className="w-5 h-5" />
+              )}
+            </button>
+
+            <div
+              className={`transition-all duration-200 overflow-hidden ${
+                showMobileLanguageDropdown ? "max-h-96" : "max-h-0"
+              }`}
+            >
+              <div className="space-y-2 pl-4 pt-2">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      handleLanguageChange(lang.code);
+                      setIsOpen(false);
+                    }}
+                    className={`flex items-center w-full px-3 py-2 text-sm rounded-md text-left ${
+                      language === lang.code
+                        ? "bg-primary-50 text-primary-600"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    <span className="text-xl mr-3">{lang.flag}</span>
+                    <span>
+                      {lang.name} ({lang.code.toUpperCase()})
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 

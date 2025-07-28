@@ -220,7 +220,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
   );
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-white to-primary-50 min-h-[90vh] flex items-center">
+    <section className="relative overflow-hidden bg-gradient-to-br from-white to-primary-50 min-h-[90vh] flex items-center pt-8 lg:pt-0">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
