@@ -1,13 +1,11 @@
 import { Link } from "@remix-run/react";
 import { NavItem } from "./NavItem";
 import translations from "./translations";
+import { User } from "~/types/models";
+import { getAvatarUrl } from "~/utils/gravatar";
 
 interface SidebarProps {
-  readonly user: {
-    name: string;
-    role: string;
-    avatar: string;
-  };
+  readonly user: User;
   readonly translations: typeof translations.en;
 }
 
@@ -79,7 +77,7 @@ export function Sidebar({ user, translations }: SidebarProps) {
           <div className="flex items-center">
             <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
               <img
-                src={user.avatar}
+                src={getAvatarUrl(user)}
                 alt={user.name}
                 className="w-full h-full object-cover"
               />

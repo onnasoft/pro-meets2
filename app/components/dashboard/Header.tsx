@@ -2,17 +2,11 @@ import { OrganizationSelector } from "./OrganizationSelector";
 import { NotificationsMenu } from "./NotificationsMenu";
 import { UserMenu } from "./UserMenu";
 import translations from "./translations";
+import { Organization, User } from "~/types/models";
 
 interface HeaderProps {
-  readonly organizations: {
-    id: string;
-    name: string;
-    current?: boolean;
-  }[];
-  readonly currentOrganization: {
-    id: string;
-    name: string;
-  };
+  readonly organizations: Organization[];
+  readonly currentOrganization: Organization;
   readonly notifications: {
     id: number;
     title: string;
@@ -21,11 +15,7 @@ interface HeaderProps {
     read: boolean;
     icon: string;
   }[];
-  readonly user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
+  readonly user: User;
   readonly translations: typeof translations.en;
 }
 

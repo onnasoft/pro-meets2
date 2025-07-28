@@ -1,26 +1,14 @@
-import { LoaderFunctionArgs } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
-import { languageLoader } from "~/loaders/language";
 import translations from "~/components/dashboard/translations";
 import { Sidebar } from "~/components/dashboard/Sidebar";
 import { Header } from "~/components/dashboard/Header";
+import { sessionLoader } from "~/loaders/session";
 
-export const loader = async (args: LoaderFunctionArgs) => {
-  const { language } = await languageLoader(args);
-  return { language };
-};
+export { sessionLoader as loader } from "~/loaders/session";
 
 export default function DashboardLayout() {
-  const { language } = useLoaderData<typeof loader>();
+  const { language, user } = useLoaderData<typeof sessionLoader>();
   const t = translations[language] || translations.en;
-
-  const user = {
-    id: "123",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    role: "Administrator",
-    avatar: "https://randomuser.me/api/portraits/men/1.jpg",
-  };
 
   // Datos de ejemplo
   const organizations = [
@@ -63,7 +51,7 @@ export default function DashboardLayout() {
   return (
     <div className="flex h-screen bg-primary-50">
       <Sidebar
-        user={{ name: user.name, role: user.role, avatar: user.avatar }}
+        user={{ name: user.name, role: user.role, avatarUrl: user.avatarUrl }}
         translations={t}
       />
 
@@ -72,7 +60,11 @@ export default function DashboardLayout() {
           organizations={organizations}
           currentOrganization={currentOrganization}
           notifications={notifications}
-          user={{ name: user.name, email: user.email, avatar: user.avatar }}
+          user={{
+            name: user.name,
+            email: user.email,
+            avatarUrl: user.avatarUrl,
+          }}
           translations={t}
         />
 

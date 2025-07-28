@@ -2,12 +2,7 @@ import { Building2, ChevronsUpDown, Plus } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "@remix-run/react";
 import translations from "./translations";
-
-interface Organization {
-  id: string;
-  name: string;
-  current?: boolean;
-}
+import { Organization } from "~/types/models";
 
 interface OrganizationSelectorProps {
   readonly organizations: Organization[];
@@ -64,7 +59,7 @@ export function OrganizationSelector({
                   key={org.id}
                   onClick={() => setIsOpen(false)}
                   className={`w-full flex items-center justify-between px-5 py-3 text-sm ${
-                    org.current
+                    org.id === currentOrganization.id
                       ? "bg-primary-50 text-primary-700"
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
@@ -73,7 +68,7 @@ export function OrganizationSelector({
                     <Building2 className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0" />
                     <span className="text-left">{org.name}</span>
                   </div>
-                  {org.current && (
+                  {org.id === currentOrganization.id && (
                     <span className="ml-4 px-2 py-0.5 text-xs font-medium rounded-full bg-primary-100 text-primary-800">
                       {translations.organizations.current}
                     </span>

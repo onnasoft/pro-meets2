@@ -11,15 +11,11 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "@remix-run/react";
 import { MenuItem } from "./MenuItem";
 import translations from "./translations";
-
-interface User {
-  name: string;
-  email: string;
-  avatar: string;
-}
+import { User as UserModel } from "~/types/models";
+import { getAvatarUrl } from "~/utils/gravatar";
 
 interface UserMenuProps {
-  readonly user: User;
+  readonly user: UserModel;
   readonly translations: typeof translations.en;
 }
 
@@ -46,7 +42,7 @@ export function UserMenu({ user, translations }: UserMenuProps) {
       >
         <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
           <img
-            src={user.avatar}
+            src={getAvatarUrl(user)}
             alt={user.name}
             className="w-full h-full object-cover"
           />

@@ -11,8 +11,9 @@ import { WhoBenefits } from "~/components/sections/WhoBenefits";
 import { FrequentAskedQuestions } from "~/components/sections/FrequentAskedQuestions";
 import { Pricing } from "~/components/sections/Pricing";
 import { languageLoader } from "~/loaders/language";
+import { sessionLoader } from "~/loaders/session";
 
-export { languageLoader as loader };
+export { sessionLoader as loader } from "~/loaders/session";
 
 const metaTranslations = {
   en: {
@@ -103,7 +104,7 @@ export const meta: MetaFunction<typeof languageLoader> = ({ data }) => {
 };
 
 export default function IndexPage() {
-  const { language } = useLoaderData<typeof languageLoader>();
+  const { language } = useLoaderData<typeof sessionLoader>();
 
   return (
     <>
