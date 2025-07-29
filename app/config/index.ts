@@ -4,6 +4,7 @@ declare global {
       PUBLIC_API_URL?: string;
       PUBLIC_LINKEDIN_URL?: string;
       GOOGLE_CLIENT_ID?: string;
+      STRIPE_PUBLISHABLE_KEY?: string;
     };
   }
 }
@@ -12,6 +13,7 @@ type Config = {
   apiUrl: string;
   linkedinUrl: string;
   googleClientId: string;
+  stripePublishableKey: string;
 };
 
 let _config: Config;
@@ -24,6 +26,7 @@ if (typeof window === "undefined") {
       process.env.PUBLIC_LINKEDIN_URL ||
       "https://www.linkedin.com/company/pro-meets",
     googleClientId: process.env.GOOGLE_CLIENT_ID || "YOUR_CLIENT_ID",
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY || "YOUR_STRIPE_PUBLISHABLE_KEY",
   };
 } else {
   _config = {
@@ -32,6 +35,7 @@ if (typeof window === "undefined") {
       window.ENV?.PUBLIC_LINKEDIN_URL ||
       "https://www.linkedin.com/company/pro-meets",
     googleClientId: window.ENV?.GOOGLE_CLIENT_ID || "YOUR_CLIENT_ID",
+    stripePublishableKey: window.ENV?.STRIPE_PUBLISHABLE_KEY || "YOUR_STRIPE_PUBLISHABLE_KEY",
   };
 }
 

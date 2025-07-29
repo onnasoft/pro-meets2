@@ -32,6 +32,10 @@ export const loader = async () => {
     ENV: {
       PUBLIC_API_URL: process.env.PUBLIC_API_URL ?? "",
       GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ?? "",
+      PUBLIC_LINKEDIN_URL:
+        process.env.PUBLIC_LINKEDIN_URL ??
+        "https://www.linkedin.com/company/pro-meets",
+      STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY ?? "",
     },
   };
 };
