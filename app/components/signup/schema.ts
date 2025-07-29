@@ -1,7 +1,7 @@
 import Joi from "joi";
 import translations from "./translations";
 
-export const registerAuthSchema = (t: typeof translations.en) =>
+export const getRegisterAuthSchema = (t: typeof translations.en) =>
   Joi.object({
     name: Joi.string()
       .min(2)

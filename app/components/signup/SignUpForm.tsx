@@ -4,7 +4,7 @@ import { CheckCircle, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import translations from "./translations";
 import { SignupFormData } from "./types";
-import { registerAuthSchema } from "./schema";
+import { getRegisterAuthSchema } from "./schema";
 import { OAuthGoogleLogin, register } from "~/services/auth";
 import { Link, useNavigate } from "@remix-run/react";
 import NameField from "./fields/NameField";
@@ -21,7 +21,7 @@ interface SignUpFormProps {
 
 const SignUpForm = ({ language }: SignUpFormProps) => {
   const t = translations[language] || translations.en;
-  const schema = registerAuthSchema(t);
+  const schema = getRegisterAuthSchema(t);
 
   const [formData, setFormData] = useState<SignupFormData>({
     name: "",

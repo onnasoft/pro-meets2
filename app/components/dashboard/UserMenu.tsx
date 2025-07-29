@@ -13,6 +13,7 @@ import { MenuItem } from "./MenuItem";
 import translations from "./translations";
 import { User as UserModel } from "~/types/models";
 import { getAvatarUrl } from "~/utils/gravatar";
+import useAuthStore from "~/store/auth";
 
 interface UserMenuProps {
   readonly user: UserModel;
@@ -23,6 +24,7 @@ export function UserMenu({ user, translations }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const auth = useAuthStore();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -67,25 +69,37 @@ export function UserMenu({ user, translations }: UserMenuProps) {
           <div className="py-1">
             <MenuItem
               icon={<User className="w-4 h-4 mr-3 text-gray-400" />}
-              onClick={() => navigate("/dashboard/profile")}
+              onClick={() => {
+                navigate("/dashboard/profile");
+                setIsOpen(false);
+              }}
             >
               {translations.userMenu.profile}
             </MenuItem>
             <MenuItem
               icon={<Settings className="w-4 h-4 mr-3 text-gray-400" />}
-              onClick={() => navigate("/dashboard/settings")}
+              onClick={() => {
+                navigate("/dashboard/settings");
+                setIsOpen(false);
+              }}
             >
               {translations.userMenu.settings}
             </MenuItem>
             <MenuItem
               icon={<CreditCard className="w-4 h-4 mr-3 text-gray-400" />}
-              onClick={() => navigate("/dashboard/billing")}
+              onClick={() => {
+                navigate("/dashboard/billing");
+                setIsOpen(false);
+              }}
             >
               {translations.userMenu.billing}
             </MenuItem>
             <MenuItem
               icon={<Shield className="w-4 h-4 mr-3 text-gray-400" />}
-              onClick={() => navigate("/dashboard/security")}
+              onClick={() => {
+                navigate("/dashboard/security");
+                setIsOpen(false);
+              }}
             >
               {translations.userMenu.security}
             </MenuItem>
@@ -94,7 +108,11 @@ export function UserMenu({ user, translations }: UserMenuProps) {
           <div className="py-1">
             <MenuItem
               icon={<LogOut className="w-4 h-4 mr-3 text-gray-400" />}
-              onClick={() => navigate("/logout")}
+              onClick={() => {
+                auth.clearTokens();
+                navigate("/");
+                setIsOpen(false);
+              }}
               isDanger
             >
               {translations.userMenu.logout}

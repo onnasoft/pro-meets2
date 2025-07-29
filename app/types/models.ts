@@ -34,6 +34,11 @@ export interface Organization {
   logoUrl?: string | null;
   members: OrganizationMember[];
   current: boolean;
+  plan: OrganizationPlan;
+  status: OrganizationStatus;
+  ownerId: string;
+  owner: User;
+  billingEmail?: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -41,8 +46,32 @@ export interface Organization {
 export interface OrganizationMember {
   id: string;
   email: string;
-  role: "admin" | "member" | "guest";
-  status: "pending" | "active" | "rejected";
+  role: MemberRole;
+  status: MemberStatus;
   createdAt: string;
   updatedAt: string;
+}
+
+export enum OrganizationPlan {
+  FREE = 'free',
+  PRO = 'pro',
+  ENTERPRISE = 'enterprise',
+}
+
+export enum OrganizationStatus {
+  ACTIVE = 'active',
+  SUSPENDED = 'suspended',
+  DELETED = 'deleted',
+}
+
+export enum MemberRole {
+  ADMIN = 'admin',
+  MEMBER = 'member',
+  GUEST = 'guest',
+}
+
+export enum MemberStatus {
+  PENDING = 'pending',
+  ACTIVE = 'active',
+  REJECTED = 'rejected',
 }
