@@ -22,6 +22,6 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   server: {
-    allowedHosts: ["localhost", "pro-meets.com"],
+    allowedHosts: ["localhost", "pro-meets.com", "dev.pro-meets.com"],
   },
 });

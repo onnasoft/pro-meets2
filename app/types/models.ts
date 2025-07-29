@@ -1,3 +1,4 @@
+import { PaymentMethod as SPaymentMethod } from "@stripe/stripe-js";
 import { Language } from "~/utils/language";
 
 export type Create<T> = Omit<T, "id" | "createdAt" | "updatedAt">;
@@ -18,6 +19,8 @@ export type User = {
   language: Language;
   role: Role;
   avatarUrl?: string;
+  stripeCustomerId: string;
+  defaultPaymentMethodId?: string | null;
   timezone: string;
   newsletter?: boolean;
   createdAt: string;
@@ -53,25 +56,29 @@ export interface OrganizationMember {
 }
 
 export enum OrganizationPlan {
-  FREE = 'free',
-  PRO = 'pro',
-  ENTERPRISE = 'enterprise',
+  FREE = "free",
+  PRO = "pro",
+  ENTERPRISE = "enterprise",
 }
 
 export enum OrganizationStatus {
-  ACTIVE = 'active',
-  SUSPENDED = 'suspended',
-  DELETED = 'deleted',
+  ACTIVE = "active",
+  SUSPENDED = "suspended",
+  DELETED = "deleted",
 }
 
 export enum MemberRole {
-  ADMIN = 'admin',
-  MEMBER = 'member',
-  GUEST = 'guest',
+  ADMIN = "admin",
+  MEMBER = "member",
+  GUEST = "guest",
 }
 
 export enum MemberStatus {
-  PENDING = 'pending',
-  ACTIVE = 'active',
-  REJECTED = 'rejected',
+  PENDING = "pending",
+  ACTIVE = "active",
+  REJECTED = "rejected",
 }
+
+export type PaymentMethod = SPaymentMethod & {
+  isDefault: boolean;
+};

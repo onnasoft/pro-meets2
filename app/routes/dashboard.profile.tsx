@@ -508,7 +508,7 @@ export default function UserProfilePage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-6">
       <div className="flex items-center mb-8">
         <User className="h-8 w-8 text-primary-600 mr-3" />
         <h1 className="text-2xl font-bold text-gray-900">{t.title}</h1>

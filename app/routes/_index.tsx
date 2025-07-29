@@ -12,7 +12,7 @@ import { FrequentAskedQuestions } from "~/components/sections/FrequentAskedQuest
 import { Pricing } from "~/components/sections/Pricing";
 import { languageLoader } from "~/loaders/language";
 
-export { sessionLoader as loader } from "~/loaders/session";
+export { languageLoader as loader } from "~/loaders/language";
 
 const metaTranslations = {
   en: {

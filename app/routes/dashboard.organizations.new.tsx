@@ -91,7 +91,7 @@ export default function NewOrganizationPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-6">
       <div className="flex items-center mb-8">
         <Building2 className="h-8 w-8 text-primary-600 mr-3" />
         <h1 className="text-2xl font-bold text-gray-900">{t.title}</h1>

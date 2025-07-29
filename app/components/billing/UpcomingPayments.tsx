@@ -1,16 +1,16 @@
 import { History } from "lucide-react";
-import translations  from "./translations";
+import translations from "./translations";
 
 interface UpcomingPaymentsProps {
-  translations: typeof translations.en.upcomingPayments;
-  nextPaymentAmount?: string;
-  estimatedPaymentDate?: string;
+  readonly translations: typeof translations.en.upcomingPayments;
+  readonly nextPaymentAmount?: string;
+  readonly estimatedPaymentDate?: string;
 }
 
-export function UpcomingPayments({ 
-  translations, 
-  nextPaymentAmount = "$9.99", 
-  estimatedPaymentDate = "15 Feb 2023" 
+export function UpcomingPayments({
+  translations,
+  nextPaymentAmount = "$9.99",
+  estimatedPaymentDate = "15 Feb 2023",
 }: UpcomingPaymentsProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
@@ -20,7 +20,9 @@ export function UpcomingPayments({
       </h2>
       <div className="space-y-4">
         <div>
-          <p className="text-sm text-gray-500">{translations.nextPaymentAmount}</p>
+          <p className="text-sm text-gray-500">
+            {translations.nextPaymentAmount}
+          </p>
           <p className="text-lg font-bold">{nextPaymentAmount}</p>
         </div>
         <div>

@@ -15,6 +15,24 @@ const translations = {
       makeDefault: "Make default",
       delete: "Delete",
       cardholderName: "Cardholder Name",
+      cardholderNameLabel: "Cardholder Name (required)",
+      cardholderNamePlaceholder: "Enter cardholder name",
+      processing: "Processing...",
+      noPaymentMethods: "No payment methods registered",
+      success: {
+        cardAdded: "Card added successfully!",
+        defaultPaymentMethodSet: "Default payment method set!",
+      },
+      errors: {
+        stripeNotLoaded: "Payment system not ready. Please try again.",
+        cardElementNotFound: "Card details not found.",
+        cardholderNameRequired: "Cardholder name is required.",
+        paymentProcessingFailed:
+          "Payment processing failed. Please check your details and try again.",
+        paymentMethodIdMissing: "Payment method ID is missing.",
+        setupIntentFailed: "Failed to initialize payment form.",
+        unexpectedError: "An unexpected error occurred. Please try again.",
+      },
     },
     invoiceHistory: {
       title: "Invoice History",
@@ -55,6 +73,27 @@ const translations = {
       makeDefault: "Hacer predeterminada",
       delete: "Eliminar",
       cardholderName: "Nombre del titular de la tarjeta",
+      cardholderNameLabel: "Nombre del titular de la tarjeta (requerido)",
+      cardholderNamePlaceholder: "Ingresa el nombre del titular de la tarjeta",
+      processing: "Procesando...",
+      noPaymentMethods: "No hay métodos de pago registrados",
+      success: {
+        cardAdded: "¡Tarjeta agregada exitosamente!",
+        defaultPaymentMethodSet: "¡Método de pago predeterminado establecido!",
+      },
+      errors: {
+        stripeNotLoaded:
+          "El sistema de pago no está listo. Por favor, inténtalo de nuevo.",
+        cardElementNotFound: "No se encontraron los detalles de la tarjeta.",
+        cardholderNameRequired:
+          "Se requiere el nombre del titular de la tarjeta.",
+        paymentProcessingFailed:
+          "Error en el procesamiento del pago. Por favor, verifica tus datos e inténtalo de nuevo.",
+        paymentMethodIdMissing: "Falta el ID del método de pago.",
+        setupIntentFailed: "Error al inicializar el formulario de pago.",
+        unexpectedError:
+          "Ocurrió un error inesperado. Por favor, inténtalo de nuevo.",
+      },
     },
     invoiceHistory: {
       title: "Historial de Facturas",
@@ -95,6 +134,26 @@ const translations = {
       makeDefault: "Définir par défaut",
       delete: "Supprimer",
       cardholderName: "Nom du Titulaire de la Carte",
+      cardholderNameLabel: "Nom du titulaire de la carte (requis)",
+      cardholderNamePlaceholder: "Entrez le nom du titulaire de la carte",
+      processing: "Traitement...",
+      noPaymentMethods: "Aucune méthode de paiement enregistrée",
+      success: {
+        cardAdded: "Carte ajoutée avec succès !",
+        defaultPaymentMethodSet: "Méthode de paiement par défaut définie !",
+      },
+      errors: {
+        stripeNotLoaded: "Système de paiement non prêt. Veuillez réessayer.",
+        cardElementNotFound: "Détails de la carte introuvables.",
+        cardholderNameRequired: "Le nom du titulaire de la carte est requis.",
+        paymentProcessingFailed:
+          "Échec du traitement du paiement. Veuillez vérifier vos informations et réessayer.",
+        paymentMethodIdMissing: "L'ID du mode de paiement est manquant.",
+        setupIntentFailed:
+          "Échec de l'initialisation du formulaire de paiement.",
+        unexpectedError:
+          "Une erreur inattendue s'est produite. Veuillez réessayer.",
+      },
     },
     invoiceHistory: {
       title: "Historique des Factures",
@@ -135,6 +194,26 @@ const translations = {
       makeDefault: "デフォルトにする",
       delete: "削除",
       cardholderName: "カード名義人",
+      cardholderNameLabel: "カード名義人（必須）",
+      cardholderNamePlaceholder: "カード名義人を入力",
+      processing: "処理中...",
+      noPaymentMethods: "登録された支払い方法はありません",
+      success: {
+        cardAdded: "カードが正常に追加されました！",
+        defaultPaymentMethodSet: "デフォルトの支払い方法が設定されました！",
+      },
+      errors: {
+        stripeNotLoaded:
+          "支払いシステムが準備できていません。もう一度お試しください。",
+        cardElementNotFound: "カードの詳細が見つかりません。",
+        cardholderNameRequired: "カード名義人の名前が必要です。",
+        paymentProcessingFailed:
+          "支払い処理に失敗しました。詳細を確認して、もう一度お試しください。",
+        paymentMethodIdMissing: "支払い方法のIDがありません。",
+        setupIntentFailed: "支払いフォームの初期化に失敗しました。",
+        unexpectedError:
+          "予期しないエラーが発生しました。もう一度お試しください。",
+      },
     },
     invoiceHistory: {
       title: "請求履歴",
@@ -175,6 +254,23 @@ const translations = {
       makeDefault: "设为默认",
       delete: "删除",
       cardholderName: "持卡人姓名",
+      cardholderNameLabel: "持卡人姓名（必填）",
+      cardholderNamePlaceholder: "输入持卡人姓名",
+      processing: "处理中...",
+      noPaymentMethods: "没有注册的支付方式",
+      success: {
+        cardAdded: "卡片添加成功！",
+        defaultPaymentMethodSet: "默认支付方式设置成功！",
+      },
+      errors: {
+        stripeNotLoaded: "支付系统未准备好。请重试。",
+        cardElementNotFound: "未找到卡片详情。",
+        cardholderNameRequired: "需要持卡人姓名。",
+        paymentProcessingFailed: "支付处理失败。请检查您的信息并重试。",
+        paymentMethodIdMissing: "缺少支付方式ID。",
+        setupIntentFailed: "初始化支付表单失败。",
+        unexpectedError: "发生意外错误。请重试。",
+      },
     },
     invoiceHistory: {
       title: "发票历史",

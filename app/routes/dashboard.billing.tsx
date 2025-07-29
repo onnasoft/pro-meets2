@@ -1,12 +1,14 @@
 import { useLoaderData } from "@remix-run/react";
 import { languageLoader } from "~/loaders/language";
 import translations from "~/components/billing/translations";
-import { PaymentMethods } from "~/components/billing/PaymentMethods";
 import { InvoiceHistory } from "~/components/billing/InvoiceHistory";
 import { CurrentPlan } from "~/components/billing/CurrentPlan";
 import { UpcomingPayments } from "~/components/billing/UpcomingPayments";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { usePaymentMethods } from "~/hooks/payment-methods";
+import { PaymentMethods } from "~/components/billing/PaymentMethods";
+import { useInvoiceHistory } from "~/hooks/invoice-history";
 import config from "~/config";
 
 export { languageLoader as loader } from "~/loaders/language";
@@ -15,46 +17,8 @@ export default function BillingPage() {
   const { language } = useLoaderData<typeof languageLoader>();
   const t = translations[language] || translations.en;
 
-  const paymentMethods = [
-    {
-      id: "1",
-      type: "VISA",
-      last4: "4242",
-      exp: "12/25",
-      isDefault: true,
-    },
-    {
-      id: "2",
-      type: "MASTERCARD",
-      last4: "5555",
-      exp: "06/24",
-      isDefault: false,
-    },
-  ];
-
-  const invoices = [
-    {
-      id: "INV-2023-001",
-      date: "15 Ene 2023",
-      amount: "$9.99",
-      status: "Paid",
-      downloadUrl: "#",
-    },
-    {
-      id: "INV-2022-012",
-      date: "15 Dic 2022",
-      amount: "$9.99",
-      status: "Paid",
-      downloadUrl: "#",
-    },
-    {
-      id: "INV-2022-011",
-      date: "15 Nov 2022",
-      amount: "$9.99",
-      status: "Paid",
-      downloadUrl: "#",
-    },
-  ];
+  const { data: paymentMethods = [] } = usePaymentMethods();
+  const { data: invoices = [] } = useInvoiceHistory();
 
   const currentPlan = {
     name: "Plan Pro",

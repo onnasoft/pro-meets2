@@ -9,8 +9,8 @@ interface PlanFeature {
 }
 
 interface CurrentPlanProps {
-  translations: typeof translations.en.currentPlan;
-  currentPlan: PlanFeature;
+  readonly translations: typeof translations.en.currentPlan;
+  readonly currentPlan: PlanFeature;
 }
 
 export function CurrentPlan({ translations, currentPlan }: CurrentPlanProps) {

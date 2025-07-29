@@ -1,20 +1,16 @@
+import type Stripe from "stripe";
 import { FileText } from "lucide-react";
 import translations from "./translations";
 
-interface Invoice {
-  id: string;
-  date: string;
-  amount: string;
-  status: string;
-  downloadUrl: string;
-}
-
 interface InvoiceHistoryProps {
-  translations: typeof translations.en.invoiceHistory;
-  invoices: Invoice[];
+  readonly translations: typeof translations.en.invoiceHistory;
+  readonly invoices: Stripe.Invoice[];
 }
 
-export function InvoiceHistory({ translations, invoices }: InvoiceHistoryProps) {
+export function InvoiceHistory({
+  translations,
+  invoices,
+}: InvoiceHistoryProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
       <h2 className="text-xl font-semibold flex items-center mb-4">
@@ -49,10 +45,22 @@ export function InvoiceHistory({ translations, invoices }: InvoiceHistoryProps) 
                   {invoice.id}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {invoice.date}
+                  {invoice.status_transitions.paid_at
+                    ? new Date(
+                        invoice.status_transitions.paid_at * 1000
+                      ).toLocaleString("es-ES", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: false,
+                      })
+                    : null}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {invoice.amount}
+                  {invoice.total / 100} {invoice.currency.toUpperCase()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -60,12 +68,15 @@ export function InvoiceHistory({ translations, invoices }: InvoiceHistoryProps) 
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <a
-                    href={invoice.downloadUrl}
-                    className="text-primary-600 hover:text-primary-900"
-                  >
-                    {translations.download}
-                  </a>
+                  {invoice.invoice_pdf ? (
+                    <a
+                      target="_blank"
+                      href={invoice.invoice_pdf}
+                      className="text-primary-600 hover:text-primary-900"
+                    >
+                      {translations.download}
+                    </a>
+                  ) : null}
                 </td>
               </tr>
             ))}

@@ -13,8 +13,9 @@ import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { languageLoader } from "~/loaders/language";
 import { Language } from "~/utils/language";
 import { organizationsLoader } from "~/loaders/organizations";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import useOrganizationStore from "~/store/organization";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 interface LoaderData {
   language: Language;
@@ -59,6 +60,8 @@ export default function DashboardLayout() {
   const t = translations[language] || translations.en;
   const navigation = useNavigate();
   const location = useLocation();
+
+  const queryClient = useMemo(() => new QueryClient(), []);
 
   const setCurrentOrganizationId = useOrganizationStore(
     (state) => state.setCurrentOrganizationId
@@ -120,22 +123,24 @@ export default function DashboardLayout() {
   }, [currentOrganizationId, organizations, navigation]);
 
   return (
-    <div className="flex h-screen bg-primary-50">
-      <Sidebar user={user} translations={t} />
+    <QueryClientProvider client={queryClient}>
+      <div className="flex h-screen bg-primary-50">
+        <Sidebar user={user} translations={t} />
 
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <Header
-          organizations={organizations}
-          currentOrganization={currentOrganization}
-          notifications={notifications}
-          user={user}
-          translations={t}
-        />
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <Header
+            organizations={organizations}
+            currentOrganization={currentOrganization}
+            notifications={notifications}
+            user={user}
+            translations={t}
+          />
 
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
-          <Outlet />
-        </main>
+          <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
+            <Outlet context={{ user, organizations, language }} />
+          </main>
+        </div>
       </div>
-    </div>
+    </QueryClientProvider>
   );
 }
