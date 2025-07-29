@@ -1,4 +1,9 @@
-import { Outlet, useLoaderData } from "@remix-run/react";
+import {
+  Outlet,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "@remix-run/react";
 import translations from "~/components/dashboard/translations";
 import { Sidebar } from "~/components/dashboard/Sidebar";
 import { Header } from "~/components/dashboard/Header";
@@ -8,6 +13,8 @@ import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { languageLoader } from "~/loaders/language";
 import { Language } from "~/utils/language";
 import { organizationsLoader } from "~/loaders/organizations";
+import { useEffect } from "react";
+import useOrganizationStore from "~/store/organization";
 
 interface LoaderData {
   language: Language;
@@ -26,10 +33,10 @@ export async function loader(args: LoaderFunctionArgs) {
     if (!result || result.length < 2) {
       throw new Error("Failed to load necessary data");
     }
-    if ('organizations' in result[2] === false) {
+    if ("organizations" in result[2] === false) {
       throw new Error("Organizations data is missing");
     }
-    if ('user' in result[1] === false) {
+    if ("user" in result[1] === false) {
       throw new Error("User data is missing");
     }
 
@@ -50,8 +57,19 @@ export async function loader(args: LoaderFunctionArgs) {
 export default function DashboardLayout() {
   const { language, user, organizations } = useLoaderData<typeof loader>();
   const t = translations[language] || translations.en;
+  const navigation = useNavigate();
+  const location = useLocation();
 
-  const currentOrganization = organizations[0];
+  const setCurrentOrganizationId = useOrganizationStore(
+    (state) => state.setCurrentOrganizationId
+  );
+  const currentOrganizationId = useOrganizationStore(
+    (state) => state.currentOrganizationId
+  );
+
+  const currentOrganization = organizations.find(
+    (org) => org.id === currentOrganizationId
+  );
 
   // Notificaciones de ejemplo
   const notifications = [
@@ -80,6 +98,26 @@ export default function DashboardLayout() {
       icon: "🎥",
     },
   ];
+
+  useEffect(() => {
+    if (organizations.length > 0) return;
+    if (location.pathname === "/dashboard/organizations/new") return;
+
+    navigation("/dashboard/organizations/new");
+  }, [organizations]);
+
+  useEffect(() => {
+    if (!currentOrganizationId && organizations.length > 0) {
+      const currentOrg = organizations.find((org) => org.current);
+      if (currentOrg) {
+        setCurrentOrganizationId(currentOrg.id);
+      } else {
+        const firstOrg = organizations[0];
+        if (!firstOrg) return;
+        setCurrentOrganizationId(firstOrg.id);
+      }
+    }
+  }, [currentOrganizationId, organizations, navigation]);
 
   return (
     <div className="flex h-screen bg-primary-50">

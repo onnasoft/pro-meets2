@@ -58,7 +58,7 @@ export async function createOrganization(
 }
 
 export async function updateOrganization(
-  id: number,
+  id: string,
   payload: Update<Organization>
 ): Promise<Organization> {
   const response = await fetch(`${config.apiUrl}/organizations/${id}`, {

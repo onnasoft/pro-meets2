@@ -31,6 +31,14 @@ export function Sidebar({ user, translations }: SidebarProps) {
             </span>
           </NavItem>
           <NavItem
+            to="/dashboard/projects"
+            activeClassName="bg-primary-100 text-primary-700"
+          >
+            <span className="flex items-center">
+              <span className="mr-3">📁</span> {translations.menu.projects}
+            </span>
+          </NavItem>
+          <NavItem
             to="/dashboard/meetings"
             activeClassName="bg-primary-100 text-primary-700"
           >

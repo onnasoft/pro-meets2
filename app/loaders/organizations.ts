@@ -35,7 +35,7 @@ export async function organizationsLoader(args: LoaderFunctionArgs) {
     }
 
     const organizations = (await userResponse.json()).data as Organization[];
-    if (!organizations || organizations.length === 0) {
+    if (!organizations) {
       throw new Error("No organizations found");
     }
 

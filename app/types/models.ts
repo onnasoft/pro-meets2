@@ -33,6 +33,7 @@ export interface Organization {
   phone?: string | null;
   logoUrl?: string | null;
   members: OrganizationMember[];
+  current: boolean;
   createdAt: string;
   updatedAt: string;
 }

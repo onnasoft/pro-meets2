@@ -8,6 +8,7 @@ const translations = {
       jobs: "Jobs",
       analytics: "Analytics",
       recordings: "Recordings",
+      projects: "Projects",
     },
     userMenu: {
       profile: "Profile",
@@ -37,6 +38,7 @@ const translations = {
       jobs: "Vacantes",
       analytics: "Analíticas",
       recordings: "Grabaciones",
+      projects: "Proyectos",
     },
     userMenu: {
       profile: "Perfil",
@@ -66,6 +68,7 @@ const translations = {
       jobs: "Emplois",
       analytics: "Analytiques",
       recordings: "Enregistrements",
+      projects: "Projets",
     },
     userMenu: {
       profile: "Profil",
@@ -95,6 +98,7 @@ const translations = {
       jobs: "求人",
       analytics: "分析",
       recordings: "録画",
+      projects: "プロジェクト",
     },
     userMenu: {
       profile: "プロフィール",
@@ -124,6 +128,7 @@ const translations = {
       jobs: "职位",
       analytics: "分析",
       recordings: "录像",
+      projects: "项目",
     },
     userMenu: {
       profile: "个人资料",

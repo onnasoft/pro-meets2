@@ -6,7 +6,7 @@ import { Organization, User } from "~/types/models";
 
 interface HeaderProps {
   readonly organizations: Organization[];
-  readonly currentOrganization: Organization;
+  readonly currentOrganization?: Organization;
   readonly notifications: {
     id: number;
     title: string;

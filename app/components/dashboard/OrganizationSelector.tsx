@@ -3,10 +3,12 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "@remix-run/react";
 import translations from "./translations";
 import { Organization } from "~/types/models";
+import { updateOrganization } from "~/services/organizations";
+import useOrganizationStore from "~/store/organization";
 
 interface OrganizationSelectorProps {
   readonly organizations: Organization[];
-  readonly currentOrganization: Organization;
+  readonly currentOrganization?: Organization;
   readonly translations: typeof translations.en;
 }
 
@@ -18,6 +20,15 @@ export function OrganizationSelector({
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const setCurrentOrganizationId = useOrganizationStore(
+    (state) => state.setCurrentOrganizationId
+  );
+
+  const handleOrganizationChange = async (org: Organization) => {
+    setIsOpen(false);
+    await updateOrganization(org.id, { current: true });
+    setCurrentOrganizationId(org.id);
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -57,9 +68,9 @@ export function OrganizationSelector({
               {organizations.map((org) => (
                 <button
                   key={org.id}
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => handleOrganizationChange(org)}
                   className={`w-full flex items-center justify-between px-5 py-3 text-sm ${
-                    org.id === currentOrganization.id
+                    org.id === currentOrganization?.id
                       ? "bg-primary-50 text-primary-700"
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
@@ -68,7 +79,7 @@ export function OrganizationSelector({
                     <Building2 className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0" />
                     <span className="text-left">{org.name}</span>
                   </div>
-                  {org.id === currentOrganization.id && (
+                  {org.id === currentOrganization?.id && (
                     <span className="ml-4 px-2 py-0.5 text-xs font-medium rounded-full bg-primary-100 text-primary-800">
                       {translations.organizations.current}
                     </span>
