@@ -12,7 +12,6 @@ import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { Language } from "~/utils/language";
-import { MembersForm } from "~/components/organization/MembersForm";
 import MembersManager from "~/components/organization/MembersManager";
 
 interface LoaderData {
