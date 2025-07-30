@@ -2,24 +2,47 @@ import { PaymentMethod as SPaymentMethod } from "@stripe/stripe-js";
 import { Language } from "~/utils/language";
 
 export type Op =
-  | 'eq'
-  | 'neq'
-  | 'gt'
-  | 'gte'
-  | 'lt'
-  | 'lte'
-  | 'like'
-  | 'ilike'
-  | 'in'
-  | 'notIn'
-  | 'between'
+  | "eq"
+  | "neq"
+  | "gt"
+  | "gte"
+  | "lt"
+  | "lte"
+  | "like"
+  | "ilike"
+  | "in"
+  | "notIn"
+  | "between";
 
 export type Condition = {
   value: any;
   op?: Op;
 };
 
-export type Create<T> = Omit<T, "id" | "createdAt" | "updatedAt">;
+type ExcludedKeys = "id" | "createdAt" | "updatedAt" | "deletedAt";
+
+type IsColumnValue<T> = T extends Date | null
+  ? true
+  : T extends object
+  ? false
+  : true;
+
+type ColumnKeys<T> = {
+  [K in keyof T]-?: IsColumnValue<T[K]> extends true ? K : never;
+}[keyof T];
+
+type OptionalKeys<T> = {
+  [K in keyof T]: undefined extends T[K] ? K : never;
+}[keyof T];
+
+type RequiredKeys<T> = Exclude<keyof T, OptionalKeys<T>>;
+
+export type Create<T> = Omit<
+  Pick<T, Extract<ColumnKeys<T>, RequiredKeys<T>>> &
+    Partial<Pick<T, Extract<ColumnKeys<T>, OptionalKeys<T>>>>,
+  ExcludedKeys
+>;
+
 export type Update<T> = Partial<Create<T>>;
 export type QueryParamsBuilder<T> = {
   select?: Partial<Record<keyof T, boolean>>;
@@ -65,6 +88,7 @@ export interface Organization {
   current: boolean;
   plan: OrganizationPlan;
   status: OrganizationStatus;
+  logoSrc?: string | null;
   ownerId: string;
   owner: User;
   billingEmail?: string | null;
@@ -76,6 +100,8 @@ export interface OrganizationMember {
   id: string;
   email: string;
   role: MemberRole;
+  user: User | null;
+  userId: string | null;
   status: MemberStatus;
   createdAt: string;
   updatedAt: string;

@@ -1,16 +1,11 @@
 import { OrganizationPlan } from "~/types/models";
 import { BadgeCheck, CreditCard, Building2 } from "lucide-react";
+import translations from "./translations";
 
 interface PlanSelectorProps {
   readonly selectedPlan: OrganizationPlan;
   readonly onSelectPlan: (plan: OrganizationPlan) => void;
-  readonly translations: {
-    plans: Record<OrganizationPlan, string>;
-    planDescriptions: Record<OrganizationPlan, string>;
-    fields: {
-      plan: string;
-    };
-  };
+  readonly translations: typeof translations.en;
   readonly error?: string;
 }
 

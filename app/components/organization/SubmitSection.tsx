@@ -1,13 +1,10 @@
+import translations from "./translations";
+
 interface SubmitSectionProps {
   readonly isSubmitting: boolean;
   readonly onCancel: () => void;
   readonly submitError?: string;
-  readonly translations: {
-    cancel: string;
-    submit: string;
-    submitting: string;
-    errorMessage: string;
-  };
+  readonly translations: typeof translations.en;
 }
 
 export function SubmitSection({

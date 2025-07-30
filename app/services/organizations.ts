@@ -8,11 +8,15 @@ import {
 } from "~/types/models";
 import { queryBuilder } from "~/utils/query";
 
-export async function getOrganization(id: number): Promise<Organization> {
+export async function getOrganization(
+  id: string,
+  headers: HeadersInit
+): Promise<Organization> {
   const response = await fetch(`${config.apiUrl}/organizations/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      ...headers,
     },
     credentials: "include",
   });

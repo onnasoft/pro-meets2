@@ -1,3 +1,5 @@
+import translations from "./translations";
+
 interface BasicInfoFormProps {
   readonly name: string;
   readonly description: string;
@@ -5,20 +7,7 @@ interface BasicInfoFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   readonly errors: Record<string, string>;
-  readonly translations: {
-    fields: {
-      name: string;
-      description: string;
-    };
-    optional: string;
-    errors: {
-      name: {
-        min: string;
-        empty: string;
-        required: string;
-      };
-    };
-  };
+  readonly translations: typeof translations.en;
 }
 
 export function BasicInfoForm({

@@ -1,23 +1,11 @@
 import { Users } from "lucide-react";
+import translations from "./translations";
 
 interface MembersFormProps {
   readonly members: string;
   readonly onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   readonly error?: string;
-  readonly translations: {
-    fields: {
-      members: string;
-    };
-    optional: string;
-    placeholders: {
-      members: string;
-    };
-    errors: {
-      members: {
-        emails: string;
-      };
-    };
-  };
+  readonly translations: typeof translations.en;
 }
 
 export function MembersForm({

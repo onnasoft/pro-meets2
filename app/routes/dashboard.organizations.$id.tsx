@@ -1,327 +1,84 @@
 import { useLoaderData, useNavigate } from "@remix-run/react";
-import { useState, useEffect } from "react";
-import Joi from "joi";
-import {
-  Building2,
-  Globe,
-  MapPin,
-  Phone,
-  Users,
-  X,
-  Pencil,
-} from "lucide-react";
+import { useState } from "react";
+import { Building2 } from "lucide-react";
 import { languageLoader } from "~/loaders/language";
-import { getOrganization, updateOrganization } from "~/services/organizations";
+import { createOrganization, getOrganization } from "~/services/organizations";
+import { Organization, OrganizationPlan, Update } from "~/types/models";
+import { PlanSelector } from "~/components/organization/PlanSelector";
+import { BasicInfoForm } from "~/components/organization/BasicInfoForm";
+import { ContactInfoForm } from "~/components/organization/ContactInfoForm";
+import { SubmitSection } from "~/components/organization/SubmitSection";
+import translations from "~/components/organization/translations";
+import { getOrganizationSchema } from "~/components/organization/schema";
+import { LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { Language } from "~/utils/language";
+import { MembersForm } from "~/components/organization/MembersForm";
+import MembersManager from "~/components/organization/MembersManager";
 
-export { languageLoader as loader } from "~/loaders/language";
+interface LoaderData {
+  organization: Organization;
+  language: Language;
+}
 
-const translations = {
-  en: {
-    title: "Create new organization",
-    fields: {
-      name: "Organization name",
-      description: "Description",
-      website: "Website URL",
-      location: "Location",
-      phone: "Phone number",
-      members: "Initial members (emails)",
-      logo: "Logo URL",
-    },
-    placeholders: {
-      website: "https://example.com",
-      members: "user1@example.com, user2@example.com",
-    },
-    cancel: "Cancel",
-    submit: "Create organization",
-    submitting: "Creating...",
-    errors: {
-      name: {
-        min: "Name must be at least 3 characters",
-        empty: "Name is required",
-        required: "Name is required",
-      },
-      website: {
-        uri: "Please enter a valid URL (https://example.com)",
-      },
-      phone: {
-        pattern: "Please enter a valid phone number",
-      },
-      members: {
-        emails: "Please enter valid email addresses separated by commas",
-      },
-    },
-    successMessage: "Organization created successfully!",
-    errorMessage: "Error creating organization",
-    optional: "(optional)",
-  },
-  es: {
-    title: "Crear nueva organización",
-    fields: {
-      name: "Nombre de la organización",
-      description: "Descripción",
-      website: "URL del sitio web",
-      location: "Ubicación",
-      phone: "Número de teléfono",
-      members: "Miembros iniciales (correos)",
-      logo: "URL del logo",
-    },
-    placeholders: {
-      website: "https://ejemplo.com",
-      members: "usuario1@ejemplo.com, usuario2@ejemplo.com",
-    },
-    cancel: "Cancelar",
-    submit: "Crear organización",
-    submitting: "Creando...",
-    errors: {
-      name: {
-        min: "El nombre debe tener al menos 3 caracteres",
-        empty: "El nombre es obligatorio",
-        required: "El nombre es obligatorio",
-      },
-      website: {
-        uri: "Ingresa una URL válida (https://ejemplo.com)",
-      },
-      phone: {
-        pattern: "Ingresa un número de teléfono válido",
-      },
-      members: {
-        emails: "Ingresa direcciones de correo válidas separadas por comas",
-      },
-    },
-    successMessage: "¡Organización creada exitosamente!",
-    errorMessage: "Error al crear la organización",
-    optional: "(opcional)",
-  },
-  fr: {
-    title: "Créer une nouvelle organisation",
-    fields: {
-      name: "Nom de l'organisation",
-      description: "Description",
-      website: "URL du site web",
-      location: "Emplacement",
-      phone: "Numéro de téléphone",
-      members: "Membres initiaux (emails)",
-      logo: "URL du logo",
-    },
-    placeholders: {
-      website: "https://exemple.com",
-      members: "utilisateur1@exemple.com, utilisateur2@exemple.com",
-    },
-    cancel: "Annuler",
-    submit: "Créer l'organisation",
-    submitting: "Création en cours...",
-    errors: {
-      name: {
-        min: "Le nom doit comporter au moins 3 caractères",
-        empty: "Le nom est requis",
-        required: "Le nom est requis",
-      },
-      website: {
-        uri: "Veuillez entrer une URL valide (https://exemple.com)",
-      },
-      phone: {
-        pattern: "Veuillez entrer un numéro de téléphone valide",
-      },
-      members: {
-        emails:
-          "Veuillez entrer des adresses email valides séparées par des virgules",
-      },
-    },
-    successMessage: "Organisation créée avec succès !",
-    errorMessage: "Erreur lors de la création de l'organisation",
-    optional: "(optionnel)",
-  },
-  ja: {
-    title: "新しい組織を作成",
-    fields: {
-      name: "組織名",
-      description: "説明",
-      website: "ウェブサイトURL",
-      location: "所在地",
-      phone: "電話番号",
-      members: "初期メンバー（メールアドレス）",
-      logo: "ロゴURL",
-    },
-    placeholders: {
-      website: "https://example.com",
-      members: "user1@example.com, user2@example.com",
-    },
-    cancel: "キャンセル",
-    submit: "組織を作成",
-    submitting: "作成中...",
-    errors: {
-      name: {
-        min: "名前は3文字以上である必要があります",
-        empty: "名前は必須です",
-        required: "名前は必須です",
-      },
-      website: {
-        uri: "有効なURLを入力してください（https://example.com）",
-      },
-      phone: {
-        pattern: "有効な電話番号を入力してください",
-      },
-      members: {
-        emails: "カンマ区切りで有効なメールアドレスを入力してください",
-      },
-    },
-    successMessage: "組織が正常に作成されました！",
-    errorMessage: "組織の作成中にエラーが発生しました",
-    optional: "（任意）",
-  },
-  zh: {
-    title: "创建新组织",
-    fields: {
-      name: "组织名称",
-      description: "描述",
-      website: "网站网址",
-      location: "地点",
-      phone: "电话号码",
-      members: "初始成员（邮箱）",
-      logo: "Logo 链接",
-    },
-    placeholders: {
-      website: "https://example.com",
-      members: "user1@example.com, user2@example.com",
-    },
-    cancel: "取消",
-    submit: "创建组织",
-    submitting: "创建中...",
-    errors: {
-      name: {
-        min: "名称至少需要 3 个字符",
-        empty: "名称为必填项",
-        required: "名称为必填项",
-      },
-      website: {
-        uri: "请输入有效的网址（https://example.com）",
-      },
-      phone: {
-        pattern: "请输入有效的电话号码",
-      },
-      members: {
-        emails: "请输入用逗号分隔的有效邮箱地址",
-      },
-    },
-    successMessage: "组织创建成功！",
-    errorMessage: "创建组织时出错",
-    optional: "（可选）",
-  },
+export async function loader(args: LoaderFunctionArgs) {
+  try {
+    const cookieHeader = args.request.headers.get("Cookie") || "";
+    const cookies = Object.fromEntries(
+      cookieHeader.split("; ").map((c) => {
+        const [k, v] = c.split("=");
+        return [k, decodeURIComponent(v)];
+      })
+    );
+    const accessToken = cookies.accessToken || null;
+
+    if (!accessToken) {
+      throw new Error("Access token not found in cookies");
+    }
+
+    const id = args.params.id;
+    if (!id) {
+      throw new Error("Organization ID is required");
+    }
+
+    const organization = await getOrganization(id, {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    const { language } = await languageLoader(args);
+
+    return { organization, language } as LoaderData;
+  } catch {
+    return redirect("/login");
+  }
+}
+
+type NonNullableFields<T> = {
+  [K in keyof T]-?: NonNullable<T[K]>;
 };
 
-const getOrganizationSchema = (t: typeof translations.en) =>
-  Joi.object({
-    name: Joi.string()
-      .min(3)
-      .messages({
-        "string.min": t.errors.name.min,
-        "string.empty": t.errors.name.empty,
-      })
-      .required()
-      .messages({
-        "any.required": t.errors.name.required,
-      }),
-    description: Joi.string().allow("").optional(),
-    website: Joi.string()
-      .uri()
-      .messages({
-        "string.uri": t.errors.website.uri,
-      })
-      .allow("")
-      .optional(),
-    location: Joi.string().allow("").optional(),
-    phone: Joi.string()
-      .pattern(/^[\d\s+\-()]{7,}$/)
-      .messages({
-        "string.pattern.base": t.errors.phone.pattern,
-      })
-      .allow("")
-      .optional(),
-    logo: Joi.string().uri().allow("").optional(),
-  });
-
-// Mock de datos de miembros
-const mockMembers = [
-  {
-    id: "1",
-    email: "admin@example.com",
-    role: "Administrador",
-    name: "Juan Pérez",
-  },
-  {
-    id: "2",
-    email: "editor@example.com",
-    role: "Editor",
-    name: "María García",
-  },
-  {
-    id: "3",
-    email: "viewer@example.com",
-    role: "Visualizador",
-    name: "Carlos López",
-  },
-];
-
-const roles = [
-  { value: "Administrador", label: "Administrador" },
-  { value: "Editor", label: "Editor" },
-  { value: "Visualizador", label: "Visualizador" },
-];
-
-export default function EditOrganizationPage() {
-  const { language } = useLoaderData<typeof languageLoader>();
+export default function NewOrganizationPage() {
+  const { language, organization } = useLoaderData<typeof loader>();
   const t = translations[language] || translations.en;
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [formValues, setFormValues] = useState({
-    name: "",
-    description: "",
-    website: "",
-    location: "",
-    phone: "",
-    logo: "",
+  const [formValues, setFormValues] = useState<
+    NonNullableFields<Omit<Update<Organization>, "ownerId" | "billingEmail">>
+  >({
+    name: organization.name ?? "",
+    description: organization.description ?? "",
+    website: organization.website ?? "",
+    location: organization.location ?? "",
+    phone: organization.phone ?? "",
+    logoSrc: organization.logoSrc ?? "",
+    plan: organization.plan ?? OrganizationPlan.FREE,
+    current: organization.current ?? false,
+    status: organization.status ?? "",
+    logoUrl: organization.logoUrl ?? "",
   });
-  const [members, setMembers] = useState(mockMembers);
-  const [newMemberEmail, setNewMemberEmail] = useState("");
-  const [newMemberRole, setNewMemberRole] = useState("Visualizador");
-  const [editingMemberId, setEditingMemberId] = useState<string | null>(null);
-  const [editMemberRole, setEditMemberRole] = useState("");
 
-  // En un caso real, cargaríamos los datos de la organización desde la API
-  useEffect(() => {
-    // Mock de carga de datos de la organización
-    const loadOrganization = async () => {
-      try {
-        // En un caso real: const orgData = await getOrganization(orgId);
-        const orgData = {
-          id: "123",
-          name: "Mi Organización",
-          description: "Descripción de ejemplo",
-          website: "https://example.com",
-          location: "Ciudad, País",
-          phone: "+1234567890",
-          logo: "https://example.com/logo.png",
-        };
-
-        setFormValues({
-          name: orgData.name,
-          description: orgData.description,
-          website: orgData.website,
-          location: orgData.location,
-          phone: orgData.phone,
-          logo: orgData.logo,
-        });
-      } catch (error) {
-        console.error("Error loading organization:", error);
-        navigate("/dashboard/organizations", {
-          state: { errorMessage: "Error loading organization" },
-        });
-      }
-    };
-
-    loadOrganization();
-  }, [navigate]);
+  const members = organization.members ?? [];
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -329,6 +86,11 @@ export default function EditOrganizationPage() {
     const { name, value } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
+  const handlePlanSelect = (plan: OrganizationPlan) => {
+    setFormValues((prev) => ({ ...prev, plan }));
+    if (errors.plan) setErrors((prev) => ({ ...prev, plan: "" }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -351,344 +113,79 @@ export default function EditOrganizationPage() {
       return;
     }
 
-    try {
-      // En un caso real: const response = await updateOrganization(orgId, value);
-      const response = { success: true };
-      if (!response.success) throw new Error(t.errorMessage);
+    const processedData = {
+      ...value,
+      members: value.members
+        ? value.members
+            .split(",")
+            .map((e: string) => e.trim())
+            .filter(Boolean)
+        : [],
+    };
 
-      navigate(`/dashboard/organizations/123`, {
-        state: { successMessage: "Organization updated successfully!" },
+    try {
+      const response = await createOrganization(processedData);
+      if (!response) throw new Error(t.errorMessage);
+
+      const data = response;
+      navigate(`/dashboard/organizations/${data.id}`, {
+        state: { successMessage: t.successMessage },
       });
     } catch (error) {
-      console.error("Error updating organization:", error);
-      setErrors({ submit: "Error updating organization" });
+      console.error("Error creating organization:", error);
+      setErrors({ submit: t.errorMessage });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleAddMember = () => {
-    if (!newMemberEmail) return;
-
-    // Validar email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(newMemberEmail)) {
-      setErrors({ members: "Please enter a valid email address" });
-      return;
-    }
-
-    // Verificar si el miembro ya existe
-    if (members.some((m) => m.email === newMemberEmail)) {
-      setErrors({ members: "This member already exists" });
-      return;
-    }
-
-    // Agregar nuevo miembro (en un caso real haríamos una llamada a la API)
-    const newMember = {
-      id: `new-${Date.now()}`,
-      email: newMemberEmail,
-      role: newMemberRole,
-      name: newMemberEmail.split("@")[0], // Mock del nombre
-    };
-
-    setMembers([...members, newMember]);
-    setNewMemberEmail("");
-    setNewMemberRole("Visualizador");
-    setErrors({ ...errors, members: "" });
-  };
-
-  const handleRemoveMember = (memberId: string) => {
-    // En un caso real haríamos una llamada a la API para eliminar
-    setMembers(members.filter((m) => m.id !== memberId));
-  };
-
-  const startEditingMember = (memberId: string) => {
-    const member = members.find((m) => m.id === memberId);
-    if (member) {
-      setEditingMemberId(memberId);
-      setEditMemberRole(member.role);
-    }
-  };
-
-  const saveMemberRole = (memberId: string) => {
-    // En un caso real haríamos una llamada a la API para actualizar
-    setMembers(
-      members.map((m) =>
-        m.id === memberId ? { ...m, role: editMemberRole } : m
-      )
-    );
-    setEditingMemberId(null);
-  };
-
-  const cancelEditing = () => {
-    setEditingMemberId(null);
-  };
-
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-6">
       <div className="flex items-center mb-8">
         <Building2 className="h-8 w-8 text-primary-600 mr-3" />
-        <h1 className="text-2xl font-bold text-gray-900">Edit Organization</h1>
+        <h1 className="text-2xl font-bold text-gray-900">{t.updateTitle}</h1>
       </div>
 
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Nombre */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t.fields.name}
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formValues.name}
-              onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
-                errors.name ? "border-red-300" : "border-gray-300"
-              }`}
-            />
-            {errors.name && (
-              <p className="mt-1 text-sm text-red-600">{errors.name}</p>
-            )}
-          </div>
+          <BasicInfoForm
+            name={formValues.name}
+            description={formValues.description}
+            onChange={handleChange}
+            errors={errors}
+            translations={t}
+          />
 
-          {/* Descripción */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t.fields.description}{" "}
-              <span className="text-gray-500">{t.optional}</span>
-            </label>
-            <textarea
-              name="description"
-              rows={3}
-              value={formValues.description}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-            />
-          </div>
+          <ContactInfoForm
+            website={formValues.website}
+            location={formValues.location}
+            phone={formValues.phone}
+            logoSrc={formValues.logoSrc}
+            onChange={handleChange}
+            errors={errors}
+            translations={t}
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Website */}
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-1">
-                <Globe className="h-4 w-4 mr-2 text-gray-500" />
-                {t.fields.website}{" "}
-                <span className="text-gray-500 ml-1">{t.optional}</span>
-              </label>
-              <input
-                type="url"
-                name="website"
-                value={formValues.website}
-                onChange={handleChange}
-                placeholder={t.placeholders.website}
-                className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
-                  errors.website ? "border-red-300" : "border-gray-300"
-                }`}
-              />
-              {errors.website && (
-                <p className="mt-1 text-sm text-red-600">{errors.website}</p>
-              )}
-            </div>
+          <MembersManager
+            members={members}
+            /*onChange={handleChange}
+            error={errors.members}
+            translations={t}*/
+          />
 
-            {/* Location */}
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-1">
-                <MapPin className="h-4 w-4 mr-2 text-gray-500" />
-                {t.fields.location}{" "}
-                <span className="text-gray-500 ml-1">{t.optional}</span>
-              </label>
-              <input
-                type="text"
-                name="location"
-                value={formValues.location}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-              />
-            </div>
+          <PlanSelector
+            selectedPlan={formValues.plan}
+            onSelectPlan={handlePlanSelect}
+            translations={t}
+            error={errors.plan}
+          />
 
-            {/* Phone */}
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-1">
-                <Phone className="h-4 w-4 mr-2 text-gray-500" />
-                {t.fields.phone}{" "}
-                <span className="text-gray-500 ml-1">{t.optional}</span>
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formValues.phone}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
-                  errors.phone ? "border-red-300" : "border-gray-300"
-                }`}
-              />
-              {errors.phone && (
-                <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
-              )}
-            </div>
-
-            {/* Logo URL */}
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-1">
-                <Building2 className="h-4 w-4 mr-2 text-gray-500" />
-                Logo URL{" "}
-                <span className="text-gray-500 ml-1">{t.optional}</span>
-              </label>
-              <input
-                type="url"
-                name="logo"
-                value={formValues.logo}
-                onChange={handleChange}
-                placeholder="https://example.com/logo.png"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-              />
-            </div>
-          </div>
-
-          {/* Members Section */}
-          <div>
-            <label className="flex items-center text-sm font-medium text-gray-700 mb-1">
-              <Users className="h-4 w-4 mr-2 text-gray-500" />
-              Organization Members
-            </label>
-
-            {/* Lista de miembros existentes */}
-            <div className="mt-2 space-y-2">
-              {members.map((member) => (
-                <div
-                  key={member.id}
-                  className="flex items-center justify-between p-2 bg-gray-50 rounded-md"
-                >
-                  <div className="flex-1">
-                    <p className="font-medium">{member.name}</p>
-                    <p className="text-sm text-gray-500">{member.email}</p>
-                  </div>
-
-                  {editingMemberId === member.id ? (
-                    <div className="flex items-center space-x-2">
-                      <select
-                        value={editMemberRole}
-                        onChange={(e) => setEditMemberRole(e.target.value)}
-                        className="border border-gray-300 rounded-md px-2 py-1 text-sm"
-                      >
-                        {roles.map((role) => (
-                          <option key={role.value} value={role.value}>
-                            {role.label}
-                          </option>
-                        ))}
-                      </select>
-                      <button
-                        type="button"
-                        onClick={() => saveMemberRole(member.id)}
-                        className="text-green-600 hover:text-green-800"
-                      >
-                        Save
-                      </button>
-                      <button
-                        type="button"
-                        onClick={cancelEditing}
-                        className="text-gray-500 hover:text-gray-700"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="flex items-center space-x-2">
-                      <span className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm">
-                        {member.role}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => startEditingMember(member.id)}
-                        className="text-blue-600 hover:text-blue-800"
-                      >
-                        <Pencil className="h-4 w-4" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveMember(member.id)}
-                        className="text-red-600 hover:text-red-800"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Agregar nuevo miembro */}
-            <div className="mt-4 flex items-end space-x-2">
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Add new member
-                </label>
-                <input
-                  type="email"
-                  value={newMemberEmail}
-                  onChange={(e) => setNewMemberEmail(e.target.value)}
-                  placeholder="user@example.com"
-                  className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
-                    errors.members ? "border-red-300" : "border-gray-300"
-                  }`}
-                />
-                {errors.members && (
-                  <p className="mt-1 text-sm text-red-600">{errors.members}</p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Role
-                </label>
-                <select
-                  value={newMemberRole}
-                  onChange={(e) => setNewMemberRole(e.target.value)}
-                  className="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                >
-                  {roles.map((role) => (
-                    <option key={role.value} value={role.value}>
-                      {role.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleAddMember}
-                className="px-3 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
-              >
-                Add
-              </button>
-            </div>
-          </div>
-
-          {/* Submit */}
-          <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
-            <button
-              type="button"
-              onClick={() => navigate(-1)}
-              className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-            >
-              {t.cancel}
-            </button>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${
-                isSubmitting ? "opacity-75 cursor-not-allowed" : ""
-              }`}
-            >
-              {isSubmitting ? "Saving..." : "Save Changes"}
-            </button>
-          </div>
-
-          {errors.submit && (
-            <div className="mt-4 p-3 bg-red-50 text-red-600 rounded-md text-sm">
-              {errors.submit}
-            </div>
-          )}
+          <SubmitSection
+            isSubmitting={isSubmitting}
+            onCancel={() => navigate(-1)}
+            submitError={errors.submit}
+            translations={t}
+          />
         </form>
       </div>
     </div>

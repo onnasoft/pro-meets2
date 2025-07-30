@@ -1,39 +1,21 @@
 import { Globe, MapPin, Phone, Building2 } from "lucide-react";
+import translations from "./translations";
 
 interface ContactInfoFormProps {
   readonly website: string;
   readonly location: string;
   readonly phone: string;
-  readonly logo: string;
+  readonly logoSrc: string;
   readonly onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   readonly errors: Record<string, string>;
-  readonly translations: {
-    fields: {
-      website: string;
-      location: string;
-      phone: string;
-      logo: string;
-    };
-    optional: string;
-    placeholders: {
-      website: string;
-    };
-    errors: {
-      website: {
-        uri: string;
-      };
-      phone: {
-        pattern: string;
-      };
-    };
-  };
+  readonly translations: typeof translations.en;
 }
 
 export function ContactInfoForm({
   website,
   location,
   phone,
-  logo,
+  logoSrc,
   onChange,
   errors,
   translations,
@@ -108,8 +90,8 @@ export function ContactInfoForm({
         </label>
         <input
           type="url"
-          name="logo"
-          value={logo}
+          name="logoSrc"
+          value={logoSrc}
           onChange={onChange}
           placeholder="https://example.com/logo.png"
           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Building2 } from "lucide-react";
 import { languageLoader } from "~/loaders/language";
 import { createOrganization } from "~/services/organizations";
-import { OrganizationPlan } from "~/types/models";
+import { Create, Organization, OrganizationPlan } from "~/types/models";
 import { PlanSelector } from "~/components/organization/PlanSelector";
 import { BasicInfoForm } from "~/components/organization/BasicInfoForm";
 import { ContactInfoForm } from "~/components/organization/ContactInfoForm";
@@ -20,14 +20,21 @@ export default function NewOrganizationPage() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<
+    Omit<
+      Create<Organization> & {
+        members: string;
+      },
+      "ownerId" | "current" | "status"
+    >
+  >({
     name: "",
     description: "",
     website: "",
     location: "",
     phone: "",
     members: "",
-    logo: "",
+    logoSrc: "",
     plan: OrganizationPlan.FREE,
   });
 
@@ -94,24 +101,24 @@ export default function NewOrganizationPage() {
     <div className="max-w-6xl mx-auto p-6">
       <div className="flex items-center mb-8">
         <Building2 className="h-8 w-8 text-primary-600 mr-3" />
-        <h1 className="text-2xl font-bold text-gray-900">{t.title}</h1>
+        <h1 className="text-2xl font-bold text-gray-900">{t.createTitle}</h1>
       </div>
 
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
         <form onSubmit={handleSubmit} className="space-y-6">
           <BasicInfoForm
             name={formValues.name}
-            description={formValues.description}
+            description={formValues.description ?? ""}
             onChange={handleChange}
             errors={errors}
             translations={t}
           />
 
           <ContactInfoForm
-            website={formValues.website}
-            location={formValues.location}
-            phone={formValues.phone}
-            logo={formValues.logo}
+            website={formValues.website ?? ""}
+            location={formValues.location ?? ""}
+            phone={formValues.phone ?? ""}
+            logoSrc={formValues.logoSrc ?? ""}
             onChange={handleChange}
             errors={errors}
             translations={t}
