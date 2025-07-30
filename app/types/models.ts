@@ -1,8 +1,34 @@
 import { PaymentMethod as SPaymentMethod } from "@stripe/stripe-js";
 import { Language } from "~/utils/language";
 
+export type Op =
+  | 'eq'
+  | 'neq'
+  | 'gt'
+  | 'gte'
+  | 'lt'
+  | 'lte'
+  | 'like'
+  | 'ilike'
+  | 'in'
+  | 'notIn'
+  | 'between'
+
+export type Condition = {
+  value: any;
+  op?: Op;
+};
+
 export type Create<T> = Omit<T, "id" | "createdAt" | "updatedAt">;
 export type Update<T> = Partial<Create<T>>;
+export type QueryParamsBuilder<T> = {
+  select?: Partial<Record<keyof T, boolean>>;
+  where?: Partial<Record<keyof T, Condition>>;
+  relations?: string[];
+  orderBy?: Array<Record<keyof T, "asc" | "desc">>;
+  take?: number;
+  skip?: number;
+};
 
 export type Role = "admin" | "user";
 
@@ -68,6 +94,7 @@ export enum OrganizationStatus {
 }
 
 export enum MemberRole {
+  OWNER = "owner",
   ADMIN = "admin",
   MEMBER = "member",
   GUEST = "guest",

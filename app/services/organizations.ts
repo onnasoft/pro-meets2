@@ -1,6 +1,12 @@
 import config from "~/config";
 import { HTTPError } from "~/types/http";
-import { Create, Organization, Update } from "~/types/models";
+import {
+  Create,
+  Organization,
+  QueryParamsBuilder,
+  Update,
+} from "~/types/models";
+import { queryBuilder } from "~/utils/query";
 
 export async function getOrganization(id: number): Promise<Organization> {
   const response = await fetch(`${config.apiUrl}/organizations/${id}`, {
@@ -19,8 +25,13 @@ export async function getOrganization(id: number): Promise<Organization> {
   return response.json();
 }
 
-export async function getOrganizations(): Promise<Organization[]> {
-  const response = await fetch(`${config.apiUrl}/organizations`, {
+type getOrganizationsParams = QueryParamsBuilder<Organization>;
+
+export async function getOrganizations(
+  params?: getOrganizationsParams
+): Promise<Organization[]> {
+  const queryString = params ? `?${queryBuilder(params)}` : "";
+  const response = await fetch(`${config.apiUrl}/organizations${queryString}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +44,8 @@ export async function getOrganizations(): Promise<Organization[]> {
     throw new Error(errorData.message || "Failed to fetch organizations");
   }
 
-  return response.json();
+  const data = (await response.json()).data as Organization[];
+  return data;
 }
 
 export async function createOrganization(
