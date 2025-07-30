@@ -1,6 +1,10 @@
 import { OrganizationPlan } from "~/types/models";
 import { BadgeCheck, CreditCard, Building2 } from "lucide-react";
 import translations from "./translations";
+import { useOutletContext, useNavigate } from "@remix-run/react";
+import { DashboardOutletContext } from "~/types/dashboard";
+import { useState } from "react";
+import { Description, Dialog, DialogTitle } from "@headlessui/react";
 
 interface PlanSelectorProps {
   readonly selectedPlan: OrganizationPlan;
@@ -9,14 +13,79 @@ interface PlanSelectorProps {
   readonly error?: string;
 }
 
+const requirePaymentMethods = [
+  OrganizationPlan.PRO,
+  OrganizationPlan.ENTERPRISE,
+];
+
 export function PlanSelector({
   selectedPlan,
   onSelectPlan,
   translations,
   error,
 }: PlanSelectorProps) {
+  const { user } = useOutletContext<DashboardOutletContext>();
+  const { defaultPaymentMethodId } = user;
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handlePlanSelection = (plan: OrganizationPlan) => {
+    if (requirePaymentMethods.includes(plan)) {
+      if (!defaultPaymentMethodId) {
+        setIsOpen(true);
+        return;
+      }
+    }
+    onSelectPlan(plan);
+  };
+
+  const handleConfirm = () => {
+    setIsOpen(false);
+    navigate("/dashboard/billing");
+  };
+
+  const handleCancel = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div>
+      {/* Diálogo de confirmación */}
+      <Dialog
+        open={isOpen}
+        onClose={handleCancel}
+        className="fixed inset-0 z-10 overflow-y-auto"
+      >
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="fixed inset-0 bg-black opacity-30" />
+
+          <div className="relative bg-white rounded-lg max-w-md mx-auto p-6">
+            <DialogTitle className="text-lg font-medium text-gray-900">
+              {translations.paymentRequired.title}
+            </DialogTitle>
+            <Description className="mt-2 text-sm text-gray-500">
+              {translations.paymentRequired.description}
+            </Description>
+
+            <div className="mt-4 flex justify-end space-x-3">
+              <button
+                onClick={handleCancel}
+                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+              >
+                {translations.paymentRequired.cancel}
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="px-4 py-2 bg-primary-600 text-white rounded-md text-sm font-medium hover:bg-primary-700"
+              >
+                {translations.paymentRequired.confirm}
+              </button>
+            </div>
+          </div>
+        </div>
+      </Dialog>
+
+      {/* Selector de planes */}
       <label className="block text-sm font-medium text-gray-700 mb-1">
         {translations.fields.plan}
       </label>
@@ -29,7 +98,7 @@ export function PlanSelector({
               ? "border-primary-500 bg-primary-50 shadow-md"
               : "border-gray-200 hover:border-primary-300"
           }`}
-          onClick={() => onSelectPlan(OrganizationPlan.FREE)}
+          onClick={() => handlePlanSelection(OrganizationPlan.FREE)}
         >
           <div className="flex items-center mb-2">
             <BadgeCheck className="h-5 w-5 mr-2 text-gray-600" />
@@ -51,7 +120,7 @@ export function PlanSelector({
               ? "border-primary-500 bg-primary-50 shadow-md"
               : "border-gray-200 hover:border-primary-300"
           }`}
-          onClick={() => onSelectPlan(OrganizationPlan.PRO)}
+          onClick={() => handlePlanSelection(OrganizationPlan.PRO)}
         >
           <div className="flex items-center mb-2">
             <CreditCard className="h-5 w-5 mr-2 text-blue-600" />
@@ -63,6 +132,11 @@ export function PlanSelector({
           <div className="mt-3 text-primary-600 font-medium">
             {selectedPlan === OrganizationPlan.PRO && <span>Selected</span>}
           </div>
+          {!defaultPaymentMethodId && (
+            <div className="mt-2 text-xs text-yellow-600">
+              {translations.plans.paymentRequired}
+            </div>
+          )}
         </button>
 
         {/* Enterprise Plan */}
@@ -73,7 +147,7 @@ export function PlanSelector({
               ? "border-primary-500 bg-primary-50 shadow-md"
               : "border-gray-200 hover:border-primary-300"
           }`}
-          onClick={() => onSelectPlan(OrganizationPlan.ENTERPRISE)}
+          onClick={() => handlePlanSelection(OrganizationPlan.ENTERPRISE)}
         >
           <div className="flex items-center mb-2">
             <Building2 className="h-5 w-5 mr-2 text-purple-600" />
@@ -87,6 +161,11 @@ export function PlanSelector({
               <span>Selected</span>
             )}
           </div>
+          {!defaultPaymentMethodId && (
+            <div className="mt-2 text-xs text-yellow-600">
+              {translations.plans.paymentRequired}
+            </div>
+          )}
         </button>
       </div>
       {error && <p className="mt-2 text-sm text-red-600">{error}</p>}

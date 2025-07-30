@@ -2,24 +2,32 @@ import config from "~/config";
 import { HTTPError } from "~/types/http";
 import {
   Create,
+  FindManyOptions,
+  FindOneOptions,
   Organization,
-  QueryParamsBuilder,
   Update,
 } from "~/types/models";
 import { queryBuilder } from "~/utils/query";
 
+type GetOrganizationParams = FindOneOptions<Organization>;
+
 export async function getOrganization(
   id: string,
+  params: GetOrganizationParams = {},
   headers: HeadersInit = {}
 ): Promise<Organization> {
-  const response = await fetch(`${config.apiUrl}/organizations/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      ...headers,
-    },
-    credentials: "include",
-  });
+  const queryString = params ? `?${queryBuilder(params)}` : "";
+  const response = await fetch(
+    `${config.apiUrl}/organizations/${id}${queryString}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...headers,
+      },
+      credentials: "include",
+    }
+  );
 
   if (!response.ok) {
     const errorData: HTTPError = await response.json();
@@ -29,10 +37,10 @@ export async function getOrganization(
   return response.json();
 }
 
-type getOrganizationsParams = QueryParamsBuilder<Organization>;
+type GetOrganizationsParams = FindManyOptions<Organization>;
 
 export async function getOrganizations(
-  params?: getOrganizationsParams
+  params?: GetOrganizationsParams
 ): Promise<Organization[]> {
   const queryString = params ? `?${queryBuilder(params)}` : "";
   const response = await fetch(`${config.apiUrl}/organizations${queryString}`, {

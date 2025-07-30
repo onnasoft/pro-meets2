@@ -7,7 +7,6 @@ import { Create, Organization, OrganizationPlan } from "~/types/models";
 import { PlanSelector } from "~/components/organization/PlanSelector";
 import { BasicInfoForm } from "~/components/organization/BasicInfoForm";
 import { ContactInfoForm } from "~/components/organization/ContactInfoForm";
-import { MembersForm } from "~/components/organization/MembersForm";
 import { SubmitSection } from "~/components/organization/SubmitSection";
 import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
@@ -21,19 +20,13 @@ export default function NewOrganizationPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formValues, setFormValues] = useState<
-    Omit<
-      Create<Organization> & {
-        members: string;
-      },
-      "ownerId" | "current" | "status"
-    >
+    Omit<Create<Organization>, "ownerId" | "current" | "status">
   >({
     name: "",
     description: "",
     website: "",
     location: "",
     phone: "",
-    members: "",
     logoSrc: "",
     plan: OrganizationPlan.FREE,
   });
@@ -121,13 +114,6 @@ export default function NewOrganizationPage() {
             logoSrc={formValues.logoSrc ?? ""}
             onChange={handleChange}
             errors={errors}
-            translations={t}
-          />
-
-          <MembersForm
-            members={formValues.members}
-            onChange={handleChange}
-            error={errors.members}
             translations={t}
           />
 

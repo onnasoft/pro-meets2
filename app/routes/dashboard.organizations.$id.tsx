@@ -1,9 +1,13 @@
-import { useLoaderData, useNavigate } from "@remix-run/react";
+import { useLoaderData, useNavigate, useOutletContext } from "@remix-run/react";
 import { useState } from "react";
 import { Building2 } from "lucide-react";
-import { languageLoader } from "~/loaders/language";
-import { createOrganization, getOrganization } from "~/services/organizations";
-import { Organization, OrganizationPlan, Update } from "~/types/models";
+import { getOrganization, updateOrganization } from "~/services/organizations";
+import {
+  MemberRole,
+  Organization,
+  OrganizationPlan,
+  Update,
+} from "~/types/models";
 import { PlanSelector } from "~/components/organization/PlanSelector";
 import { BasicInfoForm } from "~/components/organization/BasicInfoForm";
 import { ContactInfoForm } from "~/components/organization/ContactInfoForm";
@@ -11,12 +15,11 @@ import { SubmitSection } from "~/components/organization/SubmitSection";
 import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
-import { Language } from "~/utils/language";
 import MembersManager from "~/components/organization/MembersManager";
+import { DashboardOutletContext } from "~/types/dashboard";
 
 interface LoaderData {
   organization: Organization;
-  language: Language;
 }
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -39,14 +42,18 @@ export async function loader(args: LoaderFunctionArgs) {
       throw new Error("Organization ID is required");
     }
 
-    const organization = await getOrganization(id, {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    });
+    const organization = await getOrganization(
+      id,
+      {
+        relations: ["members", "members.user"],
+      },
+      {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      }
+    );
 
-    const { language } = await languageLoader(args);
-
-    return { organization, language } as LoaderData;
+    return { organization } as LoaderData;
   } catch {
     return redirect("/login");
   }
@@ -57,7 +64,8 @@ type NonNullableFields<T> = {
 };
 
 export default function NewOrganizationPage() {
-  const { language, organization } = useLoaderData<typeof loader>();
+  const { user, language } = useOutletContext<DashboardOutletContext>();
+  const { organization } = useLoaderData<typeof loader>();
   const t = translations[language] || translations.en;
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -78,6 +86,9 @@ export default function NewOrganizationPage() {
   });
 
   const members = organization.members ?? [];
+  const role =
+    organization.members.find((m) => m.user?.id === user.id)?.role ||
+    MemberRole.MEMBER;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -112,24 +123,11 @@ export default function NewOrganizationPage() {
       return;
     }
 
-    const processedData = {
-      ...value,
-      members: value.members
-        ? value.members
-            .split(",")
-            .map((e: string) => e.trim())
-            .filter(Boolean)
-        : [],
-    };
+    const processedData = value;
 
     try {
-      const response = await createOrganization(processedData);
+      const response = await updateOrganization(organization.id, processedData);
       if (!response) throw new Error(t.errorMessage);
-
-      const data = response;
-      navigate(`/dashboard/organizations/${data.id}`, {
-        state: { successMessage: t.successMessage },
-      });
     } catch (error) {
       console.error("Error creating organization:", error);
       setErrors({ submit: t.errorMessage });
@@ -167,17 +165,19 @@ export default function NewOrganizationPage() {
 
           <MembersManager
             members={members}
+            role={role}
             /*onChange={handleChange}
             error={errors.members}
             translations={t}*/
           />
-
-          <PlanSelector
-            selectedPlan={formValues.plan}
-            onSelectPlan={handlePlanSelect}
-            translations={t}
-            error={errors.plan}
-          />
+          {role === MemberRole.OWNER && (
+            <PlanSelector
+              selectedPlan={formValues.plan}
+              onSelectPlan={handlePlanSelect}
+              translations={t}
+              error={errors.plan}
+            />
+          )}
 
           <SubmitSection
             isSubmitting={isSubmitting}

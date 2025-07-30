@@ -103,6 +103,7 @@ export default function DashboardLayout() {
   ];
 
   useEffect(() => {
+    if (location.pathname === "/dashboard/billing") return;
     if (organizations.length > 0) return;
     if (location.pathname === "/dashboard/organizations/new") return;
 

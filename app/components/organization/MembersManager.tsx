@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Pencil, X } from "lucide-react";
-import { OrganizationMember } from "~/types/models";
+import { CirclePlus, Pencil, X } from "lucide-react";
+import { MemberRole, OrganizationMember } from "~/types/models";
 
 interface RoleOption {
   value: string;
@@ -8,15 +8,17 @@ interface RoleOption {
 }
 
 const roles: RoleOption[] = [
-  { value: "ADMIN", label: "Admin" },
-  { value: "MEMBER", label: "Member" },
+  { value: MemberRole.ADMIN, label: "Admin" },
+  { value: MemberRole.MEMBER, label: "Member" },
+  { value: MemberRole.GUEST, label: "Guest" },
 ];
 
 interface MembersManagerProps {
   readonly members: OrganizationMember[];
+  readonly role: MemberRole;
 }
 
-export default function MembersManager({ members }: MembersManagerProps) {
+export default function MembersManager({ members, role }: MembersManagerProps) {
   const [editingMemberId, setEditingMemberId] = useState<string | null>(null);
   const [editMemberRole, setEditMemberRole] = useState<string>("");
   const [newMemberEmail, setNewMemberEmail] = useState<string>("");
@@ -101,6 +103,7 @@ export default function MembersManager({ members }: MembersManagerProps) {
               </span>
               <button
                 type="button"
+                disabled={member.role === MemberRole.OWNER}
                 onClick={() => startEditingMember(member.id)}
                 className="text-blue-600 hover:text-blue-800"
               >
@@ -108,6 +111,7 @@ export default function MembersManager({ members }: MembersManagerProps) {
               </button>
               <button
                 type="button"
+                disabled={member.role === MemberRole.OWNER}
                 onClick={() => handleRemoveMember(member.id)}
                 className="text-red-600 hover:text-red-800"
               >
@@ -120,10 +124,14 @@ export default function MembersManager({ members }: MembersManagerProps) {
 
       <div className="mt-4 flex items-end space-x-2">
         <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="new-member-email"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Add new member
           </label>
           <input
+            id="new-member-email"
             type="email"
             value={newMemberEmail}
             onChange={(e) => setNewMemberEmail(e.target.value)}
@@ -138,10 +146,14 @@ export default function MembersManager({ members }: MembersManagerProps) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="new-member-role"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Role
           </label>
           <select
+            id="new-member-role"
             value={newMemberRole}
             onChange={(e) => setNewMemberRole(e.target.value)}
             className="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
@@ -159,7 +171,7 @@ export default function MembersManager({ members }: MembersManagerProps) {
           onClick={handleAddMember}
           className="px-3 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
         >
-          Add
+          <CirclePlus className="h-5 w-5" />
         </button>
       </div>
     </div>

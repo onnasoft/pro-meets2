@@ -20,6 +20,7 @@ const translations = {
       free: "Free",
       pro: "Pro",
       enterprise: "Enterprise",
+      paymentRequired: "Payment Required",
     },
     planDescriptions: {
       free: "Basic features for small teams",
@@ -27,8 +28,15 @@ const translations = {
       enterprise: "Custom solutions for large organizations",
     },
     cancel: "Cancel",
-    submit: "Create organization",
+    submit: "Submit",
     submitting: "Creating...",
+    paymentRequired: {
+      title: "Payment Method Required",
+      description:
+        "You need to register a payment method before selecting this plan. You will be redirected to the billing page.",
+      cancel: "Cancel",
+      confirm: "Confirm",
+    },
     errors: {
       name: {
         min: "Name must be at least 3 characters",
@@ -73,6 +81,7 @@ const translations = {
       free: "Gratis",
       pro: "Pro",
       enterprise: "Empresa",
+      paymentRequired: "Pago Requerido",
     },
     planDescriptions: {
       free: "Funciones básicas para equipos pequeños",
@@ -80,8 +89,15 @@ const translations = {
       enterprise: "Soluciones personalizadas para grandes organizaciones",
     },
     cancel: "Cancelar",
-    submit: "Crear organización",
+    submit: "Enviar",
     submitting: "Creando...",
+    paymentRequired: {
+      title: "Método de Pago Requerido",
+      description:
+        "Necesitas registrar un método de pago antes de seleccionar este plan. Serás redirigido a la página de facturación.",
+      cancel: "Cancelar",
+      confirm: "Confirmar",
+    },
     errors: {
       name: {
         min: "El nombre debe tener al menos 3 caracteres",
@@ -126,6 +142,7 @@ const translations = {
       free: "Gratuit",
       pro: "Pro",
       enterprise: "Entreprise",
+      paymentRequired: "Paiement Requis",
     },
     planDescriptions: {
       free: "Fonctionnalités de base pour petites équipes",
@@ -133,8 +150,15 @@ const translations = {
       enterprise: "Solutions personnalisées pour grandes organisations",
     },
     cancel: "Annuler",
-    submit: "Créer l'organisation",
+    submit: "Soumettre",
     submitting: "Création...",
+    paymentRequired: {
+      title: "Paiement Requis",
+      description:
+        "Vous devez enregistrer un mode de paiement avant de sélectionner ce plan. Vous serez redirigé vers la page de facturation.",
+      cancel: "Annuler",
+      confirm: "Confirmer",
+    },
     errors: {
       name: {
         min: "Le nom doit comporter au moins 3 caractères",
@@ -180,6 +204,7 @@ const translations = {
       free: "無料",
       pro: "プロ",
       enterprise: "エンタープライズ",
+      paymentRequired: "支払いが必要",
     },
     planDescriptions: {
       free: "小規模チーム向けの基本機能",
@@ -187,8 +212,15 @@ const translations = {
       enterprise: "大規模組織向けのカスタムソリューション",
     },
     cancel: "キャンセル",
-    submit: "組織を作成",
+    submit: "送信",
     submitting: "作成中...",
+    paymentRequired: {
+      title: "支払い方法が必要",
+      description:
+        "このプランを選択する前に支払い方法を登録する必要があります。請求ページにリダイレクトされます。",
+      cancel: "キャンセル",
+      confirm: "確認",
+    },
     errors: {
       name: {
         min: "名前は3文字以上である必要があります",
@@ -233,6 +265,7 @@ const translations = {
       free: "免费",
       pro: "专业版",
       enterprise: "企业版",
+      paymentRequired: "需要付款",
     },
     planDescriptions: {
       free: "适用于小型团队的基本功能",
@@ -240,8 +273,15 @@ const translations = {
       enterprise: "适用于大型组织的定制解决方案",
     },
     cancel: "取消",
-    submit: "创建组织",
+    submit: "提交",
     submitting: "创建中...",
+    paymentRequired: {
+      title: "需要支付方式",
+      description:
+        "在选择此计划之前，您需要注册支付方式。您将被重定向到账单页面。",
+      cancel: "取消",
+      confirm: "确认",
+    },
     errors: {
       name: {
         min: "名称至少需要 3 个字符",

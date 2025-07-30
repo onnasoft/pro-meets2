@@ -44,10 +44,12 @@ export type Create<T> = Omit<
 >;
 
 export type Update<T> = Partial<Create<T>>;
-export type QueryParamsBuilder<T> = {
+export type FindOneOptions<T> = {
   select?: Partial<Record<keyof T, boolean>>;
   where?: Partial<Record<keyof T, Condition>>;
   relations?: string[];
+};
+export type FindManyOptions<T> = FindOneOptions<T> & {
   orderBy?: Array<Record<keyof T, "asc" | "desc">>;
   take?: number;
   skip?: number;
