@@ -10,7 +10,7 @@ import { queryBuilder } from "~/utils/query";
 
 export async function getOrganization(
   id: string,
-  headers: HeadersInit
+  headers: HeadersInit = {}
 ): Promise<Organization> {
   const response = await fetch(`${config.apiUrl}/organizations/${id}`, {
     method: "GET",
