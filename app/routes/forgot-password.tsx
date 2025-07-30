@@ -58,7 +58,7 @@ const translations = {
     errorMessage:
       "Un problème est survenu lors de l'envoi du lien. Veuillez réessayer.",
   },
-  ja: {
+  jp: {
     title: "パスワードをリセット",
     description:
       "パスワードリセットリンクを受け取るにはメールアドレスを入力してください",

@@ -126,7 +126,7 @@ const translations = {
       "Nous avons aidé plus de 20 industries différentes à optimiser leur recrutement.",
     ctaButton: "Parler à un spécialiste",
   },
-  ja: {
+  jp: {
     title: "ProMeetsの恩恵を受けるのは誰？",
     subtitle: "技術チームと急成長チームのニーズに特化して設計",
     beneficiaries: [

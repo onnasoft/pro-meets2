@@ -201,7 +201,7 @@ const translations = {
       },
     ],
   },
-  ja: {
+  jp: {
     title: "部分的なソリューションはもう不要",
     subtitle: "ProMeetsが1つのプラットフォームで全てを提供する方法を比較",
     functionality: "機能",

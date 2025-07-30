@@ -78,7 +78,7 @@ const translations = {
       }
     ]
   },
-  ja: {
+  jp: {
     title: "サポートセンター",
     subtitle: "ご質問や問題があればお気軽にお問い合わせください",
     contactTitle: "お問い合わせ",

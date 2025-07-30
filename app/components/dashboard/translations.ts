@@ -89,7 +89,7 @@ const translations = {
     },
     dashboard: "Tableau de bord",
   },
-  ja: {
+  jp: {
     appName: "RecruitFlow",
     menu: {
       calendar: "カレンダー",

@@ -65,7 +65,7 @@ const translations = {
       googleLoginError: "Échec de la connexion avec Google, veuillez réessayer",
     },
   },
-  ja: {
+  jp: {
     title: "おかえりなさい",
     subtitle: "続けるにはログインしてください",
     emailLabel: "メールアドレス",

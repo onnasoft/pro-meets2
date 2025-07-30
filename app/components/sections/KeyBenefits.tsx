@@ -199,7 +199,7 @@ const translations = {
       },
     ],
   },
-  ja: {
+  jp: {
     title: "採用プロセスを革新する",
     description: "ProMeetsが採用の各段階をスマートな技術で変革する方法を発見",
     benefits: [

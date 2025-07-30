@@ -22,7 +22,7 @@ const translations = {
     title: "Connexion",
     subtitle: "Accédez à votre compte ProMeets",
   },
-  ja: {
+  jp: {
     title: "ログイン",
     subtitle: "ProMeetsアカウントにアクセスする",
   },

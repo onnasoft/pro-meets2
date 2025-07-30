@@ -88,18 +88,20 @@ export function OrganizationSelector({
               ))}
             </div>
 
-            <div className="py-1 bg-gray-50 rounded-b-lg">
-              <button
-                onClick={() => {
-                  navigate("/dashboard/organizations/new");
-                  setIsOpen(false);
-                }}
-                className="w-full flex items-center px-5 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100"
-              >
-                <Plus className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0" />
-                <span>{translations.organizations.createNew}</span>
-              </button>
-            </div>
+            {!organizations.length && (
+              <div className="py-1 bg-gray-50 rounded-b-lg">
+                <button
+                  onClick={() => {
+                    navigate("/dashboard/organizations/new");
+                    setIsOpen(false);
+                  }}
+                  className="w-full flex items-center px-5 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100"
+                >
+                  <Plus className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0" />
+                  <span>{translations.organizations.createNew}</span>
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

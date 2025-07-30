@@ -65,7 +65,7 @@ const translations = {
       "Un problème est survenu lors de la réinitialisation de votre mot de passe. Veuillez réessayer.",
     loginLink: "Retour à la connexion",
   },
-  ja: {
+  jp: {
     title: "パスワードをリセット",
     description: "アカウントの新しいパスワードを作成してください",
     passwordLabel: "新しいパスワード",

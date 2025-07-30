@@ -224,7 +224,7 @@ const translations = {
       remove: "Supprimer",
     },
   },
-  ja: {
+  jp: {
     title: "職務経歴書",
     sections: {
       personal: "個人情報",

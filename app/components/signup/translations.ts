@@ -117,7 +117,7 @@ const translations = {
       googleLoginError: "Échec de la connexion Google. Veuillez réessayer.",
     },
   },
-  ja: {
+  jp: {
     title: "アカウントを作成",
     subtitle: "採用プロセスの効率化を今日から始めましょう",
     nameLabel: "氏名",

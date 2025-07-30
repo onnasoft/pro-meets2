@@ -20,7 +20,7 @@ const translations = {
     title: "Inscription",
     subtitle: "Créez votre compte pour commencer à utiliser ProMeets",
   },
-  ja: {
+  jp: {
     title: "サインアップ",
     subtitle: "ProMeetsの使用を開始するためにアカウントを作成してください",
   },

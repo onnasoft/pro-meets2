@@ -23,7 +23,7 @@ const translations = {
       "Vous pouvez maintenant accéder à toutes les fonctionnalités de ProMeets.",
     cta: "Aller au Tableau de Bord",
   },
-  ja: {
+  jp: {
     title: "メール認証完了！",
     message: "メールアドレスの確認が完了しました。",
     additionalText: "ProMeetsの全機能をご利用いただけます。",

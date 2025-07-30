@@ -31,7 +31,7 @@ const translations = {
     signup: "S'inscrire",
     language: "Langue",
   },
-  ja: {
+  jp: {
     blog: "ブログ",
     login: "ログイン",
     signup: "サインアップ",

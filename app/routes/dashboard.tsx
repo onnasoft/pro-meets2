@@ -1,9 +1,4 @@
-import {
-  Outlet,
-  useLoaderData,
-  useLocation,
-  useNavigate,
-} from "@remix-run/react";
+import { Outlet, useLoaderData, useNavigate } from "@remix-run/react";
 import translations from "~/components/dashboard/translations";
 import { Sidebar } from "~/components/dashboard/Sidebar";
 import { Header } from "~/components/dashboard/Header";
@@ -49,7 +44,7 @@ export async function loader(args: LoaderFunctionArgs) {
       language: languageData.language,
       user: sessionData.user,
       organizations: organizationsData.organizations,
-    };
+    } as LoaderData;
   } catch {
     return redirect("/login");
   }
@@ -59,7 +54,6 @@ export default function DashboardLayout() {
   const { language, user, organizations } = useLoaderData<typeof loader>();
   const t = translations[language] || translations.en;
   const navigation = useNavigate();
-  const location = useLocation();
 
   const queryClient = useMemo(() => new QueryClient(), []);
 
@@ -101,14 +95,6 @@ export default function DashboardLayout() {
       icon: "🎥",
     },
   ];
-
-  useEffect(() => {
-    if (location.pathname === "/dashboard/billing") return;
-    if (organizations.length > 0) return;
-    if (location.pathname === "/dashboard/organizations/new") return;
-
-    navigation("/dashboard/organizations/new");
-  }, [organizations]);
 
   useEffect(() => {
     if (!currentOrganizationId && organizations.length > 0) {

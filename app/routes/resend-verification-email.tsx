@@ -41,7 +41,7 @@ const translations = {
     noEmailReceived: "Vous n'avez pas reçu l'email?",
     contactSupport: "Contacter le support",
   },
-  ja: {
+  jp: {
     title: "確認メールを再送信",
     description: "確認リンクを再送信するにはメールアドレスを入力してください",
     emailLabel: "メールアドレス",

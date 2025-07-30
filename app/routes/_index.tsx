@@ -49,7 +49,7 @@ const metaTranslations = {
       "Découvrez comment ProMeets peut vous aider à mener de meilleurs entretiens plus rapidement avec notre plateforme alimentée par l'IA.",
     ogImage: "https://www.promeets.com/images/og-image-fr.jpg",
   },
-  ja: {
+  jp: {
     title: "ProMeets | 採用担当者のための近代的なビデオ面接プラットフォーム",
     description:
       "AI搭載のビデオ面接で採用プロセスを効率化。エンドツーエンドの採用プラットフォームで採用までの時間を50%短縮。",

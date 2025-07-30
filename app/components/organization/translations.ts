@@ -183,7 +183,7 @@ const translations = {
     errorMessage: "Erreur lors de la création de l'organisation",
     optional: "(optionnel)",
   },
-  ja: {
+  jp: {
     createTitle: "新しい組織を作成",
     updateTitle: "組織を更新",
     fields: {

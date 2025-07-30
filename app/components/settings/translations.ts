@@ -122,7 +122,7 @@ const translations = {
       delete: "Supprimer",
     },
   },
-  ja: {
+  jp: {
     title: "システム設定",
     subtitle: "通知設定と接続を管理",
     organizations: {

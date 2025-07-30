@@ -193,7 +193,7 @@ const translations = {
     includes: "Inclus :",
     popularBadge: "POPULAIRE",
   },
-  ja: {
+  jp: {
     title: "シンプルな従量課金制",
     subtitle: "必要な分だけ支払い、チームとともにスケール",
     plans: [

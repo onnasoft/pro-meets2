@@ -221,7 +221,7 @@ const translations = {
       documentation: "Documentation technique",
     },
   },
-  ja: {
+  jp: {
     title: "技術採用のための最も完全なプラットフォーム",
     scheduling: {
       name: "スマートスケジューリング",

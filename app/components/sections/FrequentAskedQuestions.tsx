@@ -137,7 +137,7 @@ const translations = {
     ctaPrimary: "Contacter les ventes",
     ctaSecondary: "Voir la documentation complète",
   },
-  ja: {
+  jp: {
     title: "よくある質問",
     subtitle: "当社プラットフォームに関するよくある質問への回答",
     faqs: [

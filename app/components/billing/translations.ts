@@ -178,7 +178,7 @@ const translations = {
       payNow: "Payer Maintenant",
     },
   },
-  ja: {
+  jp: {
     title: "請求と支払い",
     subtitle: "支払い方法、請求書、サブスクリプションプランを管理",
     paymentMethods: {

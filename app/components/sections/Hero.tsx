@@ -88,7 +88,7 @@ const translations = {
       analytics: "Analytique",
     },
   },
-  ja: {
+  jp: {
     titlePrefix: "あなたの",
     titleSuffix: "採用プロセスを変革",
     subtitle:

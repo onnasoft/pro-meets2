@@ -151,7 +151,7 @@ const translations = {
       "ProMeets unifie l'ensemble du processus dans une seule plateforme conçue spécifiquement pour le recrutement technique",
     ctaButton: "Voir la démo complète",
   },
-  ja: {
+  jp: {
     title: "完全自動化された採用ワークフロー",
     subtitle: "求人掲載から採用まで、プラットフォームを切り替える必要なく",
     steps: [

@@ -38,7 +38,7 @@ const translations = {
       "Annulation à tout moment"
     ]
   },
-  ja: {
+  jp: {
     title: "採用プロセスの変革を始めましょう",
     subtitle: "ProMeetsでより良い、より速い採用を実現している何百もの企業に参加しましょう",
     primaryButton: "無料トライアルを開始",

@@ -52,7 +52,7 @@ const translations = {
     contact: "Contact",
     copyright: "Tous droits réservés."
   },
-  ja: {
+  jp: {
     tagline: "現代的な採用のためのオールインワンソリューション。簡単にスケジュール、面接、管理、録画。",
     quickLinks: "クイックリンク",
     features: "特徴",
