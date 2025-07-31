@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { Organization } from "~/types/models";
-import config from "~/config";
+import { getOrganizations } from "~/services/organizations";
 
 interface LoaderData {
   organizations: Organization[];
@@ -21,21 +21,11 @@ export async function organizationsLoader(args: LoaderFunctionArgs) {
       throw new Error("Access token not found in cookies");
     }
 
-    const userResponse = await fetch(`${config.apiUrl}/organizations`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      credentials: "include",
+    const organizations = await getOrganizations(null, {
+      Authorization: `Bearer ${accessToken}`,
     });
 
-    if (!userResponse.ok) {
-      throw new Error("Failed to fetch user session");
-    }
-
-    const organizations = (await userResponse.json()).data as Organization[];
-    if (!organizations) {
+    if (!organizations.length) {
       throw new Error("No organizations found");
     }
 

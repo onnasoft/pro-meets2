@@ -40,12 +40,14 @@ export async function getOrganization(
 type GetOrganizationsParams = FindManyOptions<Organization>;
 
 export async function getOrganizations(
-  params?: GetOrganizationsParams
+  params?: GetOrganizationsParams | null,
+  headers: HeadersInit = {}
 ): Promise<Organization[]> {
   const queryString = params ? `?${queryBuilder(params)}` : "";
   const response = await fetch(`${config.apiUrl}/organizations${queryString}`, {
     method: "GET",
     headers: {
+      ...headers,
       "Content-Type": "application/json",
     },
     credentials: "include",

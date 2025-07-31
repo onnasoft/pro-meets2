@@ -19,14 +19,14 @@ type Config = {
 let _config: Config;
 
 if (typeof window === "undefined") {
-  console.log("Running on the server");
   _config = {
     apiUrl: process.env.PUBLIC_API_URL || "/api",
     linkedinUrl:
       process.env.PUBLIC_LINKEDIN_URL ||
       "https://www.linkedin.com/company/pro-meets",
     googleClientId: process.env.GOOGLE_CLIENT_ID || "YOUR_CLIENT_ID",
-    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY || "YOUR_STRIPE_PUBLISHABLE_KEY",
+    stripePublishableKey:
+      process.env.STRIPE_PUBLISHABLE_KEY || "YOUR_STRIPE_PUBLISHABLE_KEY",
   };
 } else {
   _config = {
@@ -35,7 +35,8 @@ if (typeof window === "undefined") {
       window.ENV?.PUBLIC_LINKEDIN_URL ||
       "https://www.linkedin.com/company/pro-meets",
     googleClientId: window.ENV?.GOOGLE_CLIENT_ID || "YOUR_CLIENT_ID",
-    stripePublishableKey: window.ENV?.STRIPE_PUBLISHABLE_KEY || "YOUR_STRIPE_PUBLISHABLE_KEY",
+    stripePublishableKey:
+      window.ENV?.STRIPE_PUBLISHABLE_KEY || "YOUR_STRIPE_PUBLISHABLE_KEY",
   };
 }
 

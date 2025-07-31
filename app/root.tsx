@@ -6,8 +6,8 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
-
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { languageLoader } from "./loaders/language";
 import "./tailwind.css";
 
 export const links: LinksFunction = () => [
@@ -23,12 +23,10 @@ export const links: LinksFunction = () => [
   },
 ];
 
-interface Environment {
-  PUBLIC_API_URL: string;
-}
-
-export const loader = async () => {
+export const loader = async (args: LoaderFunctionArgs) => {
+  const { language } = await languageLoader(args);
   return {
+    language,
     ENV: {
       PUBLIC_API_URL: process.env.PUBLIC_API_URL ?? "",
       GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -71,7 +69,7 @@ export function ErrorBoundary() {
 }
 
 export default function App() {
-  const { ENV } = useLoaderData<typeof loader>();
+  const { ENV, language } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -80,7 +78,7 @@ export default function App() {
           __html: `window.ENV = ${JSON.stringify(ENV)};`,
         }}
       />
-      <Outlet />
+      <Outlet context={{ language }} />
     </>
   );
 }
