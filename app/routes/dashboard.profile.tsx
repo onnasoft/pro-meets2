@@ -1,5 +1,4 @@
 import { useOutletContext } from "@remix-run/react";
-import { useState } from "react";
 import { User } from "lucide-react";
 import translations from "~/components/profile/translations";
 import PersonalInformation from "~/components/profile/PersonalInformation";
@@ -123,7 +122,7 @@ const mockProfile = {
 export default function UserProfilePage() {
   const { language } = useOutletContext<DashboardOutletContext>();
   const t = translations[language] || translations.en;
-  const [profile, setProfile] = useState(mockProfile);
+  const profile = mockProfile;
 
   return (
     <div className="max-w-6xl mx-auto p-6">

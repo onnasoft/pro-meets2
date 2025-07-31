@@ -5,6 +5,7 @@ interface MenuItemProps {
   readonly children: ReactNode;
   readonly onClick: () => void;
   readonly isDanger?: boolean;
+  readonly badge?: number;
 }
 
 export function MenuItem({
@@ -12,6 +13,7 @@ export function MenuItem({
   children,
   onClick,
   isDanger = false,
+  badge
 }: MenuItemProps) {
   return (
     <button
@@ -26,6 +28,11 @@ export function MenuItem({
       <span className={isDanger ? "text-error-600" : "text-gray-700"}>
         {children}
       </span>
+      {badge && (
+        <span className="ml-auto bg-gray-200 text-gray-700 text-xs font-medium py-1 px-2 rounded-full">
+          {badge}
+        </span>
+      )}
     </button>
   );
 }

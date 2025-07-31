@@ -6,6 +6,7 @@ import {
   LogOut,
   ChevronDown,
   ChevronUp,
+  Mail,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "@remix-run/react";
@@ -18,9 +19,14 @@ import useAuthStore from "~/store/auth";
 interface UserMenuProps {
   readonly user: UserModel;
   readonly translations: typeof translations.en;
+  readonly pendingInvites?: number;
 }
 
-export function UserMenu({ user, translations }: UserMenuProps) {
+export function UserMenu({
+  user,
+  translations,
+  pendingInvites = 0,
+}: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -40,7 +46,7 @@ export function UserMenu({ user, translations }: UserMenuProps) {
     <div className="relative" ref={menuRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center text-sm rounded-full focus:outline-none group"
+        className="flex items-center text-sm rounded-full focus:outline-none group relative"
       >
         <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
           <img
@@ -56,6 +62,13 @@ export function UserMenu({ user, translations }: UserMenuProps) {
           <ChevronUp className="ml-1 w-4 h-4 text-gray-500 hidden md:block" />
         ) : (
           <ChevronDown className="ml-1 w-4 h-4 text-gray-500 hidden md:block" />
+        )}
+
+        {/* Notificación de invitaciones pendientes */}
+        {pendingInvites > 0 && (
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            {pendingInvites}
+          </span>
         )}
       </button>
 
@@ -76,6 +89,19 @@ export function UserMenu({ user, translations }: UserMenuProps) {
             >
               {translations.userMenu.profile}
             </MenuItem>
+
+            {/* Nuevo ítem para invitaciones */}
+            <MenuItem
+              icon={<Mail className="w-4 h-4 mr-3 text-gray-400" />}
+              onClick={() => {
+                navigate("/dashboard/invitations");
+                setIsOpen(false);
+              }}
+              badge={pendingInvites > 0 ? pendingInvites : undefined}
+            >
+              {translations.userMenu.invitations}
+            </MenuItem>
+
             <MenuItem
               icon={<Settings className="w-4 h-4 mr-3 text-gray-400" />}
               onClick={() => {

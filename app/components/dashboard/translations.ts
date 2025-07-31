@@ -16,6 +16,7 @@ const translations = {
       billing: "Billing",
       security: "Security",
       logout: "Log out",
+      invitations: "Invitations",
     },
     organizations: {
       title: "Organizations",
@@ -46,6 +47,7 @@ const translations = {
       billing: "Facturación",
       security: "Seguridad",
       logout: "Cerrar sesión",
+      invitations: "Invitaciones",
     },
     organizations: {
       title: "Organizaciones",
@@ -76,6 +78,7 @@ const translations = {
       billing: "Facturation",
       security: "Sécurité",
       logout: "Déconnexion",
+      invitations: "Invitations",
     },
     organizations: {
       title: "Organisations",
@@ -106,6 +109,7 @@ const translations = {
       billing: "請求",
       security: "セキュリティ",
       logout: "ログアウト",
+      invitations: "招待",
     },
     organizations: {
       title: "組織",
@@ -136,6 +140,7 @@ const translations = {
       billing: "账单",
       security: "安全",
       logout: "登出",
+      invitations: "邀请",
     },
     organizations: {
       title: "组织",
