@@ -1,6 +1,7 @@
 // En tu archivo de traducciones
 const translations = {
   en: {
+    languageCode: "en",
     title: "Invitations",
     pendingTitle: "Pending Invitations",
     pastTitle: "Past Invitations",
@@ -16,6 +17,7 @@ const translations = {
     noPastDescription: "Your past invitations will appear here.",
   },
   es: {
+    languageCode: "es",
     title: "Invitaciones",
     pendingTitle: "Invitaciones Pendientes",
     pastTitle: "Invitaciones Anteriores",
@@ -30,6 +32,7 @@ const translations = {
     noPastDescription: "Tus invitaciones anteriores aparecerán aquí.",
   },
   fr: {
+    languageCode: "fr",
     title: "Invitations",
     pendingTitle: "Invitations en attente",
     pastTitle: "Invitations précédentes",
@@ -45,6 +48,7 @@ const translations = {
     noPastDescription: "Vos invitations précédentes apparaîtront ici.",
   },
   jp: {
+    languageCode: "jp",
     title: "招待",
     pendingTitle: "保留中の招待",
     pastTitle: "過去の招待",
@@ -59,6 +63,7 @@ const translations = {
     noPastDescription: "過去の招待はここに表示されます。",
   },
   zh: {
+    languageCode: "zh",
     title: "邀请",
     pendingTitle: "待处理邀请",
     pastTitle: "历史邀请",

@@ -1,6 +1,6 @@
-import { QueryParamsBuilder } from "~/types/models";
+import { FindManyOptions } from "~/types/models";
 
-export function queryBuilder(query: QueryParamsBuilder<any>) {
+export function queryBuilder(query: FindManyOptions<any>) {
   const params = new URLSearchParams();
 
   if (query.select) {
@@ -15,8 +15,8 @@ export function queryBuilder(query: QueryParamsBuilder<any>) {
     Object.keys(query.where).forEach((key) => {
       const condition = query.where?.[key];
       if (!condition) return;
-      const op = condition.op || "eq";
-      const value = condition.value;
+      const op = typeof condition === "object" ? condition.op || "eq" : "eq";
+      const value = typeof condition === "object" ? condition.value : condition;
       params.append(`where[${key}][${op}]`, value);
     });
   }

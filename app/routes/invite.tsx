@@ -4,6 +4,7 @@ import { User, Shield, Briefcase } from "lucide-react";
 import { Language } from "~/utils/language";
 import { getOrganizationsMembers } from "~/services/organization-members";
 import { MemberRole } from "~/types/models";
+import { getAvatarUrl } from "~/utils/gravatar";
 
 const translations = {
   en: {
@@ -92,11 +93,6 @@ const translations = {
   },
 };
 
-const gravatarUrl = (email: string) => {
-  const hash = email.trim().toLowerCase().replace(/\s/g, "");
-  return `https://www.gravatar.com/avatar/${hash}?d=identicon`;
-}
-
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const token = url.searchParams.get("token") ?? "";
@@ -105,21 +101,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
     throw new Response("Token is required", { status: 400 });
   }
 
-  const query = {
-    invitationToken: {
-      op: "eq",
-      value: token,
-    },
-  } as any;
   const organizationsMembers = await getOrganizationsMembers({
-    where: {
-      ...query,
-    },
+    where: { invitationToken: token },
     relations: ["organization", "organization.owner"],
     take: 1,
   });
 
-  if (!organizationsMembers?.[0].organization) {
+  if (!organizationsMembers.length || !organizationsMembers?.[0].organization) {
     throw new Response("Invalid or expired invitation token", { status: 404 });
   }
 
@@ -152,7 +140,7 @@ export default function AcceptInvite() {
         <div className="bg-gray-50 p-4 rounded-lg">
           <div className="flex items-center mb-3">
             <img
-              src={organization.logoSrc ?? gravatarUrl(organization.owner.email)}
+              src={organization.logoSrc ?? getAvatarUrl(organization.owner)}
               alt={organization.name}
               className="h-10 w-10 rounded-md mr-3"
             />

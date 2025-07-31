@@ -16,10 +16,11 @@ import { useGoogleLogin } from "@react-oauth/google";
 import useAuthStore from "~/store/auth";
 
 interface SignUpFormProps {
-  language: Language;
+  readonly language: Language;
+  readonly redirectUrl?: string;
 }
 
-const SignUpForm = ({ language }: SignUpFormProps) => {
+const SignUpForm = ({ language, redirectUrl }: SignUpFormProps) => {
   const t = translations[language] || translations.en;
   const schema = getRegisterAuthSchema(t);
 
@@ -51,7 +52,7 @@ const SignUpForm = ({ language }: SignUpFormProps) => {
       OAuthGoogleLogin(access_token)
         .then((response) => {
           auth.setTokens(response.access_token, response.refresh_token);
-          navigate("/dashboard");
+          navigate(redirectUrl ?? "/dashboard");
         })
         .catch((error) => {
           setErrors((prev) => ({

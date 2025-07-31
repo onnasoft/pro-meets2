@@ -11,6 +11,7 @@ import { organizationsLoader } from "~/loaders/organizations";
 import { useEffect, useMemo } from "react";
 import useOrganizationStore from "~/store/organization";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import logger from "~/utils/logger";
 
 interface LoaderData {
   language: Language;
@@ -45,7 +46,8 @@ export async function loader(args: LoaderFunctionArgs) {
       user: sessionData.user,
       organizations: organizationsData.organizations,
     } as LoaderData;
-  } catch {
+  } catch (error) {
+    logger.error("Error loading dashboard data:", error);
     return redirect("/login");
   }
 }

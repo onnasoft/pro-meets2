@@ -2,12 +2,11 @@ import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import { CallToAction } from "~/components/sections/CallToAction";
 import { MetaFunction, useLoaderData } from "@remix-run/react";
-import { languageLoader } from "~/loaders/language";
 import LoginForm from "~/components/login/LoginForm";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import config from "~/config";
-
-export { languageLoader as loader };
+import { LoaderFunctionArgs } from "@remix-run/node";
+import { languageLoader } from "~/loaders/language";
 
 const translations = {
   en: {
@@ -32,7 +31,15 @@ const translations = {
   },
 };
 
-export const meta: MetaFunction<typeof languageLoader> = ({ data }) => {
+export async function loader(args: LoaderFunctionArgs) {
+  const url = new URL(args.request.url);
+  const redirectUrl = url.searchParams.get("redirect") || "/dashboard";
+  const { language } = await languageLoader(args);
+
+  return { redirectUrl, language };
+}
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const language = data?.language || "en";
   const t = translations[language] || translations.en;
 
@@ -49,7 +56,7 @@ export const meta: MetaFunction<typeof languageLoader> = ({ data }) => {
 };
 
 export default function LoginPage() {
-  const { language } = useLoaderData<typeof languageLoader>();
+  const { language, redirectUrl } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -60,7 +67,7 @@ export default function LoginPage() {
         <section className="container mx-auto px-6 py-12">
           <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
             <GoogleOAuthProvider clientId={config.googleClientId}>
-              <LoginForm language={language} />
+              <LoginForm language={language} redirectUrl={redirectUrl} />
             </GoogleOAuthProvider>
           </div>
         </section>

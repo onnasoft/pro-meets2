@@ -6,6 +6,7 @@ import { languageLoader } from "~/loaders/language";
 import SignUpForm from "~/components/signup/SignUpForm";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import config from "~/config";
+import { LoaderFunctionArgs } from "@remix-run/node";
 
 const translations = {
   en: {
@@ -30,9 +31,15 @@ const translations = {
   },
 };
 
-export { languageLoader as loader };
+export async function loader(args: LoaderFunctionArgs) {
+  const url = new URL(args.request.url);
+  const redirectUrl = url.searchParams.get("redirect") || "/dashboard";
+  const { language } = await languageLoader(args);
 
-export const meta: MetaFunction<typeof languageLoader> = ({ data }) => {
+  return { redirectUrl, language };
+}
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const language = data?.language || "en";
   const t = translations[language] || translations.en;
 
@@ -49,7 +56,7 @@ export const meta: MetaFunction<typeof languageLoader> = ({ data }) => {
 };
 
 export default function SignUpPage() {
-  const { language } = useLoaderData<typeof languageLoader>();
+  const { language, redirectUrl } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -60,7 +67,7 @@ export default function SignUpPage() {
         <section className="container mx-auto px-6 py-12">
           <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
             <GoogleOAuthProvider clientId={config.googleClientId}>
-              <SignUpForm language={language} />
+              <SignUpForm language={language} redirectUrl={redirectUrl} />
             </GoogleOAuthProvider>
           </div>
         </section>

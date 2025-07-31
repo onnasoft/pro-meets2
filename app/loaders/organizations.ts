@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { Organization } from "~/types/models";
 import { getOrganizations } from "~/services/organizations";
+import logger from "~/utils/logger";
 
 interface LoaderData {
   organizations: Organization[];
@@ -25,12 +26,9 @@ export async function organizationsLoader(args: LoaderFunctionArgs) {
       Authorization: `Bearer ${accessToken}`,
     });
 
-    if (!organizations.length) {
-      throw new Error("No organizations found");
-    }
-
     return { organizations } as LoaderData;
-  } catch {
+  } catch (err) {
+    logger.error("Error loading organizations:", err);
     return redirect("/login");
   }
 }

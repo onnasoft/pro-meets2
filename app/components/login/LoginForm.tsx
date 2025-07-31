@@ -12,9 +12,10 @@ import useAuthStore from "~/store/auth";
 
 interface LoginFormProps {
   readonly language: Language;
+  readonly redirectUrl?: string;
 }
 
-export default function LoginForm({ language }: LoginFormProps) {
+export default function LoginForm({ language, redirectUrl }: LoginFormProps) {
   const t = translations[language] || translations.en;
   const schema = loginAuthSchema(t);
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export default function LoginForm({ language }: LoginFormProps) {
       OAuthGoogleLogin(access_token)
         .then((response) => {
           auth.setTokens(response.access_token, response.refresh_token);
-          navigate("/dashboard");
+          navigate(redirectUrl ?? "/dashboard");
         })
         .catch((error) => {
           setErrors((prev) => ({
@@ -117,7 +118,7 @@ export default function LoginForm({ language }: LoginFormProps) {
       );
 
       auth.setTokens(response.access_token, response.refresh_token);
-      navigate("/dashboard");
+      navigate(redirectUrl ?? "/dashboard");
     } catch (error: any) {
       setErrors((prev) => ({
         ...prev,
