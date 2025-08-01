@@ -53,14 +53,15 @@ export default function Header({ language }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
-  const [showMobileLanguageDropdown, setShowMobileLanguageDropdown] = useState(false); // Nuevo estado para móvil
+  const [showMobileLanguageDropdown, setShowMobileLanguageDropdown] =
+    useState(false);
   const { setLanguage } = useLanguageStore((state) => state);
 
   const languages: { code: Language; name: string; flag: string }[] = [
     { code: "en", name: "English", flag: "🇬🇧" },
     { code: "es", name: "Español", flag: "🇪🇸" },
     { code: "fr", name: "Français", flag: "🇫🇷" },
-    { code: "ja", name: "日本語", flag: "🇯🇵" },
+    { code: "jp", name: "日本語", flag: "🇯🇵" },
     { code: "zh", name: "中文", flag: "🇨🇳" },
   ];
 
@@ -220,7 +221,9 @@ export default function Header({ language }: HeaderProps) {
           {/* Selector de idioma móvil - ahora como acordeón */}
           <div className="px-3 py-2">
             <button
-              onClick={() => setShowMobileLanguageDropdown(!showMobileLanguageDropdown)}
+              onClick={() =>
+                setShowMobileLanguageDropdown(!showMobileLanguageDropdown)
+              }
               className="flex items-center justify-between w-full px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200"
             >
               <div className="flex items-center">

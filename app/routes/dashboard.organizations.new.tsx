@@ -1,7 +1,6 @@
-import { useLoaderData, useNavigate } from "@remix-run/react";
+import { useNavigate, useOutletContext } from "@remix-run/react";
 import { useState } from "react";
 import { Building2 } from "lucide-react";
-import { languageLoader } from "~/loaders/language";
 import { createOrganization } from "~/services/organizations";
 import { Organization, OrganizationPlan } from "~/types/models";
 import { PlanSelector } from "~/components/organization/PlanSelector";
@@ -11,11 +10,12 @@ import { SubmitSection } from "~/components/organization/SubmitSection";
 import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
 import { Create } from "~/rest";
+import { DashboardOutletContext } from "~/types/dashboard";
 
 export { languageLoader as loader } from "~/loaders/language";
 
 export default function NewOrganizationPage() {
-  const { language } = useLoaderData<typeof languageLoader>();
+  const { language } = useOutletContext<DashboardOutletContext>();
   const t = translations[language] || translations.en;
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);

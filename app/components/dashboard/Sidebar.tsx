@@ -23,7 +23,7 @@ export function Sidebar({ user, translations }: SidebarProps) {
         {/* Menú principal */}
         <nav className="flex-1 px-2 py-6 space-y-1">
           <NavItem
-            to="/dashboard"
+            to="/dashboard" exact={true}
             activeClassName="bg-primary-100 text-primary-700"
           >
             <span className="flex items-center">

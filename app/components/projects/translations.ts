@@ -20,6 +20,14 @@ const translations = {
       hiring: "Hiring",
       completed: "Completed",
     },
+    fields: {
+      name: "Project Name",
+      description: "Description",
+    },
+    optional: "(optional)",
+    cancel: "Cancel",
+    submitting: "Submitting...",
+    submit: "Submit",
   },
   es: {
     projects: "Proyectos",
@@ -42,6 +50,14 @@ const translations = {
       hiring: "Contratando",
       completed: "Completados",
     },
+    fields: {
+      name: "Nombre del Proyecto",
+      description: "Descripción",
+    },
+    optional: "(opcional)",
+    cancel: "Cancelar",
+    submitting: "Enviando...",
+    submit: "Enviar",
   },
   fr: {
     projects: "Projets",
@@ -64,6 +80,14 @@ const translations = {
       hiring: "Embauche",
       completed: "Terminés",
     },
+    fields: {
+      name: "Nom du Projet",
+      description: "Description",
+    },
+    optional: "(optionnel)",
+    cancel: "Annuler",
+    submitting: "Envoi en cours...",
+    submit: "Soumettre",
   },
   jp: {
     projects: "プロジェクト",
@@ -86,6 +110,14 @@ const translations = {
       hiring: "採用中",
       completed: "完了",
     },
+    fields: {
+      name: "プロジェクト名",
+      description: "説明",
+    },
+    optional: "(オプション)",
+    cancel: "キャンセル",
+    submitting: "送信中...",
+    submit: "送信",
   },
   zh: {
     projects: "项目",
@@ -108,6 +140,14 @@ const translations = {
       hiring: "招聘中",
       completed: "已完成",
     },
+    fields: {
+      name: "项目名称",
+      description: "描述",
+    },
+    optional: "(可选)",
+    cancel: "取消",
+    submitting: "提交中...",
+    submit: "提交",
   },
 };
 

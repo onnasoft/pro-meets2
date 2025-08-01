@@ -85,3 +85,15 @@ export enum MemberStatus {
 export type PaymentMethod = SPaymentMethod & {
   isDefault: boolean;
 };
+
+export interface Project {
+  id: string;
+  name: string;
+  description?: string | null;
+  organizationId: string;
+  organization?: Organization;
+  ownerId: string;
+  owner: User;
+  createdAt: string;
+  updatedAt: string;
+}
