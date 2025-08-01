@@ -178,6 +178,7 @@ export default function NewOrganizationPage() {
             description={formValues.description}
             onChange={handleChange}
             errors={errors}
+            canUpdate={canUpdate}
             translations={t}
           />
 
@@ -188,12 +189,13 @@ export default function NewOrganizationPage() {
             logoSrc={formValues.logoSrc}
             onChange={handleChange}
             errors={errors}
+            canUpdate={canUpdate}
             translations={t}
           />
 
           <MembersManager
             members={members}
-            role={role}
+            canUpdate={canUpdate}
             /*onChange={handleChange}
             error={errors.members}
             translations={t}*/

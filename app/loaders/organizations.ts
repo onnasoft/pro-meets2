@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
-import { Organization } from "~/types/models";
+import { MemberStatus, Organization } from "~/types/models";
 import { getOrganizations } from "~/services/organizations";
 import logger from "~/utils/logger";
 
@@ -22,9 +22,19 @@ export async function organizationsLoader(args: LoaderFunctionArgs) {
       throw new Error("Access token not found in cookies");
     }
 
-    const organizations = await getOrganizations(null, {
-      Authorization: `Bearer ${accessToken}`,
-    });
+    const organizations = await getOrganizations(
+      {
+        where: {
+          members: {
+            status: MemberStatus.ACTIVE,
+          },
+        },
+        relations: ["members", "members.user"],
+      },
+      {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    );
 
     return { organizations } as LoaderData;
   } catch (err) {

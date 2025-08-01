@@ -33,11 +33,12 @@ export default function SettingsPage() {
   const { data: organizations = [] } = useOrganizations({
     relations: ["members"],
     where: {
-      "members.user.id": {
-        value: user.id,
-        op: "eq",
+      members: {
+        user: {
+          id: user.id,
+        },
       },
-    } as any,
+    },
   });
 
   const addApiKey = () => {

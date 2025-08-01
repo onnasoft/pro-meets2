@@ -8,6 +8,7 @@ interface ContactInfoFormProps {
   readonly logoSrc: string;
   readonly onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   readonly errors: Record<string, string>;
+  readonly canUpdate?: boolean;
   readonly translations: typeof translations.en;
 }
 
@@ -18,6 +19,7 @@ export function ContactInfoForm({
   logoSrc,
   onChange,
   errors,
+  canUpdate,
   translations,
 }: ContactInfoFormProps) {
   return (
@@ -32,6 +34,7 @@ export function ContactInfoForm({
         <input
           type="url"
           name="website"
+          readOnly={!canUpdate}
           value={website}
           onChange={onChange}
           placeholder={translations.placeholders.website}
@@ -54,6 +57,7 @@ export function ContactInfoForm({
         <input
           type="text"
           name="location"
+          readOnly={!canUpdate}
           value={location}
           onChange={onChange}
           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
@@ -70,6 +74,7 @@ export function ContactInfoForm({
         <input
           type="tel"
           name="phone"
+          readOnly={!canUpdate}
           value={phone}
           onChange={onChange}
           className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
@@ -91,6 +96,7 @@ export function ContactInfoForm({
         <input
           type="url"
           name="logoSrc"
+          readOnly={!canUpdate}
           value={logoSrc}
           onChange={onChange}
           placeholder="https://example.com/logo.png"

@@ -10,13 +10,26 @@ export type Op =
   | "lte"
   | "like"
   | "ilike"
-  | "in"
-  | "notIn"
-  | "between";
+  | "notIn";
 
-export type Condition = {
-  value: any;
-  op?: Op;
+export type Condition<T> =
+  | {
+      value: T;
+      op?: Op;
+    }
+  | {
+      value: Array<T>;
+      op?: "in";
+    }
+  | {
+      value: [T, T];
+      op?: "between";
+    };
+
+export type WhereOptions<T> = {
+  [K in keyof T]?: T[K] extends Array<infer U>
+    ? WhereOptions<U> | null
+    : Condition<T[K]> | WhereOptions<T[K]> | null;
 };
 
 type ExcludedKeys = "id" | "createdAt" | "updatedAt" | "deletedAt";
@@ -46,9 +59,7 @@ export type Create<T> = Omit<
 export type Update<T> = Partial<Create<T>>;
 export type FindOneOptions<T> = {
   select?: Partial<Record<keyof T, boolean>>;
-  where?: Partial<
-    Record<keyof T, Condition | string | number | boolean | string[] | number[] | null>
-  >;
+  where?: WhereOptions<T>;
   relations?: string[];
 };
 export type FindManyOptions<T> = FindOneOptions<T> & {

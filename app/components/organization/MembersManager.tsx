@@ -15,16 +15,18 @@ const roles: RoleOption[] = [
 
 interface MembersManagerProps {
   readonly members: OrganizationMember[];
-  readonly role: MemberRole;
+  readonly canUpdate?: boolean;
 }
 
-export default function MembersManager({ members, role }: MembersManagerProps) {
+export default function MembersManager({
+  members,
+  canUpdate,
+}: MembersManagerProps) {
   const [editingMemberId, setEditingMemberId] = useState<string | null>(null);
   const [editMemberRole, setEditMemberRole] = useState<string>("");
   const [newMemberEmail, setNewMemberEmail] = useState<string>("");
   const [newMemberRole, setNewMemberRole] = useState<string>(roles[0].value);
   const [errors, setErrors] = useState<{ members?: string }>({});
-  const canUpdate = role === MemberRole.OWNER || role === MemberRole.ADMIN;
 
   const startEditingMember = (id: string) => {
     setEditingMemberId(id);
@@ -104,7 +106,7 @@ export default function MembersManager({ members, role }: MembersManagerProps) {
               </span>
               <button
                 type="button"
-                disabled={member.role === MemberRole.OWNER}
+                disabled={member.role === MemberRole.OWNER || !canUpdate}
                 onClick={() => startEditingMember(member.id)}
                 className="text-blue-600 hover:text-blue-800"
               >
@@ -112,7 +114,7 @@ export default function MembersManager({ members, role }: MembersManagerProps) {
               </button>
               <button
                 type="button"
-                disabled={member.role === MemberRole.OWNER}
+                disabled={member.role === MemberRole.OWNER || !canUpdate}
                 onClick={() => handleRemoveMember(member.id)}
                 className="text-red-600 hover:text-red-800"
               >

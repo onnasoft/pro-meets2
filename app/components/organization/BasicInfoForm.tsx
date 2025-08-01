@@ -8,6 +8,7 @@ interface BasicInfoFormProps {
   ) => void;
   readonly errors: Record<string, string>;
   readonly translations: typeof translations.en;
+  readonly canUpdate?: boolean;
 }
 
 export function BasicInfoForm({
@@ -16,6 +17,7 @@ export function BasicInfoForm({
   onChange,
   errors,
   translations,
+  canUpdate,
 }: BasicInfoFormProps) {
   return (
     <>
@@ -28,6 +30,7 @@ export function BasicInfoForm({
           name="name"
           value={name}
           onChange={onChange}
+          readOnly={!canUpdate}
           className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
             errors.name ? "border-red-300" : "border-gray-300"
           }`}
@@ -45,6 +48,7 @@ export function BasicInfoForm({
         <textarea
           name="description"
           rows={3}
+          readOnly={!canUpdate}
           value={description}
           onChange={onChange}
           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"

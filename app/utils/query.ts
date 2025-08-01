@@ -1,4 +1,44 @@
-import { FindManyOptions } from "~/types/models";
+import { Condition, FindManyOptions, WhereOptions } from "~/types/models";
+
+function parseWhereParams<T>(
+  where: WhereOptions<T>,
+  parentKey = "where"
+): URLSearchParams {
+  const params = new URLSearchParams();
+
+  const walk = (obj: any, path: string[]) => {
+    for (const key in obj) {
+      const value = obj[key];
+      if (value === null || value === undefined) continue;
+
+      const currentPath = [...path, key];
+
+      if (isCondition(value)) {
+        const op = value.op ?? "eq";
+        const joinedKey = `${parentKey}[${currentPath.join(".")}][${op}]`;
+        const val =
+          Array.isArray(value.value) && ["between", "in"].includes(op)
+            ? value.value.join(",")
+            : String(value.value);
+        params.append(joinedKey, val);
+      } else if (["string", "number", "boolean"].includes(typeof value)) {
+        const op = "eq";
+        const joinedKey = `${parentKey}[${currentPath.join(".")}][${op}]`;
+        params.append(joinedKey, String(value));
+      } else if (typeof value === "object" && !Array.isArray(value)) {
+        walk(value, currentPath);
+      }
+    }
+  };
+
+  const isCondition = (v: any): v is Condition<any> =>
+    typeof v === "object" &&
+    "value" in v &&
+    (typeof v.value !== "object" || Array.isArray(v.value));
+
+  walk(where, []);
+  return params;
+}
 
 export function queryBuilder(query: FindManyOptions<any>) {
   const params = new URLSearchParams();
@@ -12,24 +52,10 @@ export function queryBuilder(query: FindManyOptions<any>) {
   }
 
   if (query.where) {
-    Object.keys(query.where).forEach((key) => {
-      const condition = query.where?.[key];
-      if (!condition) return;
-      let op = "eq";
-      let value: any = condition;
-      if (Array.isArray(condition)) {
-        op = "in";
-      } else if (typeof condition === "object") {
-        op = condition.op || "eq";
-        value = condition.value;
-      } else if (condition === null) {
-        op = "[isNull]";
-        value = "";
-      } else {
-        value = condition;
-      }
-      params.append(`where[${key}][${op}]`, value);
-    });
+    const whereParams = parseWhereParams(query.where);
+    for (const [key, value] of whereParams.entries()) {
+      params.append(key, value);
+    }
   }
 
   if (query.relations) {
