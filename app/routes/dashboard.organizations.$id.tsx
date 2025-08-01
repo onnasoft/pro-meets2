@@ -7,7 +7,6 @@ import {
   MemberStatus,
   Organization,
   OrganizationPlan,
-  Update,
 } from "~/types/models";
 import { PlanSelector } from "~/components/organization/PlanSelector";
 import { BasicInfoForm } from "~/components/organization/BasicInfoForm";
@@ -19,6 +18,7 @@ import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import MembersManager from "~/components/organization/MembersManager";
 import { DashboardOutletContext } from "~/types/dashboard";
 import ErrorDialog from "~/components/ErrorDialog";
+import { Update } from "~/rest";
 
 interface LoaderData {
   organization: Organization;

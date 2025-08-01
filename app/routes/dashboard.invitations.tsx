@@ -7,7 +7,7 @@ import { DashboardOutletContext } from "~/types/dashboard";
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { useQuery } from "@tanstack/react-query";
 import { getOrganizationsMembers } from "~/services/organization-members";
-import { MemberStatus } from "~/types/models";
+import { MemberRole, MemberStatus } from "~/types/models";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
@@ -45,6 +45,7 @@ export default function Invitations() {
             value: MemberStatus.PENDING,
             op: "not",
           },
+          role: { op: "not", value: MemberRole.OWNER },
         },
         relations: ["organization", "organization.owner"],
       }),

@@ -3,13 +3,14 @@ import { useState } from "react";
 import { Building2 } from "lucide-react";
 import { languageLoader } from "~/loaders/language";
 import { createOrganization } from "~/services/organizations";
-import { Create, Organization, OrganizationPlan } from "~/types/models";
+import { Organization, OrganizationPlan } from "~/types/models";
 import { PlanSelector } from "~/components/organization/PlanSelector";
 import { BasicInfoForm } from "~/components/organization/BasicInfoForm";
 import { ContactInfoForm } from "~/components/organization/ContactInfoForm";
 import { SubmitSection } from "~/components/organization/SubmitSection";
 import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
+import { Create } from "~/rest";
 
 export { languageLoader as loader } from "~/loaders/language";
 

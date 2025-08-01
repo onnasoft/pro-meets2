@@ -1,4 +1,5 @@
-import { Condition, FindManyOptions, WhereOptions } from "~/types/models";
+import { Condition } from "./condition";
+import { FindManyOptions, WhereOptions } from "./query";
 
 function parseWhereParams<T>(
   where: WhereOptions<T>,

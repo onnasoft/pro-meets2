@@ -1,13 +1,7 @@
 import config from "~/config";
 import { HTTPError } from "~/types/http";
-import {
-  Create,
-  FindManyOptions,
-  FindOneOptions,
-  Organization,
-  Update,
-} from "~/types/models";
-import { queryBuilder } from "~/utils/query";
+import { Organization } from "~/types/models";
+import { Create, FindManyOptions, FindOneOptions, queryBuilder, Update } from "~/rest";
 
 type GetOrganizationParams = FindOneOptions<Organization>;
 
