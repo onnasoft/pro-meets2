@@ -17,7 +17,7 @@ export function BasicInfoForm({
   onChange,
   errors,
   translations,
-  canUpdate,
+  canUpdate = true,
 }: BasicInfoFormProps) {
   return (
     <>

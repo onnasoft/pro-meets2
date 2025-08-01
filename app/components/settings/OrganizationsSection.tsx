@@ -39,11 +39,12 @@ export function OrganizationsSection({
                 <div className="flex items-center gap-2">
                   {org.members[0].role !== MemberRole.OWNER && (
                     <button
-                      onClick={() => onLeaveOrganization(org.id)}
-                      className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                      onClick={() => onLeaveOrganization(org.members[0].id)}
+                      className="p-1.5 rounded-md text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors flex items-center gap-1"
                       title={translations.leave}
                     >
                       <LogOut className="h-4 w-4" />
+                      <span className="text-sm font-medium">{translations.leave}</span>
                     </button>
                   )}
                   <button

@@ -5,16 +5,33 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { TriangleAlert } from "lucide-react";
+import { AlertCircle, HelpCircle } from "lucide-react";
 import { Fragment } from "react/jsx-runtime";
-import useErrorStore from "~/store/error";
 
-export default function ErrorDialog() {
-  const { isOpen, title, clearError, closeButton, message } = useErrorStore();
+interface ConfirmationDialogProps {
+  readonly isOpen: boolean;
+  readonly toggle: () => void;
+  readonly message: string;
+  readonly title?: string;
+  readonly confirmText?: string;
+  readonly cancelText?: string;
+  readonly onConfirm: () => void;
+  readonly isDestructive?: boolean;
+}
 
+export default function ConfirmationDialog({
+  isOpen,
+  toggle,
+  message,
+  title = "Confirm action",
+  confirmText = "Confirm",
+  cancelText = "Cancel",
+  onConfirm,
+  isDestructive = false,
+}: ConfirmationDialogProps) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={clearError}>
+      <Dialog as="div" className="relative z-10" onClose={toggle}>
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
@@ -41,17 +58,18 @@ export default function ErrorDialog() {
               <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <TriangleAlert
-                      className="h-10 w-10 text-red-500"
-                      aria-hidden="true"
-                    />
+                    {isDestructive ? (
+                      <AlertCircle className="h-10 w-10 text-red-500" aria-hidden="true" />
+                    ) : (
+                      <HelpCircle className="h-10 w-10 text-blue-500" aria-hidden="true" />
+                    )}
                   </div>
                   <div className="ml-4">
                     <DialogTitle
                       as="h3"
                       className="text-lg font-medium leading-6 text-gray-900"
                     >
-                      {title || "Error"}
+                      {title}
                     </DialogTitle>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">{message}</p>
@@ -59,13 +77,27 @@ export default function ErrorDialog() {
                   </div>
                 </div>
 
-                <div className="mt-4 flex justify-end">
+                <div className="mt-4 flex justify-end space-x-3">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-                    onClick={clearError}
+                    className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    onClick={toggle}
                   >
-                    {closeButton || "Close"}
+                    {cancelText}
+                  </button>
+                  <button
+                    type="button"
+                    className={`inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                      isDestructive 
+                        ? 'bg-red-600 hover:bg-red-700' 
+                        : 'bg-blue-600 hover:bg-blue-700'
+                    }`}
+                    onClick={() => {
+                      onConfirm();
+                      toggle();
+                    }}
+                  >
+                    {confirmText}
                   </button>
                 </div>
               </DialogPanel>

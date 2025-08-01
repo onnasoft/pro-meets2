@@ -23,6 +23,7 @@ export default function PendingInvitations({
   const handleDecline = async (invite: OrganizationMember) => {
     await deleteOrganizationMember(invite.id);
     await queryClient.invalidateQueries({ queryKey: ["pending-invitations"] });
+    await queryClient.invalidateQueries({ queryKey: ["past-invitations"] });
   };
 
   const handleAccept = async (invite: OrganizationMember) => {
@@ -30,6 +31,8 @@ export default function PendingInvitations({
       status: MemberStatus.ACTIVE,
     });
     await queryClient.invalidateQueries({ queryKey: ["pending-invitations"] });
+    await queryClient.invalidateQueries({ queryKey: ["past-invitations"] });
+    window.location.reload();
   };
 
   return (

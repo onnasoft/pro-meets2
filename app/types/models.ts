@@ -51,6 +51,7 @@ export interface OrganizationMember {
   user: User | null;
   userId: string | null;
   status: MemberStatus;
+  organizationId: string;
   organization?: Organization;
   createdAt: string;
   updatedAt: string;

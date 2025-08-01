@@ -17,8 +17,8 @@ import { getOrganizationSchema } from "~/components/organization/schema";
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import MembersManager from "~/components/organization/MembersManager";
 import { DashboardOutletContext } from "~/types/dashboard";
-import ErrorDialog from "~/components/ErrorDialog";
-import { Update } from "~/rest";
+import { In, Update } from "~/rest";
+import useErrorStore from "~/store/error";
 
 interface LoaderData {
   organization: Organization;
@@ -48,10 +48,8 @@ export async function loader(args: LoaderFunctionArgs) {
       id,
       {
         where: {
-          // @ts-ignore
-          "members.status": {
-            op: "in",
-            value: [MemberStatus.ACTIVE, MemberStatus.PENDING],
+          members: {
+            status: In([MemberStatus.ACTIVE, MemberStatus.PENDING]),
           },
         },
         relations: ["members", "members.user"],
@@ -93,10 +91,7 @@ export default function NewOrganizationPage() {
     status: organization.status ?? "",
     logoUrl: organization.logoUrl ?? "",
   });
-
-  // State for error dialog
-  const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const setErrorState = useErrorStore((state) => state.setError);
 
   const members = organization.members ?? [];
   const role =
@@ -120,7 +115,6 @@ export default function NewOrganizationPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setErrorMessage("");
 
     const schema = getOrganizationSchema(t);
     const { error, value } = schema.validate(formValues, {
@@ -146,8 +140,10 @@ export default function NewOrganizationPage() {
         throw new Error(t.errorMessage);
       }
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : t.errorMessage);
-      setIsErrorDialogOpen(true);
+      setErrorState(
+        "Failed to update organization",
+        error instanceof Error ? error.message : t.errorMessage
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -156,13 +152,6 @@ export default function NewOrganizationPage() {
   return (
     <div className="max-w-6xl mx-auto p-6">
       {/* Error Dialog */}
-      <ErrorDialog
-        isOpen={isErrorDialogOpen}
-        toggle={() => setIsErrorDialogOpen(false)}
-        errorMessage={errorMessage}
-        title={t.errorTitle}
-        closeButton={t.closeButton}
-      />
 
       <div className="flex items-center mb-8">
         <Building2 className="h-8 w-8 text-primary-600 mr-3" />
@@ -196,6 +185,7 @@ export default function NewOrganizationPage() {
           <MembersManager
             members={members}
             canUpdate={canUpdate}
+            organization={organization}
             /*onChange={handleChange}
             error={errors.members}
             translations={t}*/

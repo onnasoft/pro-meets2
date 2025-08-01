@@ -19,7 +19,7 @@ export function ContactInfoForm({
   logoSrc,
   onChange,
   errors,
-  canUpdate,
+  canUpdate = true,
   translations,
 }: ContactInfoFormProps) {
   return (

@@ -9,6 +9,13 @@ const translations = {
       join: "Join organization",
       viewDetails: "View details",
       leave: "Leave organization",
+      confirmDialog: {
+        title: "Leave organization",
+        message:
+          "Are you sure you want to leave this organization? You won't have access to its resources anymore.",
+        confirmText: "Leave",
+        cancelText: "Stay",
+      },
     },
     notifications: {
       title: "Notifications",
@@ -50,6 +57,13 @@ const translations = {
       join: "Unirse a organización",
       viewDetails: "Ver detalles",
       leave: "Salir de la organización",
+      confirmDialog: {
+        title: "Salir de la organización",
+        message:
+          "¿Estás seguro de que deseas salir de esta organización? Ya no tendrás acceso a sus recursos.",
+        confirmText: "Salir",
+        cancelText: "Quedarse",
+      },
     },
     notifications: {
       title: "Notificaciones",
@@ -91,6 +105,13 @@ const translations = {
       join: "Rejoindre une organisation",
       viewDetails: "Voir les détails",
       leave: "Quitter l'organisation",
+      confirmDialog: {
+        title: "Quitter l'organisation",
+        message:
+          "Êtes-vous sûr de vouloir quitter cette organisation ? Vous n'aurez plus accès à ses ressources.",
+        confirmText: "Quitter",
+        cancelText: "Rester",
+      },
     },
     notifications: {
       title: "Notifications",
@@ -132,6 +153,13 @@ const translations = {
       join: "組織に参加",
       viewDetails: "詳細を見る",
       leave: "組織を離れる",
+      confirmDialog: {
+        title: "組織を離れる",
+        message:
+          "この組織を離れてもよろしいですか？リソースへのアクセスができなくなります。",
+        confirmText: "離れる",
+        cancelText: "残る",
+      },
     },
     notifications: {
       title: "通知",
@@ -173,6 +201,12 @@ const translations = {
       join: "加入组织",
       viewDetails: "查看详情",
       leave: "离开组织",
+      confirmDialog: {
+        title: "离开组织",
+        message: "您确定要离开此组织吗？您将无法访问其资源。",
+        confirmText: "离开",
+        cancelText: "留下",
+      },
     },
     notifications: {
       title: "通知",

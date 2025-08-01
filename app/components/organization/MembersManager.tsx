@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { CirclePlus, Pencil, X } from "lucide-react";
-import { MemberRole, OrganizationMember } from "~/types/models";
+import { MemberRole, Organization, OrganizationMember } from "~/types/models";
+import { createOrganizationMember } from "~/services/organization-members";
+import useErrorStore from "~/store/error";
 
 interface RoleOption {
-  value: string;
+  value: MemberRole;
   label: string;
 }
 
@@ -14,19 +16,24 @@ const roles: RoleOption[] = [
 ];
 
 interface MembersManagerProps {
+  readonly organization?: Organization;
   readonly members: OrganizationMember[];
   readonly canUpdate?: boolean;
 }
 
 export default function MembersManager({
   members,
-  canUpdate,
+  organization,
+  canUpdate = true,
 }: MembersManagerProps) {
   const [editingMemberId, setEditingMemberId] = useState<string | null>(null);
-  const [editMemberRole, setEditMemberRole] = useState<string>("");
+  const [editMemberRole, setEditMemberRole] = useState<MemberRole | null>(null);
   const [newMemberEmail, setNewMemberEmail] = useState<string>("");
-  const [newMemberRole, setNewMemberRole] = useState<string>(roles[0].value);
+  const [newMemberRole, setNewMemberRole] = useState<MemberRole>(
+    roles[0].value
+  );
   const [errors, setErrors] = useState<{ members?: string }>({});
+  const setErrorState = useErrorStore((state) => state.setError);
 
   const startEditingMember = (id: string) => {
     setEditingMemberId(id);
@@ -36,7 +43,7 @@ export default function MembersManager({
 
   const cancelEditing = () => {
     setEditingMemberId(null);
-    setEditMemberRole("");
+    setEditMemberRole(null);
   };
 
   const saveMemberRole = (id: string) => {
@@ -48,15 +55,36 @@ export default function MembersManager({
     console.log("Remove member", id);
   };
 
-  const handleAddMember = () => {
+  const handleAddMember = async () => {
     if (!newMemberEmail) {
       setErrors({ members: "Email is required" });
       return;
     }
-    console.log("Add member:", newMemberEmail, newMemberRole);
-    setNewMemberEmail("");
-    setNewMemberRole(roles[0].value);
-    setErrors({});
+    if (!newMemberRole) {
+      setErrors({ members: "Role is required" });
+      return;
+    }
+    if (!organization) {
+      setErrors({ members: "Organization is required" });
+      return;
+    }
+
+    try {
+      await createOrganizationMember({
+        email: newMemberEmail,
+        role: newMemberRole,
+        organizationId: organization.id,
+      });
+      setNewMemberEmail("");
+      setNewMemberRole(roles[0].value);
+      setErrors({});
+      window.location.reload();
+    } catch (error) {
+      setErrorState(
+        "Failed to add member",
+        error instanceof Error ? error.message : "Unknown error"
+      );
+    }
   };
 
   return (
@@ -74,8 +102,10 @@ export default function MembersManager({
           {editingMemberId === member.id ? (
             <div className="flex items-center space-x-2">
               <select
-                value={editMemberRole}
-                onChange={(e) => setEditMemberRole(e.target.value)}
+                value={editMemberRole ?? ""}
+                onChange={(e) =>
+                  setEditMemberRole(e.target.value as MemberRole)
+                }
                 className="border border-gray-300 rounded-md px-2 py-1 text-sm"
               >
                 {roles.map((role) => (
@@ -159,7 +189,7 @@ export default function MembersManager({
             <select
               id="new-member-role"
               value={newMemberRole}
-              onChange={(e) => setNewMemberRole(e.target.value)}
+              onChange={(e) => setNewMemberRole(e.target.value as MemberRole)}
               className="border h-10 border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
             >
               {roles.map((role) => (

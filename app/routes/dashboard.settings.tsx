@@ -8,6 +8,11 @@ import translations from "~/components/settings/translations";
 import { useState } from "react";
 import { useOrganizations } from "~/hooks/organizations";
 import { DashboardOutletContext } from "~/types/dashboard";
+import { Equal } from "~/rest";
+import ConfirmationDialog from "~/components/ConfirmationDialog";
+import { deleteOrganizationMember } from "~/services/organization-members";
+import { MemberStatus } from "~/types/models";
+import useErrorStore from "~/store/error";
 
 export { languageLoader as loader } from "~/loaders/language";
 
@@ -29,14 +34,22 @@ export default function SettingsPage() {
   const [newApiKey, setNewApiKey] = useState("");
   const [newWebhook, setNewWebhook] = useState("");
 
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const toggleConfirm = () => setIsConfirmOpen(!isConfirmOpen);
+  const [selectedOrganization, setSelectedOrganization] = useState<
+    string | null
+  >(null);
+  const setErrorState = useErrorStore((state) => state.setError);
+
   // Estados para organizaciones
   const { data: organizations = [] } = useOrganizations({
     relations: ["members"],
     where: {
       members: {
         user: {
-          id: user.id,
+          id: Equal(user.id),
         },
+        status: MemberStatus.ACTIVE,
       },
     },
   });
@@ -63,16 +76,31 @@ export default function SettingsPage() {
     setWebhooks(webhooks.filter((_, i) => i !== index));
   };
 
-  const viewOrganization = (id: string) => {
+  const handleViewOrganization = (id: string) => {
     navigate(`/dashboard/organizations/${id}`);
   };
 
-  const leaveOrganization = (id: string) => {
-    console.log("Salir de organización:", id);
+  const handleLeaveOrganization = (id: string) => {
+    setSelectedOrganization(id);
+    toggleConfirm();
   };
 
-  const createOrganization = () => {
+  const handleCreateOrganization = () => {
     navigate("/dashboard/organizations/new");
+  };
+
+  const deleteOrganization = async () => {
+    if (!selectedOrganization) return;
+
+    try {
+      await deleteOrganizationMember(selectedOrganization);
+      window.location.reload();
+    } catch (error) {
+      setErrorState(
+        "Failed to delete organization",
+        error instanceof Error ? error.message : "Unknown error"
+      );
+    }
   };
 
   return (
@@ -82,13 +110,24 @@ export default function SettingsPage() {
         <p className="text-gray-600 mt-2">{t.subtitle}</p>
       </div>
 
+      <ConfirmationDialog
+        isOpen={isConfirmOpen}
+        toggle={toggleConfirm}
+        title={t.organizations.confirmDialog.title}
+        message={t.organizations.confirmDialog.message}
+        confirmText={t.organizations.confirmDialog.confirmText}
+        cancelText={t.organizations.confirmDialog.cancelText}
+        onConfirm={deleteOrganization}
+        isDestructive={true}
+      />
+
       <div className="space-y-8">
         <OrganizationsSection
           translations={t.organizations}
           organizations={organizations}
-          onViewOrganization={viewOrganization}
-          onLeaveOrganization={leaveOrganization}
-          onCreateOrganization={createOrganization}
+          onViewOrganization={handleViewOrganization}
+          onLeaveOrganization={handleLeaveOrganization}
+          onCreateOrganization={handleCreateOrganization}
         />
 
         <NotificationsSection

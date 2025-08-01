@@ -1,7 +1,13 @@
 import config from "~/config";
 import { HTTPError } from "~/types/http";
 import { OrganizationMember } from "~/types/models";
-import { FindManyOptions, FindOneOptions, queryBuilder, Update } from "~/rest";
+import {
+  Create,
+  FindManyOptions,
+  FindOneOptions,
+  queryBuilder,
+  Update,
+} from "~/rest";
 
 type GetOrganizationParams = FindOneOptions<
   OrganizationMember & { invitationToken?: string }
@@ -63,6 +69,30 @@ export async function getOrganizationsMembers(
 
   const data = (await response.json()).data as OrganizationMember[];
   return data;
+}
+
+export async function createOrganizationMember(
+  data: Omit<Create<OrganizationMember>, "status" | "userId">,
+  headers: HeadersInit = {}
+): Promise<OrganizationMember> {
+  const response = await fetch(`${config.apiUrl}/organization-members`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...headers,
+    },
+    body: JSON.stringify(data),
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const errorData: HTTPError = await response.json();
+    throw new Error(
+      errorData.message || "Failed to create organization member"
+    );
+  }
+
+  return response.json();
 }
 
 export async function updateOrganizationMember(
