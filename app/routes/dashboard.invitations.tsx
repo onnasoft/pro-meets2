@@ -9,51 +9,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getOrganizationsMembers } from "~/services/organization-members";
 import { MemberStatus } from "~/types/models";
 
-const mockInvitations = [
-  {
-    id: "1",
-    organization: {
-      name: "Tech Solutions Inc.",
-      logo: "https://via.placeholder.com/150",
-    },
-    inviter: {
-      name: "María García",
-      email: "maria.garcia@example.com",
-    },
-    role: "Admin",
-    status: "pending",
-    createdAt: "2023-05-15T10:30:00Z",
-  },
-  {
-    id: "2",
-    organization: {
-      name: "Digital Innovations",
-      logo: "https://via.placeholder.com/150",
-    },
-    inviter: {
-      name: "Carlos López",
-      email: "carlos.lopez@example.com",
-    },
-    role: "Member",
-    status: "accepted",
-    createdAt: "2023-04-10T14:20:00Z",
-  },
-  {
-    id: "3",
-    organization: {
-      name: "Creative Labs",
-      logo: "https://via.placeholder.com/150",
-    },
-    inviter: {
-      name: "Ana Martínez",
-      email: "ana.martinez@example.com",
-    },
-    role: "Recruiter",
-    status: "declined",
-    createdAt: "2023-03-22T09:15:00Z",
-  },
-];
-
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const token = url.searchParams.get("token");
@@ -66,19 +21,30 @@ export default function Invitations() {
   const { language } = useOutletContext<DashboardOutletContext>();
   const t = translations[language] || translations.en;
 
-  const pastInvitations = mockInvitations.filter(
-    (invite) => invite.status !== "pending"
-  );
-
-  const filter = token ? { invitationToken: token } : {};
-
+  const pendingFilter = token ? { invitationToken: token } : {};
   const { data: pending = [] } = useQuery({
     queryKey: ["pending-invitations", token],
     queryFn: () =>
       getOrganizationsMembers({
         where: {
           status: MemberStatus.PENDING,
-          ...filter,
+          ...pendingFilter,
+        },
+        relations: ["organization", "organization.owner"],
+      }),
+    staleTime: 1000 * 60 * 5,
+    retry: 1,
+  });
+
+  const { data: past = [] } = useQuery({
+    queryKey: ["past-invitations", token],
+    queryFn: () =>
+      getOrganizationsMembers({
+        where: {
+          status: {
+            value: MemberStatus.PENDING,
+            op: "not",
+          },
         },
         relations: ["organization", "organization.owner"],
       }),
@@ -97,7 +63,7 @@ export default function Invitations() {
       <PendingInvitations translations={t} pendingInvitations={pending} />
 
       {/* Invitaciones anteriores */}
-      <PreviousInvitations translations={t} pastInvitations={pastInvitations} />
+      <PreviousInvitations translations={t} pastInvitations={past} />
     </div>
   );
 }

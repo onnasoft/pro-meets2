@@ -3,7 +3,7 @@ import { Language } from "~/utils/language";
 
 export type Op =
   | "eq"
-  | "neq"
+  | "not"
   | "gt"
   | "gte"
   | "lt"
@@ -46,7 +46,9 @@ export type Create<T> = Omit<
 export type Update<T> = Partial<Create<T>>;
 export type FindOneOptions<T> = {
   select?: Partial<Record<keyof T, boolean>>;
-  where?: Partial<Record<keyof T, Condition | string | number | boolean>>;
+  where?: Partial<
+    Record<keyof T, Condition | string | number | boolean | string[] | number[] | null>
+  >;
   relations?: string[];
 };
 export type FindManyOptions<T> = FindOneOptions<T> & {

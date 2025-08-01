@@ -2,6 +2,7 @@ const translations = {
   en: {
     createTitle: "Create new organization",
     updateTitle: "Update organization",
+    viewTitle: "View organization",
     fields: {
       name: "Organization name",
       description: "Description",
@@ -30,6 +31,8 @@ const translations = {
     cancel: "Cancel",
     submit: "Submit",
     submitting: "Creating...",
+    errorTitle: "Error",
+    closeButton: "Close",
     paymentRequired: {
       title: "Payment Method Required",
       description:
@@ -63,6 +66,7 @@ const translations = {
   es: {
     createTitle: "Crear nueva organización",
     updateTitle: "Actualizar organización",
+    viewTitle: "Ver organización",
     fields: {
       name: "Nombre de la organización",
       description: "Descripción",
@@ -91,6 +95,8 @@ const translations = {
     cancel: "Cancelar",
     submit: "Enviar",
     submitting: "Creando...",
+    errorTitle: "Error",
+    closeButton: "Cerrar",
     paymentRequired: {
       title: "Método de Pago Requerido",
       description:
@@ -124,6 +130,7 @@ const translations = {
   fr: {
     createTitle: "Créer une nouvelle organisation",
     updateTitle: "Mettre à jour l'organisation",
+    viewTitle: "Voir l'organisation",
     fields: {
       name: "Nom de l'organisation",
       description: "Description",
@@ -152,6 +159,8 @@ const translations = {
     cancel: "Annuler",
     submit: "Soumettre",
     submitting: "Création...",
+    errorTitle: "Erreur",
+    closeButton: "Fermer",
     paymentRequired: {
       title: "Paiement Requis",
       description:
@@ -186,6 +195,7 @@ const translations = {
   jp: {
     createTitle: "新しい組織を作成",
     updateTitle: "組織を更新",
+    viewTitle: "組織を表示",
     fields: {
       name: "組織名",
       description: "説明",
@@ -214,6 +224,8 @@ const translations = {
     cancel: "キャンセル",
     submit: "送信",
     submitting: "作成中...",
+    errorTitle: "エラー",
+    closeButton: "閉じる",
     paymentRequired: {
       title: "支払い方法が必要",
       description:
@@ -247,6 +259,7 @@ const translations = {
   zh: {
     createTitle: "创建新组织",
     updateTitle: "更新组织",
+    viewTitle: "查看组织",
     fields: {
       name: "组织名称",
       description: "描述",
@@ -275,6 +288,8 @@ const translations = {
     cancel: "取消",
     submit: "提交",
     submitting: "创建中...",
+    errorTitle: "错误",
+    closeButton: "关闭",
     paymentRequired: {
       title: "需要支付方式",
       description:

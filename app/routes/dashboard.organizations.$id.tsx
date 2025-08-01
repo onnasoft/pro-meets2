@@ -4,6 +4,7 @@ import { Building2 } from "lucide-react";
 import { getOrganization, updateOrganization } from "~/services/organizations";
 import {
   MemberRole,
+  MemberStatus,
   Organization,
   OrganizationPlan,
   Update,
@@ -17,6 +18,7 @@ import { getOrganizationSchema } from "~/components/organization/schema";
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import MembersManager from "~/components/organization/MembersManager";
 import { DashboardOutletContext } from "~/types/dashboard";
+import ErrorDialog from "~/components/ErrorDialog";
 
 interface LoaderData {
   organization: Organization;
@@ -45,6 +47,13 @@ export async function loader(args: LoaderFunctionArgs) {
     const organization = await getOrganization(
       id,
       {
+        where: {
+          // @ts-ignore
+          "members.status": {
+            op: "in",
+            value: [MemberStatus.ACTIVE, MemberStatus.PENDING],
+          },
+        },
         relations: ["members", "members.user"],
       },
       {
@@ -85,10 +94,15 @@ export default function NewOrganizationPage() {
     logoUrl: organization.logoUrl ?? "",
   });
 
+  // State for error dialog
+  const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const members = organization.members ?? [];
   const role =
     organization.members.find((m) => m.user?.id === user.id)?.role ||
-    MemberRole.MEMBER;
+    MemberRole.GUEST;
+  const canUpdate = role === MemberRole.OWNER || role === MemberRole.ADMIN;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -106,6 +120,7 @@ export default function NewOrganizationPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage("");
 
     const schema = getOrganizationSchema(t);
     const { error, value } = schema.validate(formValues, {
@@ -127,10 +142,12 @@ export default function NewOrganizationPage() {
 
     try {
       const response = await updateOrganization(organization.id, processedData);
-      if (!response) throw new Error(t.errorMessage);
+      if (!response) {
+        throw new Error(t.errorMessage);
+      }
     } catch (error) {
-      console.error("Error creating organization:", error);
-      setErrors({ submit: t.errorMessage });
+      setErrorMessage(error instanceof Error ? error.message : t.errorMessage);
+      setIsErrorDialogOpen(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -138,9 +155,20 @@ export default function NewOrganizationPage() {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
+      {/* Error Dialog */}
+      <ErrorDialog
+        isOpen={isErrorDialogOpen}
+        toggle={() => setIsErrorDialogOpen(false)}
+        errorMessage={errorMessage}
+        title={t.errorTitle}
+        closeButton={t.closeButton}
+      />
+
       <div className="flex items-center mb-8">
         <Building2 className="h-8 w-8 text-primary-600 mr-3" />
-        <h1 className="text-2xl font-bold text-gray-900">{t.updateTitle}</h1>
+        <h1 className="text-2xl font-bold text-gray-900">
+          {canUpdate ? t.updateTitle : t.viewTitle}
+        </h1>
       </div>
 
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
@@ -170,6 +198,7 @@ export default function NewOrganizationPage() {
             error={errors.members}
             translations={t}*/
           />
+
           {role === MemberRole.OWNER && (
             <PlanSelector
               selectedPlan={formValues.plan}
@@ -178,13 +207,14 @@ export default function NewOrganizationPage() {
               error={errors.plan}
             />
           )}
-
-          <SubmitSection
-            isSubmitting={isSubmitting}
-            onCancel={() => navigate(-1)}
-            submitError={errors.submit}
-            translations={t}
-          />
+          {canUpdate && (
+            <SubmitSection
+              isSubmitting={isSubmitting}
+              onCancel={() => navigate(-1)}
+              submitError={errors.submit}
+              translations={t}
+            />
+          )}
         </form>
       </div>
     </div>

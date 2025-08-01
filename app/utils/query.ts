@@ -15,8 +15,19 @@ export function queryBuilder(query: FindManyOptions<any>) {
     Object.keys(query.where).forEach((key) => {
       const condition = query.where?.[key];
       if (!condition) return;
-      const op = typeof condition === "object" ? condition.op || "eq" : "eq";
-      const value = typeof condition === "object" ? condition.value : condition;
+      let op = "eq";
+      let value: any = condition;
+      if (Array.isArray(condition)) {
+        op = "in";
+      } else if (typeof condition === "object") {
+        op = condition.op || "eq";
+        value = condition.value;
+      } else if (condition === null) {
+        op = "[isNull]";
+        value = "";
+      } else {
+        value = condition;
+      }
       params.append(`where[${key}][${op}]`, value);
     });
   }
