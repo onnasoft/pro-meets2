@@ -94,6 +94,10 @@ export interface Project {
   organization?: Organization;
   ownerId: string;
   owner: User;
+  website?: string | null;
+  location?: string | null;
+  phone?: string | null;
+  logoSrc?: string | null;
   createdAt: string;
   updatedAt: string;
 }

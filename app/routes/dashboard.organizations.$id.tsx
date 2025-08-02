@@ -1,6 +1,5 @@
 import { useLoaderData, useNavigate, useOutletContext } from "@remix-run/react";
 import { useState } from "react";
-import { Building2 } from "lucide-react";
 import { getOrganization, updateOrganization } from "~/services/organizations";
 import {
   MemberRole,
@@ -19,6 +18,7 @@ import MembersManager from "~/components/organization/MembersManager";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { In, Update } from "~/rest";
 import useErrorStore from "~/store/error";
+import Title from "~/components/Title";
 
 interface LoaderData {
   organization: Organization;
@@ -151,14 +151,10 @@ export default function NewOrganizationPage() {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      {/* Error Dialog */}
-
-      <div className="flex items-center mb-8">
-        <Building2 className="h-8 w-8 text-primary-600 mr-3" />
-        <h1 className="text-2xl font-bold text-gray-900">
-          {canUpdate ? t.updateTitle : t.viewTitle}
-        </h1>
-      </div>
+      <Title
+        title={canUpdate ? t.updateTitle : t.viewTitle}
+        description={canUpdate ? t.updateDescription : t.viewDescription}
+      />
 
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
         <form onSubmit={handleSubmit} className="space-y-6">

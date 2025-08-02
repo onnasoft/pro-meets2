@@ -1,8 +1,13 @@
 const translations = {
   en: {
     createTitle: "Create new organization",
+    createDescription:
+      "Fill in the details below to create a new organization.",
     updateTitle: "Update organization",
+    updateDescription:
+      "Update the details below to modify the organization.",
     viewTitle: "View organization",
+    viewDescription: "View the details of the organization.",
     fields: {
       name: "Organization name",
       description: "Description",
@@ -65,8 +70,11 @@ const translations = {
   },
   es: {
     createTitle: "Crear nueva organización",
+    createDescription: "Complete los detalles a continuación para crear una nueva organización.",
     updateTitle: "Actualizar organización",
+    updateDescription: "Actualiza los detalles a continuación para modificar la organización.",
     viewTitle: "Ver organización",
+    viewDescription: "Ver los detalles de la organización.",
     fields: {
       name: "Nombre de la organización",
       description: "Descripción",
@@ -129,8 +137,13 @@ const translations = {
   },
   fr: {
     createTitle: "Créer une nouvelle organisation",
+    createDescription:
+      "Remplissez les détails ci-dessous pour créer une nouvelle organisation.",
     updateTitle: "Mettre à jour l'organisation",
+    updateDescription:
+      "Mettez à jour les détails ci-dessous pour modifier l'organisation.",
     viewTitle: "Voir l'organisation",
+    viewDescription: "Voir les détails de l'organisation.",
     fields: {
       name: "Nom de l'organisation",
       description: "Description",
@@ -194,8 +207,13 @@ const translations = {
   },
   jp: {
     createTitle: "新しい組織を作成",
+    createDescription:
+      "以下の詳細を入力して新しい組織を作成してください。",
     updateTitle: "組織を更新",
+    updateDescription:
+      "以下の詳細を更新して組織を変更してください。",
     viewTitle: "組織を表示",
+    viewDescription: "組織の詳細を表示します。",
     fields: {
       name: "組織名",
       description: "説明",
@@ -258,8 +276,13 @@ const translations = {
   },
   zh: {
     createTitle: "创建新组织",
+    createDescription:
+      "请填写以下详细信息以创建新组织。",
     updateTitle: "更新组织",
+    updateDescription:
+      "请更新以下详细信息以修改组织。",
     viewTitle: "查看组织",
+    viewDescription: "查看组织的详细信息。",
     fields: {
       name: "组织名称",
       description: "描述",

@@ -1,3 +1,4 @@
+import HTMLEditor from "../HTMLEditor";
 import translations from "./translations";
 
 interface BasicInfoFormProps {
@@ -34,7 +35,7 @@ export function BasicInfoForm({
           value={name}
           onChange={onChange}
           readOnly={!canUpdate}
-          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
+          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
             errors.name ? "border-red-300" : "border-gray-300"
           }`}
         />
@@ -51,14 +52,7 @@ export function BasicInfoForm({
           {translations.fields.description}{" "}
           <span className="text-gray-500">{translations.optional}</span>
         </label>
-        <textarea
-          name="description"
-          rows={3}
-          readOnly={!canUpdate}
-          value={description}
-          onChange={onChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-        />
+        <HTMLEditor />
       </div>
     </>
   );

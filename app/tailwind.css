@@ -10,3 +10,68 @@ body {
     color-scheme: dark;
   }
 }
+
+/* Estilos base del editor */
+.ProseMirror {
+  min-height: 300px;
+  padding: 1rem;
+  outline: none;
+}
+
+/* Encabezados */
+.ProseMirror h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 1.5rem 0 1rem;
+  color: #1a1a1a;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 1.25rem 0 0.75rem;
+  color: #1e293b;
+}
+
+/* Listas con viñetas */
+.ProseMirror ul {
+  padding-left: 1.5rem;
+  margin: 0.75rem 0;
+  list-style-type: disc;
+}
+
+.ProseMirror ul li {
+  margin: 0.25rem 0;
+  padding-left: 0.25rem;
+}
+
+/* Listas numeradas */
+.ProseMirror ol {
+  padding-left: 1.5rem;
+  margin: 0.75rem 0;
+  list-style-type: decimal;
+}
+
+.ProseMirror ol li {
+  margin: 0.25rem 0;
+  padding-left: 0.25rem;
+}
+
+/* Elementos interactivos */
+.ProseMirror a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.ProseMirror a:hover {
+  color: #1d4ed8;
+}
+
+/* Separador horizontal */
+.ProseMirror hr {
+  margin: 1rem 0;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+}

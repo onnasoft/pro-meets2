@@ -11,6 +11,7 @@ import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
 import { Create } from "~/rest";
 import { DashboardOutletContext } from "~/types/dashboard";
+import Title from "~/components/Title";
 
 export { languageLoader as loader } from "~/loaders/language";
 
@@ -93,10 +94,7 @@ export default function NewOrganizationPage() {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <div className="flex items-center mb-8">
-        <Building2 className="h-8 w-8 text-primary-600 mr-3" />
-        <h1 className="text-2xl font-bold text-gray-900">{t.createTitle}</h1>
-      </div>
+      <Title title={t.createTitle} description={t.createDescription} />
 
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -109,10 +107,10 @@ export default function NewOrganizationPage() {
           />
 
           <ContactInfoForm
-            website={formValues.website ?? ""}
-            location={formValues.location ?? ""}
-            phone={formValues.phone ?? ""}
-            logoSrc={formValues.logoSrc ?? ""}
+            website={formValues.website!}
+            location={formValues.location!}
+            phone={formValues.phone!}
+            logoSrc={formValues.logoSrc!}
             onChange={handleChange}
             errors={errors}
             translations={t}

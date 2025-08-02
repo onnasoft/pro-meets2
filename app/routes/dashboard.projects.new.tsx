@@ -1,6 +1,7 @@
 import { useNavigate, useOutletContext } from "@remix-run/react";
 import { useState } from "react";
 import { BasicInfoForm } from "~/components/projects/BasicInfoForm";
+import { ContactInfoForm } from "~/components/projects/ContactInfoForm";
 import { SubmitSection } from "~/components/projects/SubmitSection";
 import translations from "~/components/projects/translations";
 import Title from "~/components/Title";
@@ -21,6 +22,10 @@ export default function NewProjectPage() {
     description: "",
     organizationId: "",
     ownerId: "",
+    website: "",
+    location: "",
+    phone: "",
+    logoSrc: "",
   });
 
   const handleChange = (
@@ -62,6 +67,16 @@ export default function NewProjectPage() {
           <BasicInfoForm
             name={formValues.name}
             description={formValues.description ?? ""}
+            onChange={handleChange}
+            errors={errors}
+            translations={t}
+          />
+
+          <ContactInfoForm
+            website={formValues.website!}
+            location={formValues.location!}
+            phone={formValues.phone!}
+            logoSrc={formValues.logoSrc!}
             onChange={handleChange}
             errors={errors}
             translations={t}

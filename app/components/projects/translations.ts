@@ -23,6 +23,13 @@ const translations = {
     fields: {
       name: "Project Name",
       description: "Description",
+      website: "Website",
+      location: "Location",
+      phone: "Phone",
+      logoSrc: "Logo URL",
+    },
+    placeholders: {
+      website: "Enter your website URL",
     },
     optional: "(optional)",
     cancel: "Cancel",
@@ -53,6 +60,13 @@ const translations = {
     fields: {
       name: "Nombre del Proyecto",
       description: "Descripción",
+      website: "Sitio Web",
+      location: "Ubicación",
+      phone: "Teléfono",
+      logoSrc: "URL del Logo",
+    },
+    placeholders: {
+      website: "Ingresa la URL de tu sitio web",
     },
     optional: "(opcional)",
     cancel: "Cancelar",
@@ -83,6 +97,13 @@ const translations = {
     fields: {
       name: "Nom du Projet",
       description: "Description",
+      website: "Site Web",
+      location: "Emplacement",
+      phone: "Téléphone",
+      logoSrc: "URL du Logo",
+    },
+    placeholders: {
+      website: "Entrez l'URL de votre site web",
     },
     optional: "(optionnel)",
     cancel: "Annuler",
@@ -113,6 +134,13 @@ const translations = {
     fields: {
       name: "プロジェクト名",
       description: "説明",
+      website: "ウェブサイト",
+      location: "場所",
+      phone: "電話",
+      logoSrc: "ロゴURL",
+    },
+    placeholders: {
+      website: "ウェブサイトのURLを入力",
     },
     optional: "(オプション)",
     cancel: "キャンセル",
@@ -143,6 +171,13 @@ const translations = {
     fields: {
       name: "项目名称",
       description: "描述",
+      website: "网站",
+      location: "位置",
+      phone: "电话",
+      logoSrc: "Logo URL",
+    },
+    placeholders: {
+      website: "输入网站URL",
     },
     optional: "(可选)",
     cancel: "取消",
