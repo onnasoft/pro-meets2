@@ -2,13 +2,12 @@ import {
   User,
   Settings,
   CreditCard,
-  Shield,
   LogOut,
   ChevronDown,
   ChevronUp,
   Mail,
   HelpCircle,
-  Lock
+  Lock,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "@remix-run/react";
@@ -29,7 +28,7 @@ export function UserMenu({
   user,
   translations,
   pendingInvites = 0,
-  className = ""
+  className = "",
 }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -51,7 +50,7 @@ export function UserMenu({
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`flex items-center gap-2 text-sm rounded-full focus:outline-none transition-colors ${
-          isOpen ? 'ring-2 ring-primary-500' : ''
+          isOpen ? "ring-2 ring-primary-500" : ""
         }`}
         aria-label="Menú de usuario"
         aria-expanded={isOpen}
@@ -82,9 +81,7 @@ export function UserMenu({
           <span className="font-medium text-gray-700 line-clamp-1 max-w-[120px]">
             {user.name}
           </span>
-          <span className="text-xs text-gray-500">
-            {user.role}
-          </span>
+          <span className="text-xs text-gray-500">{user.role}</span>
         </div>
 
         {/* Icono de flecha */}
@@ -100,7 +97,9 @@ export function UserMenu({
         <div className="absolute right-0 mt-2 w-64 origin-top-right bg-white rounded-lg shadow-xl ring-1 ring-gray-200 focus:outline-none z-50 divide-y divide-gray-100 overflow-hidden animate-fade-in">
           {/* Encabezado */}
           <div className="px-4 py-3 bg-gradient-to-r from-primary-50 to-primary-100">
-            <p className="text-sm font-medium text-gray-900 truncate">{user.name}</p>
+            <p className="text-sm font-medium text-gray-900 truncate">
+              {user.name}
+            </p>
             <p className="text-xs text-gray-600 truncate">{user.email}</p>
           </div>
 
