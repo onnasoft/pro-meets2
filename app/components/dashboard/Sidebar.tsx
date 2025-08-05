@@ -53,6 +53,7 @@ export function Sidebar({
         <div className="flex items-center h-16 px-4 border-b border-gray-200 bg-gradient-to-r from-primary-600 to-primary-500">
           <Link
             to="/dashboard"
+            onClick={closeMobileMenu}
             className="text-xl font-bold text-white flex items-center"
           >
             <span className="bg-white/20 p-2 rounded-lg mr-2 flex items-center justify-center">
