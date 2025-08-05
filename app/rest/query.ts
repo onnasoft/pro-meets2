@@ -11,6 +11,7 @@ export type FindOneOptions<T> = {
   where?: WhereOptions<T>;
   relations?: string[];
 };
+
 export type FindManyOptions<T> = FindOneOptions<T> & {
   orderBy?: Array<Record<keyof T, "asc" | "desc">>;
   take?: number;

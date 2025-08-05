@@ -64,7 +64,7 @@ export default function HTMLEditor() {
     extensions: [
       StarterKit,
       Heading.configure({
-        levels: [1, 2],
+        levels: [1, 2, 3, 4, 5, 6],
       }),
     ],
     content: "<p>Empieza a escribir tu contenido aquí...</p>",
@@ -236,7 +236,7 @@ export default function HTMLEditor() {
       {/* Área del editor */}
       <EditorContent
         editor={editor}
-        className="min-h-[300px] border rounded-lg p-6 bg-white shadow-sm prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto focus:outline-none"
+        className="min-h-[300px] border rounded-lg bg-white shadow-sm prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto focus:outline-none"
       />
     </div>
   );
