@@ -1,5 +1,5 @@
 import { NavLink } from "@remix-run/react";
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 
 interface NavItemProps {
   readonly to: string;
@@ -7,6 +7,7 @@ interface NavItemProps {
   readonly activeClassName?: string;
   readonly exact?: boolean;
   readonly className?: string;
+  readonly onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export function NavItem({
@@ -15,6 +16,7 @@ export function NavItem({
   activeClassName = "bg-primary-100 text-primary-600",
   exact = false,
   className = "",
+  onClick,
 }: NavItemProps) {
   return (
     <NavLink
@@ -27,6 +29,7 @@ export function NavItem({
         } ${className}`
       }
       end={exact}
+      onClick={onClick}
     >
       {children}
     </NavLink>

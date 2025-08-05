@@ -13,6 +13,7 @@ import useOrganizationStore from "~/store/organization";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import logger from "~/utils/logger";
 import ErrorDialog from "~/components/ErrorDialog";
+import MobileShadow from "~/components/MobileShadow";
 
 interface LoaderData {
   language: Language;
@@ -115,6 +116,7 @@ export default function DashboardLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex h-screen bg-primary-50">
+        <MobileShadow />
         <Sidebar user={user} translations={t} />
 
         <div className="flex flex-col flex-1 overflow-hidden">

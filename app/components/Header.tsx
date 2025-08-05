@@ -116,7 +116,7 @@ export default function Header({ language }: HeaderProps) {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="flex items-center text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm uppercase tracking-wider px-3 py-2 rounded-md hover:bg-primary-50"
+                  className="flex items-center text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm uppercase tracking-wider px-3 py-2 rounded-md"
                 >
                   {link.icon}
                   {link.name}
@@ -269,7 +269,7 @@ export default function Header({ language }: HeaderProps) {
           <div className="pt-4 border-t border-gray-200 space-y-3">
             <Link
               to="/login"
-              className="flex items-center justify-center w-full px-4 py-3 text-center rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200"
+              className="flex items-center justify-center w-full px-4 py-3 text-center rounded-md text-base font-medium text-gray-700 bg-primary-100 hover:text-primary-600 hover:bg-primary-200 transition-colors duration-200"
               onClick={() => setIsOpen(false)}
             >
               <User className="w-5 h-5 mr-2" />
