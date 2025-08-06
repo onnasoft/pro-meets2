@@ -52,7 +52,14 @@ export function BasicInfoForm({
           {translations.fields.description}{" "}
           <span className="text-gray-500">{translations.optional}</span>
         </label>
-        <HTMLEditor />
+        <HTMLEditor
+          value={description}
+          onChange={(content) => {
+            onChange({
+              target: { name: "description", value: content },
+            } as React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>);
+          }}
+        />
       </div>
     </>
   );

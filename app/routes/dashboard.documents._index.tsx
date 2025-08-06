@@ -1,5 +1,5 @@
-import { useOutletContext } from "@remix-run/react";
-import { Plus, Search, Grid, List, FolderPlus } from "lucide-react";
+import { useNavigate, useOutletContext } from "@remix-run/react";
+import { Plus, Search, Grid, List } from "lucide-react";
 import { useState } from "react";
 import DocumentCard from "~/components/documents/DocumentCard";
 import DocumentRow from "~/components/documents/DocumentRow";
@@ -15,6 +15,8 @@ export default function DocumentsPage() {
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [documents, setDocuments] = useState<Document[]>([]);
+  const navigate = useNavigate();
+
   const t = translations[language] || translations.en;
 
   const filteredDocs = documents.filter((doc) =>
@@ -33,14 +35,8 @@ export default function DocumentsPage() {
     );
   };
 
-  const handleCreateFolder = () => {
-    const newFolder: Document = {
-      id: Date.now().toString(),
-      name: `${t.newFolder} ${documents.length + 1}`,
-      type: "folder",
-      modified: new Date().toISOString().split("T")[0],
-    };
-    setDocuments([...documents, newFolder]);
+  const handleNewDocument = () => {
+    navigate("/dashboard/documents/new");
   };
 
   return (
@@ -88,13 +84,9 @@ export default function DocumentsPage() {
           </div>
           <div className="flex space-x-2">
             <button
-              onClick={handleCreateFolder}
-              className="inline-flex items-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              onClick={handleNewDocument}
+              className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
             >
-              <FolderPlus className="-ml-1 mr-1 h-5 w-5" />
-              {t.newFolder}
-            </button>
-            <button className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
               <Plus className="-ml-1 mr-1 h-5 w-5" />
               {t.create}
             </button>

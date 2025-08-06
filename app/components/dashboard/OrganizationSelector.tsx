@@ -45,7 +45,7 @@ export function OrganizationSelector({
       <div className="relative" ref={menuRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg hover:bg-gray-100 w-[280px] md:w-[380px] border border-gray-200"
+          className="flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg hover:bg-gray-100 w-[230px] md:w-[380px] border border-gray-200"
         >
           <div className="flex items-center space-x-3">
             <Building2 className="h-5 w-5 text-primary-600 flex-shrink-0" />
@@ -57,14 +57,14 @@ export function OrganizationSelector({
         </button>
 
         {isOpen && (
-          <div className="absolute left-0 mt-2 w-[250px] md:w-[380px] origin-top-left bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none z-50 divide-y divide-gray-100 border border-gray-200">
+          <div className="absolute left-0 mt-2 w-[230px] md:w-[380px] origin-top-left bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none z-50 divide-y divide-gray-100 border border-gray-200">
             <div className="px-5 py-3 bg-gray-50 rounded-t-lg">
               <p className="text-sm font-semibold text-gray-900">
                 {translations.organizations.title}
               </p>
             </div>
 
-            <div className="py-1 max-h-[250px] md:max-h-[380px] overflow-y-auto">
+            <div className="py-1 max-h-[230px] md:max-h-[380px] overflow-y-auto">
               {organizations.map((org) => (
                 <button
                   key={org.id}

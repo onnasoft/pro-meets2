@@ -33,6 +33,38 @@ body {
   color: #1e293b;
 }
 
+.ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 1rem 0 0.5rem;
+  color: #334155;
+}
+
+.ProseMirror h4 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0.875rem 0 0.5rem;
+  color: #475569;
+}
+
+.ProseMirror h5 {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0.75rem 0 0.5rem;
+  color: #64748b;
+}
+
+.ProseMirror h6 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0.5rem 0 0.25rem;
+  color: #94a3b8;
+}
+
 /* Listas con viñetas */
 .ProseMirror ul {
   padding-left: 1.5rem;

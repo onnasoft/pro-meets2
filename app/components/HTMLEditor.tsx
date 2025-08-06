@@ -16,6 +16,7 @@ import {
   Minus,
   Image,
   Paperclip,
+  Loader,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -56,7 +57,12 @@ function ToolbarButton({
   );
 }
 
-export default function HTMLEditor() {
+interface HTMLEditorProps {
+  readonly value?: string;
+  readonly onChange?: (content: string) => void;
+}
+
+export default function HTMLEditor({ value, onChange }: HTMLEditorProps) {
   const [linkUrl, setLinkUrl] = useState("");
   const [showLinkInput, setShowLinkInput] = useState(false);
 
@@ -67,11 +73,15 @@ export default function HTMLEditor() {
         levels: [1, 2, 3, 4, 5, 6],
       }),
     ],
-    content: "<p>Empieza a escribir tu contenido aquí...</p>",
+    content: value || "<p></p>",
     immediatelyRender: false,
   });
 
-  if (!editor) return <div className="p-4">Cargando editor...</div>;
+  editor?.on("update", () => {
+    onChange?.(editor.getHTML());
+  });
+
+  if (!editor) return <Loader className="animate-spin my-20 m-auto" />;
 
   const addLink = () => {
     if (linkUrl) {
