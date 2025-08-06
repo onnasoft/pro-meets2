@@ -2,7 +2,6 @@ import { useLoaderData, useOutletContext } from "@remix-run/react";
 import translations from "~/components/invitations/translations";
 import PendingInvitations from "~/components/invitations/PendingInvitations";
 import PreviousInvitations from "~/components/invitations/PreviousInvitations";
-import { Mail } from "lucide-react";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { useQuery } from "@tanstack/react-query";
@@ -54,12 +53,7 @@ export default function Invitations() {
   });
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <div className="flex items-center mb-8">
-        <Mail className="h-8 w-8 text-primary-600 mr-3" />
-        <h1 className="text-2xl font-bold text-gray-900">{t.title}</h1>
-      </div>
-
+    <div className="max-w-6xl mx-auto">
       {/* Invitaciones pendientes */}
       <PendingInvitations translations={t} pendingInvitations={pending} />
 

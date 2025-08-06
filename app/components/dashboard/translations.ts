@@ -1,6 +1,10 @@
 const translations = {
   en: {
     appName: "RecruitFlow",
+    newProject: "New Project",
+    navigation: "Navigation",
+    recruitment: "Recruitment",
+    reports: "Reports",
     menu: {
       calendar: "Calendar",
       meetings: "Meetings",
@@ -9,6 +13,7 @@ const translations = {
       analytics: "Analytics",
       recordings: "Recordings",
       projects: "Projects",
+      documents: "Documents",
     },
     userMenu: {
       profile: "Profile",
@@ -32,6 +37,10 @@ const translations = {
   },
   es: {
     appName: "RecruitFlow",
+    newProject: "Nuevo Proyecto",
+    navigation: "Navegación",
+    recruitment: "Reclutamiento",
+    reports: "Reportes",
     menu: {
       calendar: "Calendario",
       meetings: "Reuniones",
@@ -40,6 +49,7 @@ const translations = {
       analytics: "Analíticas",
       recordings: "Grabaciones",
       projects: "Proyectos",
+      documents: "Documentos",
     },
     userMenu: {
       profile: "Perfil",
@@ -63,6 +73,10 @@ const translations = {
   },
   fr: {
     appName: "RecruitFlow",
+    newProject: "Nouveau Projet",
+    navigation: "Navigation",
+    recruitment: "Recrutement",
+    reports: "Rapports",
     menu: {
       calendar: "Calendrier",
       meetings: "Réunions",
@@ -71,6 +85,7 @@ const translations = {
       analytics: "Analytiques",
       recordings: "Enregistrements",
       projects: "Projets",
+      documents: "Documents",
     },
     userMenu: {
       profile: "Profil",
@@ -94,6 +109,10 @@ const translations = {
   },
   jp: {
     appName: "RecruitFlow",
+    newProject: "新しいプロジェクト",
+    navigation: "ナビゲーション",
+    recruitment: "採用",
+    reports: "レポート",
     menu: {
       calendar: "カレンダー",
       meetings: "会議",
@@ -102,6 +121,7 @@ const translations = {
       analytics: "分析",
       recordings: "録画",
       projects: "プロジェクト",
+      documents: "ドキュメント",
     },
     userMenu: {
       profile: "プロフィール",
@@ -125,6 +145,10 @@ const translations = {
   },
   zh: {
     appName: "RecruitFlow",
+    newProject: "新项目",
+    navigation: "导航",
+    recruitment: "招聘",
+    reports: "报告",
     menu: {
       calendar: "日历",
       meetings: "会议",
@@ -133,6 +157,7 @@ const translations = {
       analytics: "分析",
       recordings: "录像",
       projects: "项目",
+      documents: "文档",
     },
     userMenu: {
       profile: "个人资料",

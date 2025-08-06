@@ -18,7 +18,6 @@ import MembersManager from "~/components/organization/MembersManager";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { In, Update } from "~/rest";
 import useErrorStore from "~/store/error";
-import Title from "~/components/Title";
 
 interface LoaderData {
   organization: Organization;
@@ -150,12 +149,7 @@ export default function NewOrganizationPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <Title
-        title={canUpdate ? t.updateTitle : t.viewTitle}
-        description={canUpdate ? t.updateDescription : t.viewDescription}
-      />
-
+    <div className="max-w-6xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
         <form onSubmit={handleSubmit} className="space-y-6">
           <BasicInfoForm

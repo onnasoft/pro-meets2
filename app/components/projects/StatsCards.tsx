@@ -6,7 +6,7 @@ interface StatsCardsProps {
 
 export default function StatsCards({ translations }: StatsCardsProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-4 gap-4 mb-8">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         <h3 className="text-gray-500 dark:text-gray-400 text-sm font-medium">
           {translations.stats.total}

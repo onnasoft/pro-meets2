@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Link, useNavigate } from "@remix-run/react";
 import { NavItem } from "./NavItem";
 import translations from "./translations";
 import { User } from "~/types/models";
@@ -34,12 +34,18 @@ export function Sidebar({
   onLogout,
   unreadCount = 0,
 }: SidebarProps) {
+  const navigate = useNavigate();
   const { isOpen, close } = useMobileMenuStore();
   const closeMobileMenu = () => {
     if (!isOpen) return;
     setTimeout(() => {
       close();
     }, 300);
+  };
+
+  const handleNewProject = () => {
+    navigate("/dashboard/projects/new");
+    closeMobileMenu();
   };
 
   return (
@@ -67,15 +73,18 @@ export function Sidebar({
         <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
           {/* Botón de acción principal */}
           <div className="px-3 mb-4">
-            <button className="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-500 rounded-lg hover:bg-primary-600 transition-colors shadow-sm">
+            <button
+              onClick={handleNewProject}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-500 rounded-lg hover:bg-primary-600 transition-colors shadow-sm"
+            >
               <Plus className="h-4 w-4" />
-              <span>Nuevo Proyecto</span>
+              <span>{translations.newProject}</span>
             </button>
           </div>
 
           {/* Sección Principal */}
           <div className="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-            Navegación
+            {translations.navigation}
           </div>
 
           <NavItem
@@ -133,7 +142,7 @@ export function Sidebar({
 
           {/* Sección Reclutamiento */}
           <div className="px-3 mt-4 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-            Reclutamiento
+            {translations.recruitment}
           </div>
 
           <NavItem
@@ -168,13 +177,12 @@ export function Sidebar({
           >
             <span className="flex items-center">
               <FileText className="h-5 w-5 mr-3 text-gray-500 group-hover:text-primary-500" />
-              Documentos
+              {translations.menu.documents}
             </span>
           </NavItem>
 
-          {/* Sección Reportes */}
           <div className="px-3 mt-4 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-            Reportes
+            {translations.reports}
           </div>
 
           <NavItem
@@ -240,7 +248,7 @@ export function Sidebar({
             >
               <span className="flex items-center">
                 <Settings className="h-5 w-5 mr-2 text-gray-400" />
-                Configuración
+                {translations.userMenu.settings}
               </span>
             </NavItem>
             <button
@@ -248,7 +256,7 @@ export function Sidebar({
               className="w-full flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
             >
               <LogOut className="h-5 w-5 mr-2 text-gray-400" />
-              Cerrar sesión
+              {translations.userMenu.logout}
             </button>
           </div>
         </div>

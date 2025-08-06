@@ -1,6 +1,5 @@
 import { useNavigate, useOutletContext } from "@remix-run/react";
 import { useState } from "react";
-import { Building2 } from "lucide-react";
 import { createOrganization } from "~/services/organizations";
 import { Organization, OrganizationPlan } from "~/types/models";
 import { PlanSelector } from "~/components/organization/PlanSelector";
@@ -11,7 +10,6 @@ import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
 import { Create } from "~/rest";
 import { DashboardOutletContext } from "~/types/dashboard";
-import Title from "~/components/Title";
 
 export { languageLoader as loader } from "~/loaders/language";
 
@@ -93,9 +91,7 @@ export default function NewOrganizationPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <Title title={t.createTitle} description={t.createDescription} />
-
+    <div className="max-w-6xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
         <form onSubmit={handleSubmit} className="space-y-6">
           <BasicInfoForm

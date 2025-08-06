@@ -31,7 +31,6 @@ export function Header({
   const openMobileMenu = useMobileMenuStore((state) => state.open);
   return (
     <header className="flex items-center justify-between h-16 px-4 bg-white border-b border-gray-200 shadow-sm">
-      {/* Menú móvil (opcional) */}
       <div className="flex items-center md:hidden">
         <button
           className="p-2 text-gray-500 rounded-md hover:text-gray-600 hover:bg-gray-100"

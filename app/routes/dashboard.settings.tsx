@@ -9,10 +9,10 @@ import { useState } from "react";
 import { useOrganizations } from "~/hooks/organizations";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { Equal } from "~/rest";
-import ConfirmationDialog from "~/components/ConfirmationDialog";
 import { deleteOrganizationMember } from "~/services/organization-members";
 import { MemberStatus } from "~/types/models";
 import useErrorStore from "~/store/error";
+import useConfirmationStore from "~/store/confirmation";
 
 export { languageLoader as loader } from "~/loaders/language";
 
@@ -34,12 +34,11 @@ export default function SettingsPage() {
   const [newApiKey, setNewApiKey] = useState("");
   const [newWebhook, setNewWebhook] = useState("");
 
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const toggleConfirm = () => setIsConfirmOpen(!isConfirmOpen);
   const [selectedOrganization, setSelectedOrganization] = useState<
     string | null
   >(null);
   const setErrorState = useErrorStore((state) => state.setError);
+  const { open } = useConfirmationStore();
 
   // Estados para organizaciones
   const { data: organizations = [] } = useOrganizations({
@@ -82,7 +81,15 @@ export default function SettingsPage() {
 
   const handleLeaveOrganization = (id: string) => {
     setSelectedOrganization(id);
-    toggleConfirm();
+
+    open(
+      t.organizations.confirmDialog.title,
+      t.organizations.confirmDialog.message,
+      t.organizations.confirmDialog.confirmText,
+      t.organizations.confirmDialog.cancelText,
+      deleteOrganization,
+      true
+    );
   };
 
   const handleCreateOrganization = () => {
@@ -104,23 +111,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">{t.title}</h1>
-        <p className="text-gray-600 mt-2">{t.subtitle}</p>
-      </div>
-
-      <ConfirmationDialog
-        isOpen={isConfirmOpen}
-        toggle={toggleConfirm}
-        title={t.organizations.confirmDialog.title}
-        message={t.organizations.confirmDialog.message}
-        confirmText={t.organizations.confirmDialog.confirmText}
-        cancelText={t.organizations.confirmDialog.cancelText}
-        onConfirm={deleteOrganization}
-        isDestructive={true}
-      />
-
+    <div className="max-w-6xl mx-auto">
       <div className="space-y-8">
         <OrganizationsSection
           translations={t.organizations}

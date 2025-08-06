@@ -1,5 +1,4 @@
 import { useOutletContext } from "@remix-run/react";
-import { User } from "lucide-react";
 import translations from "~/components/profile/translations";
 import PersonalInformation from "~/components/profile/PersonalInformation";
 import ProfessionalSummary from "~/components/profile/ProfessionalSummary";
@@ -125,12 +124,7 @@ export default function UserProfilePage() {
   const profile = mockProfile;
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <div className="flex items-center mb-8">
-        <User className="h-8 w-8 text-primary-600 mr-3" />
-        <h1 className="text-2xl font-bold text-gray-900">{t.title}</h1>
-      </div>
-
+    <div className="max-w-6xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 space-y-8">
         {/* Personal Information */}
         <PersonalInformation translations={t} profile={profile} />

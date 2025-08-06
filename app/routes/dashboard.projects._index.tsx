@@ -1,5 +1,5 @@
 import { Plus, FileText } from "lucide-react";
-import { useNavigate, useOutletContext } from "@remix-run/react";
+import { useOutletContext } from "@remix-run/react";
 import { useRequireOrganization } from "~/hooks/require-organization";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { ProjectCard } from "~/components/projects/ProjectCard";
@@ -7,7 +7,6 @@ import translations from "~/components/projects/translations";
 import AllProjects from "~/components/projects/AllProjects";
 import Filters from "~/components/projects/Filters";
 import StatsCards from "~/components/projects/StatsCards";
-import Title from "~/components/Title";
 
 const mockProjects = [
   {
@@ -76,20 +75,9 @@ export default function ProjectsPage() {
   const { language } = useOutletContext<DashboardOutletContext>();
   useRequireOrganization();
   const t = translations[language] || translations.en;
-  const navigate = useNavigate();
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <Title title={t.projects} description={t.welcomeMessage}>
-        <button
-          onClick={() => navigate("/dashboard/projects/new")}
-          className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
-        >
-          <Plus className="w-5 h-5 mr-2" />
-          {t.newProject}
-        </button>
-      </Title>
-
+    <div className="mx-auto">
       {/* Stats Cards */}
       <StatsCards translations={t} />
 
@@ -123,7 +111,7 @@ export default function ProjectsPage() {
               {t.noProjectsDescription}
             </p>
             <div className="mt-6">
-              <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+              <button className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors">
                 <Plus className="w-5 h-5 mr-2" />
                 {t.newProject}
               </button>

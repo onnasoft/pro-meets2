@@ -7,31 +7,23 @@ import {
 } from "@headlessui/react";
 import { AlertCircle, HelpCircle } from "lucide-react";
 import { Fragment } from "react/jsx-runtime";
+import useConfirmationStore from "~/store/confirmation";
 
-interface ConfirmationDialogProps {
-  readonly isOpen: boolean;
-  readonly toggle: () => void;
-  readonly message: string;
-  readonly title?: string;
-  readonly confirmText?: string;
-  readonly cancelText?: string;
-  readonly onConfirm: () => void;
-  readonly isDestructive?: boolean;
-}
+export default function ConfirmationDialog() {
+  const {
+    isOpen,
+    close,
+    isDestructive,
+    title,
+    message,
+    confirmText,
+    cancelText,
+    onConfirm,
+  } = useConfirmationStore();
 
-export default function ConfirmationDialog({
-  isOpen,
-  toggle,
-  message,
-  title = "Confirm action",
-  confirmText = "Confirm",
-  cancelText = "Cancel",
-  onConfirm,
-  isDestructive = false,
-}: ConfirmationDialogProps) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={toggle}>
+      <Dialog as="div" className="relative z-10" onClose={close}>
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
@@ -59,9 +51,15 @@ export default function ConfirmationDialog({
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
                     {isDestructive ? (
-                      <AlertCircle className="h-10 w-10 text-red-500" aria-hidden="true" />
+                      <AlertCircle
+                        className="h-10 w-10 text-red-500"
+                        aria-hidden="true"
+                      />
                     ) : (
-                      <HelpCircle className="h-10 w-10 text-blue-500" aria-hidden="true" />
+                      <HelpCircle
+                        className="h-10 w-10 text-blue-500"
+                        aria-hidden="true"
+                      />
                     )}
                   </div>
                   <div className="ml-4">
@@ -81,20 +79,23 @@ export default function ConfirmationDialog({
                   <button
                     type="button"
                     className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={toggle}
+                    onClick={close}
                   >
                     {cancelText}
                   </button>
                   <button
                     type="button"
                     className={`inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
-                      isDestructive 
-                        ? 'bg-red-600 hover:bg-red-700' 
-                        : 'bg-blue-600 hover:bg-blue-700'
+                      isDestructive
+                        ? "bg-red-600 hover:bg-red-700"
+                        : "bg-blue-600 hover:bg-blue-700"
                     }`}
-                    onClick={() => {
-                      onConfirm();
-                      toggle();
+                    onClick={async () => {
+                      const result = onConfirm();
+                      if (result instanceof Promise) {
+                        await result;
+                      }
+                      close();
                     }}
                   >
                     {confirmText}

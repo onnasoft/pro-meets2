@@ -4,7 +4,6 @@ import { BasicInfoForm } from "~/components/projects/BasicInfoForm";
 import { ContactInfoForm } from "~/components/projects/ContactInfoForm";
 import { SubmitSection } from "~/components/projects/SubmitSection";
 import translations from "~/components/projects/translations";
-import Title from "~/components/Title";
 import { useRequireOrganization } from "~/hooks/require-organization";
 import { Create } from "~/rest";
 import { DashboardOutletContext } from "~/types/dashboard";
@@ -56,12 +55,7 @@ export default function NewProjectPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <Title
-        title="Create New Project"
-        description="Fill in the details below to create a new project for your team."
-      />
-
+    <div className="max-w-6xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 space-y-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           <BasicInfoForm
