@@ -44,7 +44,7 @@ export const getOrganizationSchema = (t: typeof translations.en) =>
       })
       .allow("")
       .optional(),
-    logo: Joi.string().uri().allow("").optional(),
+    logoUrl: Joi.string().optional(),
     plan: Joi.string()
       .valid(
         OrganizationPlan.FREE,

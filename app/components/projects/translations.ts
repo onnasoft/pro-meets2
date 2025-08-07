@@ -26,7 +26,7 @@ const translations = {
       website: "Website",
       location: "Location",
       phone: "Phone",
-      logoSrc: "Logo URL",
+      logoUrl: "Logo URL",
     },
     placeholders: {
       website: "Enter your website URL",
@@ -63,7 +63,7 @@ const translations = {
       website: "Sitio Web",
       location: "Ubicación",
       phone: "Teléfono",
-      logoSrc: "URL del Logo",
+      logoUrl: "URL del Logo",
     },
     placeholders: {
       website: "Ingresa la URL de tu sitio web",
@@ -100,7 +100,7 @@ const translations = {
       website: "Site Web",
       location: "Emplacement",
       phone: "Téléphone",
-      logoSrc: "URL du Logo",
+      logoUrl: "URL du Logo",
     },
     placeholders: {
       website: "Entrez l'URL de votre site web",
@@ -137,7 +137,7 @@ const translations = {
       website: "ウェブサイト",
       location: "場所",
       phone: "電話",
-      logoSrc: "ロゴURL",
+      logoUrl: "ロゴURL",
     },
     placeholders: {
       website: "ウェブサイトのURLを入力",
@@ -174,7 +174,7 @@ const translations = {
       website: "网站",
       location: "位置",
       phone: "电话",
-      logoSrc: "Logo URL",
+      logoUrl: "Logo URL",
     },
     placeholders: {
       website: "输入网站URL",

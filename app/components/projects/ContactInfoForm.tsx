@@ -5,7 +5,7 @@ interface ContactInfoFormProps {
   readonly website: string;
   readonly location: string;
   readonly phone: string;
-  readonly logoSrc: string;
+  readonly logoUrl: string;
   readonly onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   readonly errors: Record<string, string>;
   readonly canUpdate?: boolean;
@@ -16,7 +16,7 @@ export function ContactInfoForm({
   website,
   location,
   phone,
-  logoSrc,
+  logoUrl,
   onChange,
   errors,
   canUpdate = true,
@@ -95,9 +95,9 @@ export function ContactInfoForm({
         </label>
         <input
           type="url"
-          name="logoSrc"
+          name="logoUrl"
           readOnly={!canUpdate}
-          value={logoSrc}
+          value={logoUrl}
           onChange={onChange}
           placeholder="https://example.com/logo.png"
           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"

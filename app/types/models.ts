@@ -36,7 +36,7 @@ export interface Organization {
   current: boolean;
   plan: OrganizationPlan;
   status: OrganizationStatus;
-  logoSrc?: string | null;
+  logoUrl?: string | null;
   ownerId: string;
   owner: User;
   billingEmail?: string | null;
@@ -97,7 +97,7 @@ export interface Project {
   website?: string | null;
   location?: string | null;
   phone?: string | null;
-  logoSrc?: string | null;
+  logoUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -110,4 +110,16 @@ export interface Document {
   modified: string;
   starred?: boolean;
   extension?: string;
+}
+
+export interface Media {
+  id: string;
+  filename: string;
+  mimetype: string;
+  size: number;
+  url: string;
+  alt?: string;
+  organizationId?: string;
+  createdAt: string;
+  updatedAt: string;
 }

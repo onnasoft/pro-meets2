@@ -4,10 +4,13 @@ const translations = {
     createDescription:
       "Fill in the details below to create a new organization.",
     updateTitle: "Update organization",
-    updateDescription:
-      "Update the details below to modify the organization.",
+    updateDescription: "Update the details below to modify the organization.",
     viewTitle: "View organization",
     viewDescription: "View the details of the organization.",
+    uploading: "Uploading...",
+    upload: "Upload",
+    logoUploadError: "Error uploading logo. Please try again.",
+    logoSizeError: "Logo file size must be less than 5MB.",
     fields: {
       name: "Organization name",
       description: "Description",
@@ -70,11 +73,17 @@ const translations = {
   },
   es: {
     createTitle: "Crear nueva organización",
-    createDescription: "Complete los detalles a continuación para crear una nueva organización.",
+    createDescription:
+      "Complete los detalles a continuación para crear una nueva organización.",
     updateTitle: "Actualizar organización",
-    updateDescription: "Actualiza los detalles a continuación para modificar la organización.",
+    updateDescription:
+      "Actualiza los detalles a continuación para modificar la organización.",
     viewTitle: "Ver organización",
     viewDescription: "Ver los detalles de la organización.",
+    uploading: "Subiendo...",
+    upload: "Subir",
+    logoUploadError: "Error al subir el logo. Por favor, inténtalo de nuevo.",
+    logoSizeError: "El tamaño del archivo del logo debe ser menor a 5MB.",
     fields: {
       name: "Nombre de la organización",
       description: "Descripción",
@@ -144,6 +153,10 @@ const translations = {
       "Mettez à jour les détails ci-dessous pour modifier l'organisation.",
     viewTitle: "Voir l'organisation",
     viewDescription: "Voir les détails de l'organisation.",
+    uploading: "Téléchargement en cours...",
+    upload: "Télécharger",
+    logoUploadError: "Erreur lors du téléchargement du logo. Veuillez réessayer.",
+    logoSizeError: "La taille du fichier du logo doit être inférieure à 5 Mo.",
     fields: {
       name: "Nom de l'organisation",
       description: "Description",
@@ -207,13 +220,15 @@ const translations = {
   },
   jp: {
     createTitle: "新しい組織を作成",
-    createDescription:
-      "以下の詳細を入力して新しい組織を作成してください。",
+    createDescription: "以下の詳細を入力して新しい組織を作成してください。",
     updateTitle: "組織を更新",
-    updateDescription:
-      "以下の詳細を更新して組織を変更してください。",
+    updateDescription: "以下の詳細を更新して組織を変更してください。",
     viewTitle: "組織を表示",
     viewDescription: "組織の詳細を表示します。",
+    uploading: "アップロード中...",
+    upload: "アップロード",
+    logoUploadError: "ロゴのアップロード中にエラーが発生しました。再試行してください。",
+    logoSizeError: "ロゴファイルのサイズは5MB未満でなければなりません。",
     fields: {
       name: "組織名",
       description: "説明",
@@ -276,13 +291,15 @@ const translations = {
   },
   zh: {
     createTitle: "创建新组织",
-    createDescription:
-      "请填写以下详细信息以创建新组织。",
+    createDescription: "请填写以下详细信息以创建新组织。",
     updateTitle: "更新组织",
-    updateDescription:
-      "请更新以下详细信息以修改组织。",
+    updateDescription: "请更新以下详细信息以修改组织。",
     viewTitle: "查看组织",
     viewDescription: "查看组织的详细信息。",
+    uploading: "上传中...",
+    upload: "上传",
+    logoUploadError: "上传Logo时出错。请重试。",
+    logoSizeError: "Logo文件大小必须小于5MB。",
     fields: {
       name: "组织名称",
       description: "描述",

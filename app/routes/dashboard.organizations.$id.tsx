@@ -18,6 +18,7 @@ import MembersManager from "~/components/organization/MembersManager";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { In, Update } from "~/rest";
 import useErrorStore from "~/store/error";
+import { createMedia } from "~/services/media";
 
 interface LoaderData {
   organization: Organization;
@@ -84,11 +85,10 @@ export default function NewOrganizationPage() {
     website: organization.website ?? "",
     location: organization.location ?? "",
     phone: organization.phone ?? "",
-    logoSrc: organization.logoSrc ?? "",
+    logoUrl: organization.logoUrl ?? "",
     plan: organization.plan ?? OrganizationPlan.FREE,
     current: organization.current ?? false,
     status: organization.status ?? "",
-    logoUrl: organization.logoUrl ?? "",
   });
   const setErrorState = useErrorStore((state) => state.setError);
 
@@ -111,11 +111,11 @@ export default function NewOrganizationPage() {
     if (errors.plan) setErrors((prev) => ({ ...prev, plan: "" }));
   };
 
+  const schema = getOrganizationSchema(t);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const schema = getOrganizationSchema(t);
     const { error, value } = schema.validate(formValues, {
       abortEarly: false,
       stripUnknown: true,
@@ -148,6 +148,23 @@ export default function NewOrganizationPage() {
     }
   };
 
+  const handleFileChange = async (file: File) => {
+    try {
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) {
+        setErrors((prev) => ({ ...prev, logoUrl: t.logoSizeError }));
+        return;
+      }
+
+      const media = await createMedia({ file, alt: "Organization Logo" });
+      const logoUrl = media.url;
+      setFormValues((prev) => ({ ...prev, logoUrl }));
+    } catch (error) {
+      console.error("Error uploading logo:", error);
+      setErrors((prev) => ({ ...prev, logoUrl: t.logoUploadError }));
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
@@ -165,8 +182,9 @@ export default function NewOrganizationPage() {
             website={formValues.website}
             location={formValues.location}
             phone={formValues.phone}
-            logoSrc={formValues.logoSrc}
+            logoUrl={formValues.logoUrl}
             onChange={handleChange}
+            onLogoUpload={handleFileChange}
             errors={errors}
             canUpdate={canUpdate}
             translations={t}

@@ -1,3 +1,4 @@
+import HTMLEditor from "../HTMLEditor";
 import translations from "./translations";
 
 interface BasicInfoFormProps {
@@ -51,13 +52,13 @@ export function BasicInfoForm({
           {translations.fields.description}{" "}
           <span className="text-gray-500">{translations.optional}</span>
         </label>
-        <textarea
-          name="description"
-          rows={3}
-          readOnly={!canUpdate}
+        <HTMLEditor
           value={description}
-          onChange={onChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+          onChange={(content) => {
+            onChange({
+              target: { name: "description", value: content },
+            } as React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>);
+          }}
         />
       </div>
     </>

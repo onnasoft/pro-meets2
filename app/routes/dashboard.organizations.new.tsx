@@ -10,6 +10,7 @@ import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
 import { Create } from "~/rest";
 import { DashboardOutletContext } from "~/types/dashboard";
+import { createMedia } from "~/services/media";
 
 export { languageLoader as loader } from "~/loaders/language";
 
@@ -27,7 +28,7 @@ export default function NewOrganizationPage() {
     website: "",
     location: "",
     phone: "",
-    logoSrc: "",
+    logoUrl: "",
     plan: OrganizationPlan.FREE,
   });
 
@@ -90,6 +91,27 @@ export default function NewOrganizationPage() {
     }
   };
 
+  const handleFileChange = async (file: File) => {
+    try {
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) {
+        setErrors((prev) => ({ ...prev, logoUrl: t.logoSizeError }));
+        return;
+      }
+
+      const media = await createMedia({
+        file,
+        alt: "",
+      });
+      console.log(media);
+      const logoUrl = media.url;
+      setFormValues((prev) => ({ ...prev, logoUrl }));
+    } catch (error) {
+      console.error("Error uploading logo:", error);
+      setErrors((prev) => ({ ...prev, logoUrl: t.logoUploadError }));
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
@@ -106,8 +128,9 @@ export default function NewOrganizationPage() {
             website={formValues.website!}
             location={formValues.location!}
             phone={formValues.phone!}
-            logoSrc={formValues.logoSrc!}
+            logoUrl={formValues.logoUrl!}
             onChange={handleChange}
+            onLogoUpload={handleFileChange}
             errors={errors}
             translations={t}
           />

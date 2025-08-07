@@ -24,7 +24,7 @@ export default function NewProjectPage() {
     website: "",
     location: "",
     phone: "",
-    logoSrc: "",
+    logoUrl: "",
   });
 
   const handleChange = (
@@ -70,7 +70,7 @@ export default function NewProjectPage() {
             website={formValues.website!}
             location={formValues.location!}
             phone={formValues.phone!}
-            logoSrc={formValues.logoSrc!}
+            logoUrl={formValues.logoUrl!}
             onChange={handleChange}
             errors={errors}
             translations={t}

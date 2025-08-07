@@ -48,7 +48,7 @@ export default function PendingInvitations({
               <div className="flex items-start">
                 <img
                   src={
-                    invite.organization?.logoSrc ??
+                    invite.organization?.logoUrl ??
                     getAvatarUrl(invite.organization?.owner!)
                   }
                   alt={invite.organization?.name}

@@ -26,7 +26,7 @@ export default function PreviousInvitations({
               <div className="flex items-start">
                 <img
                   src={
-                    invite.organization?.logoSrc ??
+                    invite.organization?.logoUrl ??
                     getAvatarUrl(invite.organization?.owner!)
                   }
                   alt={invite.organization?.name}

@@ -140,7 +140,7 @@ export default function AcceptInvite() {
         <div className="bg-gray-50 p-4 rounded-lg">
           <div className="flex items-center mb-3">
             <img
-              src={organization.logoSrc ?? getAvatarUrl(organization.owner)}
+              src={organization.logoUrl ?? getAvatarUrl(organization.owner)}
               alt={organization.name}
               className="h-10 w-10 rounded-md mr-3"
             />
