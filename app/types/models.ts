@@ -36,7 +36,6 @@ export interface Organization {
   current: boolean;
   plan: OrganizationPlan;
   status: OrganizationStatus;
-  logoUrl?: string | null;
   ownerId: string;
   owner: User;
   billingEmail?: string | null;
@@ -92,12 +91,15 @@ export interface Project {
   description?: string | null;
   organizationId: string;
   organization?: Organization;
-  ownerId: string;
   owner: User;
   website?: string | null;
   location?: string | null;
   phone?: string | null;
   logoUrl?: string | null;
+  leaderId: string;
+  leader?: User;
+  startDate?: string;
+  dueDate?: string;
   createdAt: string;
   updatedAt: string;
 }

@@ -1,4 +1,10 @@
-import { useNavigate, useOutletContext } from "@remix-run/react";
+import { LoaderFunctionArgs } from "@remix-run/node";
+import {
+  redirect,
+  useLoaderData,
+  useNavigate,
+  useOutletContext,
+} from "@remix-run/react";
 import { useMemo, useState } from "react";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";
@@ -9,12 +15,47 @@ import { useOrganizationsMembers } from "~/hooks/organization-members";
 import { useRequireOrganization } from "~/hooks/require-organization";
 import { Create, In } from "~/rest";
 import { createMedia } from "~/services/media";
-import { createProject } from "~/services/projects";
+import { getProject, updateProject } from "~/services/projects";
 import useErrorStore from "~/store/error";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { MemberRole, MemberStatus, Project } from "~/types/models";
 
-export default function NewProjectPage() {
+export async function loader(args: LoaderFunctionArgs) {
+  try {
+    const cookieHeader = args.request.headers.get("Cookie") || "";
+    const cookies = Object.fromEntries(
+      cookieHeader.split("; ").map((c) => {
+        const [k, v] = c.split("=");
+        return [k, decodeURIComponent(v)];
+      })
+    );
+    const accessToken = cookies.accessToken || null;
+
+    if (!accessToken) {
+      throw new Error("Access token not found in cookies");
+    }
+
+    const id = args.params.id;
+    if (!id) {
+      throw new Error("Organization ID is required");
+    }
+
+    const project = await getProject(
+      id,
+      {},
+      {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      }
+    );
+
+    return { project };
+  } catch {
+    return redirect("/login");
+  }
+}
+
+export default function ViewProjectPage() {
   useRequireOrganization();
   const { language, organizations } =
     useOutletContext<DashboardOutletContext>();
@@ -23,17 +64,18 @@ export default function NewProjectPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const organizationId = organizations?.find((org) => org.current)?.id;
+  const { project } = useLoaderData<typeof loader>();
   const [formValues, setFormValues] = useState<Create<Project>>({
-    name: "",
-    description: "",
+    name: project.name || "",
+    description: project.description || "",
     organizationId: organizationId!,
-    website: "",
-    location: "",
-    phone: "",
-    logoUrl: "",
-    startDate: "",
-    dueDate: "",
-    leaderId: "",
+    website: project.website || "",
+    location: project.location || "",
+    phone: project.phone || "",
+    logoUrl: project.logoUrl || "",
+    startDate: project.startDate || "",
+    dueDate: project.dueDate || "",
+    leaderId: project.leaderId || "",
   });
   const { setError } = useErrorStore();
   const allowedRoles = useMemo(
@@ -64,7 +106,7 @@ export default function NewProjectPage() {
 
     // Simulate API call
     try {
-      const result = await createProject({
+      const result = await updateProject(project.id, {
         ...formValues,
         organizationId: organizationId!,
         startDate: formValues.startDate
@@ -76,10 +118,9 @@ export default function NewProjectPage() {
       });
       if (!result) throw new Error(t.errorMessage);
 
-      console.log("Project created:", result);
-      navigate(`/dashboard/projects/${result.id}`);
+      console.log("Project updated:", result);
     } catch (error) {
-      console.error("Error creating project:", error);
+      console.error("Error updating project:", error);
       setError(
         t.errorMessage,
         (error as Error).message || "An unexpected error occurred"
@@ -135,7 +176,9 @@ export default function NewProjectPage() {
 
           <LeaderSelectionForm
             leaders={members}
-            selectedLeader={undefined}
+            selectedLeader={members.find(
+              (m) => m.userId === formValues.leaderId
+            )}
             startDate={formValues.startDate ?? ""}
             dueDate={formValues.dueDate ?? ""}
             onLeaderSelect={(leader) => {

@@ -1,7 +1,21 @@
 import { Globe, MapPin, Phone, Building2, Upload } from "lucide-react";
-import translations from "./translations";
 import { useState, useRef } from "react";
 import config from "~/config";
+
+interface Translations {
+  fields: {
+    website: string;
+    location: string;
+    phone: string;
+    logo: string;
+  };
+  placeholders: {
+    website: string;
+  };
+  uploading: string;
+  upload: string;
+  optional: string;
+}
 
 interface ContactInfoFormProps {
   readonly website: string;
@@ -12,7 +26,7 @@ interface ContactInfoFormProps {
   readonly onLogoUpload: (file: File) => Promise<void>;
   readonly errors: Record<string, string>;
   readonly canUpdate?: boolean;
-  readonly translations: typeof translations.en;
+  readonly translations: Translations;
 }
 
 export function ContactInfoForm({
@@ -65,7 +79,7 @@ export function ContactInfoForm({
           value={website}
           onChange={onChange}
           placeholder={translations.placeholders.website}
-          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
+          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none  ${
             errors.website ? "border-red-300" : "border-gray-300"
           }`}
         />
@@ -87,7 +101,7 @@ export function ContactInfoForm({
           readOnly={!canUpdate}
           value={location}
           onChange={onChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none "
         />
       </div>
 
@@ -104,7 +118,7 @@ export function ContactInfoForm({
           readOnly={!canUpdate}
           value={phone}
           onChange={onChange}
-          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
+          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none  ${
             errors.phone ? "border-red-300" : "border-gray-300"
           }`}
         />

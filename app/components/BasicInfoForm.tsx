@@ -1,5 +1,12 @@
-import HTMLEditor from "../HTMLEditor";
-import translations from "./translations";
+import HTMLEditor from "./HTMLEditor";
+
+interface Translations {
+  fields: {
+    name: string;
+    description: string;
+  };
+  optional: string;
+}
 
 interface BasicInfoFormProps {
   readonly name: string;
@@ -8,7 +15,7 @@ interface BasicInfoFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   readonly errors: Record<string, string>;
-  readonly translations: typeof translations.en;
+  readonly translations: Translations;
   readonly canUpdate?: boolean;
 }
 

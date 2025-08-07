@@ -8,8 +8,8 @@ import {
   OrganizationPlan,
 } from "~/types/models";
 import { PlanSelector } from "~/components/organization/PlanSelector";
-import { BasicInfoForm } from "~/components/organization/BasicInfoForm";
-import { ContactInfoForm } from "~/components/organization/ContactInfoForm";
+import { BasicInfoForm } from "~/components/BasicInfoForm";
+import { ContactInfoForm } from "~/components/ContactInfoForm";
 import { SubmitSection } from "~/components/organization/SubmitSection";
 import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
@@ -70,7 +70,7 @@ type NonNullableFields<T> = {
   [K in keyof T]-?: NonNullable<T[K]>;
 };
 
-export default function NewOrganizationPage() {
+export default function ViewOrganizationPage() {
   const { user, language } = useOutletContext<DashboardOutletContext>();
   const { organization } = useLoaderData<typeof loader>();
   const t = translations[language] || translations.en;
@@ -90,7 +90,7 @@ export default function NewOrganizationPage() {
     current: organization.current ?? false,
     status: organization.status ?? "",
   });
-  const setErrorState = useErrorStore((state) => state.setError);
+  const setError = useErrorStore((state) => state.setError);
 
   const members = organization.members ?? [];
   const role =
@@ -139,9 +139,9 @@ export default function NewOrganizationPage() {
         throw new Error(t.errorMessage);
       }
     } catch (error) {
-      setErrorState(
-        "Failed to update organization",
-        error instanceof Error ? error.message : t.errorMessage
+      setError(
+        t.errorMessage,
+        (error as Error).message || "An unexpected error occurred"
       );
     } finally {
       setIsSubmitting(false);

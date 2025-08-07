@@ -3,14 +3,15 @@ import { useState } from "react";
 import { createOrganization } from "~/services/organizations";
 import { Organization, OrganizationPlan } from "~/types/models";
 import { PlanSelector } from "~/components/organization/PlanSelector";
-import { BasicInfoForm } from "~/components/organization/BasicInfoForm";
-import { ContactInfoForm } from "~/components/organization/ContactInfoForm";
+import { BasicInfoForm } from "~/components/BasicInfoForm";
+import { ContactInfoForm } from "~/components/ContactInfoForm";
 import { SubmitSection } from "~/components/organization/SubmitSection";
 import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
 import { Create } from "~/rest";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { createMedia } from "~/services/media";
+import useErrorStore from "~/store/error";
 
 export { languageLoader as loader } from "~/loaders/language";
 
@@ -31,6 +32,7 @@ export default function NewOrganizationPage() {
     logoUrl: "",
     plan: OrganizationPlan.FREE,
   });
+  const { setError } = useErrorStore();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -85,7 +87,10 @@ export default function NewOrganizationPage() {
       });
     } catch (error) {
       console.error("Error creating organization:", error);
-      setErrors({ submit: t.errorMessage });
+      setError(
+        t.errorMessage,
+        (error as Error).message || "An unexpected error occurred"
+      );
     } finally {
       setIsSubmitting(false);
     }

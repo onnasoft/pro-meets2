@@ -1,18 +1,18 @@
 import config from "~/config";
 import { HTTPError, ValidationErrorResponse } from "~/types/http";
-import { Organization } from "~/types/models";
+import { Project } from "~/types/models";
 import { Create, FindManyOptions, FindOneOptions, queryBuilder, Update } from "~/rest";
 
-type GetOrganizationParams = FindOneOptions<Organization>;
+type GetProjectParams = FindOneOptions<Project>;
 
-export async function getOrganization(
+export async function getProject(
   id: string,
-  params: GetOrganizationParams = {},
+  params: GetProjectParams = {},
   headers: HeadersInit = {}
-): Promise<Organization> {
+): Promise<Project> {
   const queryString = params ? `?${queryBuilder(params)}` : "";
   const response = await fetch(
-    `${config.apiUrl}/organizations/${id}${queryString}`,
+    `${config.apiUrl}/projects/${id}${queryString}`,
     {
       method: "GET",
       headers: {
@@ -25,20 +25,20 @@ export async function getOrganization(
 
   if (!response.ok) {
     const errorData: HTTPError = await response.json();
-    throw new Error(errorData.message || "Failed to fetch organization");
+    throw new Error(errorData.message || "Failed to fetch Project");
   }
 
   return response.json();
 }
 
-type GetOrganizationsParams = FindManyOptions<Organization>;
+type GetProjectsParams = FindManyOptions<Project>;
 
-export async function getOrganizations(
-  params?: GetOrganizationsParams | null,
+export async function getProjects(
+  params?: GetProjectsParams | null,
   headers: HeadersInit = {}
-): Promise<Organization[]> {
+): Promise<Project[]> {
   const queryString = params ? `?${queryBuilder(params)}` : "";
-  const response = await fetch(`${config.apiUrl}/organizations${queryString}`, {
+  const response = await fetch(`${config.apiUrl}/Projects${queryString}`, {
     method: "GET",
     headers: {
       ...headers,
@@ -49,19 +49,19 @@ export async function getOrganizations(
 
   if (!response.ok) {
     const errorData: HTTPError = await response.json();
-    throw new Error(errorData.message || "Failed to fetch organizations");
+    throw new Error(errorData.message || "Failed to fetch Projects");
   }
 
-  const data = (await response.json()).data as Organization[];
+  const data = (await response.json()).data as Project[];
   return data;
 }
 
-type CreateOrganizationError = ValidationErrorResponse<Organization> | HTTPError;
+type CreateProjectError = ValidationErrorResponse<Project> | HTTPError;
 
-export async function createOrganization(
-  payload: Create<Organization>
-): Promise<Organization> {
-  const response = await fetch(`${config.apiUrl}/organizations`, {
+export async function createProject(
+  payload: Create<Project>
+): Promise<Project> {
+  const response = await fetch(`${config.apiUrl}/projects`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -71,9 +71,9 @@ export async function createOrganization(
   });
 
   if (!response.ok) {
-    const errorData: CreateOrganizationError = await response.json();
+    const errorData: CreateProjectError = await response.json();
     if (typeof errorData.message === "string") {
-      throw new Error(errorData.message || "Organization creation failed");
+      throw new Error(errorData.message || "Project creation failed");
     }
 
     if (Array.isArray(errorData.message)) {
@@ -84,17 +84,17 @@ export async function createOrganization(
       throw new Error(`Validation errors: ${errorMessages.join("; ")}`);
     }
 
-    throw new Error("Organization creation failed");
+    throw new Error("Project creation failed");
   }
 
   return response.json();
 }
 
-export async function updateOrganization(
+export async function updateProject(
   id: string,
-  payload: Update<Organization>
-): Promise<Organization> {
-  const response = await fetch(`${config.apiUrl}/organizations/${id}`, {
+  payload: Update<Project>
+): Promise<Project> {
+  const response = await fetch(`${config.apiUrl}/projects/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -105,14 +105,14 @@ export async function updateOrganization(
 
   if (!response.ok) {
     const errorData: HTTPError = await response.json();
-    throw new Error(errorData.message || "Organization update failed");
+    throw new Error(errorData.message || "Project update failed");
   }
 
   return response.json();
 }
 
-export async function deleteOrganization(id: number): Promise<void> {
-  const response = await fetch(`${config.apiUrl}/organizations/${id}`, {
+export async function deleteProject(id: number): Promise<void> {
+  const response = await fetch(`${config.apiUrl}/projects/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -122,6 +122,6 @@ export async function deleteOrganization(id: number): Promise<void> {
 
   if (!response.ok) {
     const errorData: HTTPError = await response.json();
-    throw new Error(errorData.message || "Organization deletion failed");
+    throw new Error(errorData.message || "Project deletion failed");
   }
 }
