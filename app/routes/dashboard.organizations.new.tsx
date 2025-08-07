@@ -99,11 +99,7 @@ export default function NewOrganizationPage() {
         return;
       }
 
-      const media = await createMedia({
-        file,
-        alt: "",
-      });
-      console.log(media);
+      const media = await createMedia({ file, alt: "Organization Logo" });
       const logoUrl = media.url;
       setFormValues((prev) => ({ ...prev, logoUrl }));
     } catch (error) {

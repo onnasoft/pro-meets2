@@ -14,6 +14,10 @@ const translations = {
     noProjectsDescription: "Create your first project to get started",
     recentProjects: "Recent Projects",
     allProjects: "All Projects",
+    uploading: "Uploading...",
+    upload: "Upload",
+    logoSizeError: "Logo must be less than 2MB",
+    logoUploadError: "Failed to upload logo. Please try again.",
     stats: {
       total: "Total Projects",
       active: "Active",
@@ -26,7 +30,7 @@ const translations = {
       website: "Website",
       location: "Location",
       phone: "Phone",
-      logoUrl: "Logo URL",
+      logo: "Logo",
     },
     placeholders: {
       website: "Enter your website URL",
@@ -51,6 +55,10 @@ const translations = {
     noProjectsDescription: "Crea tu primer proyecto para comenzar",
     recentProjects: "Proyectos Recientes",
     allProjects: "Todos los Proyectos",
+    uploading: "Subiendo...",
+    upload: "Subir",
+    logoSizeError: "El logo debe ser menor a 2MB",
+    logoUploadError: "Error al subir el logo. Por favor, inténtalo de nuevo.",
     stats: {
       total: "Proyectos Totales",
       active: "Activos",
@@ -63,7 +71,7 @@ const translations = {
       website: "Sitio Web",
       location: "Ubicación",
       phone: "Teléfono",
-      logoUrl: "URL del Logo",
+      logo: "Logo",
     },
     placeholders: {
       website: "Ingresa la URL de tu sitio web",
@@ -88,6 +96,10 @@ const translations = {
     noProjectsDescription: "Créez votre premier projet pour commencer",
     recentProjects: "Projets Récents",
     allProjects: "Tous les Projets",
+    uploading: "Téléchargement...",
+    upload: "Télécharger",
+    logoSizeError: "Le logo doit être inférieur à 2 Mo",
+    logoUploadError: "Échec du téléchargement du logo. Veuillez réessayer.",
     stats: {
       total: "Projets Totaux",
       active: "Actifs",
@@ -100,7 +112,7 @@ const translations = {
       website: "Site Web",
       location: "Emplacement",
       phone: "Téléphone",
-      logoUrl: "URL du Logo",
+      logo: "Logo",
     },
     placeholders: {
       website: "Entrez l'URL de votre site web",
@@ -125,6 +137,10 @@ const translations = {
     noProjectsDescription: "最初のプロジェクトを作成して開始",
     recentProjects: "最近のプロジェクト",
     allProjects: "すべてのプロジェクト",
+    uploading: "アップロード中...",
+    upload: "アップロード",
+    logoSizeError: "ロゴは2MB未満である必要があります",
+    logoUploadError: "ロゴのアップロードに失敗しました。もう一度お試しください。",
     stats: {
       total: "総プロジェクト",
       active: "アクティブ",
@@ -137,7 +153,7 @@ const translations = {
       website: "ウェブサイト",
       location: "場所",
       phone: "電話",
-      logoUrl: "ロゴURL",
+      logo: "ロゴ",
     },
     placeholders: {
       website: "ウェブサイトのURLを入力",
@@ -162,6 +178,10 @@ const translations = {
     noProjectsDescription: "创建第一个项目开始",
     recentProjects: "最近项目",
     allProjects: "所有项目",
+    uploading: "上传中...",
+    upload: "上传",
+    logoSizeError: "Logo必须小于2MB",
+    logoUploadError: "上传Logo失败。请再试一次。",
     stats: {
       total: "总项目",
       active: "活跃",
@@ -174,7 +194,7 @@ const translations = {
       website: "网站",
       location: "位置",
       phone: "电话",
-      logoUrl: "Logo URL",
+      logo: "Logo",
     },
     placeholders: {
       website: "输入网站URL",

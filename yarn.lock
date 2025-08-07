@@ -1448,6 +1448,11 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-horizontal-rule/-/extension-horizontal-rule-3.0.9.tgz#28e1dca2c6a89d7e02598e4a108c11b264ffe405"
   integrity sha512-jPNCOte0y9R3Y4PiEA/CRGgRk8WoL700Mnn8NPVHa4juUjvMl1qxL8hdnW/k8cxhrBA8tV0qcq82+/Vqq6jSfA==
 
+"@tiptap/extension-image@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-image/-/extension-image-3.0.9.tgz#78ac096ec02c2e08184e9780029dd51c95d99a1c"
+  integrity sha512-/2igN/oIF58zqX5fcg00bf6qGLcQyXHysl5I8GiurkvO95d+SQTlYbJneSRUpt6CgrUKbhRnMBPVubmapgg+Zw==
+
 "@tiptap/extension-italic@^3.0.9":
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-italic/-/extension-italic-3.0.9.tgz#2750fcb14a365f11e5745bec6fecf1d1e38755be"
@@ -7120,6 +7125,11 @@ tinyglobby@^0.2.14:
   dependencies:
     fdir "^6.4.4"
     picomatch "^4.0.2"
+
+tiptap-extension-resizable-image@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/tiptap-extension-resizable-image/-/tiptap-extension-resizable-image-2.0.0.tgz#85c9225a4685ffb1ddddd011bf7389b6ffc8d965"
+  integrity sha512-wIZY9m4xrusbCt5BKOx+V71cwGNSbFi/J+Xr0q94VFGS+MXPSWt0TdIQ4kCN4jQoXYICmL+A6ta89wVCYhnL+g==
 
 to-regex-range@^5.0.1:
   version "5.0.1"

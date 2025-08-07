@@ -19,6 +19,12 @@ import {
   Loader,
 } from "lucide-react";
 import { useState } from "react";
+import FileUploadDialog from "./FileUploadDialog";
+import { createMedia } from "~/services/media";
+import { useOutletContext } from "@remix-run/react";
+import { DashboardOutletContext } from "~/types/dashboard";
+import { ResizableImage } from 'tiptap-extension-resizable-image';
+import config from "~/config";
 
 interface ToolbarButtonProps {
   readonly onClick: () => void;
@@ -65,10 +71,18 @@ interface HTMLEditorProps {
 export default function HTMLEditor({ value, onChange }: HTMLEditorProps) {
   const [linkUrl, setLinkUrl] = useState("");
   const [showLinkInput, setShowLinkInput] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [uploadAction, setUploadAction] = useState<"image" | "file">("image");
+  const { organizations } = useOutletContext<DashboardOutletContext>();
+  const organizationId = organizations?.find((org) => org.current)?.id;
 
   const editor = useEditor({
     extensions: [
       StarterKit,
+      ResizableImage.configure({
+        defaultWidth: 200,
+        defaultHeight: 200,
+      }),
       Heading.configure({
         levels: [1, 2, 3, 4, 5, 6],
       }),
@@ -91,43 +105,57 @@ export default function HTMLEditor({ value, onChange }: HTMLEditorProps) {
     setLinkUrl("");
   };
 
+  const handleUpload = async (files: File[]) => {
+    const media = await createMedia({
+      file: files[0],
+      alt: "",
+      organizationId,
+    });
+    const url = config.apiUrl + media.url;
+    if (uploadAction === "image") {
+      editor.chain().focus().setResizableImage({ src: url }).run();
+    } else if (uploadAction === "file") {
+      editor.chain().focus().setLink({ href: url, target: "_blank" }).run();
+    }
+  };
+
   return (
     <div className="">
-      {/* Barra de herramientas principal */}
+      {/* Main toolbar */}
       <div className="flex flex-wrap gap-1 mb-2 p-2 border rounded-lg bg-white shadow-sm sticky top-0 z-10">
-        {/* Formato de texto */}
+        {/* Text formatting */}
         <div className="flex border-r pr-2 mr-2">
           <ToolbarButton
             onClick={() => editor.chain().focus().toggleBold().run()}
             isActive={editor.isActive("bold")}
-            tooltip="Negrita (Ctrl+B)"
+            tooltip="Bold (Ctrl+B)"
           >
             <Bold className="h-5 w-5" />
           </ToolbarButton>
           <ToolbarButton
             onClick={() => editor.chain().focus().toggleItalic().run()}
             isActive={editor.isActive("italic")}
-            tooltip="Cursiva (Ctrl+I)"
+            tooltip="Italic (Ctrl+I)"
           >
             <Italic className="h-5 w-5" />
           </ToolbarButton>
           <ToolbarButton
             onClick={() => editor.chain().focus().toggleStrike().run()}
             isActive={editor.isActive("strike")}
-            tooltip="Tachado"
+            tooltip="Strikethrough"
           >
             <Strikethrough className="h-5 w-5" />
           </ToolbarButton>
         </div>
 
-        {/* Encabezados y listas */}
+        {/* Headings & lists */}
         <div className="flex border-r pr-2 mr-2">
           <ToolbarButton
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 1 }).run()
             }
             isActive={editor.isActive("heading", { level: 1 })}
-            tooltip="Título 1"
+            tooltip="Heading 1"
           >
             <Heading1 className="h-5 w-5" />
           </ToolbarButton>
@@ -136,85 +164,87 @@ export default function HTMLEditor({ value, onChange }: HTMLEditorProps) {
               editor.chain().focus().toggleHeading({ level: 2 }).run()
             }
             isActive={editor.isActive("heading", { level: 2 })}
-            tooltip="Título 2"
+            tooltip="Heading 2"
           >
             <Heading2 className="h-5 w-5" />
           </ToolbarButton>
           <ToolbarButton
             onClick={() => editor.chain().focus().toggleBulletList().run()}
             isActive={editor.isActive("bulletList")}
-            tooltip="Lista con viñetas"
+            tooltip="Bulleted list"
           >
             <List className="h-5 w-5" />
           </ToolbarButton>
           <ToolbarButton
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
             isActive={editor.isActive("orderedList")}
-            tooltip="Lista numerada"
+            tooltip="Numbered list"
           >
             <ListOrdered className="h-5 w-5" />
           </ToolbarButton>
         </div>
 
-        {/* Elementos especiales */}
+        {/* Special elements */}
         <div className="flex border-r pr-2 mr-2">
           <ToolbarButton
             onClick={() => setShowLinkInput(true)}
             isActive={editor.isActive("link")}
-            tooltip="Insertar enlace"
+            tooltip="Insert link"
           >
             <Link2 className="h-5 w-5" />
           </ToolbarButton>
           <ToolbarButton
             onClick={() => editor.chain().focus().setHorizontalRule().run()}
-            tooltip="Insertar separador"
+            tooltip="Insert separator"
           >
             <Minus className="h-5 w-5" />
           </ToolbarButton>
           <ToolbarButton
             onClick={() => {
-              /* Lógica para subir imagen */
+              setUploadAction("image");
+              setIsOpen(true);
             }}
-            tooltip="Insertar imagen"
+            tooltip="Insert image"
           >
             <Image className="h-5 w-5" />
           </ToolbarButton>
           <ToolbarButton
             onClick={() => {
-              /* Lógica para adjuntar archivo */
+              setUploadAction("file");
+              setIsOpen(true);
             }}
-            tooltip="Adjuntar archivo"
+            tooltip="Attach file"
           >
             <Paperclip className="h-5 w-5" />
           </ToolbarButton>
         </div>
 
-        {/* Historial y limpieza */}
+        {/* Undo / Redo & clear */}
         <div className="flex">
           <ToolbarButton
             onClick={() => editor.chain().focus().undo().run()}
             disabled={!editor.can().undo()}
-            tooltip="Deshacer (Ctrl+Z)"
+            tooltip="Undo (Ctrl+Z)"
           >
             <Undo2 className="h-5 w-5" />
           </ToolbarButton>
           <ToolbarButton
             onClick={() => editor.chain().focus().redo().run()}
             disabled={!editor.can().redo()}
-            tooltip="Rehacer (Ctrl+Y)"
+            tooltip="Redo (Ctrl+Y)"
           >
             <Redo2 className="h-5 w-5" />
           </ToolbarButton>
           <ToolbarButton
             onClick={() => editor.chain().focus().clearContent().run()}
-            tooltip="Limpiar documento"
+            tooltip="Clear document"
           >
             <Trash2 className="h-5 w-5" />
           </ToolbarButton>
         </div>
       </div>
 
-      {/* Input para enlaces */}
+      {/* Link input */}
       {showLinkInput && (
         <div className="absolute z-20 mt-2 p-3 bg-white border rounded-lg shadow-lg">
           <div className="flex gap-2">
@@ -222,7 +252,7 @@ export default function HTMLEditor({ value, onChange }: HTMLEditorProps) {
               type="text"
               value={linkUrl}
               onChange={(e) => setLinkUrl(e.target.value)}
-              placeholder="https://ejemplo.com"
+              placeholder="https://example.com"
               className="flex-1 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               autoFocus
               onKeyDown={(e) => e.key === "Enter" && addLink()}
@@ -231,22 +261,29 @@ export default function HTMLEditor({ value, onChange }: HTMLEditorProps) {
               onClick={addLink}
               className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
-              Aplicar
+              Apply
             </button>
             <button
               onClick={() => setShowLinkInput(false)}
               className="px-3 py-2 bg-gray-200 rounded hover:bg-gray-300"
             >
-              Cancelar
+              Cancel
             </button>
           </div>
         </div>
       )}
 
-      {/* Área del editor */}
+      {/* Editor area */}
       <EditorContent
         editor={editor}
         className="min-h-[300px] border rounded-lg bg-white shadow-sm prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto focus:outline-none"
+      />
+
+      <FileUploadDialog
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onFileUpload={handleUpload}
+        accept=".pdf,.jpg,.png"
       />
     </div>
   );

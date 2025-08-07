@@ -6,20 +6,23 @@ import { SubmitSection } from "~/components/projects/SubmitSection";
 import translations from "~/components/projects/translations";
 import { useRequireOrganization } from "~/hooks/require-organization";
 import { Create } from "~/rest";
+import { createMedia } from "~/services/media";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { Project } from "~/types/models";
 
 export default function NewProjectPage() {
   useRequireOrganization();
-  const { language } = useOutletContext<DashboardOutletContext>();
+  const { language, organizations } =
+    useOutletContext<DashboardOutletContext>();
   const t = translations[language] || translations.en;
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const organizationId = organizations?.find((org) => org.current)?.id;
   const [formValues, setFormValues] = useState<Create<Project>>({
     name: "",
     description: "",
-    organizationId: "",
+    organizationId: organizationId!,
     ownerId: "",
     website: "",
     location: "",
@@ -54,6 +57,27 @@ export default function NewProjectPage() {
     }
   };
 
+  const handleFileChange = async (file: File) => {
+    try {
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) {
+        setErrors((prev) => ({ ...prev, logoUrl: t.logoSizeError }));
+        return;
+      }
+
+      const media = await createMedia({
+        file,
+        alt: "Project Logo",
+        organizationId,
+      });
+      const logoUrl = media.url;
+      setFormValues((prev) => ({ ...prev, logoUrl }));
+    } catch (error) {
+      console.error("Error uploading logo:", error);
+      setErrors((prev) => ({ ...prev, logoUrl: t.logoUploadError }));
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 space-y-6">
@@ -72,6 +96,7 @@ export default function NewProjectPage() {
             phone={formValues.phone!}
             logoUrl={formValues.logoUrl!}
             onChange={handleChange}
+            onLogoUpload={handleFileChange}
             errors={errors}
             translations={t}
           />

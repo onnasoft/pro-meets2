@@ -8,6 +8,7 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { languageLoader } from "./loaders/language";
+import 'tiptap-extension-resizable-image/styles.css';
 import "./tailwind.css";
 
 export const links: LinksFunction = () => [
