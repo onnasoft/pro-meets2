@@ -23,13 +23,13 @@ interface FileUploadDialogProps {
 export default function FileUploadDialog({
   isOpen,
   onClose,
-  title = "Subir archivos",
-  description = "Arrastra y suelta tus archivos aquí o haz clic para seleccionarlos",
+  title = "Upload Files",
+  description = "Drag and drop your files here or click to select them",
   accept = "*",
   multiple = false,
   onFileUpload,
-  uploadText = "Subir",
-  cancelText = "Cancelar",
+  uploadText = "Upload",
+  cancelText = "Cancel",
 }: FileUploadDialogProps) {
   const [files, setFiles] = useState<File[]>([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -113,7 +113,7 @@ export default function FileUploadDialog({
                   <div
                     className={`border-2 border-dashed rounded-lg p-6 text-center ${
                       isDragging
-                        ? "border-blue-500 bg-blue-50"
+                        ? "border-primary-500 bg-primary-50"
                         : "border-gray-300"
                     }`}
                     onDragOver={handleDragOver}
@@ -124,8 +124,8 @@ export default function FileUploadDialog({
                       <UploadCloud className="h-10 w-10 text-gray-400" />
                       <p className="text-sm text-gray-600">{description}</p>
                       <label className="cursor-pointer mt-2">
-                        <span className="rounded-md bg-white px-3 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50">
-                          Seleccionar archivos
+                        <span className="rounded-md bg-white px-3 py-2 text-sm font-medium text-primary-600 hover:bg-primary-50">
+                          Select files
                         </span>
                         <input
                           type="file"
@@ -141,12 +141,12 @@ export default function FileUploadDialog({
                   {files.length > 0 && (
                     <div className="space-y-2">
                       <h4 className="text-sm font-medium text-gray-700">
-                        Archivos seleccionados:
+                        Selected files:
                       </h4>
                       <ul className="divide-y divide-gray-200 max-h-40 overflow-y-auto">
                         {files.map((file, index) => (
                           <li
-                            key={index}
+                            key={file.name + index}
                             className="py-2 flex justify-between items-center"
                           >
                             <span className="text-sm text-gray-600 truncate max-w-xs">
@@ -169,7 +169,7 @@ export default function FileUploadDialog({
                 <div className="mt-4 flex justify-end space-x-3">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
                     onClick={onClose}
                     disabled={isUploading}
                   >
@@ -177,11 +177,11 @@ export default function FileUploadDialog({
                   </button>
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     onClick={handleUpload}
                     disabled={files.length === 0 || isUploading}
                   >
-                    {isUploading ? "Subiendo..." : uploadText}
+                    {isUploading ? "Uploading..." : uploadText}
                   </button>
                 </div>
               </DialogPanel>
