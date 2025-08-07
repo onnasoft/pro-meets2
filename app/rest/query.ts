@@ -13,7 +13,7 @@ export type FindOneOptions<T> = {
 };
 
 export type FindManyOptions<T> = FindOneOptions<T> & {
-  orderBy?: Array<Record<keyof T, "asc" | "desc">>;
+  orderBy?: Array<{ [Key in keyof T]?: "asc" | "desc" }>;
   take?: number;
   skip?: number;
 };

@@ -7,6 +7,8 @@ import translations from "~/components/projects/translations";
 import AllProjects from "~/components/projects/AllProjects";
 import Filters from "~/components/projects/Filters";
 import StatsCards from "~/components/projects/StatsCards";
+import { useOrganizationStatus } from "~/hooks/organizations";
+import { useProjects } from "~/hooks/projects";
 
 const mockProjects = [
   {
@@ -72,14 +74,27 @@ const mockProjects = [
 ];
 
 export default function ProjectsPage() {
-  const { language } = useOutletContext<DashboardOutletContext>();
+  const { language, organizations } =
+    useOutletContext<DashboardOutletContext>();
   useRequireOrganization();
+  const organization =
+    organizations.find((org) => org.current) || organizations[0];
   const t = translations[language] || translations.en;
+  const { data: status } = useOrganizationStatus(organization.id);
+  const { data: recentProjects } = useProjects({
+    take: 6,
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
+  });
+  console.log("Recent Projects:", recentProjects);
 
   return (
     <div className="mx-auto">
       {/* Stats Cards */}
-      <StatsCards translations={t} />
+      <StatsCards status={status} translations={t} />
 
       {/* Filters */}
       <Filters translations={t} />

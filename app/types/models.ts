@@ -125,3 +125,4 @@ export interface Media {
   createdAt: string;
   updatedAt: string;
 }
+

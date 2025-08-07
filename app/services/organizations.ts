@@ -1,7 +1,13 @@
 import config from "~/config";
 import { HTTPError, ValidationErrorResponse } from "~/types/http";
 import { Organization } from "~/types/models";
-import { Create, FindManyOptions, FindOneOptions, queryBuilder, Update } from "~/rest";
+import {
+  Create,
+  FindManyOptions,
+  FindOneOptions,
+  queryBuilder,
+  Update,
+} from "~/rest";
 
 type GetOrganizationParams = FindOneOptions<Organization>;
 
@@ -56,7 +62,9 @@ export async function getOrganizations(
   return data;
 }
 
-type CreateOrganizationError = ValidationErrorResponse<Organization> | HTTPError;
+type CreateOrganizationError =
+  | ValidationErrorResponse<Organization>
+  | HTTPError;
 
 export async function createOrganization(
   payload: Create<Organization>
@@ -124,4 +132,30 @@ export async function deleteOrganization(id: number): Promise<void> {
     const errorData: HTTPError = await response.json();
     throw new Error(errorData.message || "Organization deletion failed");
   }
+}
+
+interface OrganizationStatusResponse {
+  projects: number;
+  planning: number;
+  inProgress: number;
+  completed: number;
+}
+
+export async function statusOrganization(
+  id: string
+): Promise<OrganizationStatusResponse> {
+  const response = await fetch(`${config.apiUrl}/organizations/${id}/status`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const errorData: HTTPError = await response.json();
+    throw new Error(errorData.message || "Failed to fetch organization status");
+  }
+
+  return response.json();
 }

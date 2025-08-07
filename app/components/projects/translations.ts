@@ -22,8 +22,8 @@ const translations = {
     required: "This field is required",
     stats: {
       total: "Total Projects",
-      active: "Active",
-      hiring: "Hiring",
+      inProgress: "In Progress",
+      planning: "Planning",
       completed: "Completed",
     },
     fields: {
@@ -69,8 +69,8 @@ const translations = {
     required: "Este campo es obligatorio",
     stats: {
       total: "Proyectos Totales",
-      active: "Activos",
-      hiring: "Contratando",
+      inProgress: "En Progreso",
+      planning: "Planificación",
       completed: "Completados",
     },
     fields: {
@@ -116,8 +116,8 @@ const translations = {
     required: "Ce champ est requis",
     stats: {
       total: "Projets Totaux",
-      active: "Actifs",
-      hiring: "Embauche",
+      inProgress: "En Progrès",
+      planning: "Planification",
       completed: "Terminés",
     },
     fields: {
@@ -163,8 +163,8 @@ const translations = {
     required: "このフィールドは必須です",
     stats: {
       total: "総プロジェクト",
-      active: "アクティブ",
-      hiring: "採用中",
+      inProgress: "進行中",
+      planning: "計画中",
       completed: "完了",
     },
     fields: {
@@ -210,8 +210,8 @@ const translations = {
     required: "此字段为必填",
     stats: {
       total: "总项目",
-      active: "活跃",
-      hiring: "招聘中",
+      inProgress: "进行中",
+      planning: "计划中",
       completed: "已完成",
     },
     fields: {
