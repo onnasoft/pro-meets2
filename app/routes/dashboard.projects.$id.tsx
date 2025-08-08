@@ -8,6 +8,7 @@ import {
 import { useMemo, useState } from "react";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";
+import { JobOffersGrid } from "~/components/projects/JobOffersGrid";
 import ProjectDetailsForm from "~/components/projects/ProjectDetailsForm";
 import { SubmitSection } from "~/components/projects/SubmitSection";
 import translations from "~/components/projects/translations";
@@ -160,7 +161,7 @@ export default function ViewProjectPage() {
   };
 
   return (
-    <div className=" mx-auto">
+    <div className="mx-auto space-y-6">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 space-y-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           <BasicInfoForm
@@ -215,6 +216,8 @@ export default function ViewProjectPage() {
           />
         </form>
       </div>
+
+      <JobOffersGrid />
     </div>
   );
 }

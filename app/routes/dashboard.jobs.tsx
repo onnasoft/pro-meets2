@@ -1,347 +1,414 @@
-// routes/dashboard/jobs.tsx
-
-import { useRequireOrganization } from "~/hooks/require-organization";
-import { Plus, Trash2, Edit, Save, X } from "lucide-react";
+// app/routes/jobs.jsx
 import { useState } from "react";
 
-interface JobOffer {
-  id: string;
-  title: string;
-  description: string;
-  requirements: string[];
-  salaryRange: string;
-  status: "draft" | "published" | "closed";
-  createdAt: string;
-  updatedAt: string;
-}
+export default function JobsPage() {
+  // Estado para las ofertas laborales
+  const [jobs, setJobs] = useState([
+    {
+      id: 1,
+      title: "Desarrollador Frontend",
+      company: "Tech Corp",
+      location: "Remoto",
+      salary: "$3,000 - $4,000",
+      type: "Tiempo completo",
+      status: "Activa",
+      posted: "2023-05-15",
+    },
+    {
+      id: 2,
+      title: "Diseñador UX/UI",
+      company: "Creative Solutions",
+      location: "Barcelona",
+      salary: "$2,500 - $3,500",
+      type: "Medio tiempo",
+      status: "Activa",
+      posted: "2023-05-10",
+    },
+    {
+      id: 3,
+      title: "Backend Developer",
+      company: "Data Systems",
+      location: "Madrid",
+      salary: "$3,500 - $4,500",
+      type: "Tiempo completo",
+      status: "Inactiva",
+      posted: "2023-05-20",
+    },
+  ]);
 
-interface JobOfferFormProps {
-  offer?: JobOffer;
-  onSave: (offer: JobOffer) => void;
-  onCancel: () => void;
-}
-
-const JobOfferForm = ({ offer, onSave, onCancel }: JobOfferFormProps) => {
-  const [formData, setFormData] = useState<
-    Omit<JobOffer, "id" | "createdAt" | "updatedAt">
-  >({
-    title: offer?.title || "",
-    description: offer?.description || "",
-    requirements: offer?.requirements || [""],
-    salaryRange: offer?.salaryRange || "",
-    status: offer?.status || "draft",
+  // Estado para el formulario
+  const [formData, setFormData] = useState({
+    title: "",
+    company: "",
+    location: "",
+    salary: "",
+    type: "Tiempo completo",
+    status: "Activa",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
+  // Estado para controlar vistas
+  const [view, setView] = useState("table"); // 'table', 'form'
+  const [currentJobId, setCurrentJobId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Manejadores de eventos
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleRequirementChange = (index: number, value: string) => {
-    const newRequirements = [...formData.requirements];
-    newRequirements[index] = value;
-    setFormData((prev) => ({ ...prev, requirements: newRequirements }));
-  };
-
-  const addRequirement = () => {
-    setFormData((prev) => ({
-      ...prev,
-      requirements: [...prev.requirements, ""],
-    }));
-  };
-
-  const removeRequirement = (index: number) => {
-    const newRequirements = formData.requirements.filter((_, i) => i !== index);
-    setFormData((prev) => ({ ...prev, requirements: newRequirements }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSave({
-      ...formData,
-      id: offer?.id || crypto.randomUUID(),
-      createdAt: offer?.createdAt || new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+  const handleNewJob = () => {
+    setFormData({
+      title: "",
+      company: "",
+      location: "",
+      salary: "",
+      type: "Tiempo completo",
+      status: "Activa",
     });
+    setView("form");
   };
 
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-4 bg-white p-6 rounded-lg shadow"
-    >
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Título
-        </label>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-          required
-        />
-      </div>
+  const handleEditJob = (job) => {
+    setFormData(job);
+    setCurrentJobId(job.id);
+    setView("form");
+  };
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Descripción
-        </label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          rows={4}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-          required
-        />
-      </div>
+  const handleCancel = () => {
+    setView("table");
+  };
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Requisitos
-        </label>
-        {formData.requirements.map((req, index) => (
-          <div key={index} className="flex items-center mb-2">
+  // Filtrar trabajos basado en el término de búsqueda
+  const filteredJobs = jobs.filter(
+    (job) =>
+      job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      job.location.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Componente de Tabla
+  const JobsTable = () => (
+    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="p-4 flex justify-between items-center border-b">
+        <h2 className="text-xl font-semibold text-gray-800">
+          Ofertas Laborales
+        </h2>
+        <div className="flex space-x-3">
+          <div className="relative">
             <input
               type="text"
-              value={req}
-              onChange={(e) => handleRequirementChange(index, e.target.value)}
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-              required
+              placeholder="Buscar ofertas..."
+              className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button
-              type="button"
-              onClick={() => removeRequirement(index)}
-              className="ml-2 p-2 text-red-500 hover:text-red-700"
-              disabled={formData.requirements.length <= 1}
+            <svg
+              className="w-5 h-5 text-gray-400 absolute left-3 top-2.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              <Trash2 size={18} />
-            </button>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
           </div>
-        ))}
-        <button
-          type="button"
-          onClick={addRequirement}
-          className="mt-2 flex items-center text-sm text-primary-600 hover:text-primary-800"
-        >
-          <Plus size={16} className="mr-1" />
-          Agregar requisito
-        </button>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Rango salarial
-        </label>
-        <input
-          type="text"
-          name="salaryRange"
-          value={formData.salaryRange}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-          required
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Estado
-        </label>
-        <select
-          name="status"
-          value={formData.status}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-        >
-          <option value="draft">Borrador</option>
-          <option value="published">Publicado</option>
-          <option value="closed">Cerrado</option>
-        </select>
-      </div>
-
-      <div className="flex justify-end space-x-3 pt-4">
-        <button
-          type="button"
-          onClick={onCancel}
-          className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-        >
-          Cancelar
-        </button>
-        <button
-          type="submit"
-          className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-        >
-          Guardar oferta
-        </button>
-      </div>
-    </form>
-  );
-};
-
-const JobOfferItem = ({
-  offer,
-  onEdit,
-  onDelete,
-}: {
-  offer: JobOffer;
-  onEdit: () => void;
-  onDelete: () => void;
-}) => {
-  return (
-    <div className="bg-white p-4 rounded-lg shadow mb-4">
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="text-lg font-medium text-gray-900">{offer.title}</h3>
-          <p className="text-sm text-gray-500 mb-2">{offer.salaryRange}</p>
-          <span
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-              offer.status === "published"
-                ? "bg-green-100 text-green-800"
-                : offer.status === "closed"
-                ? "bg-red-100 text-red-800"
-                : "bg-gray-100 text-gray-800"
-            }`}
+          <button
+            onClick={handleNewJob}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center"
           >
-            {offer.status === "published"
-              ? "Publicado"
-              : offer.status === "closed"
-              ? "Cerrado"
-              : "Borrador"}
-          </span>
+            <svg
+              className="w-5 h-5 mr-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+            Nueva Oferta
+          </button>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Puesto
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Empresa
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Ubicación
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Salario
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Tipo
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Estado
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Acciones
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {filteredJobs.length === 0 ? (
+              <tr>
+                <td colSpan="7" className="px-6 py-4 text-center text-gray-500">
+                  No se encontraron ofertas laborales
+                </td>
+              </tr>
+            ) : (
+              filteredJobs.map((job) => (
+                <tr key={job.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="font-medium text-gray-900">{job.title}</div>
+                    <div className="text-sm text-gray-500">{job.posted}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-500">
+                    {job.company}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-500">
+                    {job.location}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-500">
+                    {job.salary}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-500">
+                    {job.type}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                      ${
+                        job.status === "Activa"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-gray-100 text-gray-800"
+                      }`}
+                    >
+                      {job.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button
+                      onClick={() => handleEditJob(job)}
+                      className="text-blue-600 hover:text-blue-900 mr-3"
+                    >
+                      Editar
+                    </button>
+                    <button className="text-red-600 hover:text-red-900">
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="bg-gray-50 px-6 py-3 flex items-center justify-between border-t border-gray-200">
+        <div className="text-sm text-gray-500">
+          Mostrando <span className="font-medium">1</span> a{" "}
+          <span className="font-medium">{filteredJobs.length}</span> de{" "}
+          <span className="font-medium">{filteredJobs.length}</span> resultados
         </div>
         <div className="flex space-x-2">
-          <button
-            onClick={onEdit}
-            className="p-2 text-primary-600 hover:text-primary-800"
-          >
-            <Edit size={18} />
+          <button className="px-3 py-1 border rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+            Anterior
           </button>
-          <button
-            onClick={onDelete}
-            className="p-2 text-red-600 hover:text-red-800"
-          >
-            <Trash2 size={18} />
+          <button className="px-3 py-1 border rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+            Siguiente
           </button>
         </div>
-      </div>
-      <div className="mt-2">
-        <p className="text-sm text-gray-600">{offer.description}</p>
-      </div>
-      {offer.requirements.length > 0 && (
-        <div className="mt-3">
-          <h4 className="text-sm font-medium text-gray-700 mb-1">
-            Requisitos:
-          </h4>
-          <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-            {offer.requirements.map((req, i) => (
-              <li key={i}>{req}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <div className="mt-3 text-xs text-gray-500">
-        <p>Actualizado: {new Date(offer.updatedAt).toLocaleDateString()}</p>
       </div>
     </div>
   );
-};
 
-const JobOffersCRUD = () => {
-  useRequireOrganization();
-  const [offers, setOffers] = useState<JobOffer[]>([]);
-  const [editingOffer, setEditingOffer] = useState<JobOffer | null>(null);
-  const [isCreating, setIsCreating] = useState(false);
+  // Componente de Formulario
+  const JobForm = () => (
+    <div className="bg-white shadow-md rounded-lg overflow-hidden max-w-4xl mx-auto">
+      <div className="p-6 border-b">
+        <h2 className="text-xl font-semibold text-gray-800">
+          {currentJobId
+            ? "Editar Oferta Laboral"
+            : "Crear Nueva Oferta Laboral"}
+        </h2>
+      </div>
 
-  const handleCreate = (offer: JobOffer) => {
-    setOffers((prev) => [...prev, offer]);
-    setIsCreating(false);
-  };
+      <div className="p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Título del Puesto *
+            </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
 
-  const handleUpdate = (updatedOffer: JobOffer) => {
-    setOffers((prev) =>
-      prev.map((o) => (o.id === updatedOffer.id ? updatedOffer : o))
-    );
-    setEditingOffer(null);
-  };
+          <div>
+            <label
+              htmlFor="company"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Empresa *
+            </label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              value={formData.company}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
 
-  const handleDelete = (id: string) => {
-    setOffers((prev) => prev.filter((o) => o.id !== id));
-  };
+          <div>
+            <label
+              htmlFor="location"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Ubicación *
+            </label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              value={formData.location}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="salary"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Salario *
+            </label>
+            <input
+              type="text"
+              id="salary"
+              name="salary"
+              value={formData.salary}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="type"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Tipo de contrato *
+            </label>
+            <select
+              id="type"
+              name="type"
+              value={formData.type}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="Tiempo completo">Tiempo completo</option>
+              <option value="Medio tiempo">Medio tiempo</option>
+              <option value="Por proyecto">Por proyecto</option>
+              <option value="Freelance">Freelance</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              htmlFor="status"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Estado *
+            </label>
+            <select
+              id="status"
+              name="status"
+              value={formData.status}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="Activa">Activa</option>
+              <option value="Inactiva">Inactiva</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="flex justify-end space-x-3">
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            {currentJobId ? "Actualizar Oferta" : "Publicar Oferta"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">
-          Gestión de Ofertas Laborales
-        </h2>
-        <button
-          onClick={() => {
-            setEditingOffer(null);
-            setIsCreating(true);
-          }}
-          className="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-        >
-          <Plus size={18} className="mr-1" />
-          Crear oferta
-        </button>
-      </div>
-
-      {isCreating && (
-        <div className="mb-8">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">
-            Nueva Oferta Laboral
-          </h3>
-          <JobOfferForm
-            onSave={handleCreate}
-            onCancel={() => setIsCreating(false)}
-          />
-        </div>
-      )}
-
-      {editingOffer && (
-        <div className="mb-8">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">
-            Editar Oferta Laboral
-          </h3>
-          <JobOfferForm
-            offer={editingOffer}
-            onSave={handleUpdate}
-            onCancel={() => setEditingOffer(null)}
-          />
-        </div>
-      )}
-
-      <div className="space-y-4">
-        {offers.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-gray-500">No hay ofertas laborales creadas</p>
-          </div>
-        ) : (
-          offers.map((offer) => (
-            <JobOfferItem
-              key={offer.id}
-              offer={offer}
-              onEdit={() => {
-                setIsCreating(false);
-                setEditingOffer(offer);
-              }}
-              onDelete={() => {
-                if (confirm("¿Estás seguro de eliminar esta oferta?")) {
-                  handleDelete(offer.id);
-                }
-              }}
-            />
-          ))
-        )}
-      </div>
+      {view === "table" ? <JobsTable /> : <JobForm />}
     </div>
   );
-};
-
-export default JobOffersCRUD;
+}

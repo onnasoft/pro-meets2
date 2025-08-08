@@ -122,7 +122,7 @@ export default function HTMLEditor({ value, onChange }: HTMLEditorProps) {
   return (
     <div className="">
       {/* Main toolbar */}
-      <div className="flex flex-wrap gap-1 mb-2 p-2 border rounded-lg bg-white shadow-sm sticky top-0 z-10">
+      <div className="flex flex-wrap gap-1 mb-2 p-2 border rounded-lg bg-white shadow-sm top-0 z-10">
         {/* Text formatting */}
         <div className="flex border-r pr-2 mr-2">
           <ToolbarButton
