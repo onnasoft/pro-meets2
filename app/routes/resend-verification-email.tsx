@@ -1,9 +1,9 @@
 // app/routes/resend-verification-email.tsx
 import { useState } from "react";
-import { useLoaderData, useNavigate } from "@remix-run/react";
-import { ActionFunction, redirect } from "@remix-run/node";
+import { useLoaderData, useNavigate } from "react-router";
+import { ActionFunction, redirect } from "react-router";
 import { languageLoader } from "~/loaders/language";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export { languageLoader as loader } from "~/loaders/language";
 

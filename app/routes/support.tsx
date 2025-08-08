@@ -2,7 +2,7 @@
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import { CallToAction } from "~/components/sections/CallToAction";
-import { MetaFunction, useLoaderData } from "@remix-run/react";
+import { MetaFunction, useLoaderData } from "react-router";
 import { languageLoader } from "~/loaders/language";
 
 const translations = {

@@ -3,7 +3,7 @@ import { ProjectStatusBadge } from "./ProjectStatusBadge";
 import translations from "./translations";
 import { Project, ProjectStatus } from "~/types/models";
 import HTMLView from "../HTMLView";
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 
 interface ProjectCardProps {
   readonly project: Project;

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useLoaderData, Link } from "@remix-run/react";
-import { ActionFunction } from "@remix-run/node";
+import { useLoaderData, Link } from "react-router";
+import { ActionFunction } from "react-router";
 import { languageLoader } from "~/loaders/language";
 import { forgotPassword } from "~/services/auth";
 import { CheckCircle, AlertCircle } from "lucide-react";

@@ -1,4 +1,4 @@
-import { useNavigate, useOutletContext } from "@remix-run/react";
+import { useNavigate, useOutletContext } from "react-router";
 import { useState } from "react";
 import { createOrganization } from "~/services/organizations";
 import { Organization, OrganizationPlan } from "~/types/models";

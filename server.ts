@@ -1,4 +1,4 @@
-import { createRequestHandler } from "@remix-run/express";
+import { createRequestHandler } from "@react-router/express";
 import express from "express";
 
 async function bootstrap() {
@@ -17,7 +17,7 @@ async function bootstrap() {
   );
 
   const build: any = viteDevServer
-    ? await viteDevServer.ssrLoadModule("virtual:remix/server-build")
+    ? await viteDevServer.ssrLoadModule("virtual:react-router/server-build")
     : await import("./build/server/index.js");
 
   app.all("*", createRequestHandler({ build }));

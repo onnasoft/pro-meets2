@@ -1,4 +1,4 @@
-import { useOutletContext } from "@remix-run/react";
+import { useOutletContext } from "react-router";
 import translations from "~/components/profile/translations";
 import PersonalInformation from "~/components/profile/PersonalInformation";
 import ProfessionalSummary from "~/components/profile/ProfessionalSummary";

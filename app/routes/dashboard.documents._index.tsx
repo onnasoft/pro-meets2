@@ -1,4 +1,4 @@
-import { useNavigate, useOutletContext } from "@remix-run/react";
+import { useNavigate, useOutletContext } from "react-router";
 import { Plus, Search, Grid, List } from "lucide-react";
 import { useState } from "react";
 import DocumentCard from "~/components/documents/DocumentCard";

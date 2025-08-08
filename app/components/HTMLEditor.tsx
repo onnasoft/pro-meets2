@@ -21,7 +21,7 @@ import {
 import { useState } from "react";
 import FileUploadDialog from "./FileUploadDialog";
 import { createMedia } from "~/services/media";
-import { useOutletContext } from "@remix-run/react";
+import { useOutletContext } from "react-router";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { ResizableImage } from 'tiptap-extension-resizable-image';
 import config from "~/config";

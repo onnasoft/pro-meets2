@@ -1,4 +1,4 @@
-import { useNavigate, useOutletContext } from "@remix-run/react";
+import { useNavigate, useOutletContext } from "react-router";
 import { useEffect } from "react";
 import { DashboardOutletContext } from "~/types/dashboard";
 

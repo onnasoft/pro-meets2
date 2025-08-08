@@ -1,5 +1,5 @@
 import { Plus, FileText } from "lucide-react";
-import { useOutletContext } from "@remix-run/react";
+import { useOutletContext } from "react-router";
 import { useRequireOrganization } from "~/hooks/require-organization";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { ProjectCard } from "~/components/projects/ProjectCard";

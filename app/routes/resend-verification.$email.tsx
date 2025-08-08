@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from "@remix-run/node";
+import { LoaderFunction, redirect } from "react-router";
 import { resendVerification } from "~/services/auth";
 
 export const loader: LoaderFunction = async ({ params }) => {

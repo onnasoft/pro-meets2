@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { useOutletContext } from "@remix-run/react";
+import { useOutletContext } from "react-router";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { CalendarControls } from "~/components/calendar/CalendarControls";
 import { WeekView } from "~/components/calendar/WeekView";

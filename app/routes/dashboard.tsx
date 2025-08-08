@@ -1,10 +1,10 @@
-import { Outlet, useLoaderData, useNavigate } from "@remix-run/react";
+import { Outlet, useLoaderData, useNavigate } from "react-router";
 import translations from "~/components/dashboard/translations";
 import { Sidebar } from "~/components/dashboard/Sidebar";
 import { Header } from "~/components/dashboard/Header";
 import { sessionLoader } from "~/loaders/session";
 import { Organization, User } from "~/types/models";
-import { LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { LoaderFunctionArgs, redirect } from "react-router";
 import { languageLoader } from "~/loaders/language";
 import { Language } from "~/utils/language";
 import { organizationsLoader } from "~/loaders/organizations";

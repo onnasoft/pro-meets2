@@ -6,7 +6,7 @@ import translations from "./translations";
 import { SignupFormData } from "./types";
 import { getRegisterAuthSchema } from "./schema";
 import { OAuthGoogleLogin, register } from "~/services/auth";
-import { Link, useNavigate } from "@remix-run/react";
+import { Link, useNavigate } from "react-router";
 import NameField from "./fields/NameField";
 import EmailField from "./fields/EmailField";
 import PasswordField from "./fields/PasswordField";

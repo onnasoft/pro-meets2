@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "react-router";
 import { languageLoader } from "~/loaders/language";
 import translations from "~/components/billing/translations";
 import { InvoiceHistory } from "~/components/billing/InvoiceHistory";

@@ -5,7 +5,7 @@ import translations from "./translations";
 import { loginAuthSchema } from "./schema";
 import { LoginFormData } from "./types";
 import { useState } from "react";
-import { Link, useNavigate } from "@remix-run/react";
+import { Link, useNavigate } from "react-router";
 import { login, OAuthGoogleLogin } from "~/services/auth";
 import { useGoogleLogin } from "@react-oauth/google";
 import useAuthStore from "~/store/auth";

@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate, useOutletContext } from "@remix-run/react";
+import { useLoaderData, useNavigate, useOutletContext } from "react-router";
 import { languageLoader } from "~/loaders/language";
 import { OrganizationsSection } from "~/components/settings/OrganizationsSection";
 import { NotificationsSection } from "~/components/settings/NotificationsSection";

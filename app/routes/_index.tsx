@@ -2,7 +2,7 @@ import Header from "~/components/Header";
 import Hero from "~/components/sections/Hero";
 import Footer from "~/components/Footer";
 import { CallToAction } from "~/components/sections/CallToAction";
-import { MetaFunction, useLoaderData } from "@remix-run/react";
+import { MetaFunction, useLoaderData } from "react-router";
 import { KeyBenefits } from "~/components/sections/KeyBenefits";
 import { ProductShowcase } from "~/components/sections/ProductShowcase";
 import { CompetitorComparison } from "~/components/sections/CompetitorComparison";

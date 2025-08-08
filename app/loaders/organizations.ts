@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { LoaderFunctionArgs, redirect } from "react-router";
 import { MemberStatus, Organization } from "~/types/models";
 import { getOrganizations } from "~/services/organizations";
 import logger from "~/utils/logger";

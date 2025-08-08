@@ -1,5 +1,5 @@
 import { Video } from "lucide-react";
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 import config from "~/config";
 import { Language } from "~/utils/language";
 

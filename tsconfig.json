@@ -5,8 +5,10 @@
     "**/.server/**/*.ts",
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
-    "**/.client/**/*.tsx"
-, "server/lib/logger.js", "server/index.js"  ],
+    "**/.client/**/*.tsx",
+    "server/lib/logger.js",
+    "server/index.js"
+  ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["@remix-run/node", "vite/client"],

@@ -1,5 +1,5 @@
-import { Link, useOutletContext, useLoaderData } from "@remix-run/react";
-import { LoaderFunctionArgs } from "@remix-run/node";
+import { Link, useOutletContext, useLoaderData } from "react-router";
+import { LoaderFunctionArgs } from "react-router";
 import { User, Shield, Briefcase } from "lucide-react";
 import { Language } from "~/utils/language";
 import { getOrganizationsMembers } from "~/services/organization-members";

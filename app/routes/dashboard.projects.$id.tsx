@@ -1,10 +1,10 @@
-import { LoaderFunctionArgs } from "@remix-run/node";
 import {
   redirect,
   useLoaderData,
   useNavigate,
   useOutletContext,
-} from "@remix-run/react";
+  LoaderFunctionArgs,
+} from "react-router";
 import { useMemo, useState } from "react";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";

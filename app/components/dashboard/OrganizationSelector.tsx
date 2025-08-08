@@ -1,6 +1,6 @@
 import { Building2, ChevronsUpDown, Plus } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "@remix-run/react";
+import { useNavigate } from "react-router";
 import translations from "./translations";
 import { Organization } from "~/types/models";
 import { updateOrganization } from "~/services/organizations";

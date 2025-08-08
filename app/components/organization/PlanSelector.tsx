@@ -1,7 +1,7 @@
 import { OrganizationPlan } from "~/types/models";
 import { BadgeCheck, CreditCard, Building2 } from "lucide-react";
 import translations from "./translations";
-import { useOutletContext, useNavigate } from "@remix-run/react";
+import { useOutletContext, useNavigate } from "react-router";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { useState } from "react";
 import { Description, Dialog, DialogTitle } from "@headlessui/react";

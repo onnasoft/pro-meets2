@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate, useOutletContext } from "@remix-run/react";
+import { useLoaderData, useNavigate, useOutletContext } from "react-router";
 import { useState } from "react";
 import { getOrganization, updateOrganization } from "~/services/organizations";
 import {
@@ -13,7 +13,7 @@ import { ContactInfoForm } from "~/components/ContactInfoForm";
 import { SubmitSection } from "~/components/organization/SubmitSection";
 import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
-import { LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { LoaderFunctionArgs, redirect } from "react-router";
 import MembersManager from "~/components/organization/MembersManager";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { In, Update } from "~/rest";
