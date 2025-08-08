@@ -1,7 +1,13 @@
 import config from "~/config";
 import { HTTPError, ValidationErrorResponse } from "~/types/http";
 import { Project } from "~/types/models";
-import { Create, FindManyOptions, FindOneOptions, queryBuilder, Update } from "~/rest";
+import {
+  Create,
+  FindManyOptions,
+  FindOneOptions,
+  queryBuilder,
+  Update,
+} from "~/rest";
 
 type GetProjectParams = FindOneOptions<Project>;
 
@@ -59,7 +65,10 @@ export async function getProjects(
 type CreateProjectError = ValidationErrorResponse<Project> | HTTPError;
 
 export async function createProject(
-  payload: Create<Project>
+  payload: Omit<
+    Create<Project>,
+    "progress" | "openPositions" | "totalPositions"
+  >
 ): Promise<Project> {
   const response = await fetch(`${config.apiUrl}/projects`, {
     method: "POST",
@@ -92,7 +101,7 @@ export async function createProject(
 
 export async function updateProject(
   id: string,
-  payload: Update<Project>
+  payload: Omit<Update<Project>, "progress" | "openPositions" | "totalPositions">
 ): Promise<Project> {
   const response = await fetch(`${config.apiUrl}/projects/${id}`, {
     method: "PATCH",

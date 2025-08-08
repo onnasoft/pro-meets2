@@ -81,13 +81,14 @@ export default function ProjectsPage() {
     organizations.find((org) => org.current) || organizations[0];
   const t = translations[language] || translations.en;
   const { data: status } = useOrganizationStatus(organization.id);
-  const { data: recentProjects } = useProjects({
+  const { data: recentProjects = [] } = useProjects({
     take: 6,
     orderBy: [
       {
         createdAt: "desc",
       },
     ],
+    relations: ["leader"],
   });
   console.log("Recent Projects:", recentProjects);
 
@@ -104,9 +105,9 @@ export default function ProjectsPage() {
         <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
           {t.recentProjects}
         </h2>
-        {mockProjects.length > 0 ? (
+        {recentProjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {mockProjects.map((project) => (
+            {recentProjects.map((project) => (
               <ProjectCard
                 key={project.id}
                 project={project}

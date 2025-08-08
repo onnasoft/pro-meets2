@@ -2,7 +2,7 @@ import { useNavigate, useOutletContext } from "@remix-run/react";
 import { useMemo, useState } from "react";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";
-import { LeaderSelectionForm } from "~/components/projects/LeaderSelectionForm";
+import ProjectDetailsForm  from "~/components/projects/ProjectDetailsForm";
 import { SubmitSection } from "~/components/projects/SubmitSection";
 import translations from "~/components/projects/translations";
 import { useOrganizationsMembers } from "~/hooks/organization-members";
@@ -12,7 +12,12 @@ import { createMedia } from "~/services/media";
 import { createProject } from "~/services/projects";
 import useErrorStore from "~/store/error";
 import { DashboardOutletContext } from "~/types/dashboard";
-import { MemberRole, MemberStatus, Project } from "~/types/models";
+import {
+  MemberRole,
+  MemberStatus,
+  Project,
+  ProjectStatus,
+} from "~/types/models";
 
 export default function NewProjectPage() {
   useRequireOrganization();
@@ -23,7 +28,9 @@ export default function NewProjectPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const organizationId = organizations?.find((org) => org.current)?.id;
-  const [formValues, setFormValues] = useState<Create<Project>>({
+  const [formValues, setFormValues] = useState<
+    Omit<Create<Project>, "progress" | "openPositions" | "totalPositions">
+  >({
     name: "",
     description: "",
     organizationId: organizationId!,
@@ -34,6 +41,7 @@ export default function NewProjectPage() {
     startDate: "",
     dueDate: "",
     leaderId: "",
+    status: ProjectStatus.PLANNING,
   });
   const { setError } = useErrorStore();
   const allowedRoles = useMemo(
@@ -73,6 +81,7 @@ export default function NewProjectPage() {
         dueDate: formValues.dueDate
           ? new Date(formValues.dueDate).toISOString()
           : undefined,
+        status: formValues.status,
       });
       if (!result) throw new Error(t.errorMessage);
 
@@ -111,7 +120,7 @@ export default function NewProjectPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 space-y-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           <BasicInfoForm
@@ -133,7 +142,7 @@ export default function NewProjectPage() {
             translations={t}
           />
 
-          <LeaderSelectionForm
+          <ProjectDetailsForm
             leaders={members}
             selectedLeader={undefined}
             startDate={formValues.startDate ?? ""}
@@ -145,6 +154,13 @@ export default function NewProjectPage() {
               }));
             }}
             onDateChange={handleChange}
+            onStatusChange={(status) => {
+              setFormValues((prev) => ({
+                ...prev,
+                status,
+              }));
+            }}
+            status={formValues.status}
             errors={errors}
             translations={t}
           />

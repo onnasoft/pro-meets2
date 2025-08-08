@@ -8,17 +8,22 @@ import {
 import { useMemo, useState } from "react";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";
-import { LeaderSelectionForm } from "~/components/projects/LeaderSelectionForm";
+import ProjectDetailsForm from "~/components/projects/ProjectDetailsForm";
 import { SubmitSection } from "~/components/projects/SubmitSection";
 import translations from "~/components/projects/translations";
 import { useOrganizationsMembers } from "~/hooks/organization-members";
 import { useRequireOrganization } from "~/hooks/require-organization";
-import { Create, In } from "~/rest";
+import { In, Update } from "~/rest";
 import { createMedia } from "~/services/media";
 import { getProject, updateProject } from "~/services/projects";
 import useErrorStore from "~/store/error";
 import { DashboardOutletContext } from "~/types/dashboard";
-import { MemberRole, MemberStatus, Project } from "~/types/models";
+import {
+  MemberRole,
+  MemberStatus,
+  Project,
+  ProjectStatus,
+} from "~/types/models";
 
 export async function loader(args: LoaderFunctionArgs) {
   try {
@@ -65,7 +70,9 @@ export default function ViewProjectPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const organizationId = organizations?.find((org) => org.current)?.id;
   const { project } = useLoaderData<typeof loader>();
-  const [formValues, setFormValues] = useState<Create<Project>>({
+  const [formValues, setFormValues] = useState<
+    Omit<Update<Project>, "progress" | "openPositions" | "totalPositions">
+  >({
     name: project.name || "",
     description: project.description || "",
     organizationId: organizationId!,
@@ -76,6 +83,7 @@ export default function ViewProjectPage() {
     startDate: project.startDate || "",
     dueDate: project.dueDate || "",
     leaderId: project.leaderId || "",
+    status: project.status || ProjectStatus.PLANNING,
   });
   const { setError } = useErrorStore();
   const allowedRoles = useMemo(
@@ -152,11 +160,11 @@ export default function ViewProjectPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className=" mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 space-y-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           <BasicInfoForm
-            name={formValues.name}
+            name={formValues.name ?? ""}
             description={formValues.description ?? ""}
             onChange={handleChange}
             errors={errors}
@@ -174,7 +182,7 @@ export default function ViewProjectPage() {
             translations={t}
           />
 
-          <LeaderSelectionForm
+          <ProjectDetailsForm
             leaders={members}
             selectedLeader={members.find(
               (m) => m.userId === formValues.leaderId
@@ -187,6 +195,13 @@ export default function ViewProjectPage() {
                 leaderId: leader?.userId ? leader.userId : "",
               }));
             }}
+            onStatusChange={(status) => {
+              setFormValues((prev) => ({
+                ...prev,
+                status,
+              }));
+            }}
+            status={formValues.status!}
             onDateChange={handleChange}
             errors={errors}
             translations={t}
