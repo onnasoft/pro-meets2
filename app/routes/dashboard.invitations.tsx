@@ -1,9 +1,12 @@
-import { useLoaderData, useOutletContext } from "react-router";
+import {
+  useLoaderData,
+  useOutletContext,
+  LoaderFunctionArgs,
+} from "react-router";
 import translations from "~/components/invitations/translations";
 import PendingInvitations from "~/components/invitations/PendingInvitations";
 import PreviousInvitations from "~/components/invitations/PreviousInvitations";
 import { DashboardOutletContext } from "~/types/dashboard";
-import { LoaderFunctionArgs } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getOrganizationsMembers } from "~/services/organization-members";
 import { MemberRole, MemberStatus } from "~/types/models";
