@@ -19,12 +19,8 @@ import { createMedia } from "~/services/media";
 import { getProject, updateProject } from "~/services/projects";
 import useErrorStore from "~/store/error";
 import { DashboardOutletContext } from "~/types/dashboard";
-import {
-  MemberRole,
-  MemberStatus,
-  Project,
-  ProjectStatus,
-} from "~/types/models";
+import { Project, ProjectStatus } from "~/models/Project";
+import { MemberRole, MemberStatus } from "~/models/OrganizationMember";
 
 export async function loader(args: LoaderFunctionArgs) {
   try {

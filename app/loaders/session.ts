@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs, redirect } from "react-router";
-import { User } from "~/types/models";
+import { User } from "~/models/User";
 import config from "~/config";
 
 interface LoaderData {

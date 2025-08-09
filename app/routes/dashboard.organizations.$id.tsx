@@ -7,12 +7,6 @@ import {
 } from "react-router";
 import { useState } from "react";
 import { getOrganization, updateOrganization } from "~/services/organizations";
-import {
-  MemberRole,
-  MemberStatus,
-  Organization,
-  OrganizationPlan,
-} from "~/types/models";
 import { PlanSelector } from "~/components/organization/PlanSelector";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";
@@ -24,6 +18,8 @@ import { DashboardOutletContext } from "~/types/dashboard";
 import { In, Update } from "~/rest";
 import useErrorStore from "~/store/error";
 import { createMedia } from "~/services/media";
+import { Organization, OrganizationPlan } from "~/models/Organization";
+import { MemberRole, MemberStatus } from "~/models/OrganizationMember";
 
 interface LoaderData {
   organization: Organization;

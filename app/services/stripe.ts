@@ -1,6 +1,6 @@
 import type Stripe from 'stripe';
 import config from "~/config";
-import { PaymentMethod } from "~/types/models";
+import { PaymentMethod } from "~/models/PaymentMethod";
 
 interface CreateSetupIntentResponse {
   clientSecret: string;

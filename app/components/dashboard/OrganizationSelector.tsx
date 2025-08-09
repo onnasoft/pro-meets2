@@ -2,7 +2,7 @@ import { Building2, ChevronsUpDown, Plus } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import translations from "./translations";
-import { Organization } from "~/types/models";
+import { Organization } from "~/models/Organization";
 import { updateOrganization } from "~/services/organizations";
 import useOrganizationStore from "~/store/organization";
 

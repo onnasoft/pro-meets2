@@ -9,7 +9,7 @@ import PreviousInvitations from "~/components/invitations/PreviousInvitations";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { useQuery } from "@tanstack/react-query";
 import { getOrganizationsMembers } from "~/services/organization-members";
-import { MemberRole, MemberStatus } from "~/types/models";
+import { MemberRole, MemberStatus } from "~/models/OrganizationMember";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);

@@ -10,9 +10,9 @@ import { useOrganizations } from "~/hooks/organizations";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { Equal } from "~/rest";
 import { deleteOrganizationMember } from "~/services/organization-members";
-import { MemberStatus } from "~/types/models";
 import useErrorStore from "~/store/error";
 import useConfirmationStore from "~/store/confirmation";
+import { MemberStatus } from "~/models/OrganizationMember";
 
 export { languageLoader as loader } from "~/loaders/language";
 

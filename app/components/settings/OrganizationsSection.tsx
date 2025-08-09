@@ -1,6 +1,7 @@
 import { Users, ChevronRight, LogOut } from "lucide-react";
 import translations from "./translations";
-import { MemberRole, Organization } from "~/types/models";
+import { Organization } from "~/models/Organization";
+import { MemberRole } from "~/models/OrganizationMember";
 
 interface OrganizationsSectionProps {
   readonly translations: typeof translations.en.organizations;

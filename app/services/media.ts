@@ -1,6 +1,6 @@
 import config from "~/config";
+import { Media } from "~/models/Media";
 import { Create } from "~/rest";
-import { Media } from "~/types/models";
 
 export function createMedia(
   payload: Omit<Create<Media>, "size" | "filename" | "url" | "mimetype"> & {

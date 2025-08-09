@@ -1,6 +1,7 @@
 import { User, Calendar, Flag } from "lucide-react";
 import { useEffect, useState } from "react";
-import { OrganizationMember, ProjectStatus } from "~/types/models";
+import { OrganizationMember } from "~/models/OrganizationMember";
+import { ProjectStatus } from "~/models/Project";
 
 interface Translations {
   fields: {

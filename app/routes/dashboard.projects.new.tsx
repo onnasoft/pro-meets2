@@ -2,7 +2,7 @@ import { useNavigate, useOutletContext } from "react-router";
 import { useMemo, useState } from "react";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";
-import ProjectDetailsForm  from "~/components/projects/ProjectDetailsForm";
+import ProjectDetailsForm from "~/components/projects/ProjectDetailsForm";
 import { SubmitSection } from "~/components/projects/SubmitSection";
 import translations from "~/components/projects/translations";
 import { useOrganizationsMembers } from "~/hooks/organization-members";
@@ -12,12 +12,8 @@ import { createMedia } from "~/services/media";
 import { createProject } from "~/services/projects";
 import useErrorStore from "~/store/error";
 import { DashboardOutletContext } from "~/types/dashboard";
-import {
-  MemberRole,
-  MemberStatus,
-  Project,
-  ProjectStatus,
-} from "~/types/models";
+import { Project, ProjectStatus } from "~/models/Project";
+import { MemberRole, MemberStatus } from "~/models/OrganizationMember";
 
 export default function NewProjectPage() {
   useRequireOrganization();

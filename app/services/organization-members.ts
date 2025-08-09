@@ -1,6 +1,5 @@
 import config from "~/config";
 import { HTTPError } from "~/types/http";
-import { OrganizationMember } from "~/types/models";
 import {
   Create,
   FindManyOptions,
@@ -8,6 +7,7 @@ import {
   queryBuilder,
   Update,
 } from "~/rest";
+import { OrganizationMember } from "~/models/OrganizationMember";
 
 type GetOrganizationParams = FindOneOptions<
   OrganizationMember & { invitationToken?: string }

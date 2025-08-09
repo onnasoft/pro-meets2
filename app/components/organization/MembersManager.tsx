@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { CirclePlus, Pencil, X } from "lucide-react";
-import { MemberRole, Organization, OrganizationMember } from "~/types/models";
+import { Organization } from "~/models/Organization";
 import { createOrganizationMember } from "~/services/organization-members";
 import useErrorStore from "~/store/error";
+import { MemberRole, OrganizationMember } from "~/models/OrganizationMember";
 
 interface RoleOption {
   value: MemberRole;

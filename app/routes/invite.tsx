@@ -1,10 +1,15 @@
-import { Link, useOutletContext, useLoaderData } from "react-router";
-import { LoaderFunctionArgs } from "react-router";
+import {
+  Link,
+  useOutletContext,
+  useLoaderData,
+  LoaderFunctionArgs,
+} from "react-router";
+
 import { User, Shield, Briefcase } from "lucide-react";
 import { Language } from "~/utils/language";
 import { getOrganizationsMembers } from "~/services/organization-members";
-import { MemberRole } from "~/types/models";
 import { getAvatarUrl } from "~/utils/gravatar";
+import { MemberRole } from "~/models/OrganizationMember";
 
 const translations = {
   en: {

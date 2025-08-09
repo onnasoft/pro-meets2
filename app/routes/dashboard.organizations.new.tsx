@@ -1,7 +1,7 @@
 import { useNavigate, useOutletContext } from "react-router";
 import { useState } from "react";
 import { createOrganization } from "~/services/organizations";
-import { Organization, OrganizationPlan } from "~/types/models";
+import { Organization, OrganizationPlan } from "~/models/Organization";
 import { PlanSelector } from "~/components/organization/PlanSelector";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";

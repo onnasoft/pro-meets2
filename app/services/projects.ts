@@ -1,6 +1,6 @@
 import config from "~/config";
 import { HTTPError, ValidationErrorResponse } from "~/types/http";
-import { Project } from "~/types/models";
+import { Project } from "~/models/Project";
 import {
   Create,
   FindManyOptions,

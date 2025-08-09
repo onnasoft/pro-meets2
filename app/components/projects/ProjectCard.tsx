@@ -1,7 +1,7 @@
 import { Calendar, Users } from "lucide-react";
 import { ProjectStatusBadge } from "./ProjectStatusBadge";
 import translations from "./translations";
-import { Project, ProjectStatus } from "~/types/models";
+import { Project, ProjectStatus } from "~/models/Project";
 import HTMLView from "../HTMLView";
 import { Link } from "react-router";
 

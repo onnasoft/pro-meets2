@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import { NavItem } from "./NavItem";
 import translations from "./translations";
-import { User } from "~/types/models";
+import { User } from "~/models/User";
 import { getAvatarUrl } from "~/utils/gravatar";
 import {
   Calendar,

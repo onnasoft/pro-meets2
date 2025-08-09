@@ -1,6 +1,6 @@
 import { Download, Folder, Share2, Star, Trash2 } from "lucide-react";
 import { getFileIcon } from "./utils";
-import { Document } from "~/types/models";
+import { Document } from "~/models/Document";
 
 interface DocumentCardProps {
   readonly item: Document;

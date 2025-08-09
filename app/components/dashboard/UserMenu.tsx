@@ -13,7 +13,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { MenuItem } from "./MenuItem";
 import translations from "./translations";
-import { User as UserModel } from "~/types/models";
+import { User as UserModel } from "~/models/User";
 import { getAvatarUrl } from "~/utils/gravatar";
 import useAuthStore from "~/store/auth";
 

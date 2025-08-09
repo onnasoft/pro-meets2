@@ -1,5 +1,6 @@
 import { LoaderFunctionArgs, redirect } from "react-router";
-import { MemberStatus, Organization } from "~/types/models";
+import { Organization } from "~/models/Organization";
+import { MemberStatus } from "~/models/OrganizationMember";
 import { getOrganizations } from "~/services/organizations";
 import logger from "~/utils/logger";
 

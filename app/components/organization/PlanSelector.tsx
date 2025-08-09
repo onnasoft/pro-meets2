@@ -1,4 +1,4 @@
-import { OrganizationPlan } from "~/types/models";
+import { OrganizationPlan } from "~/models/Organization";
 import { BadgeCheck, CreditCard, Building2 } from "lucide-react";
 import translations from "./translations";
 import { useOutletContext, useNavigate } from "react-router";

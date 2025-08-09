@@ -1,4 +1,4 @@
-import { User } from "~/types/models";
+import { User } from "~/models/User";
 
 export function getAvatarUrl(user: User, size: number = 200): string {
   if (user.avatarUrl) {

@@ -9,7 +9,7 @@ import {
   setDefaultPaymentMethod,
 } from "~/services/stripe";
 import { useQueryClient } from "@tanstack/react-query";
-import { PaymentMethod } from "~/types/models";
+import { PaymentMethod } from "~/models/PaymentMethod";
 
 interface PaymentMethodsProps {
   readonly translations: typeof translations.en.paymentMethods;

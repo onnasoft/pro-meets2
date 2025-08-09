@@ -1,6 +1,6 @@
 import Joi from "joi";
 import translations from "./translations";
-import { OrganizationPlan } from "~/types/models";
+import { OrganizationPlan } from "~/models/Organization";
 
 export const getOrganizationSchema = (t: typeof translations.en) =>
   Joi.object({
