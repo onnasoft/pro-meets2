@@ -1,5 +1,9 @@
 const translations = {
   en: {
+    createTitle: "Create New Project",
+    createDescription: "Fill in the details to create a new project",
+    updateTitle: "Update Project",
+    updateDescription: "Modify the details of your project",
     projects: "Projects",
     welcomeMessage: "Manage all your recruitment projects",
     newProject: "New Project",
@@ -50,6 +54,10 @@ const translations = {
     submit: "Submit",
   },
   es: {
+    createTitle: "Crear Nuevo Proyecto",
+    createDescription: "Complete los detalles para crear un nuevo proyecto",
+    updateTitle: "Actualizar Proyecto",
+    updateDescription: "Modifique los detalles de su proyecto",
     projects: "Proyectos",
     welcomeMessage: "Administra todos tus proyectos de reclutamiento",
     newProject: "Nuevo Proyecto",
@@ -100,6 +108,10 @@ const translations = {
     submit: "Enviar",
   },
   fr: {
+    createTitle: "Créer un Nouveau Projet",
+    createDescription: "Remplissez les détails pour créer un nouveau projet",
+    updateTitle: "Mettre à Jour le Projet",
+    updateDescription: "Modifiez les détails de votre projet",
     projects: "Projets",
     welcomeMessage: "Gérez tous vos projets de recrutement",
     newProject: "Nouveau Projet",
@@ -150,6 +162,10 @@ const translations = {
     submit: "Soumettre",
   },
   jp: {
+    createTitle: "新しいプロジェクトを作成",
+    createDescription: "新しいプロジェクトを作成するために詳細を記入してください",
+    updateTitle: "プロジェクトを更新",
+    updateDescription: "プロジェクトの詳細を変更してください",
     projects: "プロジェクト",
     welcomeMessage: "すべての採用プロジェクトを管理",
     newProject: "新しいプロジェクト",
@@ -200,6 +216,10 @@ const translations = {
     submit: "送信",
   },
   zh: {
+    createTitle: "创建新项目",
+    createDescription: "填写详细信息以创建新项目",
+    updateTitle: "更新项目",
+    updateDescription: "修改您的项目详情",
     projects: "项目",
     welcomeMessage: "管理所有招聘项目",
     newProject: "新项目",

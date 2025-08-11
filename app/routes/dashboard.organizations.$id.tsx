@@ -20,6 +20,7 @@ import useErrorStore from "~/store/error";
 import { createMedia } from "~/services/media";
 import { Organization, OrganizationPlan } from "~/models/Organization";
 import { MemberRole, MemberStatus } from "~/models/OrganizationMember";
+import Title from "~/components/Title";
 
 interface LoaderData {
   organization: Organization;
@@ -172,6 +173,11 @@ export default function ViewOrganizationPage() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+        <Title
+          title={canUpdate ? t.updateTitle : t.viewTitle}
+          description={canUpdate ? t.updateDescription : t.viewDescription}
+        />
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <BasicInfoForm
             name={formValues.name}

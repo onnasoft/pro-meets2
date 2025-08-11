@@ -1,5 +1,6 @@
+import { Organization } from "~/models/Organization";
+import { User } from "~/models/User";
 import { Language } from "~/utils/language";
-import { Organization, User } from "../models/Job";
 
 export interface DashboardOutletContext {
   user: User;

@@ -12,6 +12,7 @@ import { Create } from "~/rest";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { createMedia } from "~/services/media";
 import useErrorStore from "~/store/error";
+import Title from "~/components/Title";
 
 export { languageLoader as loader } from "~/loaders/language";
 
@@ -58,10 +59,13 @@ export default function NewOrganizationPage() {
     });
 
     if (error) {
-      const validationErrors = error.details.reduce((acc, curr) => {
-        acc[curr.path[0]] = curr.message;
-        return acc;
-      }, {} as Record<string, string>);
+      const validationErrors = error.details.reduce(
+        (acc, curr) => {
+          acc[curr.path[0]] = curr.message;
+          return acc;
+        },
+        {} as Record<string, string>
+      );
       setErrors(validationErrors);
       setIsSubmitting(false);
       return;
@@ -116,6 +120,8 @@ export default function NewOrganizationPage() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+        <Title title={t.createTitle} description={t.createDescription} />
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <BasicInfoForm
             name={formValues.name}

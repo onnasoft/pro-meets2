@@ -1,8 +1,5 @@
-
-
-
-
-
+import { Organization } from "./Organization";
+import { Project } from "./Project";
 
 export enum JobType {
   FULL_TIME = "full_time",
@@ -32,4 +29,26 @@ export enum EducationLevel {
   BACHELOR = "BACHELOR",
   MASTER = "MASTER",
   DOCTORATE = "DOCTORATE",
+}
+
+export interface Job {
+  id: string;
+  title: string;
+  description?: string;
+  status?: JobStatus;
+  type: JobType;
+  contractType: ContractType;
+  salaryMin?: number;
+  salaryMax?: number;
+  location?: string;
+  postedAt?: string;
+  isActive: boolean;
+  recruiterFee?: number;
+  experienceRequired?: string;
+  educationLevel?: EducationLevel;
+  skillsRequired?: string;
+  organizationId: string;
+  organization?: Organization;
+  projectId?: string;
+  project?: Project;
 }

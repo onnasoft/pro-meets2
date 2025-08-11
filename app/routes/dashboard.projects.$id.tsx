@@ -21,6 +21,7 @@ import useErrorStore from "~/store/error";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { Project, ProjectStatus } from "~/models/Project";
 import { MemberRole, MemberStatus } from "~/models/OrganizationMember";
+import Title from "~/components/Title";
 
 export async function loader(args: LoaderFunctionArgs) {
   try {
@@ -159,6 +160,8 @@ export default function ViewProjectPage() {
   return (
     <div className="mx-auto space-y-6">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 space-y-6">
+        <Title title={t.updateTitle} description={t.updateDescription} />
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <BasicInfoForm
             name={formValues.name ?? ""}
