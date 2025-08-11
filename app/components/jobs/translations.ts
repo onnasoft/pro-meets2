@@ -28,6 +28,11 @@ const translations = {
     selectProject: "Select a project",
     cancel: "Cancel",
     create: "Create Job",
+    benefits: "Benefits",
+    errorMessage: "An error occurred while saving the job",
+    successMessage: "Job saved successfully",
+    submit: "Submit",
+    submitting: "Submitting...",
     jobTypes: {
       [JobType.FULL_TIME]: "Full Time",
       [JobType.PART_TIME]: "Part Time",
@@ -53,6 +58,42 @@ const translations = {
       [EducationLevel.BACHELOR]: "Bachelor's",
       [EducationLevel.MASTER]: "Master's",
       [EducationLevel.DOCTORATE]: "Doctorate",
+    },
+    errors: {
+      title: {
+        min: "Title is too short",
+        max: "Title is too long",
+        empty: "Title is required",
+        required: "Title is required",
+      },
+      status: {
+        invalid: "Status is invalid",
+        required: "Status is required",
+      },
+      type: {
+        invalid: "Type is invalid",
+        required: "Type is required",
+      },
+      contractType: {
+        invalid: "Contract Type is invalid",
+        required: "Contract Type is required",
+      },
+      isActive: {
+        invalid: "Is Active is invalid",
+        required: "Is Active is required",
+      },
+      educationLevel: {
+        invalid: "Education Level is invalid",
+        required: "Education Level is required",
+      },
+      organizationId: {
+        invalid: "Organization ID is invalid",
+        required: "Organization ID is required",
+      },
+      projectId: {
+        invalid: "Project ID is invalid",
+        required: "Project ID is required",
+      },
     },
   },
   es: {
@@ -84,6 +125,11 @@ const translations = {
     selectProject: "Seleccione un proyecto",
     cancel: "Cancelar",
     create: "Crear Puesto",
+    benefits: "Beneficios",
+    errorMessage: "Ocurrió un error al guardar el puesto",
+    successMessage: "Puesto guardado con éxito",
+    submitting: "Guardando...",
+    submit: "Enviar",
     jobTypes: {
       [JobType.FULL_TIME]: "Tiempo Completo",
       [JobType.PART_TIME]: "Medio Tiempo",
@@ -109,6 +155,42 @@ const translations = {
       [EducationLevel.BACHELOR]: "Licenciatura",
       [EducationLevel.MASTER]: "Maestría",
       [EducationLevel.DOCTORATE]: "Doctorado",
+    },
+    errors: {
+      title: {
+        min: "El título es demasiado corto",
+        max: "El título es demasiado largo",
+        empty: "El título es obligatorio",
+        required: "El título es obligatorio",
+      },
+      status: {
+        invalid: "El estado no es válido",
+        required: "El estado es obligatorio",
+      },
+      type: {
+        invalid: "El tipo no es válido",
+        required: "El tipo es obligatorio",
+      },
+      contractType: {
+        invalid: "El tipo de contrato no es válido",
+        required: "El tipo de contrato es obligatorio",
+      },
+      isActive: {
+        invalid: "El valor de 'Activo' no es válido",
+        required: "El valor de 'Activo' es obligatorio",
+      },
+      educationLevel: {
+        invalid: "El nivel educativo no es válido",
+        required: "El nivel educativo es obligatorio",
+      },
+      organizationId: {
+        invalid: "El ID de la organización no es válido",
+        required: "El ID de la organización es obligatorio",
+      },
+      projectId: {
+        invalid: "El ID del proyecto no es válido",
+        required: "El ID del proyecto es obligatorio",
+      },
     },
   },
   fr: {
@@ -139,6 +221,11 @@ const translations = {
     selectProject: "Sélectionnez un projet",
     cancel: "Annuler",
     create: "Créer l'Offre",
+    benefits: "Avantages",
+    errorMessage: "Une erreur s'est produite lors de l'enregistrement de l'offre",
+    successMessage: "Offre enregistrée avec succès",
+    submit: "Soumettre",
+    submitting: "Soumission...",
     jobTypes: {
       [JobType.FULL_TIME]: "Temps Plein",
       [JobType.PART_TIME]: "Temps Partiel",
@@ -164,6 +251,42 @@ const translations = {
       [EducationLevel.BACHELOR]: "Licence",
       [EducationLevel.MASTER]: "Master",
       [EducationLevel.DOCTORATE]: "Doctorat",
+    },
+    errors: {
+      title: {
+        min: "Le titre est trop court",
+        max: "Le titre est trop long",
+        empty: "Le titre est obligatoire",
+        required: "Le titre est obligatoire",
+      },
+      status: {
+        invalid: "Le statut est invalide",
+        required: "Le statut est obligatoire",
+      },
+      type: {
+        invalid: "Le type est invalide",
+        required: "Le type est obligatoire",
+      },
+      contractType: {
+        invalid: "Le type de contrat est invalide",
+        required: "Le type de contrat est obligatoire",
+      },
+      isActive: {
+        invalid: "La valeur de 'Actif' est invalide",
+        required: "La valeur de 'Actif' est obligatoire",
+      },
+      educationLevel: {
+        invalid: "Le niveau d'éducation est invalide",
+        required: "Le niveau d'éducation est obligatoire",
+      },
+      organizationId: {
+        invalid: "L'ID de l'organisation est invalide",
+        required: "L'ID de l'organisation est obligatoire",
+      },
+      projectId: {
+        invalid: "L'ID du projet est invalide",
+        required: "L'ID du projet est obligatoire",
+      },
     },
   },
   jp: {
@@ -193,6 +316,11 @@ const translations = {
     selectProject: "プロジェクトを選択",
     cancel: "キャンセル",
     create: "求人を作成",
+    benefits: "福利厚生",
+    errorMessage: "求人の保存中にエラーが発生しました",
+    successMessage: "求人が正常に保存されました",
+    submit: "送信",
+    submitting: "送信中...",
     jobTypes: {
       [JobType.FULL_TIME]: "正社員",
       [JobType.PART_TIME]: "パートタイム",
@@ -218,6 +346,42 @@ const translations = {
       [EducationLevel.BACHELOR]: "学士",
       [EducationLevel.MASTER]: "修士",
       [EducationLevel.DOCTORATE]: "博士",
+    },
+    errors: {
+      title: {
+        min: "タイトルが短すぎます",
+        max: "タイトルが長すぎます",
+        empty: "タイトルは必須です",
+        required: "タイトルは必須です",
+      },
+      status: {
+        invalid: "ステータスが無効です",
+        required: "ステータスは必須です",
+      },
+      type: {
+        invalid: "タイプが無効です",
+        required: "タイプは必須です",
+      },
+      contractType: {
+        invalid: "契約タイプが無効です",
+        required: "契約タイプは必須です",
+      },
+      isActive: {
+        invalid: "有効フラグが無効です",
+        required: "有効フラグは必須です",
+      },
+      educationLevel: {
+        invalid: "学歴レベルが無効です",
+        required: "学歴レベルは必須です",
+      },
+      organizationId: {
+        invalid: "組織IDが無効です",
+        required: "組織IDは必須です",
+      },
+      projectId: {
+        invalid: "プロジェクトIDが無効です",
+        required: "プロジェクトIDは必須です",
+      },
     },
   },
   zh: {
@@ -246,6 +410,11 @@ const translations = {
     selectProject: "选择项目",
     cancel: "取消",
     create: "创建职位",
+    benefits: "福利",
+    errorMessage: "职位保存时发生错误",
+    successMessage: "职位保存成功",
+    submit: "提交",
+    submitting: "提交中...",
     jobTypes: {
       [JobType.FULL_TIME]: "全职",
       [JobType.PART_TIME]: "兼职",
@@ -271,6 +440,42 @@ const translations = {
       [EducationLevel.BACHELOR]: "本科",
       [EducationLevel.MASTER]: "硕士",
       [EducationLevel.DOCTORATE]: "博士",
+    },
+    errors: {
+      title: {
+        min: "标题太短",
+        max: "标题太长",
+        empty: "标题是必填项",
+        required: "标题是必填项",
+      },
+      status: {
+        invalid: "状态无效",
+        required: "状态是必填项",
+      },
+      type: {
+        invalid: "类型无效",
+        required: "类型是必填项",
+      },
+      contractType: {
+        invalid: "合同类型无效",
+        required: "合同类型是必填项",
+      },
+      isActive: {
+        invalid: "是否启用无效",
+        required: "是否启用是必填项",
+      },
+      educationLevel: {
+        invalid: "学历等级无效",
+        required: "学历等级是必填项",
+      },
+      organizationId: {
+        invalid: "组织ID无效",
+        required: "组织ID是必填项",
+      },
+      projectId: {
+        invalid: "项目ID无效",
+        required: "项目ID是必填项",
+      },
     },
   },
 };

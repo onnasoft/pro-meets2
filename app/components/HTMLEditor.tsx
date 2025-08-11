@@ -66,9 +66,10 @@ function ToolbarButton({
 interface HTMLEditorProps {
   readonly value?: string;
   readonly onChange?: (content: string) => void;
+  readonly className?: string;
 }
 
-export default function HTMLEditor({ value, onChange }: HTMLEditorProps) {
+export default function HTMLEditor({ value, onChange, className }: HTMLEditorProps) {
   const [linkUrl, setLinkUrl] = useState("");
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -276,7 +277,7 @@ export default function HTMLEditor({ value, onChange }: HTMLEditorProps) {
       {/* Editor area */}
       <EditorContent
         editor={editor}
-        className="min-h-[300px] border rounded-lg bg-white shadow-sm prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto focus:outline-none"
+        className={`min-h-[300px] border rounded-lg bg-white shadow-sm prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto focus:outline-none ${className}`}
       />
 
       <FileUploadDialog

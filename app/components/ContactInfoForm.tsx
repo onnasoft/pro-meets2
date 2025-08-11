@@ -149,7 +149,7 @@ export function ContactInfoForm({
             type="button"
             onClick={handleLogoClick}
             disabled={!canUpdate || isUploading}
-            className={`flex items-center px-3 py-2 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${
+            className={`flex items-center px-3 py-2 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 ${
               canUpdate
                 ? "bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
                 : "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"

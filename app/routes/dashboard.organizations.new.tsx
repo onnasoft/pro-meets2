@@ -34,6 +34,7 @@ export default function NewOrganizationPage() {
     plan: OrganizationPlan.FREE,
   });
   const { setError } = useErrorStore();
+  const schema = getOrganizationSchema(t);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -52,7 +53,6 @@ export default function NewOrganizationPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const schema = getOrganizationSchema(t);
     const { error, value } = schema.validate(formValues, {
       abortEarly: false,
       stripUnknown: true,

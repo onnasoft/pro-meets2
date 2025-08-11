@@ -27,7 +27,7 @@ const translations = {
     delete: "Delete",
     statusOpen: "Open",
     statusClosed: "Closed",
-    statusPending: "Pending"
+    statusPending: "Pending",
   },
   es: {
     title: "Ofertas Laborales",
@@ -53,7 +53,7 @@ const translations = {
     delete: "Eliminar",
     statusOpen: "Abierta",
     statusClosed: "Cerrada",
-    statusPending: "Pendiente"
+    statusPending: "Pendiente",
   },
   fr: {
     title: "Offres d'emploi",
@@ -61,7 +61,8 @@ const translations = {
     searchPlaceholder: "Rechercher des offres...",
     newJob: "Nouvelle Offre",
     noResultsTitle: "Aucune offre d'emploi trouvée",
-    noResultsSubtitle: "Essayez d'ajuster votre recherche ou créez une nouvelle offre",
+    noResultsSubtitle:
+      "Essayez d'ajuster votre recherche ou créez une nouvelle offre",
     position: "Poste",
     project: "Projet",
     location: "Localisation",
@@ -79,7 +80,7 @@ const translations = {
     delete: "Supprimer",
     statusOpen: "Ouverte",
     statusClosed: "Fermée",
-    statusPending: "En attente"
+    statusPending: "En attente",
   },
   jp: {
     title: "求人情報",
@@ -105,7 +106,7 @@ const translations = {
     delete: "削除",
     statusOpen: "募集中",
     statusClosed: "終了",
-    statusPending: "保留中"
+    statusPending: "保留中",
   },
   zh: {
     title: "职位招聘",
@@ -131,20 +132,26 @@ const translations = {
     delete: "删除",
     statusOpen: "开放",
     statusClosed: "已关闭",
-    statusPending: "待定"
-  }
+    statusPending: "待定",
+  },
 };
 
 interface JobsTableProps {
   readonly searchTerm: string;
   readonly setSearchTerm: (term: string) => void;
   readonly jobs: Array<Job>;
+  readonly onNewJob: () => void;
+  readonly onEditJob: (job: Job) => void;
+  readonly onDeleteJob: (job: Job) => void;
 }
 
 export default function JobsTable({
   jobs,
   searchTerm,
   setSearchTerm,
+  onNewJob,
+  onEditJob,
+  onDeleteJob,
 }: JobsTableProps) {
   const { language } = useOutletContext<DashboardOutletContext>();
   const t = translations[language] || translations.en;
@@ -164,14 +171,10 @@ export default function JobsTable({
     <div className="bg-white shadow-sm rounded-xl overflow-hidden border border-gray-100">
       <div className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100">
         <div>
-          <h2 className="text-xl font-semibold text-gray-800">
-            {t.title}
-          </h2>
-          <p className="text-sm text-gray-500 mt-1">
-            {t.subtitle}
-          </p>
+          <h2 className="text-xl font-semibold text-gray-800">{t.title}</h2>
+          <p className="text-sm text-gray-500 mt-1">{t.subtitle}</p>
         </div>
-        
+
         <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
           <div className="relative w-full sm:w-64">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -197,8 +200,11 @@ export default function JobsTable({
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          
-          <button className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-sm hover:shadow-md">
+
+          <button
+            onClick={onNewJob}
+            className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-sm hover:shadow-md"
+          >
             <svg
               className="w-5 h-5"
               fill="none"
@@ -302,9 +308,12 @@ export default function JobsTable({
                 } else {
                   statusClass = "bg-gray-50 text-gray-700 ring-gray-600/20";
                 }
-                
+
                 return (
-                  <tr key={job.id} className="hover:bg-gray-50 transition-colors">
+                  <tr
+                    key={job.id}
+                    className="hover:bg-gray-50 transition-colors"
+                  >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center gap-3">
                         <div className="flex-shrink-0 h-10 w-10 rounded-md bg-primary-50 flex items-center justify-center text-primary-600">
@@ -328,11 +337,14 @@ export default function JobsTable({
                           </div>
                           <div className="text-sm text-gray-500">
                             {job.postedAt &&
-                              new Date(job.postedAt).toLocaleDateString(language, {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              })}
+                              new Date(job.postedAt).toLocaleDateString(
+                                language,
+                                {
+                                  year: "numeric",
+                                  month: "short",
+                                  day: "numeric",
+                                }
+                              )}
                           </div>
                         </div>
                       </div>
@@ -383,7 +395,10 @@ export default function JobsTable({
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end gap-3">
-                        <button className="text-primary-600 hover:text-primary-900 flex items-center gap-1">
+                        <button
+                          onClick={() => onEditJob(job)}
+                          className="text-primary-600 hover:text-primary-900 flex items-center gap-1"
+                        >
                           <svg
                             className="w-4 h-4"
                             fill="none"
@@ -397,9 +412,11 @@ export default function JobsTable({
                               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                             />
                           </svg>
-                          <span>{t.edit}</span>
                         </button>
-                        <button className="text-red-600 hover:text-red-900 flex items-center gap-1">
+                        <button
+                          onClick={() => onDeleteJob(job)}
+                          className="text-red-600 hover:text-red-900 flex items-center gap-1"
+                        >
                           <svg
                             className="w-4 h-4"
                             fill="none"
@@ -413,7 +430,6 @@ export default function JobsTable({
                               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                             />
                           </svg>
-                          <span>{t.delete}</span>
                         </button>
                       </div>
                     </td>

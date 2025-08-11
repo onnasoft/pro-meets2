@@ -25,6 +25,7 @@ import { Organization } from "~/models/Organization";
 interface LoaderData {
   language: Language;
   user: User;
+  organization: Organization;
   organizations: Organization[];
 }
 
@@ -49,10 +50,14 @@ export async function loader(args: LoaderFunctionArgs) {
     const languageData = result[0] as { language: Language };
     const sessionData = result[1] as { user: User };
     const organizationsData = result[2] as { organizations: Organization[] };
+    const currentOrganization =
+      organizationsData.organizations.find(({ current }) => current) ??
+      organizationsData.organizations[0];
 
     return {
       language: languageData.language,
       user: sessionData.user,
+      organization: currentOrganization,
       organizations: organizationsData.organizations,
     } as LoaderData;
   } catch (error) {
@@ -62,7 +67,8 @@ export async function loader(args: LoaderFunctionArgs) {
 }
 
 export default function DashboardLayout() {
-  const { language, user, organizations } = useLoaderData<typeof loader>();
+  const { language, user, organization, organizations } =
+    useLoaderData<typeof loader>();
   const t = translations[language] || translations.en;
   const navigation = useNavigate();
 
@@ -139,7 +145,7 @@ export default function DashboardLayout() {
             <ErrorDialog />
             <ConfirmationDialog />
 
-            <Outlet context={{ user, organizations, language }} />
+            <Outlet context={{ user, organization, organizations, language }} />
           </main>
         </div>
       </div>

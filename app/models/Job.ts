@@ -47,6 +47,7 @@ export interface Job {
   experienceRequired?: string;
   educationLevel?: EducationLevel;
   skillsRequired?: string;
+  benefits?: string;
   organizationId: string;
   organization?: Organization;
   projectId?: string;
