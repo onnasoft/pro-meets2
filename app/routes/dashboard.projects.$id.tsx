@@ -8,7 +8,6 @@ import {
 import { useMemo, useState } from "react";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";
-import { JobOffersGrid } from "~/components/projects/JobOffersGrid";
 import ProjectDetailsForm from "~/components/projects/ProjectDetailsForm";
 import { SubmitSection } from "~/components/projects/SubmitSection";
 import translations from "~/components/projects/translations";
@@ -22,6 +21,9 @@ import { DashboardOutletContext } from "~/types/dashboard";
 import { Project, ProjectStatus } from "~/models/Project";
 import { MemberRole, MemberStatus } from "~/models/OrganizationMember";
 import Title from "~/components/Title";
+import JobsTable from "~/components/jobs/JobsTable";
+import { Job } from "~/models/Job";
+import { useJobs } from "~/hooks/jobs";
 
 export async function loader(args: LoaderFunctionArgs) {
   try {
@@ -88,6 +90,14 @@ export default function ViewProjectPage() {
     () => [MemberRole.OWNER, MemberRole.ADMIN, MemberRole.MEMBER],
     []
   );
+  const { data: jobs = [] } = useJobs({
+    relations: ["project"],
+    where: {
+      projectId: project.id,
+    },
+  });
+  const [searchTerm, setSearchTerm] = useState("");
+
   const { data: members = [] } = useOrganizationsMembers({
     relations: ["user"],
     where: {
@@ -157,6 +167,18 @@ export default function ViewProjectPage() {
     }
   };
 
+  const handleNewJob = () => {
+    navigate("/dashboard/jobs/new");
+  };
+
+  const handleEditJob = (job: Job) => {
+    navigate(`/dashboard/jobs/${job.id}`);
+  };
+
+  const handleDeleteJob = (job: Job) => {
+    alert(`Delete job: ${job.title}`);
+  };
+
   return (
     <div className="mx-auto space-y-6">
       <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 space-y-6">
@@ -216,7 +238,14 @@ export default function ViewProjectPage() {
         </form>
       </div>
 
-      <JobOffersGrid />
+      <JobsTable
+        jobs={jobs}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        onNewJob={handleNewJob}
+        onEditJob={handleEditJob}
+        onDeleteJob={handleDeleteJob}
+      />
     </div>
   );
 }

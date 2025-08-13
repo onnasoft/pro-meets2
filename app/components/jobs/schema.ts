@@ -47,6 +47,7 @@ export const getJobSchema = (t: typeof translations.en) =>
         "any.only": t.errors.educationLevel.invalid,
       }),
     skillsRequired: Joi.string().allow("").optional(),
+    benefits: Joi.string().allow("").optional(),
     organizationId: Joi.string().uuid().required().messages({
       "any.required": t.errors.organizationId.required,
       "string.guid": t.errors.organizationId.invalid,

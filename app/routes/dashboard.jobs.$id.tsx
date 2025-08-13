@@ -1,43 +1,82 @@
 import { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router";
+import {
+  LoaderFunctionArgs,
+  redirect,
+  useLoaderData,
+  useNavigate,
+  useOutletContext,
+} from "react-router";
 import JobForm from "~/components/jobs/JobForm";
 import { getJobSchema } from "~/components/jobs/schema";
 import translations from "~/components/jobs/translations";
 import Title from "~/components/Title";
 import { useProjects } from "~/hooks/projects";
-import {
-  ContractType,
-  EducationLevel,
-  Job,
-  JobStatus,
-  JobType,
-} from "~/models/Job";
+import { Job } from "~/models/Job";
 import { Create } from "~/rest";
-import { createJob } from "~/services/jobs";
+import { getJob, updateJob } from "~/services/jobs";
 import { DashboardOutletContext } from "~/types/dashboard";
 
+export const loader = async (args: LoaderFunctionArgs) => {
+  try {
+    const cookieHeader = args.request.headers.get("Cookie") || "";
+    const cookies = Object.fromEntries(
+      cookieHeader.split("; ").map((c) => {
+        const [k, v] = c.split("=");
+        return [k, decodeURIComponent(v)];
+      })
+    );
+    const accessToken = cookies.accessToken || null;
+
+    if (!accessToken) {
+      throw new Error("Access token not found in cookies");
+    }
+
+    const id = args.params.id;
+    if (!id) {
+      throw new Error("Job ID is required");
+    }
+
+    const job = await getJob(
+      id,
+      {},
+      {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    );
+
+    if (!job) {
+      throw new Error("Job not found");
+    }
+
+    return { job };
+  } catch {
+    return redirect("/login");
+  }
+};
+
 export default function NewJob() {
+  const { job } = useLoaderData<{ job: Job }>();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { language, organization } = useOutletContext<DashboardOutletContext>();
+  const { language } = useOutletContext<DashboardOutletContext>();
   const t = translations[language] || translations.en;
   const [formValues, setFormValues] = useState<Create<Job>>({
-    title: "",
-    description: "",
-    location: "",
-    type: JobType.FULL_TIME,
-    contractType: ContractType.PERMANENT,
-    educationLevel: EducationLevel.BACHELOR,
-    experienceRequired: "",
-    salaryMin: 0,
-    salaryMax: 0,
-    recruiterFee: 0,
-    skillsRequired: "",
-    benefits: "",
-    postedAt: new Date().toISOString().split("T")[0],
-    projectId: "",
-    organizationId: organization.id,
-    isActive: true,
-    status: JobStatus.OPEN,
+    title: job.title,
+    description: job.description,
+    location: job.location,
+    type: job.type,
+    contractType: job.contractType,
+    educationLevel: job.educationLevel,
+    experienceRequired: job.experienceRequired,
+    salaryMin: job.salaryMin,
+    salaryMax: job.salaryMax,
+    recruiterFee: job.recruiterFee,
+    skillsRequired: job.skillsRequired,
+    postedAt: job.postedAt,
+    projectId: job.projectId,
+    organizationId: job.organizationId,
+    benefits: job.benefits,
+    isActive: job.isActive,
+    status: job.status,
   });
   const [errors, setErrors] = useState<
     Partial<Record<keyof Job | "form", string>>
@@ -89,7 +128,7 @@ export default function NewJob() {
     const processedData = { ...value };
 
     try {
-      const response = await createJob(processedData);
+      const response = await updateJob(job.id, processedData);
       if (!response) throw new Error(t.errorMessage);
 
       const data = response;
@@ -114,7 +153,7 @@ export default function NewJob() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="bg-white shadow-md rounded-xl overflow-hidden border border-gray-100 p-6">
-        <Title title={t.createTitle} description={t.createDescription} />
+        <Title title={t.updateTitle} description={t.updateDescription} />
 
         <JobForm
           translations={t}
