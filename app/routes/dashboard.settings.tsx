@@ -82,14 +82,14 @@ export default function SettingsPage() {
   const handleLeaveOrganization = (id: string) => {
     setSelectedOrganization(id);
 
-    open(
-      t.organizations.confirmDialog.title,
-      t.organizations.confirmDialog.message,
-      t.organizations.confirmDialog.confirmText,
-      t.organizations.confirmDialog.cancelText,
-      deleteOrganization,
-      true
-    );
+    open({
+      title: t.organizations.confirmDialog.title,
+      message: t.organizations.confirmDialog.message,
+      confirmText: t.organizations.confirmDialog.confirmText,
+      cancelText: t.organizations.confirmDialog.cancelText,
+      onConfirm: deleteOrganization,
+      isDestructive: true,
+    });
   };
 
   const handleCreateOrganization = () => {

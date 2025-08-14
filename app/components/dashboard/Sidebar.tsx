@@ -20,9 +20,12 @@ import {
   Bell,
 } from "lucide-react";
 import useMobileMenuStore from "~/store/menu";
+import { useOrganizationStatus } from "~/hooks/organizations";
+import { Organization } from "~/models/Organization";
 
 interface SidebarProps {
   readonly user: User;
+  readonly organization: Organization;
   readonly translations: typeof translations.en;
   readonly onLogout?: () => void;
   readonly unreadCount?: number;
@@ -33,9 +36,12 @@ export function Sidebar({
   translations,
   onLogout,
   unreadCount = 0,
+  organization,
 }: SidebarProps) {
   const navigate = useNavigate();
   const { isOpen, close } = useMobileMenuStore();
+  const { data: status } = useOrganizationStatus(organization.id);
+
   const closeMobileMenu = () => {
     if (!isOpen) return;
     setTimeout(() => {
@@ -108,7 +114,7 @@ export function Sidebar({
               <Folder className="h-5 w-5 mr-3 text-gray-500 group-hover:text-primary-500" />
               {translations.menu.projects}
               <span className="ml-auto bg-primary-100 text-primary-800 text-xs px-2 py-0.5 rounded-full">
-                3
+                {status?.inProgress || 0}
               </span>
             </span>
           </NavItem>

@@ -1,6 +1,7 @@
 import { useOutletContext } from "react-router";
 import { Job, JobStatus } from "~/models/Job";
 import { DashboardOutletContext } from "~/types/dashboard";
+import useConfirmationStore from "~/store/confirmation";
 
 const translations = {
   en: {
@@ -142,7 +143,7 @@ interface JobsTableProps {
   readonly jobs: Array<Job>;
   readonly onNewJob: () => void;
   readonly onEditJob: (job: Job) => void;
-  readonly onDeleteJob: (job: Job) => void;
+  readonly onDeleteJob: (job: Job) => void | Promise<void>;
 }
 
 export default function JobsTable({
@@ -155,6 +156,7 @@ export default function JobsTable({
 }: JobsTableProps) {
   const { language } = useOutletContext<DashboardOutletContext>();
   const t = translations[language] || translations.en;
+  const confirmation = useConfirmationStore();
 
   const getStatusTranslation = (status: JobStatus) => {
     switch (status) {
@@ -165,6 +167,17 @@ export default function JobsTable({
       default:
         return t.statusPending;
     }
+  };
+
+  const handleDeleteJob = (job: Job) => {
+    confirmation.open({
+      title: "Confirm Deletion",
+      message: `Are you sure you want to delete the job offer for ${job.title}? This action cannot be undone.`,
+      confirmText: t.delete,
+      onConfirm: async () => {
+        await onDeleteJob(job);
+      },
+    });
   };
 
   return (
@@ -413,7 +426,7 @@ export default function JobsTable({
                           </svg>
                         </button>
                         <button
-                          onClick={() => onDeleteJob(job)}
+                          onClick={() => handleDeleteJob(job)}
                           className="text-red-600 hover:text-red-900 flex items-center gap-1"
                         >
                           <svg

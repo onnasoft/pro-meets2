@@ -15,8 +15,9 @@ import translations from "../jobs/translations";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { Create, Update } from "~/rest";
 import { Project } from "~/models/Project";
-import { createJob, updateJob } from "~/services/jobs";
+import { createJob, deleteJob, updateJob } from "~/services/jobs";
 import { getJobSchema } from "../jobs/schema";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface JobsManagerProps {
   readonly project: Project;
@@ -53,6 +54,7 @@ export default function JobsManager({ project }: JobsManagerProps) {
   const [errors, setErrors] = useState<
     Partial<Record<keyof Job | "form", string>>
   >({});
+  const queryClient = useQueryClient();
 
   const schema = getJobSchema(t);
   const { data: jobs = [] } = useJobs({
@@ -77,7 +79,7 @@ export default function JobsManager({ project }: JobsManagerProps) {
       salaryMax: 0,
       recruiterFee: 0,
       skillsRequired: "",
-      postedAt: "",
+      postedAt: new Date().toISOString().split("T")[0],
       projectId: project.id,
       organizationId: organization.id,
       benefits: "",
@@ -112,8 +114,9 @@ export default function JobsManager({ project }: JobsManagerProps) {
     });
   };
 
-  const handleDeleteJob = (job: Job) => {
-    alert(`Delete job: ${job.title}`);
+  const handleDeleteJob = async (job: Job) => {
+    await deleteJob(job.id);
+    queryClient.invalidateQueries({ queryKey: ["jobs"] });
   };
 
   const handleChange = (
@@ -162,6 +165,8 @@ export default function JobsManager({ project }: JobsManagerProps) {
       } else if (isOpen === "edit") {
         await updateJob(jobId!, processedData);
       }
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      setIsOpen(null);
     } catch {
       setErrors({ form: "Error submitting form" });
     } finally {

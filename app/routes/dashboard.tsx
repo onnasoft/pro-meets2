@@ -131,7 +131,7 @@ export default function DashboardLayout() {
     <QueryClientProvider client={queryClient}>
       <div className="flex h-screen bg-primary-50">
         <MobileShadow />
-        <Sidebar user={user} translations={t} />
+        <Sidebar user={user} organization={organization} translations={t} />
 
         <div className="flex flex-col flex-1 overflow-hidden">
           <Header

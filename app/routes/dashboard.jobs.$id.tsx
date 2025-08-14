@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import {
   LoaderFunctionArgs,
@@ -81,6 +82,7 @@ export default function NewJob() {
   const [errors, setErrors] = useState<
     Partial<Record<keyof Job | "form", string>>
   >({});
+  const queryClient = useQueryClient();
 
   const navigate = useNavigate();
   const { data: projects = [] } = useProjects();
@@ -135,6 +137,8 @@ export default function NewJob() {
       navigate(`/dashboard/jobs/${data.id}`, {
         state: { successMessage: t.successMessage },
       });
+
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
     } catch (error) {
       console.error("Error creating job:", error);
       setErrors({
