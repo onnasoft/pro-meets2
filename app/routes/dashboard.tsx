@@ -21,6 +21,7 @@ import MobileShadow from "~/components/MobileShadow";
 import ConfirmationDialog from "~/components/ConfirmationDialog";
 import { User } from "~/models/User";
 import { Organization } from "~/models/Organization";
+import Session from "~/components/Session";
 
 interface LoaderData {
   language: Language;
@@ -144,6 +145,7 @@ export default function DashboardLayout() {
           <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
             <ErrorDialog />
             <ConfirmationDialog />
+            <Session />
 
             <Outlet context={{ user, organization, organizations, language }} />
           </main>

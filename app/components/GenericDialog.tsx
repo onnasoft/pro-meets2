@@ -13,17 +13,16 @@ interface GenericDialogProps {
   readonly onClose: () => void;
   readonly title?: string;
   readonly children: React.ReactNode;
-  readonly primaryButton?: {
-    text: string;
-    action: () => void;
-    disabled?: boolean;
-    loading?: boolean;
-  };
-  readonly secondaryButton?: {
-    text: string;
-    action: () => void;
-  };
-  readonly size?: "sm" | "md" | "lg" | "xl";
+  readonly size?:
+    | "sm"
+    | "md"
+    | "lg"
+    | "xl"
+    | "2xl"
+    | "3xl"
+    | "4xl"
+    | "5xl"
+    | "6xl";
 }
 
 export default function GenericDialog({
@@ -31,15 +30,18 @@ export default function GenericDialog({
   onClose,
   title,
   children,
-  primaryButton,
-  secondaryButton,
-  size = "md",
+  size = "xl",
 }: GenericDialogProps) {
   const sizeClasses = {
     sm: "max-w-sm",
     md: "max-w-md",
     lg: "max-w-lg",
     xl: "max-w-xl",
+    "2xl": "max-w-2xl",
+    "3xl": "max-w-3xl",
+    "4xl": "max-w-4xl",
+    "5xl": "max-w-5xl",
+    "6xl": "max-w-6xl",
   };
 
   return (
@@ -69,7 +71,7 @@ export default function GenericDialog({
               leaveTo="opacity-0 scale-95"
             >
               <DialogPanel
-                className={`w-full ${sizeClasses[size]} transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all`}
+                className={`w-full ${sizeClasses[size]} z-50 transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all`}
               >
                 <div className="flex flex-col space-y-4">
                   {title && (
@@ -90,33 +92,7 @@ export default function GenericDialog({
                     </div>
                   )}
 
-                  <div className="mt-2">
-                    {children}
-                  </div>
-
-                  {(primaryButton || secondaryButton) && (
-                    <div className="mt-4 flex justify-end space-x-3">
-                      {secondaryButton && (
-                        <button
-                          type="button"
-                          className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-                          onClick={secondaryButton.action}
-                        >
-                          {secondaryButton.text}
-                        </button>
-                      )}
-                      {primaryButton && (
-                        <button
-                          type="button"
-                          className="inline-flex justify-center rounded-md border border-transparent bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                          onClick={primaryButton.action}
-                          disabled={primaryButton.disabled || primaryButton.loading}
-                        >
-                          {primaryButton.loading ? "Loading..." : primaryButton.text}
-                        </button>
-                      )}
-                    </div>
-                  )}
+                  <div className="mt-2">{children}</div>
                 </div>
               </DialogPanel>
             </TransitionChild>

@@ -50,7 +50,7 @@ export function Sidebar({
 
   return (
     <div
-      className={`z-50 md:flex md:flex-shrink-0 ${
+      className={`z-10 md:flex md:flex-shrink-0 ${
         isOpen ? "block absolute" : "hidden"
       }`}
     >

@@ -26,13 +26,15 @@ export function WeekView({ weekDays, events, translations }: WeekViewProps) {
         <div className="p-3 border-r border-gray-200"></div>
         {weekDays.map((day, i) => (
           <div
-            key={i}
+            key={day.toISOString()}
             className={`p-3 text-center ${
               i < 6 ? "border-r border-gray-200" : ""
             }`}
           >
             <div className="text-sm font-medium text-gray-500">
-              {day.toLocaleDateString(translations.languageCode || "en", { weekday: "short" })}
+              {day.toLocaleDateString(translations.languageCode || "en", {
+                weekday: "short",
+              })}
             </div>
             <div
               className={`text-lg font-semibold mt-1 mx-auto w-8 h-8 flex items-center justify-center rounded-full ${
@@ -52,13 +54,19 @@ export function WeekView({ weekDays, events, translations }: WeekViewProps) {
         {hours.map((hour) => (
           <div key={hour} className="grid grid-cols-8 min-h-12">
             <div className="p-2 border-r border-gray-200 text-right pr-3 text-sm text-gray-500">
-              {hour === 0
-                ? "12 AM"
-                : hour < 12
-                ? `${hour} AM`
-                : hour === 12
-                ? "12 PM"
-                : `${hour - 12} PM`}
+              {(() => {
+                let hourLabel = "";
+                if (hour === 0) {
+                  hourLabel = "12 AM";
+                } else if (hour < 12) {
+                  hourLabel = `${hour} AM`;
+                } else if (hour === 12) {
+                  hourLabel = "12 PM";
+                } else {
+                  hourLabel = `${hour - 12} PM`;
+                }
+                return hourLabel;
+              })()}
             </div>
 
             {weekDays.map((day, dayIndex) => {
@@ -69,7 +77,7 @@ export function WeekView({ weekDays, events, translations }: WeekViewProps) {
 
               return (
                 <div
-                  key={dayIndex}
+                  key={day.toISOString()}
                   className={`relative ${
                     dayIndex < 6 ? "border-r border-gray-200" : ""
                   }`}
@@ -89,22 +97,27 @@ export function WeekView({ weekDays, events, translations }: WeekViewProps) {
                           style={{
                             top: `${(event.start.getMinutes() / 60) * 40}px`,
                             height: `${duration * 40}px`,
-                            zIndex: 10,
                           }}
                         >
                           <div className="font-medium truncate">
                             {event.title}
                           </div>
                           <div className="text-xs text-gray-500">
-                            {event.start.toLocaleTimeString(translations.languageCode || "en", {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })}{" "}
+                            {event.start.toLocaleTimeString(
+                              translations.languageCode || "en",
+                              {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              }
+                            )}{" "}
                             -{" "}
-                            {event.end.toLocaleTimeString(translations.languageCode || "en", {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })}
+                            {event.end.toLocaleTimeString(
+                              translations.languageCode || "en",
+                              {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              }
+                            )}
                           </div>
                         </div>
                       );

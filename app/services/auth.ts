@@ -106,6 +106,26 @@ export async function login(
   return response.json();
 }
 
+export async function refreshToken(
+  refreshToken: string
+): Promise<LoginResponse> {
+  const response = await fetch(`${config.apiUrl}/auth/refresh-token`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${refreshToken}`,
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const errorData: HTTPError = await response.json();
+    throw new Error(errorData.message || "Failed to refresh token");
+  }
+
+  return response.json();
+}
+
 export async function forgotPassword(email: string): Promise<void> {
   const response = await fetch(`${config.apiUrl}/auth/forgot-password`, {
     method: "POST",
@@ -141,9 +161,7 @@ export async function resetPassword(
   }
 }
 
-export async function OAuthGoogleLogin(
-  token: string
-): Promise<LoginResponse> {
+export async function OAuthGoogleLogin(token: string): Promise<LoginResponse> {
   const response = await fetch(`${config.apiUrl}/auth/oauth/google`, {
     method: "POST",
     headers: {
