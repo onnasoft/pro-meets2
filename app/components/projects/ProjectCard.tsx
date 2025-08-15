@@ -4,6 +4,7 @@ import translations from "./translations";
 import { Project, ProjectStatus } from "~/models/Project";
 import HTMLView from "../HTMLView";
 import { Link } from "react-router";
+import { JobStatus } from "~/models/Job";
 
 interface ProjectCardProps {
   readonly project: Project;
@@ -52,8 +53,8 @@ export function ProjectCard({ project, translations }: ProjectCardProps) {
         <div className="mb-4">
           <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 mb-1">
             <span>
-              {translations.stats.inProgress}: {project.openPositions}/
-              {project.totalPositions}
+              {translations.stats.inProgress}: {project.jobs.filter(job => job.status === JobStatus.OPEN).length}/
+              {project.jobs.length}
             </span>
             <span>{project.progress}%</span>
           </div>

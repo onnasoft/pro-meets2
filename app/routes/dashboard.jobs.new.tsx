@@ -115,7 +115,7 @@ export default function NewJob() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="mx-auto">
       <div className="bg-white shadow-md rounded-xl overflow-hidden border border-gray-100 p-6">
         <Title title={t.createTitle} description={t.createDescription} />
 

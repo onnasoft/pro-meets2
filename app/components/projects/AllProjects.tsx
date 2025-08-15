@@ -1,27 +1,21 @@
 import { Settings, Users } from "lucide-react";
 import translations from "./translations";
 import { ProjectStatusBadge } from "./ProjectStatusBadge";
+import { Project, ProjectStatus } from "~/models/Project";
+import { JobStatus } from "~/models/Job";
+import { useNavigate } from "react-router";
 
 interface AllProjectsProps {
   readonly translations: typeof translations.en;
-  readonly projects: {
-    id: string;
-    name: string;
-    description: string;
-    status: string;
-    progress: number;
-    openPositions: number;
-    totalPositions: number;
-    startDate: string;
-    endDate: string;
-    teamMembers: number;
-  }[];
+  readonly projects: Project[];
 }
 
 export default function AllProjects({
   translations,
   projects,
 }: AllProjectsProps) {
+  const navigate = useNavigate();
+
   return (
     <div>
       <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
@@ -59,7 +53,7 @@ export default function AllProjects({
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
               >
-                Team
+                Leader
               </th>
               <th
                 scope="col"
@@ -88,7 +82,17 @@ export default function AllProjects({
                         {project.name}
                       </div>
                       <div className="text-sm text-gray-500 dark:text-gray-400">
-                        {project.description}
+                        {(() => {
+                          const plainText =
+                            new DOMParser().parseFromString(
+                              project.description || "",
+                              "text/html"
+                            ).body.textContent || "";
+
+                          return plainText.length > 100
+                            ? plainText.slice(0, 100) + "..."
+                            : plainText;
+                        })()}
                       </div>
                     </div>
                   </div>
@@ -100,53 +104,56 @@ export default function AllProjects({
                   />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div
-                      className={`h-2.5 rounded-full ${
-                        project.status === "completed"
-                          ? "bg-green-500"
-                          : project.status === "active"
-                          ? "bg-blue-500"
-                          : project.status === "onHold"
-                          ? "bg-yellow-500"
-                          : "bg-gray-500"
-                      }`}
-                      style={{ width: `${project.progress}%` }}
-                    ></div>
-                  </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    {project.progress}%
-                  </div>
+                  {(() => {
+                    const colors = {
+                      [ProjectStatus.COMPLETED]: "bg-green-500",
+                      [ProjectStatus.IN_PROGRESS]: "bg-blue-500",
+                      [ProjectStatus.ON_HOLD]: "bg-yellow-500",
+                      [ProjectStatus.PLANNING]: "bg-gray-500",
+                      [ProjectStatus.CANCELLED]: "bg-red-500",
+                    };
+                    const progressBarColor =
+                      colors[project.status] || "bg-gray-500";
+                    return (
+                      <>
+                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                          <div
+                            className={`h-2.5 rounded-full ${progressBarColor}`}
+                            style={{ width: `${project.progress}%` }}
+                          ></div>
+                        </div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                          {project.progress}%
+                        </div>
+                      </>
+                    );
+                  })()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900 dark:text-white">
-                    {project.openPositions}/{project.totalPositions} open
+                    {
+                      project.jobs.filter(
+                        (job) => job.status === JobStatus.OPEN
+                      ).length
+                    }
+                    /{project.jobs.length} open
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex -space-x-2">
-                    {[...Array(Math.min(project.teamMembers, 5))].map(
-                      (_, i) => (
-                        <div
-                          key={i}
-                          className="h-8 w-8 rounded-full bg-gray-300 dark:bg-gray-600 border-2 border-white dark:border-gray-800"
-                        ></div>
-                      )
-                    )}
-                    {project.teamMembers > 5 && (
-                      <div className="h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-700 border-2 border-white dark:border-gray-800 flex items-center justify-center text-xs font-medium text-gray-500 dark:text-gray-400">
-                        +{project.teamMembers - 5}
-                      </div>
-                    )}
-                  </div>
+                  <div className="flex -space-x-2">{project.leader?.name}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-500 dark:text-gray-400">
-                    {project.startDate} - {project.endDate}
+                    {project.startDate} - {project.dueDate}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <button className="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-500 mr-3">
+                  <button
+                    onClick={() =>
+                      navigate(`/dashboard/projects/${project.id}`)
+                    }
+                    className="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-500 mr-3"
+                  >
                     <Settings className="h-5 w-5" />
                   </button>
                 </td>

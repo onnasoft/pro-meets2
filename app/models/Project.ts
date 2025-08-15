@@ -1,3 +1,4 @@
+import { Job } from "./Job";
 import { Organization } from "./Organization";
 import { User } from "./User";
 
@@ -24,9 +25,8 @@ export interface Project {
   leader?: User;
   status: ProjectStatus;
   startDate?: string;
-  openPositions: number;
-  totalPositions: number;
   progress: number;
+  jobs: Job[];
   dueDate?: string;
   createdAt: string;
   updatedAt: string;

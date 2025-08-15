@@ -10,69 +10,6 @@ import StatsCards from "~/components/projects/StatsCards";
 import { useOrganizationStatus } from "~/hooks/organizations";
 import { useProjects } from "~/hooks/projects";
 
-const mockProjects = [
-  {
-    id: "1",
-    name: "Frontend Developers Hiring",
-    description: "Recruitment for React.js developers",
-    status: "active",
-    progress: 65,
-    openPositions: 3,
-    totalPositions: 5,
-    startDate: "2023-05-15",
-    endDate: "2023-08-30",
-    teamMembers: 4,
-  },
-  {
-    id: "2",
-    name: "Backend Team Expansion",
-    description: "Node.js and Python developers needed",
-    status: "active",
-    progress: 40,
-    openPositions: 5,
-    totalPositions: 8,
-    startDate: "2023-06-01",
-    endDate: "2023-09-15",
-    teamMembers: 3,
-  },
-  {
-    id: "3",
-    name: "Mobile App Development",
-    description: "React Native developers recruitment",
-    status: "planning",
-    progress: 15,
-    openPositions: 2,
-    totalPositions: 2,
-    startDate: "2023-07-01",
-    endDate: "2023-10-31",
-    teamMembers: 2,
-  },
-  {
-    id: "4",
-    name: "QA Engineers Hiring",
-    description: "Quality assurance specialists",
-    status: "onHold",
-    progress: 30,
-    openPositions: 2,
-    totalPositions: 4,
-    startDate: "2023-04-10",
-    endDate: "2023-07-30",
-    teamMembers: 3,
-  },
-  {
-    id: "5",
-    name: "DevOps Team 2023",
-    description: "Cloud infrastructure specialists",
-    status: "completed",
-    progress: 100,
-    openPositions: 0,
-    totalPositions: 3,
-    startDate: "2023-01-15",
-    endDate: "2023-04-30",
-    teamMembers: 5,
-  },
-];
-
 export default function ProjectsPage() {
   const { language, organizations } =
     useOutletContext<DashboardOutletContext>();
@@ -88,9 +25,18 @@ export default function ProjectsPage() {
         createdAt: "desc",
       },
     ],
-    relations: ["leader"],
+    relations: ["leader", "jobs"],
   });
-  console.log("Recent Projects:", recentProjects);
+
+  const { data: allProjects = [] } = useProjects({
+    take: 10,
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
+    relations: ["leader", "jobs"],
+  });
 
   return (
     <div className="mx-auto">
@@ -137,7 +83,7 @@ export default function ProjectsPage() {
       </div>
 
       {/* All Projects Table */}
-      <AllProjects translations={t} projects={mockProjects} />
+      <AllProjects translations={t} projects={allProjects} />
     </div>
   );
 }
