@@ -167,6 +167,7 @@ export default function NewJob() {
           onChange={handleChange}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
+          id={job.id}
           {...formValues}
         />
       </div>

@@ -194,6 +194,7 @@ export default function JobsManager({ project }: JobsManagerProps) {
           onChange={handleChange}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
+          id={jobId ?? undefined}
           {...formValues}
         />
       </GenericDialog>

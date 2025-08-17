@@ -1,5 +1,6 @@
 import HTMLEditor from "~/components/HTMLEditor";
 import translations from "~/components/jobs/translations";
+import config from "~/config";
 import {
   JobType,
   JobStatus,
@@ -45,12 +46,23 @@ export default function JobForm({
         <div className="rounded-md bg-red-50 p-4">
           <div className="flex">
             <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              <svg
+                className="h-5 w-5 text-red-400"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clipRule="evenodd"
+                />
               </svg>
             </div>
             <div className="ml-3">
-              <h3 className="text-sm font-medium text-red-800">{errors.form}</h3>
+              <h3 className="text-sm font-medium text-red-800">
+                {errors.form}
+              </h3>
             </div>
           </div>
         </div>
@@ -69,11 +81,13 @@ export default function JobForm({
             type="text"
             id="title"
             name="title"
-            value={formData.title || ''}
+            value={formData.title || ""}
             onChange={onChange}
             required
             className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.title ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+              errors.title
+                ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                : "border-gray-300 "
             }`}
             placeholder={translations.jobTitlePlaceholder}
           />
@@ -91,18 +105,41 @@ export default function JobForm({
             {translations.jobDescription}
           </label>
           <HTMLEditor
-            value={formData.description || ''}
+            value={formData.description || ""}
             onChange={(content) => {
               onChange({
                 target: { name: "description", value: content },
               } as React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>);
             }}
-            className={errors.description ? "border-red-300" : "border-gray-300"}
+            className={
+              errors.description ? "border-red-300" : "border-gray-300"
+            }
           />
           {errors.description && (
             <p className="mt-1 text-sm text-red-600">{errors.description}</p>
           )}
         </div>
+
+        {/* URL */}
+        {formData.id && (
+          <div className="col-span-2">
+            <label
+              htmlFor="url"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              URL
+            </label>
+            <input
+              type="url"
+              id="url"
+              name="url"
+              required
+              readOnly
+              value={`${config.baseUrl}/jobs/${formData.id}`}
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none border-gray-300`}
+            />
+          </div>
+        )}
 
         {/* Project ID */}
         <div className="col-span-2">
@@ -115,10 +152,12 @@ export default function JobForm({
           <select
             id="projectId"
             name="projectId"
-            value={formData.projectId || ''}
+            value={formData.projectId || ""}
             onChange={onChange}
             className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.projectId ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+              errors.projectId
+                ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                : "border-gray-300 "
             }`}
           >
             {!formData.projectId ? (
@@ -150,7 +189,9 @@ export default function JobForm({
             value={formData.type || JobType.FULL_TIME}
             onChange={onChange}
             className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.type ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+              errors.type
+                ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                : "border-gray-300 "
             }`}
           >
             {Object.values(JobType).map((jobType) => (
@@ -179,7 +220,9 @@ export default function JobForm({
             value={formData.contractType || ContractType.PERMANENT}
             onChange={onChange}
             className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.contractType ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+              errors.contractType
+                ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                : "border-gray-300 "
             }`}
           >
             {Object.values(ContractType).map((contractType) => (
@@ -208,7 +251,9 @@ export default function JobForm({
             value={formData.status || JobStatus.OPEN}
             onChange={onChange}
             className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.status ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+              errors.status
+                ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                : "border-gray-300 "
             }`}
           >
             {Object.values(JobStatus).map((status) => (
@@ -231,7 +276,9 @@ export default function JobForm({
             checked={formData.isActive || false}
             onChange={onChange}
             className={`h-4 w-4 rounded ${
-              errors.isActive ? "border-red-300 text-red-600 focus:ring-red-500" : "border-gray-300 text-primary-600 focus:ring-primary-500"
+              errors.isActive
+                ? "border-red-300 text-red-600 focus:ring-red-500"
+                : "border-gray-300 text-primary-600 focus:ring-primary-500"
             }`}
           />
           <label
@@ -261,10 +308,12 @@ export default function JobForm({
               type="number"
               id="salaryMin"
               name="salaryMin"
-              value={formData.salaryMin || ''}
+              value={formData.salaryMin || ""}
               onChange={onChange}
               className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${
-                errors.salaryMin ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+                errors.salaryMin
+                  ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                  : "border-gray-300 "
               }`}
               placeholder="30.000"
             />
@@ -289,10 +338,12 @@ export default function JobForm({
               type="number"
               id="salaryMax"
               name="salaryMax"
-              value={formData.salaryMax || ''}
+              value={formData.salaryMax || ""}
               onChange={onChange}
               className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${
-                errors.salaryMax ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+                errors.salaryMax
+                  ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                  : "border-gray-300 "
               }`}
               placeholder="200.000"
             />
@@ -318,10 +369,12 @@ export default function JobForm({
               type="number"
               id="recruiterFee"
               name="recruiterFee"
-              value={formData.recruiterFee || ''}
+              value={formData.recruiterFee || ""}
               onChange={onChange}
               className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${
-                errors.recruiterFee ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+                errors.recruiterFee
+                  ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                  : "border-gray-300 "
               }`}
               placeholder="500"
             />
@@ -343,10 +396,12 @@ export default function JobForm({
             type="text"
             id="location"
             name="location"
-            value={formData.location || ''}
+            value={formData.location || ""}
             onChange={onChange}
             className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.location ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+              errors.location
+                ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                : "border-gray-300 "
             }`}
             placeholder={translations.locationPlaceholder}
           />
@@ -367,15 +422,19 @@ export default function JobForm({
             type="text"
             id="experienceRequired"
             name="experienceRequired"
-            value={formData.experienceRequired || ''}
+            value={formData.experienceRequired || ""}
             onChange={onChange}
             className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.experienceRequired ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+              errors.experienceRequired
+                ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                : "border-gray-300 "
             }`}
             placeholder={translations.experiencePlaceholder}
           />
           {errors.experienceRequired && (
-            <p className="mt-1 text-sm text-red-600">{errors.experienceRequired}</p>
+            <p className="mt-1 text-sm text-red-600">
+              {errors.experienceRequired}
+            </p>
           )}
         </div>
 
@@ -390,10 +449,12 @@ export default function JobForm({
           <select
             id="educationLevel"
             name="educationLevel"
-            value={formData.educationLevel || ''}
+            value={formData.educationLevel || ""}
             onChange={onChange}
             className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.educationLevel ? "border-red-300 focus:ring-red-500 focus:border-red-500" : "border-gray-300 "
+              errors.educationLevel
+                ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                : "border-gray-300 "
             }`}
           >
             {!formData.educationLevel && (
@@ -419,13 +480,15 @@ export default function JobForm({
             {translations.skillsRequired}
           </label>
           <HTMLEditor
-            value={formData.skillsRequired || ''}
+            value={formData.skillsRequired || ""}
             onChange={(content) => {
               onChange({
                 target: { name: "skillsRequired", value: content },
               } as React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>);
             }}
-            className={errors.skillsRequired ? "border-red-300" : "border-gray-300"}
+            className={
+              errors.skillsRequired ? "border-red-300" : "border-gray-300"
+            }
           />
           {errors.skillsRequired && (
             <p className="mt-1 text-sm text-red-600">{errors.skillsRequired}</p>
@@ -441,7 +504,7 @@ export default function JobForm({
             {translations.benefits}
           </label>
           <HTMLEditor
-            value={formData.benefits || ''}
+            value={formData.benefits || ""}
             onChange={(content) => {
               onChange({
                 target: { name: "benefits", value: content },
@@ -457,7 +520,7 @@ export default function JobForm({
         <input
           type="hidden"
           name="organizationId"
-          value={formData.organizationId || ''}
+          value={formData.organizationId || ""}
         />
         {errors.organizationId && (
           <p className="mt-1 text-sm text-red-600">{errors.organizationId}</p>
@@ -482,9 +545,25 @@ export default function JobForm({
         >
           {isSubmitting ? (
             <span className="flex items-center">
-              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              <svg
+                className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
               </svg>
               {translations.submitting}
             </span>

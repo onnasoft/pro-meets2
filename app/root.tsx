@@ -1,7 +1,14 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "react-router";
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+} from "react-router";
 import type { LinksFunction, LoaderFunctionArgs } from "react-router";
 import { languageLoader } from "./loaders/language";
-import 'tiptap-extension-resizable-image/styles.css';
+import "tiptap-extension-resizable-image/styles.css";
 import "./tailwind.css";
 
 export const links: LinksFunction = () => [
@@ -22,12 +29,14 @@ export const loader = async (args: LoaderFunctionArgs) => {
   return {
     language,
     ENV: {
+      PUBLIC_BASE_URL: process.env.PUBLIC_BASE_URL ?? "",
       PUBLIC_API_URL: process.env.PUBLIC_API_URL ?? "",
-      GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ?? "",
+      PUBLIC_GOOGLE_CLIENT_ID: process.env.PUBLIC_GOOGLE_CLIENT_ID ?? "",
       PUBLIC_LINKEDIN_URL:
         process.env.PUBLIC_LINKEDIN_URL ??
         "https://www.linkedin.com/company/pro-meets",
-      STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY ?? "",
+      PUBLIC_STRIPE_PUBLISHABLE_KEY:
+        process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "",
     },
   };
 };

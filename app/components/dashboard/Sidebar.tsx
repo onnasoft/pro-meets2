@@ -25,7 +25,7 @@ import { Organization } from "~/models/Organization";
 
 interface SidebarProps {
   readonly user: User;
-  readonly organization: Organization;
+  readonly organization?: Organization;
   readonly translations: typeof translations.en;
   readonly onLogout?: () => void;
   readonly unreadCount?: number;
@@ -40,7 +40,7 @@ export function Sidebar({
 }: SidebarProps) {
   const navigate = useNavigate();
   const { isOpen, close } = useMobileMenuStore();
-  const { data: status } = useOrganizationStatus(organization.id);
+  const { data: status } = useOrganizationStatus(organization?.id ?? null);
 
   const closeMobileMenu = () => {
     if (!isOpen) return;
@@ -56,9 +56,8 @@ export function Sidebar({
 
   return (
     <div
-      className={`z-10 md:flex md:flex-shrink-0 ${
-        isOpen ? "block absolute" : "hidden"
-      }`}
+      className={`z-10 md:flex md:flex-shrink-0 ${isOpen ? "block absolute" : "hidden"
+        }`}
     >
       <div className="flex flex-col w-64 border-r border-gray-200 bg-white h-screen sticky top-0">
         {/* Logo */}

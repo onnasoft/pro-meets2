@@ -25,10 +25,13 @@ export function useOrganization(id: string) {
   });
 }
 
-export function useOrganizationStatus(id: string) {
+export function useOrganizationStatus(id: string | null) {
   return useQuery({
     queryKey: ["statusOrganization", id],
-    queryFn: () => statusOrganization(id),
+    queryFn: () => {
+      if (!id) return Promise.resolve(null);
+      return statusOrganization(id);
+    },
     staleTime: 1000 * 60 * 5,
     retry: 1,
   });
