@@ -11,13 +11,11 @@ import { useOrganizationStatus } from "~/hooks/organizations";
 import { useProjects } from "~/hooks/projects";
 
 export default function ProjectsPage() {
-  const { language, organizations } =
+  const { language, organization } =
     useOutletContext<DashboardOutletContext>();
   useRequireOrganization();
-  const organization =
-    organizations.find((org) => org.current) || organizations[0];
   const t = translations[language] || translations.en;
-  const { data: status } = useOrganizationStatus(organization.id);
+  const { data: status } = useOrganizationStatus(organization?.id ?? null);
   const { data: recentProjects = [] } = useProjects({
     take: 6,
     orderBy: [

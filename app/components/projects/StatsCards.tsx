@@ -3,7 +3,7 @@ import translations from "./translations";
 
 interface StatsCardsProps {
   readonly translations: typeof translations.en;
-  readonly status?: Awaited<ReturnType<typeof statusOrganization>>;
+  readonly status?: Awaited<ReturnType<typeof statusOrganization>> | null;
 }
 
 export default function StatsCards({ translations, status }: StatsCardsProps) {

@@ -4,7 +4,7 @@ import { Language } from "~/utils/language";
 
 export interface DashboardOutletContext {
   user: User;
-  organization: Organization;
+  organization?: Organization;
   organizations: Organization[];
   language: Language;
 }
