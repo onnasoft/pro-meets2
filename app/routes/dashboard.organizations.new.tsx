@@ -1,18 +1,15 @@
 import { useNavigate, useOutletContext } from "react-router";
 import { useState } from "react";
-import { createOrganization } from "~/services/organizations";
-import { Organization, OrganizationPlan } from "~/models/Organization";
 import { PlanSelector } from "~/components/organization/PlanSelector";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";
 import { SubmitSection } from "~/components/organization/SubmitSection";
 import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
-import { Create } from "~/rest";
 import { DashboardOutletContext } from "~/types/dashboard";
-import { createMedia } from "~/services/media";
 import useErrorStore from "~/store/error";
 import Title from "~/components/Title";
+import { Create, createMedia, createOrganization, Organization, OrganizationPlan } from "pro-meets-core";
 
 export { languageLoader as loader } from "~/loaders/language";
 
@@ -75,9 +72,9 @@ export default function NewOrganizationPage() {
       ...value,
       members: value.members
         ? value.members
-            .split(",")
-            .map((e: string) => e.trim())
-            .filter(Boolean)
+          .split(",")
+          .map((e: string) => e.trim())
+          .filter(Boolean)
         : [],
     };
 

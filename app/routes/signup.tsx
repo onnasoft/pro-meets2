@@ -1,12 +1,11 @@
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import { CallToAction } from "~/components/sections/CallToAction";
-import { MetaFunction, useLoaderData } from "react-router";
+import { MetaFunction, useLoaderData, LoaderFunctionArgs } from "react-router";
 import { languageLoader } from "~/loaders/language";
 import SignUpForm from "~/components/signup/SignUpForm";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import config from "~/config";
-import { LoaderFunctionArgs } from "react-router";
 
 const translations = {
   en: {
@@ -39,8 +38,8 @@ export async function loader(args: LoaderFunctionArgs) {
   return { redirectUrl, language };
 }
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const language = data?.language || "en";
+export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
+  const language = loaderData?.language || "en";
   const t = translations[language] || translations.en;
 
   return [

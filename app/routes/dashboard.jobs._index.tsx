@@ -1,10 +1,9 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { deleteJob, Job } from "pro-meets-core";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import JobsTable from "~/components/jobs/JobsTable";
 import { useJobs } from "~/hooks/jobs";
-import { Job } from "~/models/Job";
-import { deleteJob } from "~/services/jobs";
 
 export default function JobsPage() {
   const { data: jobs = [] } = useJobs({

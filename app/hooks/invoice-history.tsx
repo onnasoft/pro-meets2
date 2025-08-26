@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getInvoiceHistory } from "~/services/stripe";
+import { getInvoiceHistory } from "pro-meets-core";
 
 export function useInvoiceHistory() {
   return useQuery({

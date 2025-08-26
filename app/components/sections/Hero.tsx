@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import { Language } from "~/utils/language";
+import { Language } from "pro-meets-core";
 
 const translations = {
   es: {

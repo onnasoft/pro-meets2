@@ -1,5 +1,5 @@
 import { Plus, FileText } from "lucide-react";
-import { useOutletContext } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 import { useRequireOrganization } from "~/hooks/require-organization";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { ProjectCard } from "~/components/projects/ProjectCard";
@@ -14,6 +14,7 @@ export default function ProjectsPage() {
   const { language, organization } =
     useOutletContext<DashboardOutletContext>();
   useRequireOrganization();
+  const navigate = useNavigate();
   const t = translations[language] || translations.en;
   const { data: status } = useOrganizationStatus(organization?.id ?? null);
   const { data: recentProjects = [] } = useProjects({
@@ -71,7 +72,9 @@ export default function ProjectsPage() {
               {t.noProjectsDescription}
             </p>
             <div className="mt-6">
-              <button className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors">
+              <button
+                onClick={() => navigate("/dashboard/projects/new")}
+                className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors">
                 <Plus className="w-5 h-5 mr-2" />
                 {t.newProject}
               </button>

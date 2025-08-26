@@ -1,11 +1,9 @@
-import { Language } from "~/utils/language";
 import { motion } from "framer-motion";
 import { CheckCircle, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import translations from "./translations";
 import { SignupFormData } from "./types";
 import { getRegisterAuthSchema } from "./schema";
-import { OAuthGoogleLogin, register } from "~/services/auth";
 import { Link, useNavigate } from "react-router";
 import NameField from "./fields/NameField";
 import EmailField from "./fields/EmailField";
@@ -14,6 +12,7 @@ import CompanyField from "./fields/CompanyField";
 import TermsField from "./fields/TermsField";
 import { useGoogleLogin } from "@react-oauth/google";
 import useAuthStore from "~/store/auth";
+import { Language, OAuthGoogleLogin, register } from "pro-meets-core";
 
 interface SignUpFormProps {
   readonly language: Language;

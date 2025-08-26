@@ -1,5 +1,5 @@
+import { defaultLanguage, Language, languages } from "pro-meets-core";
 import { LoaderFunctionArgs } from "react-router";
-import { defaultLanguage, Language, languages } from "~/utils/language";
 
 interface LoaderData {
   language: Language;

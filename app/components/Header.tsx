@@ -10,7 +10,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import useLanguageStore from "~/store/language";
-import { Language } from "~/utils/language";
+import { Language } from "pro-meets-core";
 
 const translations = {
   en: {

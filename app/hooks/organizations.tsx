@@ -1,9 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  getOrganization,
-  getOrganizations,
-  statusOrganization,
-} from "~/services/organizations";
+import { getOrganization, getOrganizations, statusOrganization } from "pro-meets-core";
 
 type Params = Parameters<typeof getOrganizations>[0];
 

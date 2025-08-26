@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getJob, getJobs } from "~/services/jobs";
+import { getJob, getJobs } from "pro-meets-core";
 
 type Params = Parameters<typeof getJobs>[0];
 

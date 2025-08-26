@@ -1,4 +1,4 @@
-import { ContractType, EducationLevel, JobStatus, JobType } from "~/models/Job";
+import { ContractType, EducationLevel, JobStatus, JobType } from "pro-meets-core";
 
 const translations = {
   en: {
@@ -203,7 +203,8 @@ const translations = {
   },
   fr: {
     createTitle: "Créer une Nouvelle Offre d'Emploi",
-    createDescription: "Remplissez les détails pour créer une nouvelle offre d'emploi",
+    createDescription:
+      "Remplissez les détails pour créer une nouvelle offre d'emploi",
     updateTitle: "Mettre à Jour l'Offre d'Emploi",
     updateDescription: "Apportez des modifications à l'offre d'emploi",
     viewTitle: "Détails de l'Offre d'Emploi",
@@ -234,7 +235,8 @@ const translations = {
     cancel: "Annuler",
     create: "Créer l'Offre",
     benefits: "Avantages",
-    errorMessage: "Une erreur s'est produite lors de l'enregistrement de l'offre",
+    errorMessage:
+      "Une erreur s'est produite lors de l'enregistrement de l'offre",
     successMessage: "Offre enregistrée avec succès",
     submit: "Soumettre",
     submitting: "Soumission...",

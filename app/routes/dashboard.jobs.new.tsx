@@ -1,4 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { ContractType, Create, createJob, EducationLevel, Job, JobStatus, JobType } from "pro-meets-core";
 import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import JobForm from "~/components/jobs/JobForm";
@@ -6,15 +7,6 @@ import { getJobSchema } from "~/components/jobs/schema";
 import translations from "~/components/jobs/translations";
 import Title from "~/components/Title";
 import { useProjects } from "~/hooks/projects";
-import {
-  ContractType,
-  EducationLevel,
-  Job,
-  JobStatus,
-  JobType,
-} from "~/models/Job";
-import { Create } from "~/rest";
-import { createJob } from "~/services/jobs";
 import { DashboardOutletContext } from "~/types/dashboard";
 
 export default function NewJob() {
@@ -36,7 +28,7 @@ export default function NewJob() {
     benefits: "",
     postedAt: new Date().toISOString().split("T")[0],
     projectId: "",
-    organizationId: organization.id,
+    organizationId: organization!.id,
     isActive: true,
     status: JobStatus.OPEN,
   });

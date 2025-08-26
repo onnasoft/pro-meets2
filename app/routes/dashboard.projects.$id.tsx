@@ -13,16 +13,12 @@ import { SubmitSection } from "~/components/projects/SubmitSection";
 import translations from "~/components/projects/translations";
 import { useOrganizationsMembers } from "~/hooks/organization-members";
 import { useRequireOrganization } from "~/hooks/require-organization";
-import { In, Update } from "~/rest";
-import { createMedia } from "~/services/media";
-import { getProject, updateProject } from "~/services/projects";
 import useErrorStore from "~/store/error";
-import { DashboardOutletContext } from "~/types/dashboard";
-import { Project, ProjectStatus } from "~/models/Project";
-import { MemberRole, MemberStatus } from "~/models/OrganizationMember";
+import { DashboardOutletContext } from "~/types/dashboard";;
 import Title from "~/components/Title";
 import { useJobs } from "~/hooks/jobs";
 import JobsManager from "~/components/projects/JobsManager";
+import { createMedia, getProject, In, MemberRole, MemberStatus, Project, ProjectStatus, Update, updateProject } from "pro-meets-core";
 
 export async function loader(args: LoaderFunctionArgs) {
   try {

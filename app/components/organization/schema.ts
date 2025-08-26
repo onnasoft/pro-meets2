@@ -1,6 +1,6 @@
 import Joi from "joi";
 import translations from "./translations";
-import { OrganizationPlan } from "~/models/Organization";
+import { OrganizationPlan } from "pro-meets-core";
 
 export const getOrganizationSchema = (t: typeof translations.en) =>
   Joi.object({
@@ -44,7 +44,7 @@ export const getOrganizationSchema = (t: typeof translations.en) =>
       })
       .allow("")
       .optional(),
-    logoUrl: Joi.string().optional(),
+    logoUrl: Joi.string().allow("").optional(),
     plan: Joi.string()
       .valid(
         OrganizationPlan.FREE,

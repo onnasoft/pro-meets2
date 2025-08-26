@@ -1,4 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { Create, getJob, Job, updateJob } from "pro-meets-core";
 import { useState } from "react";
 import {
   LoaderFunctionArgs,
@@ -12,9 +13,6 @@ import { getJobSchema } from "~/components/jobs/schema";
 import translations from "~/components/jobs/translations";
 import Title from "~/components/Title";
 import { useProjects } from "~/hooks/projects";
-import { Job } from "~/models/Job";
-import { Create } from "~/rest";
-import { getJob, updateJob } from "~/services/jobs";
 import { DashboardOutletContext } from "~/types/dashboard";
 
 export const loader = async (args: LoaderFunctionArgs) => {

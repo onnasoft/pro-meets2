@@ -1,6 +1,6 @@
 import { Check, ChevronRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
-import { Language } from "~/utils/language";
+import { Language } from "pro-meets-core";
 
 const PRICES = {
   FREE: "$0",

@@ -6,7 +6,6 @@ import {
   redirect,
 } from "react-router";
 import { useState } from "react";
-import { getOrganization, updateOrganization } from "~/services/organizations";
 import { PlanSelector } from "~/components/organization/PlanSelector";
 import { BasicInfoForm } from "~/components/BasicInfoForm";
 import { ContactInfoForm } from "~/components/ContactInfoForm";
@@ -15,12 +14,9 @@ import translations from "~/components/organization/translations";
 import { getOrganizationSchema } from "~/components/organization/schema";
 import MembersManager from "~/components/organization/MembersManager";
 import { DashboardOutletContext } from "~/types/dashboard";
-import { In, Update } from "~/rest";
 import useErrorStore from "~/store/error";
-import { createMedia } from "~/services/media";
-import { Organization, OrganizationPlan } from "~/models/Organization";
-import { MemberRole, MemberStatus } from "~/models/OrganizationMember";
 import Title from "~/components/Title";
+import { createMedia, getOrganization, In, MemberRole, MemberStatus, Organization, OrganizationPlan, Update, updateOrganization } from "pro-meets-core";
 
 interface LoaderData {
   organization: Organization;

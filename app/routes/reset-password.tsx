@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useLoaderData, Link, useSearchParams } from "react-router";
+import { useLoaderData, Link, useSearchParams } from "react-router-dom";
 import { ActionFunction } from "react-router";
 import { languageLoader } from "~/loaders/language";
-import { resetPassword } from "~/services/auth";
 import { CheckCircle, AlertCircle, Lock } from "lucide-react";
+import { resetPassword } from "pro-meets-core";
 
 export { languageLoader as loader } from "~/loaders/language";
 

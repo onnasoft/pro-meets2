@@ -1,4 +1,4 @@
-import { User } from "~/models/User";
+import { User } from "pro-meets-core";
 
 export function getAvatarUrl(user: User, size: number = 200): string {
   if (user.avatarUrl) {

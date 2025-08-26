@@ -5,7 +5,7 @@ import DocumentCard from "~/components/documents/DocumentCard";
 import DocumentRow from "~/components/documents/DocumentRow";
 import translations from "~/components/documents/translations";
 import { DashboardOutletContext } from "~/types/dashboard";
-import { Document } from "~/models/Document";
+import { Document } from "pro-meets-core";
 
 export default function DocumentsPage() {
   const { language } = useOutletContext<DashboardOutletContext>();

@@ -20,11 +20,11 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import FileUploadDialog from "./FileUploadDialog";
-import { createMedia } from "~/services/media";
 import { useOutletContext } from "react-router";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { ResizableImage } from 'tiptap-extension-resizable-image';
 import config from "~/config";
+import { createMedia } from "pro-meets-core";
 
 interface ToolbarButtonProps {
   readonly onClick: () => void;

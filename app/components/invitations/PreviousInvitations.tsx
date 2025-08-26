@@ -2,7 +2,7 @@ import { Briefcase, Check, Clock, Mail, Shield, X } from "lucide-react";
 import translations from "./translations";
 import { EmptyState } from "./EmptyState";
 import { getAvatarUrl } from "~/utils/gravatar";
-import { MemberRole, MemberStatus, OrganizationMember } from "~/models/OrganizationMember";
+import { MemberRole, MemberStatus, OrganizationMember } from "pro-meets-core";
 
 interface PreviousInvitationsProps {
   readonly translations: typeof translations.en;

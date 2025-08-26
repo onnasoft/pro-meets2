@@ -2,12 +2,8 @@ import { Briefcase, Check, Clock, Mail, Shield, X } from "lucide-react";
 import translations from "./translations";
 import { EmptyState } from "./EmptyState";
 import { getAvatarUrl } from "~/utils/gravatar";
-import {
-  deleteOrganizationMember,
-  updateOrganizationMember,
-} from "~/services/organization-members";
 import { useQueryClient } from "@tanstack/react-query";
-import { MemberRole, MemberStatus, OrganizationMember } from "~/models/OrganizationMember";
+import { deleteOrganizationMember, MemberRole, MemberStatus, OrganizationMember, updateOrganizationMember } from "pro-meets-core";
 
 interface PendingInvitationsProps {
   readonly translations: typeof translations.en;

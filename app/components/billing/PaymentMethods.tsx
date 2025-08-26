@@ -2,14 +2,8 @@ import { CreditCard, Loader2, CheckCircle, XCircle } from "lucide-react";
 import translations from "./translations";
 import { useEffect, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import {
-  attachPaymentMethod,
-  createSetupIntent,
-  detachPaymentMethod,
-  setDefaultPaymentMethod,
-} from "~/services/stripe";
 import { useQueryClient } from "@tanstack/react-query";
-import { PaymentMethod } from "~/models/PaymentMethod";
+import { attachPaymentMethod, createSetupIntent, detachPaymentMethod, PaymentMethod, setDefaultPaymentMethod } from "pro-meets-core";
 
 interface PaymentMethodsProps {
   readonly translations: typeof translations.en.paymentMethods;

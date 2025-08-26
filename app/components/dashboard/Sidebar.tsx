@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import { NavItem } from "./NavItem";
 import translations from "./translations";
-import { User } from "~/models/User";
 import { getAvatarUrl } from "~/utils/gravatar";
 import {
   Calendar,
@@ -21,7 +20,7 @@ import {
 } from "lucide-react";
 import useMobileMenuStore from "~/store/menu";
 import { useOrganizationStatus } from "~/hooks/organizations";
-import { Organization } from "~/models/Organization";
+import { Organization, User } from "pro-meets-core";
 
 interface SidebarProps {
   readonly user: User;

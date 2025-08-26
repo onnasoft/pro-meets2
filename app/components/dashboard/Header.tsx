@@ -2,10 +2,9 @@ import { OrganizationSelector } from "./OrganizationSelector";
 import { NotificationsMenu } from "./NotificationsMenu";
 import { UserMenu } from "./UserMenu";
 import translations from "./translations";
-import { User } from "~/models/User";
 import { Menu } from "lucide-react";
 import useMobileMenuStore from "~/store/menu";
-import { Organization } from "~/models/Organization";
+import { Organization, User } from "pro-meets-core";
 
 interface HeaderProps {
   readonly organizations: Organization[];

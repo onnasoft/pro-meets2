@@ -1,5 +1,5 @@
+import { resendVerification } from "pro-meets-core";
 import { LoaderFunction, redirect } from "react-router";
-import { resendVerification } from "~/services/auth";
 
 export const loader: LoaderFunction = async ({ params }) => {
   const email = params.email;

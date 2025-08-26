@@ -7,14 +7,10 @@ import { SubmitSection } from "~/components/projects/SubmitSection";
 import translations from "~/components/projects/translations";
 import { useOrganizationsMembers } from "~/hooks/organization-members";
 import { useRequireOrganization } from "~/hooks/require-organization";
-import { Create, In } from "~/rest";
-import { createMedia } from "~/services/media";
-import { createProject } from "~/services/projects";
 import useErrorStore from "~/store/error";
 import { DashboardOutletContext } from "~/types/dashboard";
-import { Project, ProjectStatus } from "~/models/Project";
-import { MemberRole, MemberStatus } from "~/models/OrganizationMember";
 import Title from "~/components/Title";
+import { Create, createMedia, createProject, In, MemberRole, MemberStatus, Project, ProjectStatus } from "pro-meets-core";
 
 export default function NewProjectPage() {
   useRequireOrganization();

@@ -9,6 +9,10 @@ body {
   }
 }
 
+.html-view .ProseMirror {
+  padding: 0;
+}
+
 /* Estilos base del editor */
 .ProseMirror {
   min-height: 300px;

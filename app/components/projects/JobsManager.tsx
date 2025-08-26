@@ -2,22 +2,13 @@ import { useNavigate, useOutletContext } from "react-router";
 import GenericDialog from "../GenericDialog";
 import JobsTable from "../jobs/JobsTable";
 import { useState } from "react";
-import {
-  ContractType,
-  EducationLevel,
-  Job,
-  JobStatus,
-  JobType,
-} from "~/models/Job";
 import { useJobs } from "~/hooks/jobs";
 import JobForm from "../jobs/JobForm";
 import translations from "../jobs/translations";
 import { DashboardOutletContext } from "~/types/dashboard";
-import { Create, Update } from "~/rest";
-import { Project } from "~/models/Project";
-import { createJob, deleteJob, updateJob } from "~/services/jobs";
 import { getJobSchema } from "../jobs/schema";
 import { useQueryClient } from "@tanstack/react-query";
+import { ContractType, Create, createJob, deleteJob, EducationLevel, Job, JobStatus, JobType, Project, Update, updateJob } from "pro-meets-core";
 
 interface JobsManagerProps {
   readonly project: Project;
@@ -46,7 +37,7 @@ export default function JobsManager({ project }: JobsManagerProps) {
     skillsRequired: "",
     postedAt: "",
     projectId: project.id,
-    organizationId: organization.id,
+    organizationId: organization!.id,
     benefits: "",
     isActive: false,
     status: JobStatus.OPEN,
@@ -81,7 +72,7 @@ export default function JobsManager({ project }: JobsManagerProps) {
       skillsRequired: "",
       postedAt: new Date().toISOString().split("T")[0],
       projectId: project.id,
-      organizationId: organization.id,
+      organizationId: organization!.id,
       benefits: "",
       isActive: false,
       status: JobStatus.OPEN,

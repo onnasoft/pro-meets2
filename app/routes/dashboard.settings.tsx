@@ -8,11 +8,9 @@ import translations from "~/components/settings/translations";
 import { useState } from "react";
 import { useOrganizations } from "~/hooks/organizations";
 import { DashboardOutletContext } from "~/types/dashboard";
-import { Equal } from "~/rest";
-import { deleteOrganizationMember } from "~/services/organization-members";
 import useErrorStore from "~/store/error";
 import useConfirmationStore from "~/store/confirmation";
-import { MemberStatus } from "~/models/OrganizationMember";
+import { deleteOrganizationMember, Equal, MemberStatus } from "pro-meets-core";
 
 export { languageLoader as loader } from "~/loaders/language";
 

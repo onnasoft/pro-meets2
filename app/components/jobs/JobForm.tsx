@@ -1,14 +1,8 @@
+import { ContractType, EducationLevel, Job, JobStatus, JobType, Project } from "pro-meets-core";
 import HTMLEditor from "~/components/HTMLEditor";
 import translations from "~/components/jobs/translations";
 import config from "~/config";
-import {
-  JobType,
-  JobStatus,
-  ContractType,
-  EducationLevel,
-  Job,
-} from "~/models/Job";
-import { Project } from "~/models/Project";
+
 
 interface JobFormProps extends Partial<Job> {
   readonly translations: typeof translations.en;
@@ -84,11 +78,10 @@ export default function JobForm({
             value={formData.title || ""}
             onChange={onChange}
             required
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.title
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.title
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
-            }`}
+              }`}
             placeholder={translations.jobTitlePlaceholder}
           />
           {errors.title && (
@@ -154,11 +147,10 @@ export default function JobForm({
             name="projectId"
             value={formData.projectId || ""}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.projectId
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.projectId
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
-            }`}
+              }`}
           >
             {!formData.projectId ? (
               <option value="">{translations.selectProject}</option>
@@ -188,11 +180,10 @@ export default function JobForm({
             required
             value={formData.type || JobType.FULL_TIME}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.type
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.type
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
-            }`}
+              }`}
           >
             {Object.values(JobType).map((jobType) => (
               <option key={jobType} value={jobType}>
@@ -219,11 +210,10 @@ export default function JobForm({
             required
             value={formData.contractType || ContractType.PERMANENT}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.contractType
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.contractType
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
-            }`}
+              }`}
           >
             {Object.values(ContractType).map((contractType) => (
               <option key={contractType} value={contractType}>
@@ -250,11 +240,10 @@ export default function JobForm({
             required
             value={formData.status || JobStatus.OPEN}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.status
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.status
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
-            }`}
+              }`}
           >
             {Object.values(JobStatus).map((status) => (
               <option key={status} value={status}>
@@ -275,11 +264,10 @@ export default function JobForm({
             type="checkbox"
             checked={formData.isActive || false}
             onChange={onChange}
-            className={`h-4 w-4 rounded ${
-              errors.isActive
+            className={`h-4 w-4 rounded ${errors.isActive
                 ? "border-red-300 text-red-600 focus:ring-red-500"
                 : "border-gray-300 text-primary-600 focus:ring-primary-500"
-            }`}
+              }`}
           />
           <label
             htmlFor="isActive"
@@ -308,13 +296,13 @@ export default function JobForm({
               type="number"
               id="salaryMin"
               name="salaryMin"
+              min={0}
               value={formData.salaryMin || ""}
               onChange={onChange}
-              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${
-                errors.salaryMin
+              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${errors.salaryMin
                   ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                   : "border-gray-300 "
-              }`}
+                }`}
               placeholder="30.000"
             />
           </div>
@@ -338,13 +326,13 @@ export default function JobForm({
               type="number"
               id="salaryMax"
               name="salaryMax"
+              min={formData.salaryMin || 0}
               value={formData.salaryMax || ""}
               onChange={onChange}
-              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${
-                errors.salaryMax
+              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${errors.salaryMax
                   ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                   : "border-gray-300 "
-              }`}
+                }`}
               placeholder="200.000"
             />
           </div>
@@ -353,34 +341,35 @@ export default function JobForm({
           )}
         </div>
 
-        {/* Recruiter Fee */}
+        {/* Education Level */}
         <div>
           <label
-            htmlFor="recruiterFee"
+            htmlFor="educationLevel"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            {translations.recruiterFee}
+            {translations.educationLevel}
           </label>
-          <div className="relative rounded-md shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span className="text-gray-500">$</span>
-            </div>
-            <input
-              type="number"
-              id="recruiterFee"
-              name="recruiterFee"
-              value={formData.recruiterFee || ""}
-              onChange={onChange}
-              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${
-                errors.recruiterFee
-                  ? "border-red-300 focus:ring-red-500 focus:border-red-500"
-                  : "border-gray-300 "
+          <select
+            id="educationLevel"
+            name="educationLevel"
+            value={formData.educationLevel || ""}
+            onChange={onChange}
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.educationLevel
+                ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                : "border-gray-300 "
               }`}
-              placeholder="500"
-            />
-          </div>
-          {errors.recruiterFee && (
-            <p className="mt-1 text-sm text-red-600">{errors.recruiterFee}</p>
+          >
+            {!formData.educationLevel && (
+              <option value="">{translations.selectEducation}</option>
+            )}
+            {Object.values(EducationLevel).map((level) => (
+              <option key={level} value={level}>
+                {translations.educationLevels[level]}
+              </option>
+            ))}
+          </select>
+          {errors.educationLevel && (
+            <p className="mt-1 text-sm text-red-600">{errors.educationLevel}</p>
           )}
         </div>
 
@@ -398,11 +387,10 @@ export default function JobForm({
             name="location"
             value={formData.location || ""}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.location
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.location
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
-            }`}
+              }`}
             placeholder={translations.locationPlaceholder}
           />
           {errors.location && (
@@ -424,11 +412,10 @@ export default function JobForm({
             name="experienceRequired"
             value={formData.experienceRequired || ""}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.experienceRequired
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.experienceRequired
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
-            }`}
+              }`}
             placeholder={translations.experiencePlaceholder}
           />
           {errors.experienceRequired && (
@@ -438,82 +425,34 @@ export default function JobForm({
           )}
         </div>
 
-        {/* Education Level */}
+        {/* Recruiter Fee */}
         <div>
           <label
-            htmlFor="educationLevel"
+            htmlFor="recruiterFee"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            {translations.educationLevel}
+            {translations.recruiterFee}
           </label>
-          <select
-            id="educationLevel"
-            name="educationLevel"
-            value={formData.educationLevel || ""}
-            onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
-              errors.educationLevel
-                ? "border-red-300 focus:ring-red-500 focus:border-red-500"
-                : "border-gray-300 "
-            }`}
-          >
-            {!formData.educationLevel && (
-              <option value="">{translations.selectEducation}</option>
-            )}
-            {Object.values(EducationLevel).map((level) => (
-              <option key={level} value={level}>
-                {translations.educationLevels[level]}
-              </option>
-            ))}
-          </select>
-          {errors.educationLevel && (
-            <p className="mt-1 text-sm text-red-600">{errors.educationLevel}</p>
-          )}
-        </div>
-
-        {/* Skills Required */}
-        <div className="col-span-2">
-          <label
-            htmlFor="skillsRequired"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            {translations.skillsRequired}
-          </label>
-          <HTMLEditor
-            value={formData.skillsRequired || ""}
-            onChange={(content) => {
-              onChange({
-                target: { name: "skillsRequired", value: content },
-              } as React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>);
-            }}
-            className={
-              errors.skillsRequired ? "border-red-300" : "border-gray-300"
-            }
-          />
-          {errors.skillsRequired && (
-            <p className="mt-1 text-sm text-red-600">{errors.skillsRequired}</p>
-          )}
-        </div>
-
-        {/* Benefits */}
-        <div className="col-span-2">
-          <label
-            htmlFor="benefits"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            {translations.benefits}
-          </label>
-          <HTMLEditor
-            value={formData.benefits || ""}
-            onChange={(content) => {
-              onChange({
-                target: { name: "benefits", value: content },
-              } as React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>);
-            }}
-            className={errors.benefits ? "border-red-300" : "border-gray-300"}
-          />
-          {errors.benefits && (
-            <p className="mt-1 text-sm text-red-600">{errors.benefits}</p>
+          <div className="relative rounded-md shadow-sm">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <span className="text-gray-500">$</span>
+            </div>
+            <input
+              type="number"
+              id="recruiterFee"
+              name="recruiterFee"
+              value={formData.recruiterFee || ""}
+              onChange={onChange}
+              min={0}
+              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${errors.recruiterFee
+                  ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                  : "border-gray-300 "
+                }`}
+              placeholder="500"
+            />
+          </div>
+          {errors.recruiterFee && (
+            <p className="mt-1 text-sm text-red-600">{errors.recruiterFee}</p>
           )}
         </div>
 
@@ -539,9 +478,8 @@ export default function JobForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${
-            isSubmitting ? "opacity-75 cursor-not-allowed" : ""
-          }`}
+          className={`px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${isSubmitting ? "opacity-75 cursor-not-allowed" : ""
+            }`}
         >
           {isSubmitting ? (
             <span className="flex items-center">

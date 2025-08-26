@@ -1,8 +1,7 @@
 import { Settings, Users } from "lucide-react";
 import translations from "./translations";
 import { ProjectStatusBadge } from "./ProjectStatusBadge";
-import { Project, ProjectStatus } from "~/models/Project";
-import { JobStatus } from "~/models/Job";
+import { JobStatus, Project, ProjectStatus } from "pro-meets-core";
 import { useNavigate } from "react-router";
 
 interface AllProjectsProps {

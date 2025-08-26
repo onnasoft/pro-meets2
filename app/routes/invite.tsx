@@ -6,10 +6,8 @@ import {
 } from "react-router";
 
 import { User, Shield, Briefcase } from "lucide-react";
-import { Language } from "~/utils/language";
-import { getOrganizationsMembers } from "~/services/organization-members";
 import { getAvatarUrl } from "~/utils/gravatar";
-import { MemberRole } from "~/models/OrganizationMember";
+import { getOrganizationsMembers, Language, MemberRole } from "pro-meets-core";
 
 const translations = {
   en: {

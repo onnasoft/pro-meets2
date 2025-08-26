@@ -1,7 +1,6 @@
-import { LoaderFunctionArgs } from "react-router";
-import { Link, useLoaderData } from "react-router";
+import { verifyEmail } from "pro-meets-core";
+import { LoaderFunctionArgs, Link, useLoaderData } from "react-router";
 import { languageLoader } from "~/loaders/language";
-import { verifyEmail } from "~/services/auth";
 
 const translations = {
   en: {

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Rocket, ChevronRight } from "lucide-react";
-import { Language } from "~/utils/language";
+import { Language } from "pro-meets-core";
 
 const translations = {
   en: {

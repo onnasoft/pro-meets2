@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { motion } from "framer-motion";
-import { Language } from "~/utils/language";
+import { Language } from "pro-meets-core";
 
 const translations = {
   en: {

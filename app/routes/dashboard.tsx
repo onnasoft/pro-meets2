@@ -10,7 +10,6 @@ import { Sidebar } from "~/components/dashboard/Sidebar";
 import { Header } from "~/components/dashboard/Header";
 import { sessionLoader } from "~/loaders/session";
 import { languageLoader } from "~/loaders/language";
-import { Language } from "~/utils/language";
 import { organizationsLoader } from "~/loaders/organizations";
 import { useEffect, useMemo } from "react";
 import useOrganizationStore from "~/store/organization";
@@ -19,9 +18,8 @@ import logger from "~/utils/logger";
 import ErrorDialog from "~/components/ErrorDialog";
 import MobileShadow from "~/components/MobileShadow";
 import ConfirmationDialog from "~/components/ConfirmationDialog";
-import { User } from "~/models/User";
-import { Organization } from "~/models/Organization";
 import Session from "~/components/Session";
+import { Language, Organization, User } from "pro-meets-core";
 
 interface LoaderData {
   language: Language;

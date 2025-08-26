@@ -1,14 +1,13 @@
 import { Lock, Mail, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
-import { Language } from "~/utils/language";
 import translations from "./translations";
 import { loginAuthSchema } from "./schema";
 import { LoginFormData } from "./types";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { login, OAuthGoogleLogin } from "~/services/auth";
 import { useGoogleLogin } from "@react-oauth/google";
 import useAuthStore from "~/store/auth";
+import { Language, login, OAuthGoogleLogin } from "pro-meets-core";
 
 interface LoginFormProps {
   readonly language: Language;

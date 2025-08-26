@@ -1,4 +1,4 @@
-import { OrganizationPlan } from "~/models/Organization";
+import { OrganizationPlan } from "pro-meets-core";
 import { BadgeCheck, CreditCard, Building2 } from "lucide-react";
 import translations from "./translations";
 import { useOutletContext, useNavigate } from "react-router";

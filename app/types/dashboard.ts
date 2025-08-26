@@ -1,6 +1,4 @@
-import { Organization } from "~/models/Organization";
-import { User } from "~/models/User";
-import { Language } from "~/utils/language";
+import { Language, Organization, User } from "pro-meets-core";
 
 export interface DashboardOutletContext {
   user: User;

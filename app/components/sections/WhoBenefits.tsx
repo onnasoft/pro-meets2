@@ -1,6 +1,6 @@
 import { Building, UserCheck, Users, Clock, BarChart2 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Language } from "~/utils/language";
+import { Language } from "pro-meets-core";
 
 const translations = {
   en: {
