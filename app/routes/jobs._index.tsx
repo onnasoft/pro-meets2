@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Search, MapPin, DollarSign, Briefcase, Clock, Filter } from "lucide-react";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
-import { MetaFunction, useLoaderData, LoaderFunctionArgs } from "react-router";
+import { MetaFunction, useLoaderData, LoaderFunctionArgs, Link } from "react-router";
 import { languageLoader } from "~/loaders/language";
 import { useJobs } from "~/hooks/jobs";
 
@@ -125,20 +125,6 @@ export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
   ];
 };
 
-interface Job {
-  id: number;
-  title: string;
-  company: string;
-  location: string;
-  salary: string;
-  type: string;
-  isFeatured: boolean;
-  postedDate: string;
-  description: string;
-  workMode: string;
-  experienceLevel: string;
-}
-
 export default function JobsPage() {
   const { language } = useLoaderData<typeof loader>();
   const t = translations[language] || translations.en;
@@ -149,7 +135,9 @@ export default function JobsPage() {
   const [showFilters, setShowFilters] = useState(false);
 
   // Datos de ejemplo mejorados
-  const { data: jobs = [] } = useJobs();
+  const { data: jobs = [] } = useJobs({
+    relations: ["project"]
+  });
 
   const clearFilters = () => {
     setSearchTerm("");
@@ -178,7 +166,7 @@ export default function JobsPage() {
         {/* Jobs Section */}
         <section className="container mx-auto px-6 py-12">
           {/* Search and Filters */}
-          <div className="max-w-6xl mx-auto mb-8 space-y-4">
+          <div className="mx-auto mb-8 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="relative col-span-2">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -273,7 +261,7 @@ export default function JobsPage() {
           </div>
 
           {/* Jobs List */}
-          <div className="max-w-6xl mx-auto">
+          <div className="mx-auto">
             {jobs.length > 0 ? (
               <div className="space-y-4">
                 {jobs.map((job) => (
@@ -321,9 +309,9 @@ export default function JobsPage() {
                           <button className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors">
                             {t.applyNow}
                           </button>
-                          <button className="px-4 py-2 border border-primary-600 text-primary-600 rounded-md hover:bg-primary-50 transition-colors">
+                          <Link to={`/jobs/${job.id}`} className="px-4 py-2 border border-primary-600 text-primary-600 rounded-md hover:bg-primary-50 transition-colors">
                             {t.viewDetails}
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
