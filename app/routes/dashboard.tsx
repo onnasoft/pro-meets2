@@ -5,20 +5,19 @@ import {
   useLoaderData,
   useNavigate,
 } from "react-router";
+import { useEffect } from "react";
+import logger from "~/utils/logger";
+import Session from "~/components/Session";
 import translations from "~/components/dashboard/translations";
 import { Sidebar } from "~/components/dashboard/Sidebar";
 import { Header } from "~/components/dashboard/Header";
 import { sessionLoader } from "~/loaders/session";
 import { languageLoader } from "~/loaders/language";
 import { organizationsLoader } from "~/loaders/organizations";
-import { useEffect, useMemo } from "react";
 import useOrganizationStore from "~/store/organization";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import logger from "~/utils/logger";
 import ErrorDialog from "~/components/ErrorDialog";
 import MobileShadow from "~/components/MobileShadow";
 import ConfirmationDialog from "~/components/ConfirmationDialog";
-import Session from "~/components/Session";
 import { Language, Organization, User } from "pro-meets-core";
 
 interface LoaderData {
@@ -70,9 +69,6 @@ export default function DashboardLayout() {
     useLoaderData<typeof loader>();
   const t = translations[language] || translations.en;
   const navigation = useNavigate();
-
-  const queryClient = useMemo(() => new QueryClient(), []);
-
   const setCurrentOrganizationId = useOrganizationStore(
     (state) => state.setCurrentOrganizationId
   );
@@ -126,29 +122,27 @@ export default function DashboardLayout() {
   }, [currentOrganizationId, organizations, navigation]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="flex h-screen bg-primary-50">
-        <MobileShadow />
-        <Sidebar user={user} organization={organization} translations={t} />
+    <div className="flex h-screen bg-primary-50">
+      <MobileShadow />
+      <Sidebar user={user} organization={organization} translations={t} />
 
-        <div className="flex flex-col flex-1 overflow-hidden">
-          <Header
-            organizations={organizations}
-            currentOrganization={currentOrganization}
-            notifications={notifications}
-            user={user}
-            translations={t}
-          />
+      <div className="flex flex-col flex-1 overflow-hidden">
+        <Header
+          organizations={organizations}
+          currentOrganization={currentOrganization}
+          notifications={notifications}
+          user={user}
+          translations={t}
+        />
 
-          <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
-            <ErrorDialog />
-            <ConfirmationDialog />
-            <Session />
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
+          <ErrorDialog />
+          <ConfirmationDialog />
+          <Session />
 
-            <Outlet context={{ user, organization, organizations, language }} />
-          </main>
-        </div>
+          <Outlet context={{ user, organization, organizations, language }} />
+        </main>
       </div>
-    </QueryClientProvider>
+    </div>
   );
 }

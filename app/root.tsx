@@ -10,6 +10,7 @@ import type { LinksFunction, LoaderFunctionArgs } from "react-router";
 import { languageLoader } from "./loaders/language";
 import "tiptap-extension-resizable-image/styles.css";
 import "./tailwind.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -73,6 +74,7 @@ export function ErrorBoundary() {
 
 export default function App() {
   const { ENV, language } = useLoaderData<typeof loader>();
+  const queryClient = new QueryClient();
 
   return (
     <>
@@ -81,7 +83,9 @@ export default function App() {
           __html: `window.ENV = ${JSON.stringify(ENV)};`,
         }}
       />
-      <Outlet context={{ language }} />
+      <QueryClientProvider client={queryClient}>
+        <Outlet context={{ language }} />
+      </QueryClientProvider>
     </>
   );
 }

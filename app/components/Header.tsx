@@ -8,36 +8,42 @@ import {
   BookOpen,
   ChevronDown,
   ChevronUp,
+  Search
 } from "lucide-react";
 import useLanguageStore from "~/store/language";
 import { Language } from "pro-meets-core";
 
 const translations = {
   en: {
+    jobs: "Jobs",
     blog: "Blog",
     login: "Login",
     signup: "Sign Up",
     language: "Language",
   },
   es: {
+    jobs: "Empleos",
     blog: "Blog",
     login: "Iniciar sesión",
     signup: "Registrarse",
     language: "Idioma",
   },
   fr: {
+    jobs: "Emplois",
     blog: "Blog",
     login: "Connexion",
     signup: "S'inscrire",
     language: "Langue",
   },
   jp: {
+    jobs: "求人",
     blog: "ブログ",
     login: "ログイン",
     signup: "サインアップ",
     language: "言語",
   },
   zh: {
+    jobs: "招聘",
     blog: "博客",
     login: "登录",
     signup: "注册",
@@ -76,6 +82,11 @@ export default function Header({ language }: HeaderProps) {
   }, []);
 
   const navLinks = [
+    {
+      name: t.jobs,
+      href: "/jobs",
+      icon: <Search className="w-5 h-5 mr-2" />,
+    },
     {
       name: t.blog,
       href: "/blog",

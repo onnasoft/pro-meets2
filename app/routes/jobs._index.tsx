@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import { Search, MapPin, DollarSign, Star, Briefcase, Clock, Filter } from "lucide-react";
+import { useState } from "react";
+import { Search, MapPin, DollarSign, Briefcase, Clock, Filter } from "lucide-react";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import { MetaFunction, useLoaderData, LoaderFunctionArgs } from "react-router";
 import { languageLoader } from "~/loaders/language";
+import { useJobs } from "~/hooks/jobs";
 
 const translations = {
   en: {
@@ -146,90 +147,9 @@ export default function JobsPage() {
   const [jobTypeFilter, setJobTypeFilter] = useState("");
   const [workModeFilter, setWorkModeFilter] = useState("");
   const [showFilters, setShowFilters] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   // Datos de ejemplo mejorados
-  const jobs: Job[] = [
-    {
-      id: 1,
-      title: "Frontend Developer (React)",
-      company: "TechCorp Inc.",
-      location: "Remote",
-      salary: "$3,000 - $4,500",
-      type: t.fullTime,
-      isFeatured: true,
-      postedDate: "2 days ago",
-      description: "We're looking for an experienced React developer to join our team...",
-      workMode: t.remote,
-      experienceLevel: "Mid-Senior",
-    },
-    {
-      id: 2,
-      title: "UX/UI Designer",
-      company: "DesignHub Studios",
-      location: "Buenos Aires, Argentina",
-      salary: "$2,500 - $3,200",
-      type: t.contract,
-      isFeatured: false,
-      postedDate: "1 week ago",
-      description: "Join our creative team to design beautiful user experiences...",
-      workMode: t.hybrid,
-      experienceLevel: "Junior",
-    },
-    {
-      id: 3,
-      title: "Backend Engineer (Node.js)",
-      company: "DataSystems LLC",
-      location: "Córdoba, Argentina",
-      salary: "$3,500 - $4,800",
-      type: t.fullTime,
-      isFeatured: true,
-      postedDate: "3 days ago",
-      description: "Looking for a backend developer with strong Node.js experience...",
-      workMode: "On-site",
-      experienceLevel: "Senior",
-    },
-    {
-      id: 4,
-      title: "Product Manager",
-      company: "InnovateTech",
-      location: "Remote",
-      salary: "$4,500 - $6,000",
-      type: t.fullTime,
-      isFeatured: false,
-      postedDate: "Just now",
-      description: "Lead product development for our SaaS platform...",
-      workMode: t.remote,
-      experienceLevel: "Senior",
-    },
-  ];
-
-  // Simular carga de datos
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const filteredJobs = jobs.filter((job) => {
-    const matchesSearch = 
-      job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesLocation = 
-      !locationFilter || 
-      job.location.toLowerCase().includes(locationFilter.toLowerCase());
-    
-    const matchesJobType = 
-      !jobTypeFilter || 
-      job.type === jobTypeFilter;
-    
-    const matchesWorkMode = 
-      !workModeFilter || 
-      job.workMode === workModeFilter;
-
-    return matchesSearch && matchesLocation && matchesJobType && matchesWorkMode;
-  });
+  const { data: jobs = [] } = useJobs();
 
   const clearFilters = () => {
     setSearchTerm("");
@@ -265,7 +185,9 @@ export default function JobsPage() {
                   <Search className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
+                  name="search"
                   type="text"
+                  autoComplete="off"
                   placeholder={t.searchPlaceholder}
                   className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   value={searchTerm}
@@ -287,7 +209,7 @@ export default function JobsPage() {
             </div>
 
             <div className="flex justify-between items-center">
-              <button 
+              <button
                 onClick={() => setShowFilters(!showFilters)}
                 className="flex items-center text-primary-600 hover:text-primary-800"
               >
@@ -295,7 +217,7 @@ export default function JobsPage() {
                 {t.filters}
               </button>
               {(searchTerm || locationFilter || jobTypeFilter || workModeFilter) && (
-                <button 
+                <button
                   onClick={clearFilters}
                   className="text-gray-500 hover:text-gray-700 text-sm"
                 >
@@ -352,20 +274,9 @@ export default function JobsPage() {
 
           {/* Jobs List */}
           <div className="max-w-6xl mx-auto">
-            {isLoading ? (
+            {jobs.length > 0 ? (
               <div className="space-y-4">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 animate-pulse">
-                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2 mb-3"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/3 mb-3"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/4"></div>
-                  </div>
-                ))}
-              </div>
-            ) : filteredJobs.length > 0 ? (
-              <div className="space-y-4">
-                {filteredJobs.map((job) => (
+                {jobs.map((job) => (
                   <div
                     key={job.id}
                     className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow"
@@ -374,20 +285,14 @@ export default function JobsPage() {
                       <div className="flex-1">
                         <div className="flex items-start">
                           <div className="bg-primary-100 text-primary-800 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
-                            {job.company.charAt(0)}
+                            {job.project?.name.charAt(0)}
                           </div>
                           <div>
                             <h3 className="text-lg font-semibold text-gray-900">
                               {job.title}
-                              {job.isFeatured && (
-                                <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
-                                  <Star className="h-3 w-3 mr-1" />
-                                  {t.featured}
-                                </span>
-                              )}
                             </h3>
-                            <p className="text-gray-600">{job.company}</p>
-                            
+                            <p className="text-gray-600">{job.project?.name}</p>
+
                             <div className="mt-3 flex flex-wrap gap-2">
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
                                 <MapPin className="h-3 w-3 mr-1" />
@@ -395,13 +300,13 @@ export default function JobsPage() {
                               </span>
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                 <DollarSign className="h-3 w-3 mr-1" />
-                                {job.salary}
+                                {job.salaryMin} ~ {job.salaryMax}
                               </span>
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                {job.workMode}
+                                {job.contractType}
                               </span>
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                                {job.experienceLevel}
+                                {job.experienceRequired}
                               </span>
                             </div>
                           </div>
@@ -411,7 +316,7 @@ export default function JobsPage() {
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800 mb-2">
                           {job.type}
                         </span>
-                        <span className="text-sm text-gray-500 mb-3">{job.postedDate}</span>
+                        <span className="text-sm text-gray-500 mb-3">{job.postedAt}</span>
                         <div className="flex space-x-2">
                           <button className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors">
                             {t.applyNow}
@@ -432,7 +337,7 @@ export default function JobsPage() {
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 mb-1">{t.noJobsFound}</h3>
                 <p className="text-gray-500">Try adjusting your search or filter criteria</p>
-                <button 
+                <button
                   onClick={clearFilters}
                   className="mt-4 px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
                 >
