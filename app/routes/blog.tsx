@@ -1,18 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiSearch, FiClock, FiFolder, FiArrowRight } from "react-icons/fi";
-import Header from "~/components/Header";
-import Footer from "~/components/Footer";
 import BlogLayout from "~/components/blog/BlogLayout";
-import { useLoaderData } from "react-router";
-import { languageLoader } from "~/loaders/language";
-import { CallToAction } from "~/components/sections/CallToAction";
-
-export { languageLoader as loader };
 
 const BlogPage = () => {
-  const { language } = useLoaderData<typeof languageLoader>();
-
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("Todas");
 

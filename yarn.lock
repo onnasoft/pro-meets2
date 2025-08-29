@@ -4195,11 +4195,11 @@ prettier@^3.6.2:
 
 "pro-meets-core@https://github.com/juliotorresmoreno/pro-meets-core.git":
   version "0.0.4"
-  resolved "https://github.com/juliotorresmoreno/pro-meets-core.git#80fcfbb7bb76f32af4cbf4ca8133f0b876b439a7"
+  resolved "https://github.com/juliotorresmoreno/pro-meets-core.git#1e9b010dd904596a0a77806aa73d0f9e3bf607f5"
   dependencies:
     "@stripe/stripe-js" "^7.9.0"
     "@types/node" "^24.3.0"
-    stripe "^18.4.0"
+    stripe "^18.5.0"
 
 proc-log@^3.0.0:
   version "3.0.0"
@@ -5033,13 +5033,6 @@ strip-json-comments@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-3.1.1.tgz"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
-
-stripe@^18.4.0:
-  version "18.4.0"
-  resolved "https://registry.npmjs.org/stripe/-/stripe-18.4.0.tgz"
-  integrity sha512-LKFeDnDYo4U/YzNgx2Lc9PT9XgKN0JNF1iQwZxgkS4lOw5NunWCnzyH5RhTlD3clIZnf54h7nyMWkS8VXPmtTQ==
-  dependencies:
-    qs "^6.11.0"
 
 stripe@^18.5.0:
   version "18.5.0"

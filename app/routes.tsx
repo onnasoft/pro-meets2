@@ -15,14 +15,16 @@ export default [
   route('/invite', './routes/invite.tsx'),
 
   // Auth
-  route('/login', './routes/auth/login.tsx'),
-  route('/signup', './routes/auth/signup.tsx'),
-  route('/resend-verification-email', './routes/auth/resend-verification-email.tsx'),
-  route('/resend-verification/:email', './routes/auth/resend-verification.$email.tsx'),
-  route('/reset-password', './routes/auth/reset-password.tsx'),
-  route('/forgot-password', './routes/auth/forgot-password.tsx'),
-  route('/verification-sent', './routes/auth/verification-sent.tsx'),
-  route('/verify-email', './routes/auth/verify-email.tsx'),
+  route('/', './routes/auth/layout.tsx', [
+    route('/login', './routes/auth/login.tsx'),
+    route('/signup', './routes/auth/signup.tsx'),
+    route('/resend-verification-email', './routes/auth/resend-verification-email.tsx'),
+    route('/resend-verification/:email', './routes/auth/resend-verification.$email.tsx'),
+    route('/reset-password', './routes/auth/reset-password.tsx'),
+    route('/forgot-password', './routes/auth/forgot-password.tsx'),
+    route('/verification-sent', './routes/auth/verification-sent.tsx'),
+    route('/verify-email', './routes/auth/verify-email.tsx'),
+  ]),
 
   // Dashboard
   route('/dashboard', './routes/dashboard/layout.tsx', [
@@ -51,6 +53,8 @@ export default [
   ]),
 
   // Jobs
-  route('/jobs', './routes/jobs/index.tsx'),
-  route('/jobs/:id', './routes/jobs/$id.tsx')
+  route('/', './routes/jobs/layout.tsx', [
+    route('/jobs', './routes/jobs/index.tsx'),
+    route('/jobs/:id', './routes/jobs/$id.tsx')
+  ])
 ] satisfies RouteConfig;

@@ -127,8 +127,8 @@ const translations = {
 
 export { languageLoader as loader };
 
-export const meta: MetaFunction<typeof languageLoader> = ({ data }) => {
-  const language = data?.language || "en";
+export const meta: MetaFunction<typeof languageLoader> = ({ loaderData }) => {
+  const language = loaderData?.language || "en";
   const t = translations[language] || translations.en;
 
   return [
