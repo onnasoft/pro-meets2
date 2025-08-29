@@ -17,7 +17,9 @@ export async function loader(args: LoaderFunctionArgs): Promise<LoaderData> {
   const id = args.params.id!;
   const job = await getJob(
     id,
-    {},
+    {
+      relations: ['organization']
+    },
   );
 
   return { language, job };
@@ -61,8 +63,8 @@ export default function JobsPage() {
       <main>
         <div className="pt-28" />
 
-        <section className="container mx-auto px-6 py-12">
-          <div className="mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
+        <section className="container mx-auto px-6">
+          <div className="mx-auto max-w-6xl bg-white px-8">
             {/* Breadcrumb */}
             <nav className="text-sm text-gray-500 mb-6">
               <ol className="list-none p-0 inline-flex">
