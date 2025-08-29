@@ -1,13 +1,18 @@
 import { index, route, type RouteConfig } from "@react-router/dev/routes";
 
 export default [
-  index('./routes/_index.tsx'),
+  route('/.well-known/appspecific/com.chrome.devtools.json', './routes/nothing.tsx'),
 
-  route('/blog', './routes/blog.tsx'),
-  route('/about-us', './routes/about.tsx'),
-  route('/demo', './routes/demo.tsx'),
+  route('/', './routes/layout.tsx', [
+    index('./routes/_index.tsx'),
+    route('/blog', './routes/blog.tsx'),
+    route('/about-us', './routes/about.tsx'),
+    route('/demo', './routes/demo.tsx'),
+    route('/why-us', './routes/why-us.tsx'),
+    route('/support', './routes/support.tsx'),
+  ]),
+
   route('/invite', './routes/invite.tsx'),
-  route('/support', './routes/support.tsx'),
 
   // Auth
   route('/login', './routes/auth/login.tsx'),

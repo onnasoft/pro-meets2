@@ -1,7 +1,5 @@
-import Header from "~/components/Header";
+
 import Hero from "~/components/sections/Hero";
-import Footer from "~/components/Footer";
-import { CallToAction } from "~/components/sections/CallToAction";
 import { MetaFunction, useLoaderData } from "react-router";
 import { KeyBenefits } from "~/components/sections/KeyBenefits";
 import { ProductShowcase } from "~/components/sections/ProductShowcase";
@@ -107,19 +105,14 @@ export default function IndexPage() {
 
   return (
     <>
-      <Header language={language} />
-      <main>
-        <Hero language={language} />
-        <KeyBenefits language={language} />
-        <ProductShowcase language={language} />
-        <CompetitorComparison language={language} />
-        <WorkflowIntegration language={language} />
-        <WhoBenefits language={language} />
-        <FrequentAskedQuestions language={language} />
-        <Pricing language={language} />
-        <CallToAction language={language} />
-      </main>
-      <Footer language={language} />
+      <Hero language={language} />
+      <KeyBenefits language={language} />
+      <ProductShowcase language={language} />
+      <CompetitorComparison language={language} />
+      <WorkflowIntegration language={language} />
+      <WhoBenefits language={language} />
+      <FrequentAskedQuestions language={language} />
+      <Pricing language={language} />
     </>
   );
 }

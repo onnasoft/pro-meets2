@@ -1,4 +1,3 @@
-import { translations } from "./translations";
 
 const TermsField = ({
   checked,
@@ -13,7 +12,12 @@ const TermsField = ({
   touched?: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   onBlur: React.FocusEventHandler<HTMLInputElement>;
-  t: (typeof translations)["en"];
+  t: {
+    termsText: string
+    termsLink: string
+    and: string
+    privacyLink: string
+  }
 }) => (
   <>
     <div className="flex items-center">
@@ -25,9 +29,8 @@ const TermsField = ({
         onChange={onChange}
         onBlur={onBlur}
         required
-        className={`h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded ${
-          error && touched ? "border-red-500" : ""
-        }`}
+        className={`h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded ${error && touched ? "border-red-500" : ""
+          }`}
       />
       <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
         {t.termsText}{" "}

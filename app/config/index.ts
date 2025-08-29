@@ -1,12 +1,6 @@
 declare global {
   interface Window {
-    ENV?: {
-      PUBLIC_BASE_URL?: string;
-      PUBLIC_API_URL?: string;
-      PUBLIC_LINKEDIN_URL?: string;
-      PUBLIC_GOOGLE_CLIENT_ID?: string;
-      PUBLIC_STRIPE_PUBLISHABLE_KEY?: string;
-    };
+    ENV?: Record<string, string>;
   }
 }
 

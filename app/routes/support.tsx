@@ -1,7 +1,4 @@
 // app/routes/support.tsx
-import Header from "~/components/Header";
-import Footer from "~/components/Footer";
-import { CallToAction } from "~/components/sections/CallToAction";
 import { MetaFunction, useLoaderData } from "react-router";
 import { languageLoader } from "~/loaders/language";
 
@@ -151,113 +148,103 @@ export default function SupportPage() {
   const t = translations[language] || translations.en;
 
   return (
-    <>
-      <Header language={language} />
-      <main>
-        <div className="pt-28" />
+    <section className="container mx-auto px-6 py-12">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-primary-900 mb-4">
+          {t.title}
+        </h1>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          {t.subtitle}
+        </p>
+      </div>
 
-        <section className="container mx-auto px-6 py-12">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-primary-900 mb-4">
-              {t.title}
-            </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              {t.subtitle}
-            </p>
-          </div>
-
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div className="bg-white rounded-xl shadow-md overflow-hidden p-8">
-              <h2 className="text-2xl font-semibold text-primary-800 mb-6">
-                {t.contactTitle}
-              </h2>
-              <form className="space-y-4">
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t.emailLabel}
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t.subjectLabel}
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t.messageLabel}
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-                    required
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
-                >
-                  {t.submitButton}
-                </button>
-              </form>
-            </div>
-
-            {/* FAQ Section */}
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+        {/* Contact Form */}
+        <div className="bg-white rounded-xl shadow-md overflow-hidden p-8">
+          <h2 className="text-2xl font-semibold text-primary-800 mb-6">
+            {t.contactTitle}
+          </h2>
+          <form className="space-y-4">
             <div>
-              <h2 className="text-2xl font-semibold text-primary-800 mb-6">
-                {t.faqTitle}
-              </h2>
-              <div className="space-y-4">
-                {t.faqItems.map((item) => (
-                  <div key={item.answer} className="bg-white rounded-xl shadow-md overflow-hidden">
-                    <details className="group">
-                      <summary className="list-none p-4 cursor-pointer flex justify-between items-center">
-                        <span className="font-medium text-gray-800 group-hover:text-primary-600">
-                          {item.question}
-                        </span>
-                        <svg
-                          className="w-5 h-5 text-gray-500 group-hover:text-primary-600 transform group-open:rotate-180"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </summary>
-                      <div className="px-4 pb-4 text-gray-600">
-                        {item.answer}
-                      </div>
-                    </details>
-                  </div>
-                ))}
-              </div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                {t.emailLabel}
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                required
+              />
             </div>
-          </div>
-        </section>
 
-        <CallToAction language={language} />
-      </main>
-      <Footer language={language} />
-    </>
+            <div>
+              <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                {t.subjectLabel}
+              </label>
+              <input
+                type="text"
+                id="subject"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                {t.messageLabel}
+              </label>
+              <textarea
+                id="message"
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
+            >
+              {t.submitButton}
+            </button>
+          </form>
+        </div>
+
+        {/* FAQ Section */}
+        <div>
+          <h2 className="text-2xl font-semibold text-primary-800 mb-6">
+            {t.faqTitle}
+          </h2>
+          <div className="space-y-4">
+            {t.faqItems.map((item) => (
+              <div key={item.answer} className="bg-white rounded-xl shadow-md overflow-hidden">
+                <details className="group">
+                  <summary className="list-none p-4 cursor-pointer flex justify-between items-center">
+                    <span className="font-medium text-gray-800 group-hover:text-primary-600">
+                      {item.question}
+                    </span>
+                    <svg
+                      className="w-5 h-5 text-gray-500 group-hover:text-primary-600 transform group-open:rotate-180"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </summary>
+                  <div className="px-4 pb-4 text-gray-600">
+                    {item.answer}
+                  </div>
+                </details>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
