@@ -104,7 +104,7 @@ export default function ProjectDetailsForm({
             onSelect={handleLeaderSelect}
             readOnly={!canUpdate}
             placeholder={translations.placeholders.leader}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
+            className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${
               errors.leader ? "border-red-300" : "border-gray-300"
             } ${!canUpdate ? "bg-gray-100 cursor-not-allowed" : ""}`}
           />
@@ -132,7 +132,7 @@ export default function ProjectDetailsForm({
           value={startDate}
           onChange={onDateChange}
           readOnly={!canUpdate}
-          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
+          className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${
             errors.startDate ? "border-red-300" : "border-gray-300"
           } ${!canUpdate ? "bg-gray-100 cursor-not-allowed" : ""}`}
         />
@@ -155,7 +155,7 @@ export default function ProjectDetailsForm({
           onChange={onDateChange}
           readOnly={!canUpdate}
           min={startDate}
-          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
+          className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${
             errors.dueDate ? "border-red-300" : "border-gray-300"
           } ${!canUpdate ? "bg-gray-100 cursor-not-allowed" : ""}`}
         />
@@ -176,7 +176,7 @@ export default function ProjectDetailsForm({
           value={status}
           onChange={handleStatusChange}
           disabled={!canUpdate}
-          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
+          className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${
             errors.status ? "border-red-300" : "border-gray-300"
           } ${!canUpdate ? "bg-gray-100 cursor-not-allowed" : ""}`}
         >

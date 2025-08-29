@@ -70,7 +70,7 @@ export function CallToAction({ language }: CallToActionProps) {
   const t = translations[language] || translations.en;
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary-900 to-primary-700 text-white">
+    <section className="py-20 bg-linear-to-br from-primary-900 to-primary-700 text-white">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2

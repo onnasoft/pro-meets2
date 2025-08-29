@@ -20,7 +20,7 @@ export default function PreviousInvitations({
       </h2>
 
       {pastInvitations.length > 0 ? (
-        <div className="bg-white shadow rounded-lg divide-y divide-gray-200">
+        <div className="bg-white shadow-sm rounded-lg divide-y divide-gray-200">
           {pastInvitations.map((invite) => (
             <div key={invite.id} className="p-6">
               <div className="flex items-start">

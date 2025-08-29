@@ -28,7 +28,7 @@ const translations = {
           "Email support",
           "Community access",
         ],
-        buttonVariant: "outline",
+        buttonVariant: "outline-solid",
       },
       {
         name: "Professional",
@@ -64,7 +64,7 @@ const translations = {
           "Full API access",
           "99.9% uptime SLA",
         ],
-        buttonVariant: "outline",
+        buttonVariant: "outline-solid",
       },
     ],
     includes: "Includes:",
@@ -89,7 +89,7 @@ const translations = {
           "Soporte por email",
           "Acceso a la comunidad",
         ],
-        buttonVariant: "outline",
+        buttonVariant: "outline-solid",
       },
       {
         name: "Profesional",
@@ -125,7 +125,7 @@ const translations = {
           "API completa",
           "SLA 99.9% uptime",
         ],
-        buttonVariant: "outline",
+        buttonVariant: "outline-solid",
       },
     ],
     includes: "Incluye:",
@@ -151,7 +151,7 @@ const translations = {
           "Support par email",
           "Accès à la communauté",
         ],
-        buttonVariant: "outline",
+        buttonVariant: "outline-solid",
       },
       {
         name: "Professionnel",
@@ -187,7 +187,7 @@ const translations = {
           "Accès API complet",
           "SLA 99.9% de disponibilité",
         ],
-        buttonVariant: "outline",
+        buttonVariant: "outline-solid",
       },
     ],
     includes: "Inclus :",
@@ -212,7 +212,7 @@ const translations = {
           "メールサポート",
           "コミュニティアクセス",
         ],
-        buttonVariant: "outline",
+        buttonVariant: "outline-solid",
       },
       {
         name: "プロフェッショナル",
@@ -248,7 +248,7 @@ const translations = {
           "完全なAPIアクセス",
           "99.9% 稼働率SLA",
         ],
-        buttonVariant: "outline",
+        buttonVariant: "outline-solid",
       },
     ],
     includes: "含まれるもの:",
@@ -273,7 +273,7 @@ const translations = {
           "邮件支持",
           "社区访问",
         ],
-        buttonVariant: "outline",
+        buttonVariant: "outline-solid",
       },
       {
         name: "专业版",
@@ -309,7 +309,7 @@ const translations = {
           "完整API访问",
           "99.9%正常运行时间SLA",
         ],
-        buttonVariant: "outline",
+        buttonVariant: "outline-solid",
       },
     ],
     includes: "包含:",
@@ -384,7 +384,7 @@ export function Pricing({ language }: PricingProps) {
                 <button
                   className={`w-full py-3 px-6 rounded-lg font-bold flex items-center justify-center gap-2 transition-colors mb-6 ${
                     plan.buttonVariant === "primary"
-                      ? "bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800"
+                      ? "bg-linear-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800"
                       : "border border-primary-600 text-primary-600 hover:bg-primary-50"
                   }`}
                 >
@@ -406,7 +406,7 @@ export function Pricing({ language }: PricingProps) {
                             plan.name === t.plans[0].name
                               ? "text-gray-400"
                               : "text-green-500"
-                          } mt-0.5 mr-2 flex-shrink-0`}
+                          } mt-0.5 mr-2 shrink-0`}
                         />
                         <span
                           className={`${

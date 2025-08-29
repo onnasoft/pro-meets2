@@ -370,7 +370,7 @@ export function KeyBenefits({ language }: KeyBenefitsProps) {
               key={benefit.title}
               variants={item}
               whileHover={{ scale: 1.03 }}
-              className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group"
+              className="bg-white p-8 rounded-2xl shadow-xs border border-gray-100 hover:shadow-lg transition-all duration-300 group"
             >
               <div className="w-16 h-16 bg-primary-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary-100 transition-colors">
                 {benefit.icon}
@@ -389,7 +389,7 @@ export function KeyBenefits({ language }: KeyBenefitsProps) {
         </motion.div>
 
         {/* Sección adicional de estadísticas */}
-        <div className="mt-24 bg-white rounded-2xl shadow-sm p-8 md:p-12 border border-gray-100 hidden">
+        <div className="mt-24 bg-white rounded-2xl shadow-xs p-8 md:p-12 border border-gray-100 hidden">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="text-5xl font-bold text-primary-600 mb-2">

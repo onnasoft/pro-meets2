@@ -220,7 +220,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
   );
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-white to-primary-50 min-h-[90vh] flex items-center pt-8 lg:pt-0">
+    <section className="relative overflow-hidden bg-linear-to-br from-white to-primary-50 min-h-[90vh] flex items-center pt-8 lg:pt-0">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -253,7 +253,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
 
             <motion.h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
               {t.titlePrefix}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-700">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary-600 to-primary-700">
                 {t.titleSuffix}
               </span>
             </motion.h1>
@@ -272,14 +272,14 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
             <motion.div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
                 to="/demo"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg shadow-primary hover:shadow-primary-md transition-all hover:scale-[1.02]"
+                className="flex items-center justify-center gap-2 px-8 py-4 bg-linear-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg shadow-primary hover:shadow-primary-md transition-all hover:scale-[1.02]"
               >
                 <Rocket className="w-5 h-5" />
                 {t.ctaDemo}
               </Link>
               <Link
                 to="#features"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-800 font-medium rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all hover:scale-[1.02]"
+                className="flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-800 font-medium rounded-lg border border-gray-200 shadow-xs hover:shadow-md transition-all hover:scale-[1.02]"
               >
                 {t.ctaFeatures}
                 <ChevronRight className="w-5 h-5" />
@@ -292,7 +292,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
                 {recruitmentPillars.map((pillar, index) => (
                   <motion.div
                     key={pillar.title}
-                    className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm border border-gray-100 hover:border-primary-200 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-xs border border-gray-100 hover:border-primary-200 transition-colors"
                     whileHover={{ y: -5 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{
@@ -343,10 +343,10 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
                   <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
                   <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
                 </div>
-                <div className="p-4 bg-gradient-to-br from-primary-50 to-primary-100 h-96 flex items-center justify-center">
+                <div className="p-4 bg-linear-to-br from-primary-50 to-primary-100 h-96 flex items-center justify-center">
                   <div className="text-center">
                     <motion.div
-                      className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 flex items-center justify-center text-white"
+                      className="w-16 h-16 mx-auto mb-4 rounded-full bg-linear-to-r from-primary-500 to-primary-600 flex items-center justify-center text-white"
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 1 }}
                     >
@@ -361,7 +361,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
                     <br />
                     <Link
                       to="/signup"
-                      className="mt-6 px-6 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg text-sm font-medium hover:from-primary-600 hover:to-primary-700 transition-colors"
+                      className="mt-6 px-6 py-2 bg-linear-to-r from-primary-500 to-primary-600 text-white rounded-lg text-sm font-medium hover:from-primary-600 hover:to-primary-700 transition-colors"
                     >
                       {t.joinNow}
                     </Link>

@@ -42,7 +42,7 @@ export function BasicInfoForm({
           value={name}
           onChange={onChange}
           readOnly={!canUpdate}
-          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${
+          className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${
             errors.name ? "border-red-300" : "border-gray-300"
           }`}
         />

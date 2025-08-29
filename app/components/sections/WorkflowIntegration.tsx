@@ -279,7 +279,7 @@ export function WorkflowIntegration({ language }: WorkflowIntegrationProps) {
 
         <div className="relative">
           {/* Timeline decoration */}
-          <div className="hidden lg:block absolute left-1/2 top-0 h-full w-0.5 bg-gradient-to-b from-primary-500 to-primary-300 transform -translate-x-1/2"></div>
+          <div className="hidden lg:block absolute left-1/2 top-0 h-full w-0.5 bg-linear-to-b from-primary-500 to-primary-300 transform -translate-x-1/2"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {t.steps.map((step, index) => (
@@ -295,7 +295,7 @@ export function WorkflowIntegration({ language }: WorkflowIntegrationProps) {
                     : "lg:pl-8 lg:text-left"
                 } ${index === 0 ? "lg:mt-0" : ""}`}
               >
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all h-full">
+                <div className="bg-white p-6 rounded-xl shadow-xs border border-gray-100 hover:shadow-md transition-all h-full">
                   <div
                     className={`flex ${
                       index % 2 === 0 ? "lg:justify-end" : ""
@@ -319,7 +319,7 @@ export function WorkflowIntegration({ language }: WorkflowIntegrationProps) {
           </div>
         </div>
 
-        <div className="mt-16 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-8 md:p-12 text-white">
+        <div className="mt-16 bg-linear-to-r from-primary-600 to-primary-700 rounded-2xl p-8 md:p-12 text-white">
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               {t.ctaTitle}

@@ -19,7 +19,7 @@ export function WebhooksSection({
   onWebhookChange,
 }: WebhooksSectionProps) {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-6">
       <div className="flex items-center mb-4">
         <Cpu className="h-5 w-5 text-primary-600 mr-2" />
         <h2 className="text-xl font-semibold">{translations.title}</h2>
@@ -32,11 +32,11 @@ export function WebhooksSection({
             value={newWebhook}
             onChange={(e) => onWebhookChange(e.target.value)}
             placeholder={translations.placeholder}
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           />
           <button
             onClick={onAddWebhook}
-            className="px-4 py-2 bg-primary-600 text-white rounded-r-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="px-4 py-2 bg-primary-600 text-white rounded-r-md hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500"
           >
             {translations.add}
           </button>
@@ -52,7 +52,7 @@ export function WebhooksSection({
                 <span className="text-sm break-all">{webhook}</span>
                 <button
                   onClick={() => onRemoveWebhook(index)}
-                  className="text-red-600 hover:text-red-800 ml-2 flex-shrink-0"
+                  className="text-red-600 hover:text-red-800 ml-2 shrink-0"
                 >
                   {translations.delete}
                 </button>

@@ -85,7 +85,7 @@ export default function EmailVerified() {
 
   if (!success) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-red-50 to-red-100 flex flex-col items-center justify-center p-6">
+      <div className="min-h-screen bg-linear-to-b from-red-50 to-red-100 flex flex-col items-center justify-center p-6">
         <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 space-y-6 text-center">
           {/* Icono de error */}
           <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100">
@@ -161,7 +161,7 @@ export default function EmailVerified() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-50 to-primary-100 flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-linear-to-b from-primary-50 to-primary-100 flex flex-col items-center justify-center p-6">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 space-y-6 text-center">
         {/* Icono de verificación exitosa */}
         <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100">

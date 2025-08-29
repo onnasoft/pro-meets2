@@ -56,7 +56,7 @@ export default function WorkExperience({
                     <input
                       type="text"
                       name="position"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-xs focus:outline-hidden focus:ring-primary-500 focus:border-primary-500"
                     />
                   </div>
                   <div>
@@ -66,7 +66,7 @@ export default function WorkExperience({
                     <input
                       type="text"
                       name="company"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-xs focus:outline-hidden focus:ring-primary-500 focus:border-primary-500"
                     />
                   </div>
                 </div>
@@ -78,7 +78,7 @@ export default function WorkExperience({
                     <input
                       type="date"
                       name="startDate"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-xs focus:outline-hidden focus:ring-primary-500 focus:border-primary-500"
                     />
                   </div>
                   <div>
@@ -88,7 +88,7 @@ export default function WorkExperience({
                     <input
                       type="date"
                       name="endDate"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-xs focus:outline-hidden focus:ring-primary-500 focus:border-primary-500"
                     />
                   </div>
                 </div>
@@ -98,7 +98,7 @@ export default function WorkExperience({
                   </label>
                   <textarea
                     name="description"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-xs focus:outline-hidden focus:ring-primary-500 focus:border-primary-500"
                     rows={3}
                     placeholder={translations.placeholders.description}
                   />

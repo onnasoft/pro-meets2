@@ -55,12 +55,12 @@ export function Sidebar({
 
   return (
     <div
-      className={`z-10 md:flex md:flex-shrink-0 ${isOpen ? "block absolute" : "hidden"
+      className={`z-10 md:flex md:shrink-0 ${isOpen ? "block absolute" : "hidden"
         }`}
     >
       <div className="flex flex-col w-64 border-r border-gray-200 bg-white h-screen sticky top-0">
         {/* Logo */}
-        <div className="flex items-center h-16 px-4 border-b border-gray-200 bg-gradient-to-r from-primary-600 to-primary-500">
+        <div className="flex items-center h-16 px-4 border-b border-gray-200 bg-linear-to-r from-primary-600 to-primary-500">
           <Link
             to="/dashboard"
             onClick={closeMobileMenu}
@@ -79,7 +79,7 @@ export function Sidebar({
           <div className="px-3 mb-4">
             <button
               onClick={handleNewProject}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-500 rounded-lg hover:bg-primary-600 transition-colors shadow-sm"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-500 rounded-lg hover:bg-primary-600 transition-colors shadow-xs"
             >
               <Plus className="h-4 w-4" />
               <span>{translations.newProject}</span>
@@ -227,7 +227,7 @@ export function Sidebar({
         <div className="p-4 border-t border-gray-200 bg-gray-50 mt-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gray-200 overflow-hidden border-2 border-white shadow-sm">
+              <div className="shrink-0 w-10 h-10 rounded-full bg-gray-200 overflow-hidden border-2 border-white shadow-xs">
                 <img
                   src={getAvatarUrl(user)}
                   alt={user.name}

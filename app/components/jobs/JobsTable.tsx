@@ -181,7 +181,7 @@ export default function JobsTable({
   };
 
   return (
-    <div className="bg-white shadow-sm rounded-xl overflow-hidden border border-gray-100">
+    <div className="bg-white shadow-xs rounded-xl overflow-hidden border border-gray-100">
       <div className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100">
         <div>
           <h2 className="text-xl font-semibold text-gray-800">{t.title}</h2>
@@ -208,7 +208,7 @@ export default function JobsTable({
             <input
               type="text"
               placeholder={t.searchPlaceholder}
-              className="block w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+              className="block w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -216,7 +216,7 @@ export default function JobsTable({
 
           <button
             onClick={onNewJob}
-            className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-sm hover:shadow-md"
+            className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-xs hover:shadow-md"
           >
             <svg
               className="w-5 h-5"
@@ -328,7 +328,7 @@ export default function JobsTable({
                   >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center gap-3">
-                        <div className="flex-shrink-0 h-10 w-10 rounded-md bg-primary-50 flex items-center justify-center text-primary-600">
+                        <div className="shrink-0 h-10 w-10 rounded-md bg-primary-50 flex items-center justify-center text-primary-600">
                           <svg
                             className="w-5 h-5"
                             fill="none"

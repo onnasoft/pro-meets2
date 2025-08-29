@@ -9,7 +9,7 @@ interface StatsCardsProps {
 export default function StatsCards({ translations, status }: StatsCardsProps) {
   return (
     <div className="grid grid-cols-4 gap-4 mb-8">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
         <h3 className="text-gray-500 dark:text-gray-400 text-sm font-medium">
           {translations.stats.total}
         </h3>
@@ -17,7 +17,7 @@ export default function StatsCards({ translations, status }: StatsCardsProps) {
           {status?.projects || 0}
         </p>
       </div>
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
         <h3 className="text-gray-500 dark:text-gray-400 text-sm font-medium">
           {translations.stats.planning}
         </h3>
@@ -25,7 +25,7 @@ export default function StatsCards({ translations, status }: StatsCardsProps) {
           {status?.planning || 0}
         </p>
       </div>
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
         <h3 className="text-gray-500 dark:text-gray-400 text-sm font-medium">
           {translations.stats.inProgress}
         </h3>
@@ -33,7 +33,7 @@ export default function StatsCards({ translations, status }: StatsCardsProps) {
           {status?.inProgress || 0}
         </p>
       </div>
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
         <h3 className="text-gray-500 dark:text-gray-400 text-sm font-medium">
           {translations.stats.completed}
         </h3>

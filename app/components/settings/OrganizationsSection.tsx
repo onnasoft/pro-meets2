@@ -18,7 +18,7 @@ export function OrganizationsSection({
   onCreateOrganization,
 }: OrganizationsSectionProps) {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-6">
       <div className="flex items-center mb-4">
         <Users className="h-5 w-5 text-primary-600 mr-2" />
         <h2 className="text-xl font-semibold">{translations.title}</h2>

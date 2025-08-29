@@ -9,7 +9,7 @@ export default function Benefits() {
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Beneficio 1: Ahorro de Tiempo */}
-          <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-sm">
+          <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-xs">
             <Clock className="h-10 w-10 text-purple-600 mb-3" />
             <h3 className="text-lg font-semibold mb-2 text-gray-900">
               Ahorro de Tiempo Masivo
@@ -20,7 +20,7 @@ export default function Benefits() {
             </p>
           </div>
           {/* Beneficio 2: Experiencia del Candidato */}
-          <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-sm">
+          <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-xs">
             <Star className="h-10 w-10 text-purple-600 mb-3" />
             <h3 className="text-lg font-semibold mb-2 text-gray-900">
               Mejora la Experiencia del Candidato
@@ -31,7 +31,7 @@ export default function Benefits() {
             </p>
           </div>
           {/* Beneficio 3: Decisiones Inteligentes */}
-          <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-sm">
+          <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-xs">
             <Zap className="h-10 w-10 text-purple-600 mb-3" />
             <h3 className="text-lg font-semibold mb-2 text-gray-900">
               Decisiones de Contratación Inteligentes
@@ -42,7 +42,7 @@ export default function Benefits() {
             </p>
           </div>
           {/* Beneficio 4: Colaboración Optimizada */}
-          <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-sm">
+          <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-xs">
             <Users className="h-10 w-10 text-purple-600 mb-3" />
             <h3 className="text-lg font-semibold mb-2 text-gray-900">
               Colaboración Optimizada

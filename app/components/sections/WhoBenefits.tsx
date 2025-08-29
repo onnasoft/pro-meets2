@@ -246,7 +246,7 @@ export function WhoBenefits({ language }: WhoBenefitsProps) {
               transition={{ duration: 0.3, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
-              className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all"
+              className="bg-white p-8 rounded-xl shadow-xs border border-gray-100 hover:shadow-md transition-all"
             >
               <div className="w-14 h-14 bg-primary-50 rounded-lg flex items-center justify-center mb-6 text-primary-600">
                 {icons[index]}

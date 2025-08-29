@@ -79,7 +79,7 @@ export function ContactInfoForm({
           value={website}
           onChange={onChange}
           placeholder={translations.placeholders.website}
-          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none  ${
+          className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden  ${
             errors.website ? "border-red-300" : "border-gray-300"
           }`}
         />
@@ -101,7 +101,7 @@ export function ContactInfoForm({
           readOnly={!canUpdate}
           value={location}
           onChange={onChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none "
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-xs focus:outline-hidden "
         />
       </div>
 
@@ -118,7 +118,7 @@ export function ContactInfoForm({
           readOnly={!canUpdate}
           value={phone}
           onChange={onChange}
-          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none  ${
+          className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden  ${
             errors.phone ? "border-red-300" : "border-gray-300"
           }`}
         />
@@ -149,7 +149,7 @@ export function ContactInfoForm({
             type="button"
             onClick={handleLogoClick}
             disabled={!canUpdate || isUploading}
-            className={`flex items-center px-3 py-2 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+            className={`flex items-center px-3 py-2 border rounded-md shadow-xs text-sm font-medium focus:outline-hidden focus:ring-2 focus:ring-offset-2 ${
               canUpdate
                 ? "bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
                 : "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
@@ -160,7 +160,7 @@ export function ContactInfoForm({
           </button>
 
           {logoUrl && (
-            <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden border border-gray-200">
+            <div className="shrink-0 h-10 w-10 rounded-full overflow-hidden border border-gray-200">
               <img
                 src={`${config.apiUrl}${logoUrl}`}
                 alt="Organization Logo"

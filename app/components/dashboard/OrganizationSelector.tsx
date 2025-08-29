@@ -47,16 +47,16 @@ export function OrganizationSelector({
           className="flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg hover:bg-gray-100 w-[230px] md:w-[380px] border border-gray-200"
         >
           <div className="flex items-center space-x-3">
-            <Building2 className="h-5 w-5 text-primary-600 flex-shrink-0" />
+            <Building2 className="h-5 w-5 text-primary-600 shrink-0" />
             <span className="font-medium text-gray-700 text-left truncate">
               {currentOrganization?.name}
             </span>
           </div>
-          <ChevronsUpDown className="h-4 w-4 text-gray-400 flex-shrink-0" />
+          <ChevronsUpDown className="h-4 w-4 text-gray-400 shrink-0" />
         </button>
 
         {isOpen && (
-          <div className="absolute left-0 mt-2 w-[230px] md:w-[380px] origin-top-left bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none z-50 divide-y divide-gray-100 border border-gray-200">
+          <div className="absolute left-0 mt-2 w-[230px] md:w-[380px] origin-top-left bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-hidden z-50 divide-y divide-gray-100 border border-gray-200">
             <div className="px-5 py-3 bg-gray-50 rounded-t-lg">
               <p className="text-sm font-semibold text-gray-900">
                 {translations.organizations.title}
@@ -75,7 +75,7 @@ export function OrganizationSelector({
                   }`}
                 >
                   <div className="flex items-center">
-                    <Building2 className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0" />
+                    <Building2 className="w-5 h-5 mr-3 text-gray-400 shrink-0" />
                     <span className="text-left">{org.name}</span>
                   </div>
                   {org.id === currentOrganization?.id && (
@@ -96,7 +96,7 @@ export function OrganizationSelector({
                   }}
                   className="w-full flex items-center px-5 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100"
                 >
-                  <Plus className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0" />
+                  <Plus className="w-5 h-5 mr-3 text-gray-400 shrink-0" />
                   <span>{translations.organizations.createNew}</span>
                 </button>
               </div>

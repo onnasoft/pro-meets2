@@ -84,7 +84,7 @@ export const JobOffersGrid = () => {
         {offers.map((offer) => (
           <div
             key={offer.id}
-            className="border border-gray-200 rounded-lg p-5 shadow-sm hover:shadow-md transition-all duration-200"
+            className="border border-gray-200 rounded-lg p-5 shadow-xs hover:shadow-md transition-all duration-200"
           >
             {/* Header */}
             <div className="flex justify-between items-start mb-3">

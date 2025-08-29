@@ -61,7 +61,7 @@ export default function ProjectsPage() {
             ))}
           </div>
         ) : (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-12 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-12 text-center">
             <div className="mx-auto h-24 w-24 text-gray-400 dark:text-gray-500">
               <FileText className="w-full h-full" />
             </div>

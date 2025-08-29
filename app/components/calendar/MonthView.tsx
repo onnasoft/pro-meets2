@@ -21,7 +21,7 @@ export function MonthView({ monthDays, events, translations }: MonthViewProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+    <div className="bg-white rounded-lg shadow-xs border border-gray-200 overflow-hidden">
       {/* Day headers */}
       <div className="grid grid-cols-7 border-b border-gray-200">
         {[
@@ -70,7 +70,7 @@ export function MonthView({ monthDays, events, translations }: MonthViewProps) {
                 {dayEvents.map((event) => (
                   <div
                     key={event.id}
-                    className={`text-xs p-1 rounded truncate ${event.color}`}
+                    className={`text-xs p-1 rounded-sm truncate ${event.color}`}
                   >
                     {event.title}
                   </div>

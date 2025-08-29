@@ -49,7 +49,7 @@ export function NotificationsMenu({
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50 divide-y divide-gray-100">
+        <div className="absolute right-0 mt-2 w-80 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden z-50 divide-y divide-gray-100">
           <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
             <p className="text-sm font-medium text-gray-900">
               {translations.notifications.title}
@@ -65,7 +65,7 @@ export function NotificationsMenu({
                   }`}
                 >
                   <div className="flex items-start">
-                    <div className="flex-shrink-0 pt-0.5 text-lg mr-3">
+                    <div className="shrink-0 pt-0.5 text-lg mr-3">
                       {notification.icon}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -80,7 +80,7 @@ export function NotificationsMenu({
                       </p>
                     </div>
                     {!notification.read && (
-                      <div className="ml-2 flex-shrink-0">
+                      <div className="ml-2 shrink-0">
                         <span className="inline-block w-2 h-2 rounded-full bg-primary-500"></span>
                       </div>
                     )}

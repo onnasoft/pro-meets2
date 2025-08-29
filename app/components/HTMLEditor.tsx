@@ -55,7 +55,7 @@ function ToolbarButton({
     >
       {children}
       {tooltip && (
-        <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
           {tooltip}
         </span>
       )}
@@ -123,7 +123,7 @@ export default function HTMLEditor({ value, onChange, className }: HTMLEditorPro
   return (
     <div className="">
       {/* Main toolbar */}
-      <div className="flex flex-wrap gap-1 mb-2 p-2 border rounded-lg bg-white shadow-sm top-0 z-10">
+      <div className="flex flex-wrap gap-1 mb-2 p-2 border rounded-lg bg-white shadow-xs top-0 z-10">
         {/* Text formatting */}
         <div className="flex border-r pr-2 mr-2">
           <ToolbarButton
@@ -254,19 +254,19 @@ export default function HTMLEditor({ value, onChange, className }: HTMLEditorPro
               value={linkUrl}
               onChange={(e) => setLinkUrl(e.target.value)}
               placeholder="https://example.com"
-              className="flex-1 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-3 py-2 border rounded-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500"
               autoFocus
               onKeyDown={(e) => e.key === "Enter" && addLink()}
             />
             <button
               onClick={addLink}
-              className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-3 py-2 bg-blue-600 text-white rounded-sm hover:bg-blue-700"
             >
               Apply
             </button>
             <button
               onClick={() => setShowLinkInput(false)}
-              className="px-3 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              className="px-3 py-2 bg-gray-200 rounded-sm hover:bg-gray-300"
             >
               Cancel
             </button>
@@ -277,7 +277,7 @@ export default function HTMLEditor({ value, onChange, className }: HTMLEditorPro
       {/* Editor area */}
       <EditorContent
         editor={editor}
-        className={`min-h-[300px] border rounded-lg bg-white shadow-sm prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto focus:outline-none ${className}`}
+        className={`min-h-[300px] border rounded-lg bg-white shadow-xs prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto focus:outline-hidden ${className}`}
       />
 
       <FileUploadDialog

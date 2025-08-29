@@ -20,7 +20,7 @@ export function WeekView({ weekDays, events, translations }: WeekViewProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+    <div className="bg-white rounded-lg shadow-xs border border-gray-200 overflow-hidden">
       {/* Day headers */}
       <div className="grid grid-cols-8 border-b border-gray-200">
         <div className="p-3 border-r border-gray-200"></div>

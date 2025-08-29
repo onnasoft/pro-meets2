@@ -17,7 +17,7 @@ export default function DocumentRow({
     <tr>
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex items-center">
-          <div className="flex-shrink-0 h-10 w-10 flex items-center">
+          <div className="shrink-0 h-10 w-10 flex items-center">
             {item.type === "folder" ? (
               <Folder className="h-8 w-8 text-primary-400" />
             ) : (
@@ -29,7 +29,7 @@ export default function DocumentRow({
               {item.type === "folder" ? (
                 <button
                   onClick={() => onNavigate(item.name)}
-                  className="hover:text-primary-600 focus:outline-none text-left"
+                  className="hover:text-primary-600 focus:outline-hidden text-left"
                 >
                   {item.name}
                 </button>

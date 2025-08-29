@@ -13,7 +13,7 @@ export function UpcomingPayments({
   estimatedPaymentDate = "15 Feb 2023",
 }: UpcomingPaymentsProps) {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-6">
       <h2 className="text-xl font-semibold flex items-center mb-4">
         <History className="h-5 w-5 mr-2 text-orange-600" />
         {translations.title}

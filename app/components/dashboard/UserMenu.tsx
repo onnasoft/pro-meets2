@@ -49,7 +49,7 @@ export function UserMenu({
     <div className={`relative ${className}`} ref={menuRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-2 text-sm rounded-full focus:outline-none transition-colors ${
+        className={`flex items-center gap-2 text-sm rounded-full focus:outline-hidden transition-colors ${
           isOpen ? "ring-2 ring-primary-500" : ""
         }`}
         aria-label="Menú de usuario"
@@ -57,14 +57,14 @@ export function UserMenu({
       >
         {/* Badge de notificaciones */}
         {pendingInvites > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center shadow-sm">
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center shadow-xs">
             {pendingInvites}
           </span>
         )}
 
         {/* Avatar */}
         <div className="relative">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 p-0.5">
+          <div className="w-9 h-9 rounded-full bg-linear-to-r from-primary-500 to-primary-600 p-0.5">
             <div className="w-full h-full rounded-full bg-white overflow-hidden">
               <img
                 src={getAvatarUrl(user)}
@@ -94,9 +94,9 @@ export function UserMenu({
 
       {/* Menú desplegable */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 origin-top-right bg-white rounded-lg shadow-xl ring-1 ring-gray-200 focus:outline-none z-50 divide-y divide-gray-100 overflow-hidden animate-fade-in">
+        <div className="absolute right-0 mt-2 w-64 origin-top-right bg-white rounded-lg shadow-xl ring-1 ring-gray-200 focus:outline-hidden z-50 divide-y divide-gray-100 overflow-hidden animate-fade-in">
           {/* Encabezado */}
-          <div className="px-4 py-3 bg-gradient-to-r from-primary-50 to-primary-100">
+          <div className="px-4 py-3 bg-linear-to-r from-primary-50 to-primary-100">
             <p className="text-sm font-medium text-gray-900 truncate">
               {user.name}
             </p>

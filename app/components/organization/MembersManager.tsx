@@ -169,7 +169,7 @@ export default function MembersManager({
               value={newMemberEmail}
               onChange={(e) => setNewMemberEmail(e.target.value)}
               placeholder="user@example.com"
-              className={`w-full px-3 py-2 h-10 border rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
+              className={`w-full px-3 py-2 h-10 border rounded-md shadow-xs focus:outline-hidden focus:ring-primary-500 focus:border-primary-500 ${
                 errors.members ? "border-red-300" : "border-gray-300"
               }`}
             />
@@ -189,7 +189,7 @@ export default function MembersManager({
               id="new-member-role"
               value={newMemberRole}
               onChange={(e) => setNewMemberRole(e.target.value as MemberRole)}
-              className="border h-10 border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+              className="border h-10 border-gray-300 rounded-md px-3 py-2 shadow-xs focus:outline-hidden focus:ring-primary-500 focus:border-primary-500"
             >
               {roles.map((role) => (
                 <option key={role.value} value={role.value}>
@@ -202,7 +202,7 @@ export default function MembersManager({
           <button
             type="button"
             onClick={handleAddMember}
-            className="px-3 py-2 h-10 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="px-3 py-2 h-10 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500"
           >
             <CirclePlus className="h-5 w-5" />
           </button>

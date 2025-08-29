@@ -39,7 +39,7 @@ export default function JobForm({
       {errors.form && (
         <div className="rounded-md bg-red-50 p-4">
           <div className="flex">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <svg
                 className="h-5 w-5 text-red-400"
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@ export default function JobForm({
             value={formData.title || ""}
             onChange={onChange}
             required
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.title
+            className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${errors.title
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
               }`}
@@ -129,7 +129,7 @@ export default function JobForm({
               required
               readOnly
               value={`${config.baseUrl}/jobs/${formData.id}`}
-              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none border-gray-300`}
+              className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden border-gray-300`}
             />
           </div>
         )}
@@ -147,7 +147,7 @@ export default function JobForm({
             name="projectId"
             value={formData.projectId || ""}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.projectId
+            className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${errors.projectId
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
               }`}
@@ -180,7 +180,7 @@ export default function JobForm({
             required
             value={formData.type || JobType.FULL_TIME}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.type
+            className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${errors.type
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
               }`}
@@ -210,7 +210,7 @@ export default function JobForm({
             required
             value={formData.contractType || ContractType.PERMANENT}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.contractType
+            className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${errors.contractType
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
               }`}
@@ -240,7 +240,7 @@ export default function JobForm({
             required
             value={formData.status || JobStatus.OPEN}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.status
+            className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${errors.status
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
               }`}
@@ -288,7 +288,7 @@ export default function JobForm({
           >
             {translations.minSalary}
           </label>
-          <div className="relative rounded-md shadow-sm">
+          <div className="relative rounded-md shadow-xs">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <span className="text-gray-500">$</span>
             </div>
@@ -299,7 +299,7 @@ export default function JobForm({
               min={0}
               value={formData.salaryMin || ""}
               onChange={onChange}
-              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${errors.salaryMin
+              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-hidden ${errors.salaryMin
                   ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                   : "border-gray-300 "
                 }`}
@@ -318,7 +318,7 @@ export default function JobForm({
           >
             {translations.maxSalary}
           </label>
-          <div className="relative rounded-md shadow-sm">
+          <div className="relative rounded-md shadow-xs">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <span className="text-gray-500">$</span>
             </div>
@@ -329,7 +329,7 @@ export default function JobForm({
               min={formData.salaryMin || 0}
               value={formData.salaryMax || ""}
               onChange={onChange}
-              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${errors.salaryMax
+              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-hidden ${errors.salaryMax
                   ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                   : "border-gray-300 "
                 }`}
@@ -354,7 +354,7 @@ export default function JobForm({
             name="educationLevel"
             value={formData.educationLevel || ""}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.educationLevel
+            className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${errors.educationLevel
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
               }`}
@@ -387,7 +387,7 @@ export default function JobForm({
             name="location"
             value={formData.location || ""}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.location
+            className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${errors.location
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
               }`}
@@ -412,7 +412,7 @@ export default function JobForm({
             name="experienceRequired"
             value={formData.experienceRequired || ""}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none ${errors.experienceRequired
+            className={`w-full px-3 py-2 border rounded-md shadow-xs focus:outline-hidden ${errors.experienceRequired
                 ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                 : "border-gray-300 "
               }`}
@@ -433,7 +433,7 @@ export default function JobForm({
           >
             {translations.recruiterFee}
           </label>
-          <div className="relative rounded-md shadow-sm">
+          <div className="relative rounded-md shadow-xs">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <span className="text-gray-500">$</span>
             </div>
@@ -444,7 +444,7 @@ export default function JobForm({
               value={formData.recruiterFee || ""}
               onChange={onChange}
               min={0}
-              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none ${errors.recruiterFee
+              className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-hidden ${errors.recruiterFee
                   ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                   : "border-gray-300 "
                 }`}
@@ -471,14 +471,14 @@ export default function JobForm({
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+          className="px-4 py-2 border border-gray-300 rounded-md shadow-xs text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
         >
           {translations.cancel}
         </button>
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${isSubmitting ? "opacity-75 cursor-not-allowed" : ""
+          className={`px-4 py-2 border border-transparent rounded-md shadow-xs text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${isSubmitting ? "opacity-75 cursor-not-allowed" : ""
             }`}
         >
           {isSubmitting ? (

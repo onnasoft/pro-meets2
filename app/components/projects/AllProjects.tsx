@@ -20,7 +20,7 @@ export default function AllProjects({
       <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
         {translations.allProjects}
       </h2>
-      <div className="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
+      <div className="bg-white dark:bg-gray-800 shadow-sm overflow-hidden sm:rounded-lg">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
           <thead className="bg-gray-50 dark:bg-gray-700">
             <tr>
@@ -73,7 +73,7 @@ export default function AllProjects({
               >
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
-                    <div className="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
+                    <div className="shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
                       <Users className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                     </div>
                     <div className="ml-4">

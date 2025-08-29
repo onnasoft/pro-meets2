@@ -156,7 +156,7 @@ export default function JobsPage() {
         <div className="pt-28" />
 
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-primary-500 to-primary-700 py-16 text-white">
+        <section className="bg-linear-to-r from-primary-500 to-primary-700 py-16 text-white">
           <div className="container mx-auto px-6 text-center">
             <h1 className="text-4xl font-bold mb-4">{t.title}</h1>
             <p className="text-xl max-w-2xl mx-auto">{t.subtitle}</p>
@@ -177,7 +177,7 @@ export default function JobsPage() {
                   type="text"
                   autoComplete="off"
                   placeholder={t.searchPlaceholder}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -189,7 +189,7 @@ export default function JobsPage() {
                 <input
                   type="text"
                   placeholder={t.locationPlaceholder}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   value={locationFilter}
                   onChange={(e) => setLocationFilter(e.target.value)}
                 />
@@ -267,7 +267,7 @@ export default function JobsPage() {
                 {jobs.map((job) => (
                   <div
                     key={job.id}
-                    className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow"
+                    className="bg-white rounded-lg shadow-xs border border-gray-100 p-6 hover:shadow-md transition-shadow"
                   >
                     <div className="flex flex-col md:flex-row md:items-start justify-between">
                       <div className="flex-1">

@@ -40,7 +40,7 @@ export default function DocumentCard({
             {item.type === "folder" ? (
               <button
                 onClick={() => onNavigate(item.name)}
-                className="text-left hover:text-primary-600 focus:outline-none"
+                className="text-left hover:text-primary-600 focus:outline-hidden"
               >
                 {item.name}
               </button>

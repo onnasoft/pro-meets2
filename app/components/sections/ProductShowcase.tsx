@@ -372,7 +372,7 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
   ];
 
   return (
-    <section id="product-showcase" className="py-24 bg-gradient-to-br bg-gray-50">
+    <section id="product-showcase" className="py-24 bg-linear-to-br bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-start gap-12">
           {/* Left panel (content) */}
@@ -412,7 +412,7 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
-                      className="text-lg text-gray-700 mb-6 flex-grow"
+                      className="text-lg text-gray-700 mb-6 grow"
                     >
                       {feature.description}
                     </motion.div>
@@ -421,7 +421,7 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
                         {feature.stats}
                       </div>
                       <div className="flex flex-col sm:flex-row gap-4">
-                        <button className="px-8 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-medium hover:from-primary-700 hover:to-primary-800 transition-colors shadow-lg hover:shadow-xl">
+                        <button className="px-8 py-3 bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-lg font-medium hover:from-primary-700 hover:to-primary-800 transition-colors shadow-lg hover:shadow-xl">
                           {t.buttons.liveDemo}
                         </button>
                         <button className="px-8 py-3 border-2 border-primary-600 text-primary-700 rounded-lg font-medium hover:bg-primary-50 transition-colors">
@@ -449,7 +449,7 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
                 alt={features[selectedIndex].name}
                 className="w-full h-full object-contain object-top bg-white p-4"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent p-6">
                 <p className="text-white font-medium text-lg">
                   {features[selectedIndex].name} • ProMeets
                 </p>

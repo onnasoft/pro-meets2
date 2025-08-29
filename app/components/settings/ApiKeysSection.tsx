@@ -19,7 +19,7 @@ export function ApiKeysSection({
   onApiKeyChange,
 }: ApiKeysSectionProps) {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-6">
       <div className="flex items-center mb-4">
         <Key className="h-5 w-5 text-primary-600 mr-2" />
         <h2 className="text-xl font-semibold">{translations.title}</h2>
@@ -32,11 +32,11 @@ export function ApiKeysSection({
             value={newApiKey}
             onChange={(e) => onApiKeyChange(e.target.value)}
             placeholder={translations.placeholder}
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           />
           <button
             onClick={onAddApiKey}
-            className="px-4 py-2 bg-primary-600 text-white rounded-r-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="px-4 py-2 bg-primary-600 text-white rounded-r-md hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500"
           >
             {translations.add}
           </button>

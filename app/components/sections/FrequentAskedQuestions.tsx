@@ -290,7 +290,7 @@ export function FrequentAskedQuestions({
               key={faq.question}
               variants={item}
               whileHover={{ scale: 1.01 }}
-              className="mb-4 border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow"
+              className="mb-4 border border-gray-200 rounded-xl overflow-hidden bg-white shadow-xs hover:shadow-md transition-shadow"
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -353,7 +353,7 @@ export function FrequentAskedQuestions({
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="bg-gray-50 rounded-xl p-8 inline-block max-w-2xl shadow-sm">
+          <div className="bg-gray-50 rounded-xl p-8 inline-block max-w-2xl shadow-xs">
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
               {t.ctaTitle}
             </h3>

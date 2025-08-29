@@ -12,7 +12,7 @@ export function InvoiceHistory({
   invoices,
 }: InvoiceHistoryProps) {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div className="bg-white rounded-lg shadow-xs border border-gray-200 p-6">
       <h2 className="text-xl font-semibold flex items-center mb-4">
         <FileText className="h-5 w-5 mr-2 text-green-600" />
         {translations.title}

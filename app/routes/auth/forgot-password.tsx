@@ -164,7 +164,7 @@ export default function ForgotPassword() {
 
   if (status === "success") {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-primary-50 to-primary-100 flex flex-col items-center justify-center p-6">
+      <div className="min-h-screen bg-linear-to-b from-primary-50 to-primary-100 flex flex-col items-center justify-center p-6">
         <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 space-y-6 text-center">
           <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100">
             <CheckCircle className="h-8 w-8 text-green-600" />
@@ -187,7 +187,7 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-50 to-primary-100 flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-linear-to-b from-primary-50 to-primary-100 flex flex-col items-center justify-center p-6">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 space-y-6">
         <div className="text-center">
           <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 mb-4">
@@ -245,7 +245,7 @@ export default function ForgotPassword() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${
+            className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-xs text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${
               isSubmitting ? "opacity-75 cursor-not-allowed" : ""
             }`}
           >

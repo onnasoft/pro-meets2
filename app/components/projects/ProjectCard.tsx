@@ -21,7 +21,7 @@ export function ProjectCard({ project, translations }: ProjectCardProps) {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
       <style
         dangerouslySetInnerHTML={{
           __html: `

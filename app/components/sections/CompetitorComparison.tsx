@@ -478,7 +478,7 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
           {t.competitors.map((competitor, index) => (
             <div
               key={competitor.name}
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+              className="bg-white p-6 rounded-lg shadow-xs border border-gray-200"
             >
               <h3 className="font-bold text-lg mb-3 flex items-center">
                 <img
@@ -491,7 +491,7 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
               <ul className="space-y-2">
                 {competitor.pros.map((pro) => (
                   <li key={pro} className="flex items-start">
-                    <Check className="w-4 h-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                    <Check className="w-4 h-4 text-green-500 mt-0.5 mr-2 shrink-0" />
                     <span className="text-gray-700">{pro}</span>
                   </li>
                 ))}

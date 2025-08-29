@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export default function VerificationSent() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-50 to-primary-100 flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-linear-to-b from-primary-50 to-primary-100 flex flex-col items-center justify-center p-6">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 space-y-6 text-center">
         {/* Icono de verificación */}
         <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-primary-100">
