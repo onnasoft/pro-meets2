@@ -1,13 +1,14 @@
-
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  CalendarCheck,
   Video,
   Users,
   Lightbulb,
   TrendingUp,
   ChevronRight,
-  Rocket,
+  Building2,
+  UserCheck,
+  Handshake,
+  Target,
 } from "lucide-react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
@@ -15,126 +16,144 @@ import { Language } from "pro-meets-core";
 
 const translations = {
   es: {
-    titlePrefix: "Transforma tu ",
-    titleSuffix: "proceso de reclutamiento",
+    titlePrefix: "Conectamos ",
+    titleSuffix: "talento con oportunidades",
     subtitle:
-      "La plataforma todo-en-uno para agendar entrevistas, realizar videollamadas, gestionar candidatos y grabar sesiones.",
-    typing1: "Automatizado",
-    typing2: "Inteligente",
-    typing3: "Eficiente",
-    typing4: "Colaborativo",
-    ctaDemo: "Solicitar Demo",
+      "La plataforma donde reclutadores y candidatos se encuentran para crear conexiones profesionales significativas.",
+    typing1: "Inteligente",
+    typing2: "Eficiente",
+    typing3: "Colaborativo",
+    typing4: "Transparente",
+    ctaJoin: "Unirse Ahora",
     ctaFeatures: "Ver Funcionalidades",
     poweredBy: "Potenciado con tecnología avanzada:",
-    newRecruitment: "✨ La nueva forma de reclutar",
-    scheduledInterview: "Entrevista programada",
-    frontendPosition:
-      "Reunión con Carlos M. para puesto de Desarrollador Frontend",
+    newPlatform: "✨ La nueva forma de conectar talento",
+    scheduledMeeting: "Reunión programada",
+    interviewExample:
+      "Entrevista con TechCorp para puesto de Desarrollador Senior",
     joinNow: "Unirse ahora",
-    recruitmentPillars: {
-      scheduling: "Agendamiento",
-      videoCalls: "Videollamadas",
+    platformPillars: {
+      matching: "Emparejamiento",
+      videoCalls: "Entrevistas",
       collaboration: "Colaboración",
       intelligence: "Inteligencia",
       analytics: "Analíticas",
     },
+    forRecruiters: "Para Reclutadores",
+    forCandidates: "Para Candidatos",
+    recruitersBenefit: "Encuentra el talento perfecto para tu equipo",
+    candidatesBenefit: "Descubre oportunidades que se ajustan a tu perfil",
   },
   en: {
-    titlePrefix: "Transform your ",
-    titleSuffix: "hiring process",
+    titlePrefix: "Connecting ",
+    titleSuffix: "talent with opportunities",
     subtitle:
-      "The all-in-one platform to schedule interviews, conduct video calls, manage candidates and record sessions.",
-    typing1: "Automated",
-    typing2: "Smart",
-    typing3: "Efficient",
-    typing4: "Collaborative",
-    ctaDemo: "Request Demo",
+      "The platform where recruiters and candidates meet to create meaningful professional connections.",
+    typing1: "Smart",
+    typing2: "Efficient",
+    typing3: "Collaborative",
+    typing4: "Transparent",
+    ctaJoin: "Join Now",
     ctaFeatures: "Explore Features",
     poweredBy: "Powered by advanced technology:",
-    newRecruitment: "✨ The new way to recruit",
-    scheduledInterview: "Scheduled interview",
-    frontendPosition: "Meeting with Carlos M. for Frontend Developer position",
+    newPlatform: "✨ The new way to connect talent",
+    scheduledMeeting: "Scheduled meeting",
+    interviewExample: "Interview with TechCorp for Senior Developer position",
     joinNow: "Join now",
-    recruitmentPillars: {
-      scheduling: "Scheduling",
-      videoCalls: "Video Calls",
+    platformPillars: {
+      matching: "Matching",
+      videoCalls: "Interviews",
       collaboration: "Collaboration",
       intelligence: "Intelligence",
       analytics: "Analytics",
     },
+    forRecruiters: "For Recruiters",
+    forCandidates: "For Candidates",
+    recruitersBenefit: "Find the perfect talent for your team",
+    candidatesBenefit: "Discover opportunities that match your profile",
   },
   fr: {
-    titlePrefix: "Transformez votre ",
-    titleSuffix: "processus de recrutement",
+    titlePrefix: "Connecter ",
+    titleSuffix: "les talents aux opportunités",
     subtitle:
-      "La plateforme tout-en-un pour planifier des entretiens, effectuer des appels vidéo, gérer les candidats et enregistrer des sessions.",
-    typing1: "Automatisé",
-    typing2: "Intelligent",
-    typing3: "Efficace",
-    typing4: "Collaboratif",
-    ctaDemo: "Demander une démo",
+      "La plateforme où recruteurs et candidats se rencontrent pour créer des connexions professionnelles significatives.",
+    typing1: "Intelligent",
+    typing2: "Efficace",
+    typing3: "Collaboratif",
+    typing4: "Transparent",
+    ctaJoin: "Rejoindre Maintenant",
     ctaFeatures: "Voir les fonctionnalités",
     poweredBy: "Propulsé par une technologie avancée :",
-    newRecruitment: "✨ La nouvelle façon de recruter",
-    scheduledInterview: "Entretien programmé",
-    frontendPosition:
-      "Réunion avec Carlos M. pour le poste de Développeur Frontend",
+    newPlatform: "✨ La nouvelle façon de connecter les talents",
+    scheduledMeeting: "Réunion programmée",
+    interviewExample: "Entretien avec TechCorp pour un poste de Développeur Senior",
     joinNow: "Rejoindre maintenant",
-    recruitmentPillars: {
-      scheduling: "Planification",
-      videoCalls: "Appels vidéo",
+    platformPillars: {
+      matching: "Appariement",
+      videoCalls: "Entretiens",
       collaboration: "Collaboration",
       intelligence: "Intelligence",
       analytics: "Analytique",
     },
+    forRecruiters: "Pour Recruteurs",
+    forCandidates: "Pour Candidats",
+    recruitersBenefit: "Trouvez le talent parfait pour votre équipe",
+    candidatesBenefit: "Découvrez des opportunités qui correspondent à votre profil",
   },
   jp: {
-    titlePrefix: "あなたの",
-    titleSuffix: "採用プロセスを変革",
+    titlePrefix: "機会と人材を",
+    titleSuffix: "つなぐプラットフォーム",
     subtitle:
-      "面接のスケジュール、ビデオ通話の実施、候補者の管理、セッションの記録ができるオールインワンプラットフォーム。",
-    typing1: "自動化",
-    typing2: "スマート",
-    typing3: "効率的",
-    typing4: "協力的",
-    ctaDemo: "デモをリクエスト",
+      "採用担当者と候補者が出会い、意味のある専門的なつながりを作るプラットフォーム。",
+    typing1: "スマート",
+    typing2: "効率的",
+    typing3: "協力的",
+    typing4: "透明",
+    ctaJoin: "今すぐ参加",
     ctaFeatures: "機能を見る",
     poweredBy: "高度な技術で構築:",
-    newRecruitment: "✨ 新しい採用方法",
-    scheduledInterview: "予定された面接",
-    frontendPosition:
-      "フロントエンド開発者ポジションについてのCarlos M.との面談",
+    newPlatform: "✨ 新しい人材コネクション",
+    scheduledMeeting: "予定された面接",
+    interviewExample: "TechCorpとのシニア開発者ポジションについての面談",
     joinNow: "今すぐ参加",
-    recruitmentPillars: {
-      scheduling: "スケジューリング",
-      videoCalls: "ビデオ通話",
+    platformPillars: {
+      matching: "マッチング",
+      videoCalls: "面接",
       collaboration: "コラボレーション",
       intelligence: "インテリジェンス",
       analytics: "分析",
     },
+    forRecruiters: "採用担当者向け",
+    forCandidates: "候補者向け",
+    recruitersBenefit: "あなたのチームにぴったりの人材を見つけましょう",
+    candidatesBenefit: "あなたのプロファイルに合った機会を見つけましょう",
   },
   zh: {
-    titlePrefix: "改变你的",
-    titleSuffix: "招聘流程",
-    subtitle: "一体化平台，用于安排面试、进行视频通话、管理候选人和录制会话。",
-    typing1: "自动化",
-    typing2: "智能",
-    typing3: "高效",
-    typing4: "协作",
-    ctaDemo: "请求演示",
+    titlePrefix: "连接人才与",
+    titleSuffix: "机遇的平台",
+    subtitle: "招聘人员和候选人见面的平台，创造有意义的专业联系。",
+    typing1: "智能",
+    typing2: "高效",
+    typing3: "协作",
+    typing4: "透明",
+    ctaJoin: "立即加入",
     ctaFeatures: "查看功能",
     poweredBy: "由先进技术驱动：",
-    newRecruitment: "✨ 新的招聘方式",
-    scheduledInterview: "已安排的面试",
-    frontendPosition: "与Carlos M.会面讨论前端开发职位",
+    newPlatform: "✨ 连接人才的新方式",
+    scheduledMeeting: "安排的会议",
+    interviewExample: "与TechCorp面试高级开发职位",
     joinNow: "立即加入",
-    recruitmentPillars: {
-      scheduling: "日程安排",
-      videoCalls: "视频通话",
+    platformPillars: {
+      matching: "匹配",
+      videoCalls: "面试",
       collaboration: "协作",
       intelligence: "智能",
       analytics: "分析",
     },
+    forRecruiters: "招聘人员",
+    forCandidates: "候选人",
+    recruitersBenefit: "为您的团队找到完美人才",
+    candidatesBenefit: "发现与您资料匹配的机会",
   },
 };
 
@@ -192,35 +211,35 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
     },
   };
 
-  // Traducir los pilares de reclutamiento
-  const recruitmentPillars = useMemo(
+  // Pilares de la plataforma
+  const platformPillars = useMemo(
     () => [
       {
-        icon: <CalendarCheck className="w-6 h-6" />,
-        title: t.recruitmentPillars.scheduling,
+        icon: <Target className="w-6 h-6" />,
+        title: t.platformPillars.matching,
       },
       {
         icon: <Video className="w-6 h-6" />,
-        title: t.recruitmentPillars.videoCalls,
+        title: t.platformPillars.videoCalls,
       },
       {
         icon: <Users className="w-6 h-6" />,
-        title: t.recruitmentPillars.collaboration,
+        title: t.platformPillars.collaboration,
       },
       {
         icon: <Lightbulb className="w-6 h-6" />,
-        title: t.recruitmentPillars.intelligence,
+        title: t.platformPillars.intelligence,
       },
       {
         icon: <TrendingUp className="w-6 h-6" />,
-        title: t.recruitmentPillars.analytics,
+        title: t.platformPillars.analytics,
       },
     ],
     [language]
   );
 
   return (
-    <section className="relative overflow-hidden bg-linear-to-br from-white to-primary-50 min-h-[90vh] flex items-center pt-8 lg:pt-0">
+    <section className="relative overflow-hidden bg-primary-50 min-h-[90vh] flex items-center lg:pt-0">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -236,7 +255,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
       </div>
 
       {/* Content */}
-      <div className="relative container mx-auto px-6 py-20 md:py-24 lg:py-32">
+      <div className="relative container mx-auto px-6">
         <motion.div
           className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16"
           initial="hidden"
@@ -247,7 +266,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
           <div className="lg:w-1/2 text-center lg:text-left">
             <motion.div className="mb-8">
               <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-primary-100 text-primary-800 mb-4">
-                {t.newRecruitment}
+                {t.newPlatform}
               </span>
             </motion.div>
 
@@ -269,13 +288,35 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
               {t.subtitle}
             </motion.p>
 
+            {/* Dual audience benefits */}
+            <motion.div className="flex flex-col sm:flex-row gap-6 mb-10">
+              <div className="flex-1 bg-white p-4 rounded-lg shadow-xs border border-gray-100">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 bg-blue-100 rounded-full">
+                    <Building2 className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <h3 className="font-semibold text-gray-800">{t.forRecruiters}</h3>
+                </div>
+                <p className="text-sm text-gray-600">{t.recruitersBenefit}</p>
+              </div>
+              <div className="flex-1 bg-white p-4 rounded-lg shadow-xs border border-gray-100">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 bg-green-100 rounded-full">
+                    <UserCheck className="w-5 h-5 text-green-600" />
+                  </div>
+                  <h3 className="font-semibold text-gray-800">{t.forCandidates}</h3>
+                </div>
+                <p className="text-sm text-gray-600">{t.candidatesBenefit}</p>
+              </div>
+            </motion.div>
+
             <motion.div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
-                to="/demo"
+                to="/signup"
                 className="flex items-center justify-center gap-2 px-8 py-4 bg-linear-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg shadow-primary hover:shadow-primary-md transition-all hover:scale-[1.02]"
               >
-                <Rocket className="w-5 h-5" />
-                {t.ctaDemo}
+                <Handshake className="w-5 h-5" />
+                {t.ctaJoin}
               </Link>
               <Link
                 to="#features"
@@ -289,7 +330,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
             <motion.div className="mt-12">
               <p className="text-sm text-gray-500 mb-4">{t.poweredBy}</p>
               <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                {recruitmentPillars.map((pillar, index) => (
+                {platformPillars.map((pillar, index) => (
                   <motion.div
                     key={pillar.title}
                     className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-xs border border-gray-100 hover:border-primary-200 transition-colors"
@@ -350,13 +391,13 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 1 }}
                     >
-                      <Video className="w-8 h-8" />
+                      <Handshake className="w-8 h-8" />
                     </motion.div>
                     <h3 className="font-semibold text-lg mb-2">
-                      {t.scheduledInterview}
+                      {t.scheduledMeeting}
                     </h3>
                     <p className="text-gray-600 text-sm max-w-xs mx-auto">
-                      {t.frontendPosition}
+                      {t.interviewExample}
                     </p>
                     <br />
                     <Link

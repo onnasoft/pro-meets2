@@ -1,320 +1,377 @@
-import { Check, X, ChevronDown } from "lucide-react";
+import { Check, X, ChevronDown, Star, Zap, Users, Clock, Target } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Language } from "pro-meets-core";
 
+
+// Add the missing icon imports at the top
+const Brain = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+  </svg>
+);
+
+const ShieldCheck = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+  </svg>
+);
+
+const BarChart3 = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+  </svg>
+);
+
 const translations = {
   en: {
-    title: "No more partial solutions",
-    subtitle:
-      "Compare how ProMeets offers everything you need in a single platform",
+    title: "Why Choose Our AI Matching Platform?",
+    subtitle: "Compare the most complete AI-powered talent matching solution for your projects",
     functionality: "Feature",
     complete: "Complete",
     partial: "Partial",
     notAvailable: "Not available",
-    prosLabel: "+ {count} integrated features",
+    prosLabel: "+ {count} advanced features",
     competitors: [
       {
-        name: "ProMeets",
-        image: "/logos/promeets.webp",
-        tagline: "All-in-one solution",
+        name: "ProMeets AI",
+        image: "/logos/promeets-ai.webp",
+        tagline: "AI-Powered Talent Matching",
         pros: [
-          "Specialized in recruitment",
-          "Fully integrated workflow",
-          "Designed for TA teams",
+          "Specialized in project-based matching",
+          "Advanced AI algorithms",
+          "End-to-end project management",
         ],
       },
       {
-        name: "Zoom + Calendly",
-        image: "/logos/zoom-calendly.webp",
-        tagline: "Separate solutions",
-        pros: ["Known tools", "Basic functionalities"],
+        name: "Generic Freelance Platforms",
+        image: "/logos/freelance-platforms.webp",
+        tagline: "Basic matching",
+        pros: ["Large talent pool", "Basic search filters", "Rating system"],
       },
       {
-        name: "Traditional ATS",
-        image: "/logos/traditional-ats.webp",
-        tagline: "Legacy system",
-        pros: ["Candidate database", "Process tracking"],
+        name: "Traditional Job Boards",
+        image: "/logos/job-boards.webp",
+        tagline: "Manual search",
+        pros: ["High visibility", "Established platforms", "Simple posting"],
       },
     ],
     features: [
       {
-        name: "HD Video Calls",
-        description:
-          "Professional quality integrated directly into the platform",
-        details: "No need for complex configurations or additional plugins",
+        name: "AI-Powered Matching",
+        description: "Advanced algorithms that analyze project requirements and talent profiles for perfect matches",
+        details: "Machine learning models trained on thousands of successful projects",
+        icon: <Brain className="w-5 h-5" />
       },
       {
-        name: "Smart Scheduling",
-        description: "Bi-directional calendar synchronization",
-        details:
-          "Candidates see only your real available times, with automatic buffers",
+        name: "Skill Verification",
+        description: "Automated testing and portfolio validation to ensure talent quality",
+        details: "Technical assessments and code review integration",
+        icon: <ShieldCheck className="w-5 h-5" />
       },
       {
-        name: "Interview Kit",
-        description: "Templates, collaborative evaluation and recordings",
-        details: "All interview context in one place with timestamping",
+        name: "Time Zone Optimization",
+        description: "Smart matching based on availability and timezone compatibility",
+        details: "Real-time availability tracking and overlap analysis",
+        icon: <Clock className="w-5 h-5" />
       },
       {
-        name: "Candidate Onboarding",
-        description: "Candidate self-service portal",
-        details: "Document upload, digital signature and automated checklist",
+        name: "Project Management Tools",
+        description: "Integrated tools for project tracking, communication, and collaboration",
+        details: "Milestones, time tracking, and file sharing in one platform",
+        icon: <Target className="w-5 h-5" />
       },
       {
-        name: "Advanced Analytics",
-        description: "Hiring process dashboards",
-        details:
-          "Time per stage, candidate quality and interviewer performance",
+        name: "Quality Assurance",
+        description: "Automated quality checks and performance monitoring throughout the project",
+        details: "Code quality analysis, progress tracking, and client feedback integration",
+        icon: <Star className="w-5 h-5" />
+      },
+      {
+        name: "Smart Pricing",
+        description: "AI-driven pricing recommendations based on project complexity and talent experience",
+        details: "Market rate analysis and budget optimization algorithms",
+        icon: <BarChart3 className="w-5 h-5" />
       },
     ],
   },
   es: {
-    title: "No más soluciones parciales",
-    subtitle:
-      "Compara cómo ProMeets ofrece todo lo que necesitas en una sola plataforma",
+    title: "¿Por Qué Elegir Nuestra Plataforma de Matching con IA?",
+    subtitle: "Compara la solución más completa de matching de talento con IA para tus proyectos",
     functionality: "Funcionalidad",
     complete: "Completo",
     partial: "Parcial",
     notAvailable: "No disponible",
-    prosLabel: "+ {count} funcionalidades integradas",
+    prosLabel: "+ {count} funciones avanzadas",
     competitors: [
       {
-        name: "ProMeets",
-        image: "/logos/promeets.webp",
-        tagline: "Solución todo-en-uno",
+        name: "ProMeets AI",
+        image: "/logos/promeets-ai.webp",
+        tagline: "Matching de Talento con IA",
         pros: [
-          "Especializado en reclutamiento",
-          "Flujo completamente integrado",
-          "Diseñado para equipos de TA",
+          "Especializado en matching basado en proyectos",
+          "Algoritmos de IA avanzados",
+          "Gestión de proyectos integral",
         ],
       },
       {
-        name: "Zoom + Calendly",
-        image: "/logos/zoom-calendly.webp",
-        tagline: "Soluciones separadas",
-        pros: ["Herramientas conocidas", "Funcionalidades básicas"],
+        name: "Plataformas Freelance Genéricas",
+        image: "/logos/freelance-platforms.webp",
+        tagline: "Matching básico",
+        pros: ["Gran pool de talento", "Filtros de búsqueda básicos", "Sistema de rating"],
       },
       {
-        name: "ATS Tradicional",
-        image: "/logos/traditional-ats.webp",
-        tagline: "Sistema legacy",
-        pros: ["Base de candidatos", "Seguimiento de procesos"],
+        name: "Portales de Empleo Tradicionales",
+        image: "/logos/job-boards.webp",
+        tagline: "Búsqueda manual",
+        pros: ["Alta visibilidad", "Plataformas establecidas", "Publicación simple"],
       },
     ],
     features: [
       {
-        name: "Videollamadas HD",
-        description:
-          "Calidad profesional integrada directamente en la plataforma",
-        details:
-          "Sin necesidad de configuraciones complejas o plugins adicionales",
+        name: "Matching con IA",
+        description: "Algoritmos avanzados que analizan requisitos de proyecto y perfiles de talento para matches perfectos",
+        details: "Modelos de machine learning entrenados con miles de proyectos exitosos",
+        icon: <Brain className="w-5 h-5" />
       },
       {
-        name: "Agendamiento inteligente",
-        description: "Sincronización bidireccional con calendarios",
-        details:
-          "Los candidatos ven solo tus horarios disponibles reales, con buffers automáticos",
+        name: "Verificación de Habilidades",
+        description: "Pruebas automatizadas y validación de portafolio para garantizar calidad del talento",
+        details: "Evaluaciones técnicas e integración con revisiones de código",
+        icon: <ShieldCheck className="w-5 h-5" />
       },
       {
-        name: "Kit de entrevistas",
-        description: "Plantillas, evaluación colaborativa y grabaciones",
-        details:
-          "Todo el contexto de la entrevista en un solo lugar con timestamping",
+        name: "Optimización de Zona Horaria",
+        description: "Matching inteligente basado en disponibilidad y compatibilidad de zonas horarias",
+        details: "Seguimiento de disponibilidad en tiempo real y análisis de superposición",
+        icon: <Clock className="w-5 h-5" />
       },
       {
-        name: "Onboarding candidatos",
-        description: "Portal autogestionado por candidatos",
-        details: "Subida de documentos, firma digital y checklist automatizado",
+        name: "Herramientas de Gestión",
+        description: "Herramientas integradas para seguimiento, comunicación y colaboración de proyectos",
+        details: "Hitos, control de tiempo y compartición de archivos en una plataforma",
+        icon: <Target className="w-5 h-5" />
       },
       {
-        name: "Analíticas avanzadas",
-        description: "Dashboards de proceso de contratación",
-        details:
-          "Tiempos por etapa, calidad de candidatos y desempeño de entrevistadores",
+        name: "Control de Calidad",
+        description: "Chequeos de calidad automatizados y monitoreo de performance durante el proyecto",
+        details: "Análisis de calidad de código, seguimiento de progreso e integración de feedback",
+        icon: <Star className="w-5 h-5" />
+      },
+      {
+        name: "Precios Inteligentes",
+        description: "Recomendaciones de precios basadas en IA según complejidad y experiencia del talento",
+        details: "Análisis de tarifas de mercado y algoritmos de optimización de presupuesto",
+        icon: <BarChart3 className="w-5 h-5" />
       },
     ],
   },
   fr: {
-    title: "Plus de solutions partielles",
-    subtitle:
-      "Comparez comment ProMeets offre tout ce dont vous avez besoin dans une seule plateforme",
+    title: "Pourquoi Choisir Notre Plateforme de Matching IA ?",
+    subtitle: "Comparez la solution de matching de talent la plus complète alimentée par l'IA pour vos projets",
     functionality: "Fonctionnalité",
     complete: "Complet",
     partial: "Partiel",
     notAvailable: "Non disponible",
-    prosLabel: "+ {count} fonctionnalités intégrées",
+    prosLabel: "+ {count} fonctionnalités avancées",
     competitors: [
       {
-        name: "ProMeets",
-        image: "/logos/promeets.webp",
-        tagline: "Solution tout-en-un",
+        name: "ProMeets AI",
+        image: "/logos/promeets-ai.webp",
+        tagline: "Matching de Talent avec IA",
         pros: [
-          "Spécialisé dans le recrutement",
-          "Flux entièrement intégré",
-          "Conçu pour les équipes de TA",
+          "Spécialisé dans le matching par projet",
+          "Algorithmes d'IA avancés",
+          "Gestion de projet de bout en bout",
         ],
       },
       {
-        name: "Zoom + Calendly",
-        image: "/logos/zoom-calendly.webp",
-        tagline: "Solutions séparées",
-        pros: ["Outils connus", "Fonctionnalités de base"],
+        name: "Plateformes Freelance Génériques",
+        image: "/logos/freelance-platforms.webp",
+        tagline: "Matching basique",
+        pros: ["Grand pool de talent", "Filtres de recherche basiques", "Système de notation"],
       },
       {
-        name: "ATS Traditionnel",
-        image: "/logos/traditional-ats.webp",
-        tagline: "Système legacy",
-        pros: ["Base de candidats", "Suivi des processus"],
+        name: "Sites d'Emploi Traditionnels",
+        image: "/logos/job-boards.webp",
+        tagline: "Recherche manuelle",
+        pros: ["Haute visibilité", "Plateformes établies", "Publication simple"],
       },
     ],
     features: [
       {
-        name: "Appels vidéo HD",
-        description:
-          "Qualité professionnelle intégrée directement dans la plateforme",
-        details:
-          "Pas besoin de configurations complexes ou de plugins supplémentaires",
+        name: "Matching par IA",
+        description: "Algorithmes avancés analysant les exigences des projets et les profils de talent pour des matches parfaits",
+        details: "Modèles de machine learning entraînés sur des milliers de projets réussis",
+        icon: <Brain className="w-5 h-5" />
       },
       {
-        name: "Planification intelligente",
-        description: "Synchronisation bidirectionnelle avec les calendriers",
-        details:
-          "Les candidats voient seulement vos créneaux disponibles réels, avec tampons automatiques",
+        name: "Vérification des Compétences",
+        description: "Tests automatisés et validation de portfolio pour garantir la qualité des talents",
+        details: "Évaluations techniques et intégration de revue de code",
+        icon: <ShieldCheck className="w-5 h-5" />
       },
       {
-        name: "Kit d'entretien",
-        description: "Modèles, évaluation collaborative et enregistrements",
-        details:
-          "Tout le contexte de l'entretien au même endroit avec horodatage",
+        name: "Optimisation Fuseau Horaire",
+        description: "Matching intelligent basé sur la disponibilité et la compatibilité des fuseaux horaires",
+        details: "Suivi de disponibilité en temps réel et analyse de chevauchement",
+        icon: <Clock className="w-5 h-5" />
       },
       {
-        name: "Onboarding candidats",
-        description: "Portail libre-service pour candidats",
-        details:
-          "Téléchargement de documents, signature numérique et checklist automatisée",
+        name: "Outils de Gestion de Projet",
+        description: "Outils intégrés pour le suivi, la communication et la collaboration des projets",
+        details: "Jalons, suivi du temps et partage de fichiers sur une plateforme",
+        icon: <Target className="w-5 h-5" />
       },
       {
-        name: "Analyses avancées",
-        description: "Tableaux de bord du processus d'embauche",
-        details:
-          "Temps par étape, qualité des candidats et performance des intervieweurs",
+        name: "Assurance Qualité",
+        description: "Contrôles de qualité automatisés et surveillance des performances tout au long du projet",
+        details: "Analyse de qualité de code, suivi de progression et intégration des retours clients",
+        icon: <Star className="w-5 h-5" />
+      },
+      {
+        name: "Tarification Intelligente",
+        description: "Recommandations de prix basées sur l'IA selon la complexité et l'expérience du talent",
+        details: "Analyse des tarifs du marché et algorithmes d'optimisation de budget",
+        icon: <BarChart3 className="w-5 h-5" />
       },
     ],
   },
   jp: {
-    title: "部分的なソリューションはもう不要",
-    subtitle: "ProMeetsが1つのプラットフォームで全てを提供する方法を比較",
+    title: "当社のAIマッチングプラットフォームを選ぶ理由",
+    subtitle: "プロジェクトのための最も完全なAI駆動の人材マッチングソリューションを比較",
     functionality: "機能",
     complete: "完全",
     partial: "部分的",
     notAvailable: "利用不可",
-    prosLabel: "+ {count} の統合機能",
+    prosLabel: "+ {count} の高度な機能",
     competitors: [
       {
-        name: "ProMeets",
-        image: "/logos/promeets.webp",
-        tagline: "オールインワンソリューション",
+        name: "ProMeets AI",
+        image: "/logos/promeets-ai.webp",
+        tagline: "AI駆動の人材マッチング",
         pros: [
-          "採用に特化",
-          "完全に統合されたワークフロー",
-          "TAチーム向けに設計",
+          "プロジェクトベースのマッチングに特化",
+          "高度なAIアルゴリズム",
+          "エンドツーエンドのプロジェクト管理",
         ],
       },
       {
-        name: "Zoom + Calendly",
-        image: "/logos/zoom-calendly.webp",
-        tagline: "分離されたソリューション",
-        pros: ["既知のツール", "基本機能"],
+        name: "一般的なフリーランスプラットフォーム",
+        image: "/logos/freelance-platforms.webp",
+        tagline: "基本マッチング",
+        pros: ["大人材プール", "基本検索フィルター", "評価システム"],
       },
       {
-        name: "従来のATS",
-        image: "/logos/traditional-ats.webp",
-        tagline: "レガシーシステム",
-        pros: ["候補者データベース", "プロセス追跡"],
+        name: "従来の求人サイト",
+        image: "/logos/job-boards.webp",
+        tagline: "手動検索",
+        pros: ["高視認性", "確立されたプラットフォーム", "簡単な投稿"],
       },
     ],
     features: [
       {
-        name: "HDビデオ通話",
-        description: "プラットフォームに直接統合されたプロ品質",
-        details: "複雑な設定や追加プラグインは不要",
+        name: "AI駆動マッチング",
+        description: "プロジェクト要件と人材プロファイルを分析して完璧なマッチを実現する高度なアルゴリズム",
+        details: "何千もの成功プロジェクトで訓練された機械学習モデル",
+        icon: <Brain className="w-5 h-5" />
       },
       {
-        name: "スマートスケジューリング",
-        description: "カレンダーとの双方向同期",
-        details: "候補者は実際の空き時間のみを確認、自動バッファ付き",
+        name: "スキル検証",
+        description: "人材の品質を保証する自動テストとポートフォリオ検証",
+        details: "技術的評価とコードレビュー統合",
+        icon: <ShieldCheck className="w-5 h-5" />
       },
       {
-        name: "面接キット",
-        description: "テンプレート、共同評価と録画",
-        details: "タイムスタンプ付きで全ての面接コンテキストを一元管理",
+        name: "タイムゾーン最適化",
+        description: "可用性とタイムゾーン互換性に基づくスマートマッチング",
+        details: "リアルタイム可用性追跡と重複分析",
+        icon: <Clock className="w-5 h-5" />
       },
       {
-        name: "候補者オンボーディング",
-        description: "候補者セルフサービスポータル",
-        details:
-          "ドキュメントアップロード、電子署名と自動化されたチェックリスト",
+        name: "プロジェクト管理ツール",
+        description: "プロジェクト追跡、通信、コラボレーションのための統合ツール",
+        details: "マイルストーン、時間追跡、ファイル共有を単一プラットフォームで",
+        icon: <Target className="w-5 h-5" />
       },
       {
-        name: "高度な分析",
-        description: "採用プロセスダッシュボード",
-        details: "ステージ別時間、候補者品質と面接官のパフォーマンス",
+        name: "品質保証",
+        description: "プロジェクト全体を通じた自動品質チェックとパフォーマンス監視",
+        details: "コード品質分析、進捗追跡、クライアントフィードバック統合",
+        icon: <Star className="w-5 h-5" />
+      },
+      {
+        name: "スマート価格設定",
+        description: "プロジェクト複雑性と人材経験に基づくAI駆動の価格推奨",
+        details: "市場価格分析と予算最適化アルゴリズム",
+        icon: <BarChart3 className="w-5 h-5" />
       },
     ],
   },
   zh: {
-    title: "不再需要部分解决方案",
-    subtitle: "比较ProMeets如何在一个平台中提供您所需的一切",
+    title: "为什么选择我们的AI匹配平台？",
+    subtitle: "比较最完整的AI驱动人才匹配解决方案为您的项目",
     functionality: "功能",
     complete: "完整",
     partial: "部分",
     notAvailable: "不可用",
-    prosLabel: "+ {count} 项集成功能",
+    prosLabel: "+ {count} 项高级功能",
     competitors: [
       {
-        name: "ProMeets",
-        image: "/logos/promeets.webp",
-        tagline: "一体化解决方案",
-        pros: ["专注于招聘", "完全集成的工作流程", "为TA团队设计"],
+        name: "ProMeets AI",
+        image: "/logos/promeets-ai.webp",
+        tagline: "AI驱动人才匹配",
+        pros: ["专注于项目匹配", "高级AI算法", "端到端项目管理"],
       },
       {
-        name: "Zoom + Calendly",
-        image: "/logos/zoom-calendly.webp",
-        tagline: "分离的解决方案",
-        pros: ["知名工具", "基本功能"],
+        name: "通用自由职业平台",
+        image: "/logos/freelance-platforms.webp",
+        tagline: "基本匹配",
+        pros: ["庞大人才库", "基本搜索过滤器", "评分系统"],
       },
       {
-        name: "传统ATS",
-        image: "/logos/traditional-ats.webp",
-        tagline: "遗留系统",
-        pros: ["候选人数据库", "流程跟踪"],
+        name: "传统招聘网站",
+        image: "/logos/job-boards.webp",
+        tagline: "手动搜索",
+        pros: ["高可见性", "成熟平台", "简单发布"],
       },
     ],
     features: [
       {
-        name: "高清视频通话",
-        description: "直接集成到平台中的专业质量",
-        details: "无需复杂配置或额外插件",
+        name: "AI驱动匹配",
+        description: "分析项目需求和人才档案以实现完美匹配的高级算法",
+        details: "基于数千个成功项目训练的机器学习模型",
+        icon: <Brain className="w-5 h-5" />
       },
       {
-        name: "智能调度",
-        description: "与日历双向同步",
-        details: "候选人只看到您真实的可用时间，带有自动缓冲",
+        name: "技能验证",
+        description: "自动化测试和作品集验证确保人才质量",
+        details: "技术评估和代码审查集成",
+        icon: <ShieldCheck className="w-5 h-5" />
       },
       {
-        name: "面试套件",
-        description: "模板、协作评估和录制",
-        details: "所有面试上下文集中一处并带时间戳",
+        name: "时区优化",
+        description: "基于可用性和时区兼容性的智能匹配",
+        details: "实时可用性跟踪和重叠分析",
+        icon: <Clock className="w-5 h-5" />
       },
       {
-        name: "候选人入职",
-        description: "候选人自助门户",
-        details: "文档上传、数字签名和自动化清单",
+        name: "项目管理工具",
+        description: "项目跟踪、沟通和协作的集成工具",
+        details: "里程碑、时间跟踪和文件共享一体化平台",
+        icon: <Target className="w-5 h-5" />
       },
       {
-        name: "高级分析",
-        description: "招聘流程仪表板",
-        details: "各阶段时间、候选人质量和面试官表现",
+        name: "质量保证",
+        description: "整个项目期间的自动化质量检查和性能监控",
+        details: "代码质量分析、进度跟踪和客户反馈集成",
+        icon: <Star className="w-5 h-5" />
+      },
+      {
+        name: "智能定价",
+        description: "基于项目复杂性和人才经验的AI驱动定价建议",
+        details: "市场费率分析和预算优化算法",
+        icon: <BarChart3 className="w-5 h-5" />
       },
     ],
   },
@@ -329,16 +386,16 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
   const t = translations[language] || translations.en;
 
   const hasFeature = (competitorIndex: number, featureIndex: number) => {
-    // ProMeets has all features
+    // ProMeets AI has all features
     if (competitorIndex === 0) return 2; // 2 = complete check
 
-    // Zoom + Calendly
+    // Generic Freelance Platforms
     if (competitorIndex === 1) {
       return [0, 1].includes(featureIndex) ? 1 : 0; // 1 = partial check, 0 = cross
     }
 
-    // Traditional ATS
-    return featureIndex === 4 ? 1 : 0; // Only has basic analytics
+    // Traditional Job Boards
+    return 0; // No advanced features
   };
 
   return (
@@ -352,34 +409,47 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
         </div>
 
         {/* Comparison table */}
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto bg-white rounded-2xl shadow-lg border border-gray-200">
           <table className="w-full">
             <thead>
-              <tr>
-                <th className="text-left pb-6 font-semibold text-gray-900 w-1/4">
-                  {t.functionality}
+              <tr className="border-b border-gray-200">
+                <th className="text-left p-6 font-semibold text-gray-900 w-1/3">
+                  <div className="flex items-center">
+                    <Target className="w-6 h-6 mr-2 text-primary-600" />
+                    {t.functionality}
+                  </div>
                 </th>
-                {t.competitors.map((competitor) => (
-                  <th
-                    key={competitor.name}
-                    className="text-center pb-6 font-semibold text-gray-900"
-                  >
-                    <div className="flex flex-col items-center">
-                      <img
-                        src={competitor.image}
-                        alt={competitor.name}
-                        className="h-12 mb-2 object-contain"
-                      />
-                      <span className="block font-bold">{competitor.name}</span>
-                      <span className="block text-sm text-gray-500">
-                        {competitor.tagline}
-                      </span>
-                    </div>
-                  </th>
-                ))}
+                {t.competitors.map((competitor) => {
+                  let CompetitorIcon;
+                  if (competitor.name.includes("AI")) {
+                    CompetitorIcon = <Brain className="w-6 h-6" />;
+                  } else if (competitor.name.includes("Freelance")) {
+                    CompetitorIcon = <Users className="w-6 h-6" />;
+                  } else {
+                    CompetitorIcon = <Zap className="w-6 h-6" />;
+                  }
+                  return (
+                    <th
+                      key={competitor.name}
+                      className="text-center p-6 font-semibold text-gray-900"
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="w-16 h-16 mb-3 bg-white rounded-full shadow-md flex items-center justify-center">
+                          <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white">
+                            {CompetitorIcon}
+                          </div>
+                        </div>
+                        <span className="block font-bold text-lg">{competitor.name}</span>
+                        <span className="block text-sm text-gray-500 mt-1">
+                          {competitor.tagline}
+                        </span>
+                      </div>
+                    </th>
+                  );
+                })}
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-100">
               {t.features.map((feature, featureIndex) => (
                 <motion.tr
                   key={feature.name}
@@ -387,20 +457,22 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.3, delay: featureIndex * 0.05 }}
                   viewport={{ once: true }}
-                  className="group hover:bg-white cursor-pointer"
+                  className="group hover:bg-gray-50 cursor-pointer transition-colors"
                   onClick={() =>
                     setExpandedFeature(
                       expandedFeature === featureIndex ? null : featureIndex
                     )
                   }
                 >
-                  <td className="py-4 pr-4 font-medium text-gray-900">
+                  <td className="p-6 font-medium text-gray-900">
                     <div className="flex items-center">
-                      <span>{feature.name}</span>
+                      <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                        {feature.icon}
+                      </div>
+                      <span className="text-lg">{feature.name}</span>
                       <ChevronDown
-                        className={`ml-2 w-4 h-4 transition-transform ${
-                          expandedFeature === featureIndex ? "rotate-180" : ""
-                        }`}
+                        className={`ml-2 w-4 h-4 transition-transform ${expandedFeature === featureIndex ? "rotate-180" : ""
+                          }`}
                       />
                     </div>
                     <AnimatePresence>
@@ -409,12 +481,12 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="overflow-hidden"
+                          className="overflow-hidden mt-3"
                         >
-                          <p className="text-sm text-gray-500 mt-2">
+                          <p className="text-gray-600">
                             {feature.description}
                           </p>
-                          <p className="text-xs text-gray-400 mt-1">
+                          <p className="text-sm text-gray-500 mt-2">
                             {feature.details}
                           </p>
                         </motion.div>
@@ -432,8 +504,10 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
                     if (featureStatus === 2) {
                       featureContent = (
                         <div className="flex flex-col items-center">
-                          <Check className="w-6 h-6 text-green-500 p-1 bg-green-100 rounded-full" />
-                          <span className="text-xs text-green-600 mt-1">
+                          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <Check className="w-6 h-6 text-green-600" />
+                          </div>
+                          <span className="text-sm text-green-600 mt-2 font-medium">
                             {t.complete}
                           </span>
                         </div>
@@ -441,8 +515,10 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
                     } else if (featureStatus === 1) {
                       featureContent = (
                         <div className="flex flex-col items-center">
-                          <Check className="w-6 h-6 text-yellow-500 p-1 bg-yellow-100 rounded-full" />
-                          <span className="text-xs text-yellow-600 mt-1">
+                          <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                            <div className="w-4 h-0.5 bg-yellow-600"></div>
+                          </div>
+                          <span className="text-sm text-yellow-600 mt-2 font-medium">
                             {t.partial}
                           </span>
                         </div>
@@ -450,8 +526,10 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
                     } else {
                       featureContent = (
                         <div className="flex flex-col items-center">
-                          <X className="w-6 h-6 text-red-500 p-1 bg-red-100 rounded-full" />
-                          <span className="text-xs text-red-600 mt-1">
+                          <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                            <X className="w-6 h-6 text-red-600" />
+                          </div>
+                          <span className="text-sm text-red-600 mt-2 font-medium">
                             {t.notAvailable}
                           </span>
                         </div>
@@ -461,7 +539,7 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
                     return (
                       <td
                         key={`${featureIndex}-${competitorIndex}`}
-                        className="py-4 px-4 text-center"
+                        className="p-6 text-center"
                       >
                         {featureContent}
                       </td>
@@ -473,31 +551,45 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
           </table>
         </div>
 
-        {/* Key notes */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Key advantages */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
           {t.competitors.map((competitor, index) => (
-            <div
+            <motion.div
               key={competitor.name}
-              className="bg-white p-6 rounded-lg shadow-xs border border-gray-200"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className={`bg-white p-8 rounded-2xl shadow-lg border-2 ${index === 0
+                  ? "border-primary-500 border-2 shadow-xl"
+                  : "border-gray-200"
+                }`}
             >
-              <h3 className="font-bold text-lg mb-3 flex items-center">
-                <img
-                  src={competitor.image}
-                  alt={competitor.name}
-                  className="h-6 mr-3 object-contain"
-                />
-                {competitor.name}
-              </h3>
-              <ul className="space-y-2">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  {competitor.name}
+                </h3>
+                <p className="text-gray-500">{competitor.tagline}</p>
+              </div>
+
+              <ul className="space-y-4">
                 {competitor.pros.map((pro) => (
                   <li key={pro} className="flex items-start">
-                    <Check className="w-4 h-4 text-green-500 mt-0.5 mr-2 shrink-0" />
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center mr-3 mt-0.5 ${index === 0 ? "bg-primary-100" : "bg-gray-100"
+                      }`}>
+                      <Check className={`w-4 h-4 ${index === 0 ? "text-primary-600" : "text-gray-600"
+                        }`} />
+                    </div>
                     <span className="text-gray-700">{pro}</span>
                   </li>
                 ))}
+
                 {index === 0 && (
-                  <li className="flex items-start pt-2 mt-2 border-t border-gray-100">
-                    <span className="text-sm text-gray-500">
+                  <li className="flex items-start pt-4 mt-4 border-t border-gray-100">
+                    <div className="w-6 h-6 rounded-full bg-primary-100 flex items-center justify-center mr-3">
+                      <Star className="w-4 h-4 text-primary-600" />
+                    </div>
+                    <span className="text-sm text-primary-600 font-medium">
                       {t.prosLabel.replace(
                         "{count}",
                         t.features.length.toString()
@@ -506,7 +598,7 @@ export function CompetitorComparison({ language }: CompetitorComparisonProps) {
                   </li>
                 )}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

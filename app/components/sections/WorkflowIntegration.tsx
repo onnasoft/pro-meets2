@@ -1,240 +1,333 @@
 import {
-  BadgeCheck,
+  Brain,
   Zap,
   RefreshCw,
-  Users,
-  FileText,
-  Calendar,
-  MessageSquare,
+  Target,
+  CheckCircle,
+  Rocket,
+  BarChart3,
+  ShieldCheck,
+  Clock,
+  Star,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Language } from "pro-meets-core";
 
 const translations = {
   en: {
-    title: "Complete Automated Recruitment Workflow",
-    subtitle: "From job posting to hiring, without switching platforms",
+    title: "AI-Powered Project Matching Workflow",
+    subtitle: "From project definition to perfect talent match, all in one intelligent platform",
     steps: [
       {
-        title: "Job Posting",
-        description:
-          "Create and publish job postings to multiple boards directly from the platform with optimized templates.",
-        automation: "Auto-distribution to job boards",
+        title: "Project Definition",
+        description: "Define your project requirements, skills needed, timeline, and budget using our intelligent templates.",
+        automation: "AI-assisted requirement analysis",
+        icon: <Target className="w-12 h-12" />
       },
       {
-        title: "Candidate Management",
-        description:
-          "Receive, organize and filter candidates automatically with AI and customizable criteria.",
-        automation: "Automatic ranking by relevance",
+        title: "AI Talent Matching",
+        description: "Our advanced algorithms analyze thousands of profiles to find the perfect match for your project.",
+        automation: "95% match accuracy guarantee",
+        icon: <Brain className="w-12 h-12" />
       },
       {
-        title: "Smart Scheduling",
-        description:
-          "Candidates select times based on your real availability without email exchanges.",
-        automation: "Calendar synchronization",
+        title: "Skill Verification",
+        description: "Automated technical assessments and portfolio review to ensure candidate quality and relevance.",
+        automation: "Automated technical testing",
+        icon: <ShieldCheck className="w-12 h-12" />
       },
       {
-        title: "Integrated Interviews",
-        description:
-          "Conduct video calls with automatic recording, transcription and real-time evaluation.",
-        automation: "Position-specific interview kits",
+        title: "Availability Matching",
+        description: "Smart scheduling that considers time zones, availability, and project deadlines for optimal collaboration.",
+        automation: "Time zone optimization",
+        icon: <Clock className="w-12 h-12" />
       },
       {
-        title: "Collaborative Decision",
-        description:
-          "Unified feedback system with scorecards and side-by-side candidate comparison.",
-        automation: "Compatibility analysis",
+        title: "Project Kickoff",
+        description: "Seamless onboarding with automated contract signing, project setup, and team introduction.",
+        automation: "Automated onboarding workflow",
+        icon: <Rocket className="w-12 h-12" />
       },
       {
-        title: "Automated Onboarding",
-        description:
-          "Send offers, hire and integrate new employees with self-service digital flows.",
-        automation: "Integrated e-signature",
+        title: "Ongoing Management",
+        description: "Integrated project tracking, communication tools, and quality assurance throughout the project lifecycle.",
+        automation: "Real-time progress monitoring",
+        icon: <BarChart3 className="w-12 h-12" />
       },
     ],
-    ctaTitle: "Tired of using 5 different tools?",
-    ctaSubtitle:
-      "ProMeets unifies the entire process in a single platform designed specifically for technical recruitment",
-    ctaButton: "View full demo",
+    benefits: [
+      {
+        title: "5x Faster Matching",
+        description: "Find perfect talent in days instead of weeks",
+        icon: <Zap className="w-5 h-5" />
+      },
+      {
+        title: "40% Cost Reduction",
+        description: "Optimized pricing and reduced recruitment overhead",
+        icon: <CheckCircle className="w-5 h-5" />
+      },
+      {
+        title: "98% Satisfaction",
+        description: "Higher quality matches and successful project outcomes",
+        icon: <Star className="w-5 h-5" />
+      }
+    ],
+    ctaTitle: "Ready to Transform Your Project Recruitment?",
+    ctaSubtitle: "Join thousands of companies that have found perfect talent matches through our AI-powered platform",
+    ctaButton: "Start Your Project Now",
+    ctaSecondary: "Watch Platform Demo"
   },
   es: {
-    title: "Flujo Completo de Reclutamiento Automatizado",
-    subtitle:
-      "Desde la publicación hasta la contratación, sin cambiar de plataforma",
+    title: "Flujo de Matching con IA para Proyectos",
+    subtitle: "Desde la definición del proyecto hasta el talento perfecto, todo en una plataforma inteligente",
     steps: [
       {
-        title: "Publicación de Vacantes",
-        description:
-          "Crea y publica vacantes en múltiples portales directamente desde la plataforma con plantillas optimizadas.",
-        automation: "Auto-distribución a portales laborales",
+        title: "Definición del Proyecto",
+        description: "Define los requisitos de tu proyecto, habilidades necesarias, timeline y presupuesto usando nuestras plantillas inteligentes.",
+        automation: "Análisis de requisitos asistido por IA",
+        icon: <Target className="w-6 h-6" />
       },
       {
-        title: "Gestión de Candidatos",
-        description:
-          "Recibe, organiza y filtra candidatos automáticamente con IA y criterios personalizables.",
-        automation: "Clasificación automática por relevancia",
+        title: "Matching de Talento con IA",
+        description: "Nuestros algoritmos avanzados analizan miles de perfiles para encontrar el match perfecto para tu proyecto.",
+        automation: "95% de precisión en matching garantizada",
+        icon: <Brain className="w-6 h-6" />
       },
       {
-        title: "Programación Inteligente",
-        description:
-          "Los candidatos seleccionan horarios basados en tu disponibilidad real sin intercambios de correos.",
-        automation: "Sincronización con calendarios",
+        title: "Verificación de Habilidades",
+        description: "Evaluaciones técnicas automatizadas y revisión de portafolio para garantizar calidad y relevancia del candidato.",
+        automation: "Pruebas técnicas automatizadas",
+        icon: <ShieldCheck className="w-6 h-6" />
       },
       {
-        title: "Entrevistas Integradas",
-        description:
-          "Realiza videollamadas con grabación automática, transcripción y evaluación en tiempo real.",
-        automation: "Kits de entrevista por puesto",
+        title: "Matching de Disponibilidad",
+        description: "Programación inteligente que considera zonas horarias, disponibilidad y deadlines para colaboración óptima.",
+        automation: "Optimización de zona horaria",
+        icon: <Clock className="w-6 h-6" />
       },
       {
-        title: "Decisión Colaborativa",
-        description:
-          "Sistema unificado de feedback con scorecards y comparación lado a lado de candidatos.",
-        automation: "Análisis de compatibilidad",
+        title: "Inicio del Proyecto",
+        description: "Onboarding seamless con firma automatizada de contratos, configuración del proyecto e introducción al equipo.",
+        automation: "Flujo de onboarding automatizado",
+        icon: <Rocket className="w-6 h-6" />
       },
       {
-        title: "Onboarding Automatizado",
-        description:
-          "Envía ofertas, contrata e integra nuevos empleados con flujos digitales autogestionados.",
-        automation: "Firma electrónica integrada",
+        title: "Gestión Continua",
+        description: "Seguimiento integrado del proyecto, herramientas de comunicación y control de calidad durante todo el ciclo de vida.",
+        automation: "Monitoreo de progreso en tiempo real",
+        icon: <BarChart3 className="w-6 h-6" />
       },
     ],
-    ctaTitle: "¿Cansado de usar 5 herramientas diferentes?",
-    ctaSubtitle:
-      "ProMeets unifica todo el proceso en una sola plataforma diseñada específicamente para reclutamiento técnico",
-    ctaButton: "Ver demostración completa",
+    benefits: [
+      {
+        title: "5x Más Rápido",
+        description: "Encuentra talento perfecto en días en lugar de semanas",
+        icon: <Zap className="w-5 h-5" />
+      },
+      {
+        title: "40% Reducción de Costos",
+        description: "Precios optimizados y reducción de gastos de reclutamiento",
+        icon: <CheckCircle className="w-5 h-5" />
+      },
+      {
+        title: "98% Satisfacción",
+        description: "Matches de mayor calidad y resultados exitosos de proyectos",
+        icon: <Star className="w-5 h-5" />
+      }
+    ],
+    ctaTitle: "¿Listo para Transformar tu Reclutamiento de Proyectos?",
+    ctaSubtitle: "Únete a miles de empresas que han encontrado matches perfectos de talento through nuestra plataforma con IA",
+    ctaButton: "Comenzar Proyecto Ahora",
+    ctaSecondary: "Ver Demo de la Plataforma"
   },
   fr: {
-    title: "Processus de Recrutement Automatisé Complet",
-    subtitle:
-      "De la publication d'offre à l'embauche, sans changer de plateforme",
+    title: "Workflow de Matching IA pour Projets",
+    subtitle: "De la définition du projet au talent parfait, le tout dans une plateforme intelligente",
     steps: [
       {
-        title: "Publication d'Offres",
-        description:
-          "Créez et publiez des offres d'emploi sur plusieurs plateformes directement depuis la plateforme avec des modèles optimisés.",
-        automation: "Distribution automatique aux plateformes d'emploi",
+        title: "Définition du Projet",
+        description: "Définissez vos exigences de projet, compétences nécessaires, calendrier et budget grâce à nos modèles intelligents.",
+        automation: "Analyse des exigences assistée par IA",
+        icon: <Target className="w-6 h-6" />
       },
       {
-        title: "Gestion des Candidats",
-        description:
-          "Recevez, organisez et filtrez les candidats automatiquement avec l'IA et des critères personnalisables.",
-        automation: "Classement automatique par pertinence",
+        title: "Matching de Talent par IA",
+        description: "Nos algorithmes avancés analysent des milliers de profils pour trouver le match parfait pour votre projet.",
+        automation: "95% de précision de matching garantie",
+        icon: <Brain className="w-6 h-6" />
       },
       {
-        title: "Planification Intelligente",
-        description:
-          "Les candidats sélectionnent des créneaux basés sur votre réelle disponibilité sans échanges d'emails.",
-        automation: "Synchronisation avec les calendriers",
+        title: "Vérification des Compétences",
+        description: "Évaluations techniques automatisées et revue de portfolio pour garantir qualité et pertinence des candidats.",
+        automation: "Tests techniques automatisés",
+        icon: <ShieldCheck className="w-6 h-6" />
       },
       {
-        title: "Entretiens Intégrés",
-        description:
-          "Effectuez des appels vidéo avec enregistrement automatique, transcription et évaluation en temps réel.",
-        automation: "Kits d'entretien par poste",
+        title: "Matching de Disponibilité",
+        description: "Planification intelligente prenant en compte fuseaux horaires, disponibilité et délais pour une collaboration optimale.",
+        automation: "Optimisation des fuseaux horaires",
+        icon: <Clock className="w-6 h-6" />
       },
       {
-        title: "Décision Collaborative",
-        description:
-          "Système unifié de feedback avec grilles d'évaluation et comparaison côte à côte des candidats.",
-        automation: "Analyse de compatibilité",
+        title: "Lancement du Projet",
+        description: "Onboarding transparent avec signature automatisée de contrats, configuration du projet et présentation de l'équipe.",
+        automation: "Workflow d'onboarding automatisé",
+        icon: <Rocket className="w-6 h-6" />
       },
       {
-        title: "Onboarding Automatisé",
-        description:
-          "Envoyez des offres, embauchez et intégrez de nouveaux employés avec des flux numériques en libre-service.",
-        automation: "Signature électronique intégrée",
+        title: "Gestion Continue",
+        description: "Suivi intégré de projet, outils de communication et contrôle qualité tout au long du cycle de vie.",
+        automation: "Surveillance en temps réel des progrès",
+        icon: <BarChart3 className="w-6 h-6" />
       },
     ],
-    ctaTitle: "Fatigué d'utiliser 5 outils différents ?",
-    ctaSubtitle:
-      "ProMeets unifie l'ensemble du processus dans une seule plateforme conçue spécifiquement pour le recrutement technique",
-    ctaButton: "Voir la démo complète",
+    benefits: [
+      {
+        title: "5x Plus Rapide",
+        description: "Trouvez des talents parfaits en jours au lieu de semaines",
+        icon: <Zap className="w-5 h-5" />
+      },
+      {
+        title: "40% Réduction de Coûts",
+        description: "Tarification optimisée et frais de recrutement réduits",
+        icon: <CheckCircle className="w-5 h-5" />
+      },
+      {
+        title: "98% Satisfaction",
+        description: "Matches de meilleure qualité et résultats de projet réussis",
+        icon: <Star className="w-5 h-5" />
+      }
+    ],
+    ctaTitle: "Prêt à Transformer Votre Recrutement de Projets ?",
+    ctaSubtitle: "Rejoignez des milliers d'entreprises qui ont trouvé des matches de talent parfaits grâce à notre plateforme IA",
+    ctaButton: "Commencer un Projet Maintenant",
+    ctaSecondary: "Voir la Démo de la Plateforme"
   },
   jp: {
-    title: "完全自動化された採用ワークフロー",
-    subtitle: "求人掲載から採用まで、プラットフォームを切り替える必要なく",
+    title: "AIを活用したプロジェクトマッチングワークフロー",
+    subtitle: "プロジェクト定義から完璧な人材マッチまで、すべてが智能プラットフォームで",
     steps: [
       {
-        title: "求人掲載",
-        description:
-          "最適化されたテンプレートでプラットフォームから直接複数の求人サイトに掲載を作成・公開。",
-        automation: "求人サイトへの自動配信",
+        title: "プロジェクト定義",
+        description: "智能テンプレートを使用して、プロジェクト要件、必要なスキル、タイムライン、予算を定義します。",
+        automation: "AIを活用した要件分析",
+        icon: <Target className="w-6 h-6" />
       },
       {
-        title: "候補者管理",
-        description:
-          "AIとカスタマイズ可能な基準で候補者を自動的に受信、整理、フィルタリング。",
-        automation: "関連性による自動ランキング",
+        title: "AI人材マッチング",
+        description: "高度なアルゴリズムが数千のプロファイルを分析し、プロジェクトに最適なマッチを見つけます。",
+        automation: "95%のマッチ精度保証",
+        icon: <Brain className="w-6 h-6" />
       },
       {
-        title: "スマートスケジューリング",
-        description:
-          "候補者がメールのやり取りなしで実際の空き時間に基づいて時間を選択。",
-        automation: "カレンダー同期",
+        title: "スキル検証",
+        description: "候補者の品質と関連性を確保するための自動化された技術評価とポートフォリオレビュー。",
+        automation: "自動化された技術テスト",
+        icon: <ShieldCheck className="w-6 h-6" />
       },
       {
-        title: "統合面接",
-        description:
-          "自動録画、文字起こし、リアルタイム評価付きのビデオ通話を実施。",
-        automation: "職種別面接キット",
+        title: "可用性マッチング",
+        description: "最適なコラボレーションのためのタイムゾーン、可用性、プロジェクト締切を考慮したスマートスケジューリング。",
+        automation: "タイムゾーン最適化",
+        icon: <Clock className="w-6 h-6" />
       },
       {
-        title: "共同意思決定",
-        description:
-          "スコアカードと候補者の並列比較を備えた統一フィードバックシステム。",
-        automation: "互換性分析",
+        title: "プロジェクトキックオフ",
+        description: "自動化された契約締結、プロジェクト設定、チーム紹介によるシームレスなオンボーディング。",
+        automation: "自動化されたオンボーディングワークフロー",
+        icon: <Rocket className="w-6 h-6" />
       },
       {
-        title: "自動化されたオンボーディング",
-        description:
-          "セルフサービスデジタルフローでオファー送信、採用、新入社員統合。",
-        automation: "統合電子署名",
+        title: "継続的管理",
+        description: "プロジェクトライフサイクル全体を通じた統合プロジェクト追跡、通信ツール、品質保証。",
+        automation: "リアルタイム進捗監視",
+        icon: <BarChart3 className="w-6 h-6" />
       },
     ],
-    ctaTitle: "5つの異なるツールを使うのに疲れていませんか？",
-    ctaSubtitle:
-      "ProMeetsは技術採用に特化して設計された単一プラットフォームでプロセス全体を統合",
-    ctaButton: "完全なデモを見る",
+    benefits: [
+      {
+        title: "5倍高速なマッチング",
+        description: "数週間ではなく数日で完璧な人材を見つけます",
+        icon: <Zap className="w-5 h-5" />
+      },
+      {
+        title: "40%コスト削減",
+        description: "最適化された価格設定と削減された採用経費",
+        icon: <CheckCircle className="w-5 h-5" />
+      },
+      {
+        title: "98%満足度",
+        description: "より高い品質のマッチと成功したプロジェクト成果",
+        icon: <Star className="w-5 h-5" />
+      }
+    ],
+    ctaTitle: "プロジェクト採用を変える準備はできていますか？",
+    ctaSubtitle: "当社のAI駆動プラットフォームを通じて完璧な人材マッチを見つけた何千もの企業に参加しましょう",
+    ctaButton: "今すぐプロジェクトを開始",
+    ctaSecondary: "プラットフォームデモを見る"
   },
   zh: {
-    title: "完整的自动化招聘流程",
-    subtitle: "从职位发布到招聘，无需切换平台",
+    title: "AI驱动的项目匹配工作流程",
+    subtitle: "从项目定义到完美人才匹配，全部在一个智能平台中完成",
     steps: [
       {
-        title: "职位发布",
-        description: "使用优化模板直接从平台创建并发布职位到多个招聘网站。",
-        automation: "自动分发到招聘网站",
+        title: "项目定义",
+        description: "使用我们的智能模板定义项目需求、所需技能、时间表和预算。",
+        automation: "AI辅助的需求分析",
+        icon: <Target className="w-6 h-6" />
       },
       {
-        title: "候选人管理",
-        description: "通过AI和可自定义标准自动接收、组织和筛选候选人。",
-        automation: "按相关性自动排名",
+        title: "AI人才匹配",
+        description: "我们的高级算法分析数千个档案，为您的项目找到完美匹配。",
+        automation: "95%匹配准确率保证",
+        icon: <Brain className="w-6 h-6" />
       },
       {
-        title: "智能调度",
-        description: "候选人根据您真实的可用时间选择时间，无需邮件往来。",
-        automation: "日历同步",
+        title: "技能验证",
+        description: "自动化技术评估和作品集审查，确保候选人质量和相关性。",
+        automation: "自动化技术测试",
+        icon: <ShieldCheck className="w-6 h-6" />
       },
       {
-        title: "集成面试",
-        description: "进行视频通话，自动录制、转录和实时评估。",
-        automation: "职位特定面试套件",
+        title: "可用性匹配",
+        description: "智能调度，考虑时区、可用性和项目截止日期，实现最佳协作。",
+        automation: "时区优化",
+        icon: <Clock className="w-6 h-6" />
       },
       {
-        title: "协作决策",
-        description: "统一的反馈系统，带有评分卡和候选人并列比较。",
-        automation: "兼容性分析",
+        title: "项目启动",
+        description: "无缝入职，包括自动化合同签署、项目设置和团队介绍。",
+        automation: "自动化入职工作流程",
+        icon: <Rocket className="w-6 h-6" />
       },
       {
-        title: "自动化入职",
-        description: "通过自助数字流程发送offer、招聘和整合新员工。",
-        automation: "集成电子签名",
+        title: "持续管理",
+        description: "集成项目跟踪、沟通工具和整个项目生命周期的质量保证。",
+        automation: "实时进度监控",
+        icon: <BarChart3 className="w-6 h-6" />
       },
     ],
-    ctaTitle: "厌倦使用5种不同的工具？",
-    ctaSubtitle: "ProMeets将整个流程统一在一个专为技术招聘设计的单一平台中",
-    ctaButton: "查看完整演示",
+    benefits: [
+      {
+        title: "5倍更快匹配",
+        description: "在几天而不是几周内找到完美人才",
+        icon: <Zap className="w-5 h-5" />
+      },
+      {
+        title: "40%成本降低",
+        description: "优化定价和减少招聘开销",
+        icon: <CheckCircle className="w-5 h-5" />
+      },
+      {
+        title: "98%满意度",
+        description: "更高质量的匹配和成功的项目成果",
+        icon: <Star className="w-5 h-5" />
+      }
+    ],
+    ctaTitle: "准备好改变您的项目招聘了吗？",
+    ctaSubtitle: "加入通过我们AI驱动平台找到完美人才匹配的数千家公司",
+    ctaButton: "立即开始项目",
+    ctaSecondary: "观看平台演示"
   },
 };
 
@@ -244,14 +337,6 @@ interface WorkflowIntegrationProps {
 
 export function WorkflowIntegration({ language }: WorkflowIntegrationProps) {
   const t = translations[language] || translations.en;
-  const icons = [
-    <FileText key="filetext" className="w-8 h-8" />,
-    <Users key="users" className="w-8 h-8" />,
-    <Calendar key="calendar" className="w-8 h-8" />,
-    <MessageSquare key="messagesquare" className="w-8 h-8" />,
-    <BadgeCheck key="badgecheck" className="w-8 h-8" />,
-    <Zap key="zap" className="w-8 h-8" />,
-  ];
 
   return (
     <section id="workflow-integration" className="py-20 bg-gray-50">
@@ -277,38 +362,36 @@ export function WorkflowIntegration({ language }: WorkflowIntegrationProps) {
           </motion.p>
         </div>
 
-        <div className="relative">
-          {/* Timeline decoration */}
-          <div className="hidden lg:block absolute left-1/2 top-0 h-full w-0.5 bg-linear-to-b from-primary-500 to-primary-300 transform -translate-x-1/2"></div>
+        {/* Workflow Steps */}
+        <div className="relative mb-16">
+          {/* Connecting line */}
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {t.steps.map((step, index) => (
               <motion.div
                 key={step.title}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`relative ${
-                  index % 2 === 0
-                    ? "lg:pr-8 lg:text-right"
-                    : "lg:pl-8 lg:text-left"
-                } ${index === 0 ? "lg:mt-0" : ""}`}
+                className="relative"
               >
-                <div className="bg-white p-6 rounded-xl shadow-xs border border-gray-100 hover:shadow-md transition-all h-full">
-                  <div
-                    className={`flex ${
-                      index % 2 === 0 ? "lg:justify-end" : ""
-                    } mb-4`}
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-primary-100 flex items-center justify-center text-primary-600">
-                      {icons[index]}
-                    </div>
+                <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all h-full group">
+                  {/* Step number */}
+                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    {index + 1}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+
+                  {/* Icon */}
+                  <div className="w-16 h-16 rounded-lg text-primary-600 mb-4 transition-colors">
+                    {step.icon}
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
                     {step.title}
                   </h3>
                   <p className="text-gray-600 mb-4">{step.description}</p>
+
                   <div className="flex items-center text-sm text-primary-600 font-medium">
                     <RefreshCw className="w-4 h-4 mr-2" />
                     <span>{step.automation}</span>
@@ -319,17 +402,28 @@ export function WorkflowIntegration({ language }: WorkflowIntegrationProps) {
           </div>
         </div>
 
-        <div className="mt-16 bg-linear-to-r from-primary-600 to-primary-700 rounded-2xl p-8 md:p-12 text-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              {t.ctaTitle}
-            </h3>
-            <p className="text-xl mb-6">{t.ctaSubtitle}</p>
-            <button className="px-8 py-3 bg-white text-primary-700 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition-colors">
-              {t.ctaButton}
-            </button>
+        {/* Benefits Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {t.benefits.map((benefit, index) => (
+              <div key={benefit.title} className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                <div className="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center text-green-600 mb-4">
+                  {benefit.icon}
+                </div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                  {benefit.title}
+                </h4>
+                <p className="text-gray-600">{benefit.description}</p>
+              </div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

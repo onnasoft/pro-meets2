@@ -1,11 +1,21 @@
+import { useLoaderData } from "react-router";
+import { AIAdvantage } from "~/components/why-us/AIAdvantage";
+import { GlobalReach } from "~/components/why-us/GlobalReach";
+import { IndustryExpertise } from "~/components/why-us/IndustryExpertise";
+import { WhyUsHero } from "~/components/why-us/WhyUsHero";
+import { languageLoader } from "~/loaders/language";
+
+export { languageLoader as loader } from "~/loaders/language";
+
 export default function DemoPage() {
+  const { language } = useLoaderData<typeof languageLoader>();
+
   return (
-    <div className="container mx-auto px-6 py-20">
-      <h1 className="text-4xl font-bold mb-6">Demo Page</h1>
-      <p className="text-lg text-gray-700 mb-4">
-        This is a demo page to showcase the application features.
-      </p>
-      {/* Additional content can be added here */}
-    </div>
+    <>
+      <WhyUsHero language={language} />
+      <AIAdvantage language={language} />
+      <IndustryExpertise language={language} />
+      <GlobalReach language={language} />
+    </>
   );
 }

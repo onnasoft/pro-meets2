@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Brain, Zap, Shield, Clock, Users, Rocket, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Language } from "pro-meets-core";
@@ -6,221 +6,268 @@ import { Language } from "pro-meets-core";
 const translations = {
   en: {
     title: "Frequently Asked Questions",
-    subtitle: "Answers to the most common questions about our platform",
+    subtitle: "Everything you need to know about our AI-powered talent matching platform",
     faqs: [
       {
-        question: "How does ProMeets integrate with our current systems?",
+        question: "How does your AI matching algorithm work?",
         answer:
-          "ProMeets offers native integrations with major ATS (Applicant Tracking Systems), calendar tools (Google Calendar, Outlook), and video conferencing platforms. Our implementation team works with you to ensure a smooth migration and provides developer-accessible APIs.",
-        tip: "Pro tip: All our plans include a free Security Assessment to identify potential improvements in your current processes.",
+          "Our AI algorithm analyzes multiple data points including skills, experience, project requirements, availability, timezone compatibility, and past project success rates. It uses machine learning models trained on thousands of successful project matches to identify the perfect talent for your specific needs.",
+        tip: "Pro tip: The more detailed your project requirements, the better our AI can match you with ideal candidates.",
+        icon: <Brain className="w-5 h-5" />
       },
       {
-        question:
-          "What differentiates ProMeets from using Zoom + Calendly + ATS separately?",
+        question: "How do you verify the skills of professionals on your platform?",
         answer:
-          "Unlike fragmented solutions, ProMeets offers a fully integrated flow specifically designed for technical recruitment: automatic recordings linked to each candidate, contextual collaborative evaluation, specialized templates for technical roles, and unified analytics that show the performance of the entire process, not just isolated parts.",
+          "We use a multi-layered verification process including technical assessments, portfolio reviews, reference checks, and past project evaluations. All professionals undergo rigorous screening before they can receive project invitations.",
+        tip: "All verified professionals receive a badge showing their expertise level and verification status.",
+        icon: <Shield className="w-5 h-5" />
       },
       {
-        question: "How do you ensure the security of candidate data?",
+        question: "What's the typical time to find the right talent for a project?",
         answer:
-          "We implement end-to-end encryption, storage in ISO 27001 certified data centers, granular access controls, and compliance with GDPR and local regulations. All recordings and personal data are managed with strict security protocols and you can configure automatic retention and deletion periods.",
+          "Most projects are matched with suitable talent within 48 hours. For specialized roles or complex requirements, it may take up to 5 business days. Our AI continuously learns from your preferences to speed up future matches.",
+        tip: "Urgent projects can be flagged for priority matching with our premium support team.",
+        icon: <Clock className="w-5 h-5" />
       },
       {
-        question: "Does it work for high-volume hiring?",
+        question: "Can I manage the entire project through your platform?",
         answer:
-          "Absolutely. Our clients manage processes with 500+ monthly candidates using features like: technical auto-scoring based on criteria, batch scheduling, asynchronous recorded interviews, and advanced dashboards for tracking massive pipelines. The platform scales automatically according to your volume.",
+          "Yes, our platform provides end-to-end project management tools including milestone tracking, time tracking, communication tools, file sharing, and payment processing. Everything you need to successfully complete your project in one place.",
+        tip: "We integrate with popular project management tools if you prefer to use your existing workflow.",
+        icon: <Users className="w-5 h-5" />
       },
       {
-        question: "What support and training is included?",
+        question: "How do you handle different time zones for global projects?",
         answer:
-          "We offer personalized onboarding, live team training, an online academy with certification, and priority support through multiple channels (chat, email, video call). All plans include 24/7 technical support and access to our resource center with templates and best practices for technical recruitment.",
+          "Our AI specifically optimizes for time zone compatibility and overlapping working hours. We show you availability windows and suggest optimal collaboration times. All professionals indicate their preferred working hours and flexibility.",
+        tip: "Look for professionals with 'Flexible Hours' badges for better time zone alignment.",
+        icon: <Zap className="w-5 h-5" />
       },
       {
-        question: "Can I try ProMeets before committing?",
+        question: "What if the matched professional isn't the right fit?",
         answer:
-          "Yes, we offer a personalized demo with specific use cases for your industry, plus a 14-day free trial with access to all features. During the trial, we assign a Customer Success Manager to guide you through the initial setup.",
+          "We offer a satisfaction guarantee. If within the first week the match isn't working, we'll find a replacement at no additional cost. Our success team will work with you to understand what went wrong and improve future matches.",
+        tip: "Provide detailed feedback to help our AI learn and make better matches in the future.",
+        icon: <Rocket className="w-5 h-5" />
       },
     ],
-    ctaTitle: "Didn't find your question?",
-    ctaSubtitle: "Our team of specialists is ready to help you personally",
-    ctaPrimary: "Contact sales",
-    ctaSecondary: "View full documentation",
+    ctaTitle: "Still have questions?",
+    ctaSubtitle: "Our AI specialists are ready to help you find the perfect talent for your project",
+    ctaPrimary: "Talk to an Expert",
+    ctaSecondary: "View Platform Demo",
     proTip: "Pro tip:",
   },
   es: {
-    title: "Preguntas frecuentes",
-    subtitle: "Respuestas a las dudas más comunes sobre nuestra plataforma",
+    title: "Preguntas Frecuentes",
+    subtitle: "Todo lo que necesitas saber sobre nuestra plataforma de matching de talento con IA",
     faqs: [
       {
-        question: "¿Cómo integra ProMeets con nuestros sistemas actuales?",
+        question: "¿Cómo funciona su algoritmo de matching con IA?",
         answer:
-          "ProMeets ofrece integraciones nativas con los principales ATS (Applicant Tracking Systems), herramientas de calendario (Google Calendar, Outlook), y plataformas de videoconferencia. Nuestro equipo de implementación trabaja contigo para garantizar una migración sin problemas y ofrece API accesibles para desarrolladores.",
-        tip: "Tip profesional: Todos nuestros planes incluyen un Assessment de Seguridad gratuito para identificar posibles mejoras en tus procesos actuales.",
+          "Nuestro algoritmo de IA analiza múltiples puntos de datos incluyendo habilidades, experiencia, requisitos del proyecto, disponibilidad, compatibilidad de zona horaria y tasas de éxito de proyectos anteriores. Utiliza modelos de machine learning entrenados con miles de matches exitosos para identificar el talento perfecto para tus necesidades específicas.",
+        tip: "Tip profesional: Cuanto más detallados sean tus requisitos de proyecto, mejor podrá nuestra IA matcharte con candidatos ideales.",
+        icon: <Brain className="w-5 h-5" />
       },
       {
-        question:
-          "¿Qué diferencia a ProMeets de usar Zoom + Calendly + ATS por separado?",
+        question: "¿Cómo verifican las habilidades de los profesionales en su plataforma?",
         answer:
-          "A diferencia de soluciones fragmentadas, ProMeets ofrece un flujo completamente integrado diseñado específicamente para reclutamiento técnico: grabaciones automáticas vinculadas a cada candidato, evaluación colaborativa en contexto, plantillas especializadas para roles técnicos, y analíticas unificadas que te muestran el rendimiento de todo el proceso, no solo partes aisladas.",
+          "Utilizamos un proceso de verificación de múltiples capas que incluye evaluaciones técnicas, revisiones de portafolio, verificaciones de referencias y evaluaciones de proyectos anteriores. Todos los profesionales pasan por un riguroso screening antes de poder recibir invitaciones a proyectos.",
+        tip: "Todos los profesionales verificados reciben una insignia que muestra su nivel de expertise y estado de verificación.",
+        icon: <Shield className="w-5 h-5" />
       },
       {
-        question:
-          "¿Cómo garantizan la seguridad de los datos de los candidatos?",
+        question: "¿Cuál es el tiempo típico para encontrar el talento adecuado para un proyecto?",
         answer:
-          "Implementamos cifrado end-to-end, almacenamiento en centros de datos certificados ISO 27001, controles de acceso granulares, y cumplimiento con GDPR y regulaciones locales. Todas las grabaciones y datos personales se gestionan con estrictos protocolos de seguridad y puedes configurar períodos automáticos de retención y eliminación.",
+          "La mayoría de los proyectos son matchados con talento adecuado en 48 horas. Para roles especializados o requisitos complejos, puede tomar hasta 5 días hábiles. Nuestra IA aprende continuamente de tus preferencias para acelerar matches futuros.",
+        tip: "Los proyectos urgentes pueden ser marcados para matching prioritario con nuestro equipo de soporte premium.",
+        icon: <Clock className="w-5 h-5" />
       },
       {
-        question: "¿Funciona para reclutamiento masivo (high-volume hiring)?",
+        question: "¿Puedo gestionar todo el proyecto a través de su plataforma?",
         answer:
-          "Absolutamente. Nuestros clientes gestionan procesos con 500+ candidatos mensuales usando funciones como: autocalificación técnica basada en criterios, programación por lotes, entrevistas grabadas asíncronas, y dashboards avanzados para seguimiento de pipelines masivos. La plataforma escala automáticamente según tu volumen.",
+          "Sí, nuestra plataforma proporciona herramientas de gestión de proyectos integrales que incluyen seguimiento de hitos, control de tiempo, herramientas de comunicación, compartición de archivos y procesamiento de pagos. Todo lo que necesitas para completar exitosamente tu proyecto en un solo lugar.",
+        tip: "Nos integramos con herramientas populares de gestión de proyectos si prefieres usar tu flujo de trabajo existente.",
+        icon: <Users className="w-5 h-5" />
       },
       {
-        question: "¿Qué soporte y capacitación incluye?",
+        question: "¿Cómo manejan diferentes zonas horarias para proyectos globales?",
         answer:
-          "Ofrecemos onboarding personalizado, capacitación en vivo para equipos, academia en línea con certificación, y soporte prioritario por múltiples canales (chat, email, videollamada). Todos los planes incluyen soporte técnico 24/7 y acceso a nuestro centro de recursos con plantillas y mejores prácticas para reclutamiento técnico.",
+          "Nuestra IA específicamente optimiza para compatibilidad de zona horaria y horarios de trabajo superpuestos. Te mostramos ventanas de disponibilidad y sugerimos tiempos óptimos de colaboración. Todos los profesionales indican sus horarios preferidos y flexibilidad.",
+        tip: "Busca profesionales con insignias de 'Horarios Flexibles' para mejor alineación de zona horaria.",
+        icon: <Zap className="w-5 h-5" />
       },
       {
-        question: "¿Puedo probar ProMeets antes de comprometerme?",
+        question: "¿Qué pasa si el profesional matchado no es el adecuado?",
         answer:
-          "Sí, ofrecemos una demo personalizada con casos de uso específicos para tu industria, además de un periodo de prueba gratuito de 14 días con acceso a todas las funciones. Durante la prueba, asignamos un Customer Success Manager para guiarte en la configuración inicial.",
+          "Ofrecemos una garantía de satisfacción. Si dentro de la primera semana el match no está funcionando, encontraremos un reemplazo sin costo adicional. Nuestro equipo de éxito trabajará contigo para entender qué salió mal y mejorar matches futuros.",
+        tip: "Proporciona feedback detallado para ayudar a nuestra IA a aprender y hacer mejores matches en el futuro.",
+        icon: <Rocket className="w-5 h-5" />
       },
     ],
+    ctaTitle: "¿Aún tienes preguntas?",
+    ctaSubtitle: "Nuestros especialistas en IA están listos para ayudarte a encontrar el talento perfecto para tu proyecto",
+    ctaPrimary: "Hablar con un Experto",
+    ctaSecondary: "Ver Demo de la Plataforma",
     proTip: "Tip profesional:",
-    ctaTitle: "¿No encontraste tu pregunta?",
-    ctaSubtitle:
-      "Nuestro equipo de especialistas está listo para ayudarte personalmente",
-    ctaPrimary: "Contactar a ventas",
-    ctaSecondary: "Ver documentación completa",
   },
   fr: {
-    title: "Questions fréquemment posées",
-    subtitle: "Réponses aux questions les plus courantes sur notre plateforme",
+    title: "Questions Fréquentes",
+    subtitle: "Tout ce que vous devez savoir sur notre plateforme de matching de talent avec IA",
     faqs: [
       {
-        question: "Comment ProMeets s'intègre-t-il à nos systèmes actuels ?",
+        question: "Comment fonctionne votre algorithme de matching IA ?",
         answer:
-          "ProMeets propose des intégrations natives avec les principaux ATS (Applicant Tracking Systems), outils de calendrier (Google Calendar, Outlook) et plateformes de visioconférence. Notre équipe d'implémentation travaille avec vous pour garantir une migration fluide et fournit des API accessibles aux développeurs.",
-        tip: "Conseil pro : Tous nos plans incluent une évaluation de sécurité gratuite pour identifier les améliorations potentielles dans vos processus actuels.",
+          "Notre algorithme IA analyse de multiples points de données incluant compétences, expérience, exigences projet, disponibilité, compatibilité fuseau horaire et taux de réussite projets passés. Il utilise des modèles de machine learning entraînés sur des milliers de matches réussis pour identifier le talent parfait pour vos besoins spécifiques.",
+        tip: "Conseil pro : Plus vos exigences projet sont détaillées, mieux notre IA peut vous matcher avec des candidats idéaux.",
+        icon: <Brain className="w-5 h-5" />
       },
       {
-        question:
-          "Qu'est-ce qui différencie ProMeets de l'utilisation séparée de Zoom + Calendly + ATS ?",
+        question: "Comment vérifiez-vous les compétences des professionnels sur votre plateforme ?",
         answer:
-          "Contrairement aux solutions fragmentées, ProMeets offre un flux entièrement intégré conçu spécifiquement pour le recrutement technique : enregistrements automatiques liés à chaque candidat, évaluation collaborative contextuelle, modèles spécialisés pour les rôles techniques et analyses unifiées montrant la performance de l'ensemble du processus, pas seulement des parties isolées.",
+          "Nous utilisons un processus de vérification multicouche incluant évaluations techniques, revues portfolio, vérifications références et évaluations projets passés. Tous les professionnels subissent un screening rigoureux avant de pouvoir recevoir des invitations projet.",
+        tip: "Tous les professionnels vérifiés reçoivent un badge montrant leur niveau d'expertise et statut de vérification.",
+        icon: <Shield className="w-5 h-5" />
       },
       {
-        question:
-          "Comment garantissez-vous la sécurité des données des candidats ?",
+        question: "Quel est le délai typique pour trouver le talent adapté à un projet ?",
         answer:
-          "Nous mettons en œuvre un chiffrement de bout en bout, un stockage dans des centres de données certifiés ISO 27001, des contrôles d'accès granulaires et une conformité au GDPR et aux réglementations locales. Tous les enregistrements et données personnelles sont gérés avec des protocoles de sécurité stricts et vous pouvez configurer des périodes de rétention et de suppression automatiques.",
+          "La plupart des projets sont matchés avec talent adapté sous 48 heures. Pour rôles spécialisés ou exigences complexes, cela peut prendre jusqu'à 5 jours ouvrables. Notre IA apprend continuellement de vos préférences pour accélérer les matches futurs.",
+        tip: "Les projets urgents peuvent être signalés pour matching prioritaire avec notre équipe support premium.",
+        icon: <Clock className="w-5 h-5" />
       },
       {
-        question: "Fonctionne-t-il pour le recrutement en volume élevé ?",
+        question: "Puis-je gérer l'ensemble du projet via votre plateforme ?",
         answer:
-          "Absolument. Nos clients gèrent des processus avec 500+ candidats mensuels en utilisant des fonctionnalités comme : l'auto-évaluation technique basée sur des critères, la planification par lots, les entretiens enregistrés asynchrones et des tableaux de bord avancés pour suivre des pipelines massifs. La plateforme s'adapte automatiquement à votre volume.",
+          "Oui, notre plateforme fournit des outils de gestion de projet de bout en bout incluant suivi jalons, contrôle temps, outils communication, partage fichiers et traitement paiements. Tout ce dont vous avez besoin pour réussir votre projet au même endroit.",
+        tip: "Nous intégrons les outils de gestion de projet populaires si vous préférez utiliser votre workflow existant.",
+        icon: <Users className="w-5 h-5" />
       },
       {
-        question: "Quel support et formation sont inclus ?",
+        question: "Comment gérez-vous les différents fuseaux horaires pour les projets globaux ?",
         answer:
-          "Nous proposons un onboarding personnalisé, des formations en direct pour les équipes, une académie en ligne avec certification et un support prioritaire via plusieurs canaux (chat, email, appel vidéo). Tous les plans incluent un support technique 24/7 et l'accès à notre centre de ressources avec des modèles et meilleures pratiques pour le recrutement technique.",
+          "Notre IA optimise spécifiquement pour compatibilité fuseau horaire et chevauchement horaires travail. Nous vous montrons des fenêtres disponibilité et suggérons des temps collaboration optimaux. Tous les professionnels indiquent leurs horaires préférés et flexibilité.",
+        tip: "Recherchez des professionnels avec badges 'Horaires Flexibles' pour meilleur alignement fuseau horaire.",
+        icon: <Zap className="w-5 h-5" />
       },
       {
-        question: "Puis-je essayer ProMeets avant de m'engager ?",
+        question: "Que se passe-t-il si le professionnel matché ne convient pas ?",
         answer:
-          "Oui, nous proposons une démo personnalisée avec des cas d'usage spécifiques à votre secteur, ainsi qu'un essai gratuit de 14 jours avec accès à toutes les fonctionnalités. Pendant l'essai, nous assignons un Customer Success Manager pour vous guider dans la configuration initiale.",
+          "Nous offrons une garantie satisfaction. Si durant la première semaine le match ne fonctionne pas, nous trouverons un remplacement sans coût additionnel. Notre équipe succès travaillera avec vous pour comprendre ce qui n'a pas marché et améliorer les matches futurs.",
+        tip: "Fournissez des retours détaillés pour aider notre IA à apprendre et faire de meilleurs matches à l'avenir.",
+        icon: <Rocket className="w-5 h-5" />
       },
     ],
+    ctaTitle: "Encore des questions ?",
+    ctaSubtitle: "Nos spécialistes IA sont prêts à vous aider à trouver le talent parfait pour votre projet",
+    ctaPrimary: "Parler à un Expert",
+    ctaSecondary: "Voir Démo Plateforme",
     proTip: "Conseil pro :",
-    ctaTitle: "Vous n'avez pas trouvé votre question ?",
-    ctaSubtitle:
-      "Notre équipe de spécialistes est prête à vous aider personnellement",
-    ctaPrimary: "Contacter les ventes",
-    ctaSecondary: "Voir la documentation complète",
   },
   jp: {
     title: "よくある質問",
-    subtitle: "当社プラットフォームに関するよくある質問への回答",
+    subtitle: "AIを活用した人材マッチングプラットフォームについて知っておくべきすべて",
     faqs: [
       {
-        question: "ProMeetsは現在のシステムとどのように統合されますか？",
+        question: "AIマッチングアルゴリズムはどのように機能しますか？",
         answer:
-          "ProMeetsは主要なATS（応募者追跡システム）、カレンダーツール（Googleカレンダー、Outlook）、ビデオ会議プラットフォームとネイティブに統合されます。導入チームがスムーズな移行をサポートし、開発者がアクセス可能なAPIを提供します。",
-        tip: "プロのヒント：すべてのプランに、現在のプロセスの改善点を特定する無料のセキュリティ評価が含まれています。",
+          "当社のAIアルゴリズムは、スキル、経験、プロジェクト要件、可用性、タイムゾーン互換性、過去のプロジェクト成功率など、複数のデータポイントを分析します。何千もの成功したプロジェクトマッチで訓練された機械学習モデルを使用し、特定のニーズに完璧な人材を特定します。",
+        tip: "プロのヒント：プロジェクト要件が詳細であるほど、AIは理想的な候補者とのマッチングがより正確になります。",
+        icon: <Brain className="w-5 h-5" />
       },
       {
-        question:
-          "Zoom + Calendly + ATSを別々に使うのとProMeetsの違いは何ですか？",
+        question: "プラットフォーム上のプロフェッショナルのスキルをどのように検証しますか？",
         answer:
-          "断片化されたソリューションとは異なり、ProMeetsは技術採用向けに特別に設計された完全に統合されたフローを提供します：各候補者にリンクされた自動録画、文脈を考慮した共同評価、技術職向けの専門テンプレート、孤立した部分ではなくプロセス全体のパフォーマンスを示す統合分析。",
+          "技術的評価、ポートフォリオレビュー、参照チェック、過去のプロジェクト評価を含む多層的な検証プロセスを使用します。すべてのプロフェッショナルは、プロジェクト招待を受け取る前に厳格なスクリーニングを受けます。",
+        tip: "すべての検証済みプロフェッショナルは、専門知識レベルと検証ステータスを示すバッジを受け取ります。",
+        icon: <Shield className="w-5 h-5" />
       },
       {
-        question: "候補者データの安全性はどのように保証されていますか？",
+        question: "プロジェクトに適した人材を見つけるまでの典型的な時間はどれくらいですか？",
         answer:
-          "エンドツーエンド暗号化、ISO 27001認証データセンターでの保管、きめ細かいアクセス制御、GDPRおよび現地規制への準拠を実施しています。すべての録画と個人データは厳格なセキュリティプロトコルで管理され、自動保持・削除期間を設定できます。",
+          "ほとんどのプロジェクトは48時間以内に適切な人材とマッチングされます。専門的な役職や複雑な要件の場合、最大5営業日かかる場合があります。当社のAIは、将来のマッチングを高速化するために、お客様の好みから継続的に学習します。",
+        tip: "緊急のプロジェクトは、プレミアムサポートチームによる優先マッチングのフラグを立てることができます。",
+        icon: <Clock className="w-5 h-5" />
       },
       {
-        question: "大量採用（high-volume hiring）に対応していますか？",
+        question: "プラットフォームを通じてプロジェクト全体を管理できますか？",
         answer:
-          "もちろんです。当社のクライアントは、基準に基づく技術的自己採点、バッチスケジューリング、非同期録画面接、大規模パイプライン追跡のための高度なダッシュボードなどの機能を使用して、月500人以上の候補者を管理しています。プラットフォームはボリュームに応じて自動的に拡張します。",
+          "はい、当社のプラットフォームは、マイルストーントラッキング、時間追跡、コミュニケーションツール、ファイル共有、支払い処理を含むエンドツーエンドのプロジェクト管理ツールを提供します。プロジェクトを成功裏に完了するために必要なすべてが1か所に揃っています。",
+        tip: "既存のワークフローを使用したい場合は、人気のあるプロジェクト管理ツールと統合します。",
+        icon: <Users className="w-5 h-5" />
       },
       {
-        question: "どのようなサポートとトレーニングが含まれていますか？",
+        question: "グローバルプロジェクトの異なるタイムゾーンをどのように処理しますか？",
         answer:
-          "パーソナライズされたオンボーディング、チーム向けライブトレーニング、認定付きオンラインアカデミー、複数チャネル（チャット、メール、ビデオ通話）での優先サポートを提供します。すべてのプランに24/7技術サポートと、技術採用向けのテンプレートとベストプラクティスが揃ったリソースセンターへのアクセスが含まれます。",
+          "当社のAIは、タイムゾーンの互換性と重複する作業時間 specifically 最適化します。利用可能な時間帯を表示し、最適なコラボレーション時間を提案します。すべてのプロフェッショナルは、希望する勤務時間と柔軟性を示します。",
+        tip: "タイムゾーンの調整を改善するには、「柔軟な時間」のバッジを持つプロフェッショナルを探してください。",
+        icon: <Zap className="w-5 h-5" />
       },
       {
-        question: "コミットする前にProMeetsを試すことはできますか？",
+        question: "マッチングされたプロフェッショナルが適切でない場合はどうなりますか？",
         answer:
-          "はい、業界特有のユースケースを考慮したパーソナライズされたデモと、全機能にアクセスできる14日間の無料トライアルを提供しています。トライアル期間中は、初期設定をガイドするカスタマーサクセスマネージャーが割り当てられます。",
+          "満足保証を提供しています。最初の1週間以内にマッチングが機能しない場合、追加費用なしで代替えを見つけます。サクセスチームが、問題を理解し将来のマッチングを改善するために協力します。",
+        tip: "AIが学習し将来より良いマッチングを行うために、詳細なフィードバックを提供してください。",
+        icon: <Rocket className="w-5 h-5" />
       },
     ],
+    ctaTitle: "まだ質問がありますか？",
+    ctaSubtitle: "当社のAIスペシャリストが、プロジェクトに最適な人材を見つけるお手伝いをします",
+    ctaPrimary: "エキスパートと話す",
+    ctaSecondary: "プラットフォームデモを見る",
     proTip: "プロのヒント：",
-    ctaTitle: "質問が見つかりませんでしたか？",
-    ctaSubtitle: "専門家チームが個別にお手伝いします",
-    ctaPrimary: "営業に連絡",
-    ctaSecondary: "完全なドキュメントを見る",
   },
   zh: {
     title: "常见问题",
-    subtitle: "关于我们平台最常见问题的解答",
+    subtitle: "关于我们AI驱动人才匹配平台您需要了解的一切",
     faqs: [
       {
-        question: "ProMeets如何与我们当前的系统集成？",
+        question: "您的AI匹配算法如何工作？",
         answer:
-          "ProMeets提供与主要ATS（申请人跟踪系统）、日历工具（Google日历、Outlook）和视频会议平台的原生集成。我们的实施团队与您合作确保顺利迁移，并提供开发人员可访问的API。",
-        tip: "专业提示：所有计划都包括免费的安全评估，以识别当前流程中的潜在改进点。",
+          "我们的AI算法分析多个数据点，包括技能、经验、项目需求、可用性、时区兼容性和过去项目成功率。它使用基于数千个成功项目匹配训练的机器学习模型，为您的特定需求找到完美人才。",
+        tip: "专业提示：您的项目需求越详细，我们的AI越能为您匹配理想的候选人。",
+        icon: <Brain className="w-5 h-5" />
       },
       {
-        question: "ProMeets与单独使用Zoom + Calendly + ATS有什么区别？",
+        question: "如何验证平台上专业人士的技能？",
         answer:
-          "与碎片化解决方案不同，ProMeets提供专为技术招聘设计的完全集成流程：自动录制链接到每位候选人、上下文协作评估、技术角色专用模板，以及显示整个流程绩效而非孤立部分的统一分析。",
+          "我们使用多层验证流程，包括技术评估、作品集审查、参考检查和过去项目评估。所有专业人士在接收项目邀请前都经过严格筛选。",
+        tip: "所有经过验证的专业人士都会获得显示其专业水平和验证状态的徽章。",
+        icon: <Shield className="w-5 h-5" />
       },
       {
-        question: "如何确保候选人数据的安全？",
+        question: "为项目找到合适人才的典型时间是多久？",
         answer:
-          "我们实施端到端加密、存储在ISO 27001认证的数据中心、细粒度访问控制，并遵守GDPR和当地法规。所有录音和个人数据都通过严格的安全协议管理，您可以配置自动保留和删除周期。",
+          "大多数项目在48小时内与合适人才匹配。对于专业角色或复杂需求，可能需要最多5个工作日。我们的AI不断从您的偏好中学习，以加速未来的匹配。",
+        tip: "紧急项目可以标记为优先匹配，由我们的高级支持团队处理。",
+        icon: <Clock className="w-5 h-5" />
       },
       {
-        question: "适用于大规模招聘吗？",
+        question: "我可以通过您的平台管理整个项目吗？",
         answer:
-          "完全可以。我们的客户使用以下功能管理每月500多名候选人的流程：基于标准的技术自动评分、批量安排、异步录制面试，以及用于跟踪大规模管道的先进仪表板。平台会根据您的规模自动扩展。",
+          "是的，我们的平台提供端到端的项目管理工具，包括里程碑跟踪、时间跟踪、沟通工具、文件共享和支付处理。成功完成项目所需的一切都在一个地方。",
+        tip: "如果您更喜欢使用现有工作流程，我们与流行的项目管理工具集成。",
+        icon: <Users className="w-5 h-5" />
       },
       {
-        question: "包含哪些支持和培训？",
+        question: "如何处理全球项目的不同时区？",
         answer:
-          "我们提供个性化入职培训、团队现场培训、带认证的在线学院，以及通过多种渠道（聊天、电子邮件、视频通话）的优先支持。所有计划都包括24/7技术支持和访问我们的资源中心，其中包含技术招聘的模板和最佳实践。",
+          "我们的AI专门优化时区兼容性和重叠工作时间。我们显示可用时间窗口并建议最佳协作时间。所有专业人士都标明其首选工作时间和灵活性。",
+        tip: "寻找带有“灵活时间”徽章的专业人士以获得更好的时区对齐。",
+        icon: <Zap className="w-5 h-5" />
       },
       {
-        question: "可以在承诺前试用ProMeets吗？",
+        question: "如果匹配的专业人士不合适怎么办？",
         answer:
-          "是的，我们提供针对您行业特定用例的个性化演示，以及14天免费试用，可访问所有功能。试用期间，我们会指派一位客户成功经理指导您完成初始设置。",
+          "我们提供满意度保证。如果在第一周内匹配不成功，我们将免费寻找替代人选。我们的成功团队将与您合作了解问题所在并改进未来的匹配。",
+        tip: "提供详细反馈以帮助我们的AI学习并在未来进行更好的匹配。",
+        icon: <Rocket className="w-5 h-5" />
       },
     ],
+    ctaTitle: "还有问题吗？",
+    ctaSubtitle: "我们的AI专家随时准备帮助您为项目找到完美人才",
+    ctaPrimary: "与专家交流",
+    ctaSecondary: "查看平台演示",
     proTip: "专业提示：",
-    ctaTitle: "没有找到您的问题？",
-    ctaSubtitle: "我们的专家团队随时准备为您提供帮助",
-    ctaPrimary: "联系销售",
-    ctaSecondary: "查看完整文档",
   },
 };
 
@@ -266,7 +313,7 @@ export function FrequentAskedQuestions({
         >
           <motion.h2
             variants={item}
-            className="text-4xl font-bold text-gray-900 mb-4"
+            className="text-6xl font-bold text-gray-900 mb-4"
           >
             {t.title}
           </motion.h2>
@@ -290,18 +337,20 @@ export function FrequentAskedQuestions({
               key={faq.question}
               variants={item}
               whileHover={{ scale: 1.01 }}
-              className="mb-4 border border-gray-200 rounded-xl overflow-hidden bg-white shadow-xs hover:shadow-md transition-shadow"
+              className="mb-6 border border-gray-200 rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all"
             >
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition-colors"
               >
-                <motion.h3
-                  layout
-                  className="text-lg font-semibold text-gray-900 text-left"
-                >
-                  {faq.question}
-                </motion.h3>
+                <div className="flex items-center space-x-4">
+                  <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600">
+                    {faq.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 text-left">
+                    {faq.question}
+                  </h3>
+                </div>
                 <motion.div
                   animate={{ rotate: activeIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
@@ -323,6 +372,7 @@ export function FrequentAskedQuestions({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.2 }}
+                        className="leading-relaxed"
                       >
                         {faq.answer}
                       </motion.p>
@@ -353,23 +403,26 @@ export function FrequentAskedQuestions({
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="bg-gray-50 rounded-xl p-8 inline-block max-w-2xl shadow-xs">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">
+          <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-8 md:p-12 text-white">
+            <h3 className="text-2xl font-bold mb-4">
               {t.ctaTitle}
             </h3>
-            <p className="text-gray-600 mb-6">{t.ctaSubtitle}</p>
+            <p className="text-xl mb-8 opacity-90">
+              {t.ctaSubtitle}
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors"
+                className="px-8 py-3 bg-white text-primary-700 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition-colors flex items-center justify-center"
               >
                 {t.ctaPrimary}
+                <ArrowRight className="w-5 h-5 ml-2" />
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                className="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-primary-700 transition-colors"
               >
                 {t.ctaSecondary}
               </motion.button>

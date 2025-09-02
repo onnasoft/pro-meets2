@@ -2,342 +2,503 @@ import { useState } from "react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { Language } from "pro-meets-core";
+import {
+  Brain,
+  Rocket,
+  BarChart3,
+  Code,
+  Cloud,
+  Database,
+  Palette,
+  Smartphone,
+  Globe
+} from "lucide-react";
 
 const translations = {
   en: {
-    title: "The most complete platform for tech recruitment",
-    scheduling: {
-      name: "Smart Scheduling",
+    title: "AI-Powered Talent Matching for Your Projects",
+    matching: {
+      name: "Smart Matching",
       description: (
         <>
           <p className="mb-4">
-            Our scheduling system revolutionizes how you coordinate interviews:
+            Our AI algorithm analyzes your project requirements and finds the perfect talent match:
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>Automatic sync with Google Calendar, Outlook and others</li>
-            <li>Candidates select times based on your availability</li>
-            <li>Automatic email and SMS reminders</li>
-            <li>Configuration of buffers between interviews</li>
-            <li>Smart blocking of non-working hours</li>
+            <li>Advanced skill and experience matching</li>
+            <li>Availability and timezone alignment</li>
+            <li>Project complexity assessment</li>
+            <li>Cultural fit and work style compatibility</li>
+            <li>Budget and rate optimization</li>
           </ul>
-          <p>Reduce coordination time by 80% and eliminate endless emails.</p>
+          <p>Find the right talent 5x faster than traditional methods.</p>
         </>
       ),
-      stats: "95% of interviews scheduled without conflicts",
+      stats: "95% accuracy in talent-project matching",
     },
-    interviews: {
-      name: "Integrated Interviews",
+    onboarding: {
+      name: "Rapid Onboarding",
       description: (
         <>
           <p className="mb-4">
-            Everything you need for effective interviews in one place:
+            Get your project started immediately with pre-vetted professionals:
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>HD video calls with guaranteed quality</li>
-            <li>Automatic recording with secure storage</li>
-            <li>Real-time transcription with content analysis</li>
-            <li>Standardized question templates</li>
-            <li>Shared notes during the interview</li>
+            <li>Verified skills and portfolio review</li>
+            <li>Background and reference checks</li>
+            <li>Immediate availability confirmation</li>
+            <li>Contract and agreement templates</li>
+            <li>Secure payment setup</li>
           </ul>
-          <p>Eliminates the need for Zoom, Teams and other external tools.</p>
+          <p>Reduce onboarding time from weeks to just days.</p>
         </>
       ),
-      stats: "40% more efficiency in interview sessions",
+      stats: "70% faster project kickoff",
     },
-    evaluation: {
-      name: "Collaborative Evaluation",
+    management: {
+      name: "Project Management",
       description: (
         <>
           <p className="mb-4">
-            Make more objective decisions with our evaluation system:
+            Everything you need to manage your project successfully:
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>Standardized scorecards by position</li>
-            <li>Asynchronous feedback from the hiring team</li>
-            <li>Side-by-side candidate comparison</li>
-            <li>Cultural compatibility analysis</li>
-            <li>Integration with your technical tests</li>
+            <li>Integrated communication tools</li>
+            <li>Progress tracking and milestones</li>
+            <li>Time tracking and productivity metrics</li>
+            <li>File sharing and collaboration</li>
+            <li>Quality assurance checkpoints</li>
           </ul>
-          <p>Reduce unconscious bias and improve your hiring quality.</p>
+          <p>Complete project visibility and control in one platform.</p>
         </>
       ),
-      stats: "60% less time in decision processes",
+      stats: "40% increase in project success rate",
     },
     buttons: {
-      liveDemo: "View live demo",
-      documentation: "Technical documentation",
+      findTalent: "Find Talent Now",
+      viewCases: "View Case Studies",
     },
+    techStack: "We Connect You with Experts Across All Technologies",
+    techCategories: [
+      {
+        icon: <Code className="w-6 h-6" />,
+        name: "Web Development",
+        skills: ["React", "Vue", "Angular", "Node.js", "Python", "PHP"]
+      },
+      {
+        icon: <Smartphone className="w-6 h-6" />,
+        name: "Mobile Development",
+        skills: ["iOS", "Android", "Flutter", "React Native", "Kotlin", "Swift"]
+      },
+      {
+        icon: <Cloud className="w-6 h-6" />,
+        name: "Cloud & DevOps",
+        skills: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform"]
+      },
+      {
+        icon: <Database className="w-6 h-6" />,
+        name: "Data Science & AI",
+        skills: ["Python", "R", "TensorFlow", "PyTorch", "SQL", "ML"]
+      },
+      {
+        icon: <Palette className="w-6 h-6" />,
+        name: "UI/UX Design",
+        skills: ["Figma", "Sketch", "Adobe XD", "Prototyping", "User Research"]
+      },
+      {
+        icon: <Globe className="w-6 h-6" />,
+        name: "Digital Marketing",
+        skills: ["SEO", "PPC", "Social Media", "Content Strategy", "Analytics"]
+      },
+    ],
   },
   es: {
-    title: "La plataforma más completa para reclutamiento tecnológico",
-    scheduling: {
-      name: "Programación Inteligente",
+    title: "Matching de Talento con IA para Tus Proyectos",
+    matching: {
+      name: "Matching Inteligente",
       description: (
         <>
           <p className="mb-4">
-            Nuestro sistema de agendamiento revoluciona cómo coordinas
-            entrevistas:
+            Nuestro algoritmo de IA analiza tus requisitos de proyecto y encuentra el talento perfecto:
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>
-              Sincronización automática con Google Calendar, Outlook y otros
-            </li>
-            <li>Los candidatos seleccionan horarios según tu disponibilidad</li>
-            <li>Recordatorios automáticos por email y SMS</li>
-            <li>Configuración de buffers entre entrevistas</li>
-            <li>Bloqueo inteligente de horarios no laborales</li>
+            <li>Matching avanzado de habilidades y experiencia</li>
+            <li>Alineación de disponibilidad y zona horaria</li>
+            <li>Evaluación de complejidad del proyecto</li>
+            <li>Compatibilidad cultural y de estilo de trabajo</li>
+            <li>Optimización de presupuesto y tarifas</li>
           </ul>
-          <p>
-            Reduce el tiempo de coordinación en un 80% y elimina los correos
-            interminables.
-          </p>
+          <p>Encuentra el talento adecuado 5 veces más rápido que con métodos tradicionales.</p>
         </>
       ),
-      stats: "95% de entrevistas programadas sin conflictos",
+      stats: "95% de precisión en matching talento-proyecto",
     },
-    interviews: {
-      name: "Entrevistas Integradas",
+    onboarding: {
+      name: "Onboarding Rápido",
       description: (
         <>
           <p className="mb-4">
-            Todo lo que necesitas para entrevistas efectivas en un solo lugar:
+            Inicia tu proyecto inmediatamente con profesionales pre-evaluados:
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>Videollamadas HD con calidad garantizada</li>
-            <li>Grabación automática con almacenamiento seguro</li>
-            <li>Transcripción en tiempo real con análisis de contenido</li>
-            <li>Plantillas de preguntas estandarizadas</li>
-            <li>Notas compartidas durante la entrevista</li>
+            <li>Habilidades verificadas y revisión de portafolio</li>
+            <li>Verificación de antecedentes y referencias</li>
+            <li>Confirmación de disponibilidad inmediata</li>
+            <li>Plantillas de contrato y acuerdos</li>
+            <li>Configuración de pagos seguros</li>
           </ul>
-          <p>
-            Elimina la necesidad de Zoom, Teams y otras herramientas externas.
-          </p>
+          <p>Reduce el tiempo de onboarding de semanas a solo días.</p>
         </>
       ),
-      stats: "40% más eficiencia en sesiones de entrevistas",
+      stats: "70% más rápido el inicio de proyectos",
     },
-    evaluation: {
-      name: "Evaluación Colaborativa",
+    management: {
+      name: "Gestión de Proyectos",
       description: (
         <>
           <p className="mb-4">
-            Toma decisiones más objetivas con nuestro sistema de evaluación:
+            Todo lo que necesitas para gestionar tu proyecto exitosamente:
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>Scorecards estandarizadas por puesto</li>
-            <li>Comentarios asíncronos del equipo de contratación</li>
-            <li>Comparación lado a lado de candidatos</li>
-            <li>Análisis de compatibilidad cultural</li>
-            <li>Integración con tus pruebas técnicas</li>
+            <li>Herramientas de comunicación integradas</li>
+            <li>Seguimiento de progreso y hitos</li>
+            <li>Control de tiempo y métricas de productividad</li>
+            <li>Compartición de archivos y colaboración</li>
+            <li>Puntos de control de calidad</li>
           </ul>
-          <p>
-            Reduce los sesgos inconscientes y mejora la calidad de tus
-            contrataciones.
-          </p>
+          <p>Visibilidad y control completo del proyecto en una sola plataforma.</p>
         </>
       ),
-      stats: "60% menos tiempo en procesos de decisión",
+      stats: "40% de aumento en la tasa de éxito de proyectos",
     },
     buttons: {
-      liveDemo: "Ver demostración en vivo",
-      documentation: "Documentación técnica",
+      findTalent: "Encontrar Talento Ahora",
+      viewCases: "Ver Casos de Estudio",
     },
+    techStack: "Te Conectamos con Expertos en Todas las Tecnologías",
+    techCategories: [
+      {
+        icon: <Code className="w-6 h-6" />,
+        name: "Desarrollo Web",
+        skills: ["React", "Vue", "Angular", "Node.js", "Python", "PHP"]
+      },
+      {
+        icon: <Smartphone className="w-6 h-6" />,
+        name: "Desarrollo Móvil",
+        skills: ["iOS", "Android", "Flutter", "React Native", "Kotlin", "Swift"]
+      },
+      {
+        icon: <Cloud className="w-6 h-6" />,
+        name: "Cloud & DevOps",
+        skills: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform"]
+      },
+      {
+        icon: <Database className="w-6 h-6" />,
+        name: "Ciencia de Datos & IA",
+        skills: ["Python", "R", "TensorFlow", "PyTorch", "SQL", "ML"]
+      },
+      {
+        icon: <Palette className="w-6 h-6" />,
+        name: "Diseño UI/UX",
+        skills: ["Figma", "Sketch", "Adobe XD", "Prototipado", "Investigación de Usuario"]
+      },
+      {
+        icon: <Globe className="w-6 h-6" />,
+        name: "Marketing Digital",
+        skills: ["SEO", "PPC", "Redes Sociales", "Estrategia de Contenido", "Analytics"]
+      },
+    ],
   },
   fr: {
-    title: "La plateforme la plus complète pour le recrutement technologique",
-    scheduling: {
-      name: "Planification Intelligente",
+    title: "Matching de Talent avec IA pour Vos Projets",
+    matching: {
+      name: "Matching Intelligent",
       description: (
         <>
           <p className="mb-4">
-            Notre système de planification révolutionne la coordination des
-            entretiens :
+            Notre algorithme d'IA analyse vos exigences de projet et trouve le talent parfait :
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>
-              Synchronisation automatique avec Google Calendar, Outlook et
-              autres
-            </li>
-            <li>
-              Les candidats sélectionnent des horaires selon votre disponibilité
-            </li>
-            <li>Rappels automatiques par email et SMS</li>
-            <li>Configuration de tampons entre les entretiens</li>
-            <li>Blocage intelligent des heures non travaillées</li>
+            <li>Matching avancé de compétences et expérience</li>
+            <li>Alignement disponibilité et fuseau horaire</li>
+            <li>Évaluation complexité du projet</li>
+            <li>Compatibilité culturelle et style de travail</li>
+            <li>Optimisation budget et tarifs</li>
           </ul>
-          <p>
-            Réduisez le temps de coordination de 80% et éliminez les emails sans
-            fin.
-          </p>
+          <p>Trouvez le talent idéal 5 fois plus vite qu'avec les méthodes traditionnelles.</p>
         </>
       ),
-      stats: "95% des entretiens programmés sans conflits",
+      stats: "95% de précision dans le matching talent-projet",
     },
-    interviews: {
-      name: "Entretiens Intégrés",
+    onboarding: {
+      name: "Onboarding Rapide",
       description: (
         <>
           <p className="mb-4">
-            Tout ce dont vous avez besoin pour des entretiens efficaces en un
-            seul endroit :
+            Démarrez votre projet immédiatement avec des professionnels pré-vérifiés :
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>Appels vidéo HD avec qualité garantie</li>
-            <li>Enregistrement automatique avec stockage sécurisé</li>
-            <li>Transcription en temps réel avec analyse de contenu</li>
-            <li>Modèles de questions standardisées</li>
-            <li>Notes partagées pendant l'entretien</li>
+            <li>Compétences vérifiées et revue de portfolio</li>
+            <li>Vérification antécédents et références</li>
+            <li>Confirmation disponibilité immédiate</li>
+            <li>Modèles de contrat et accords</li>
+            <li>Configuration paiements sécurisés</li>
           </ul>
-          <p>Élimine le besoin de Zoom, Teams et d'autres outils externes.</p>
+          <p>Réduisez le temps d'onboarding de semaines à quelques jours.</p>
         </>
       ),
-      stats: "40% plus d'efficacité dans les sessions d'entretien",
+      stats: "70% plus rapide pour démarrer les projets",
     },
-    evaluation: {
-      name: "Évaluation Collaborative",
+    management: {
+      name: "Gestion de Projet",
       description: (
         <>
           <p className="mb-4">
-            Prenez des décisions plus objectives avec notre système d'évaluation
-            :
+            Tout ce dont vous avez besoin pour gérer votre projet avec succès :
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>Grilles d'évaluation standardisées par poste</li>
-            <li>Commentaires asynchrones de l'équipe de recrutement</li>
-            <li>Comparaison côte à côte des candidats</li>
-            <li>Analyse de compatibilité culturelle</li>
-            <li>Intégration avec vos tests techniques</li>
+            <li>Outils de communication intégrés</li>
+            <li>Suivi progression et jalons</li>
+            <li>Suivi temps et métriques productivité</li>
+            <li>Partage fichiers et collaboration</li>
+            <li>Points de contrôle qualité</li>
           </ul>
-          <p>
-            Réduisez les biais inconscients et améliorez la qualité de vos
-            embauches.
-          </p>
+          <p>Visibilité et contrôle complets du projet sur une seule plateforme.</p>
         </>
       ),
-      stats: "60% moins de temps dans les processus de décision",
+      stats: "40% d'augmentation du taux de réussite des projets",
     },
     buttons: {
-      liveDemo: "Voir la démo en direct",
-      documentation: "Documentation technique",
+      findTalent: "Trouver des Talents Maintenant",
+      viewCases: "Voir les Études de Cas",
     },
+    techStack: "Nous Vous Connectons avec des Experts dans Toutes les Technologies",
+    techCategories: [
+      {
+        icon: <Code className="w-6 h-6" />,
+        name: "Développement Web",
+        skills: ["React", "Vue", "Angular", "Node.js", "Python", "PHP"]
+      },
+      {
+        icon: <Smartphone className="w-6 h-6" />,
+        name: "Développement Mobile",
+        skills: ["iOS", "Android", "Flutter", "React Native", "Kotlin", "Swift"]
+      },
+      {
+        icon: <Cloud className="w-6 h-6" />,
+        name: "Cloud & DevOps",
+        skills: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform"]
+      },
+      {
+        icon: <Database className="w-6 h-6" />,
+        name: "Science des Données & IA",
+        skills: ["Python", "R", "TensorFlow", "PyTorch", "SQL", "ML"]
+      },
+      {
+        icon: <Palette className="w-6 h-6" />,
+        name: "Design UI/UX",
+        skills: ["Figma", "Sketch", "Adobe XD", "Prototypage", "Recherche Utilisateur"]
+      },
+      {
+        icon: <Globe className="w-6 h-6" />,
+        name: "Marketing Digital",
+        skills: ["SEO", "PPC", "Réseaux Sociaux", "Stratégie de Contenu", "Analytics"]
+      },
+    ],
   },
   jp: {
-    title: "技術採用のための最も完全なプラットフォーム",
-    scheduling: {
-      name: "スマートスケジューリング",
+    title: "AIを活用したプロジェクトのための人材マッチング",
+    matching: {
+      name: "スマートマッチング",
       description: (
         <>
           <p className="mb-4">
-            私たちのスケジューリングシステムは、面接の調整方法を革新します：
+            当社のAIアルゴリズムがプロジェクト要件を分析し、完璧な人材マッチを見つけます：
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>Googleカレンダー、Outlookなどとの自動同期</li>
-            <li>候補者があなたの空き時間に基づいて時間を選択</li>
-            <li>自動メールおよびSMSリマインダー</li>
-            <li>面接間のバッファ設定</li>
-            <li>非労働時間のスマートブロック</li>
+            <li>高度なスキルと経験のマッチング</li>
+            <li>可用性とタイムゾーンの調整</li>
+            <li>プロジェクト複雑性の評価</li>
+            <li>文化的適合性と仕事スタイルの互換性</li>
+            <li>予算と料金の最適化</li>
           </ul>
-          <p>調整時間を80％削減し、無限のメールを排除します。</p>
+          <p>従来の方法より5倍速く適切な人材を見つけます。</p>
         </>
       ),
-      stats: "95％の面接が衝突なくスケジュール",
+      stats: "人材とプロジェクトのマッチング精度95%",
     },
-    interviews: {
-      name: "統合面接",
+    onboarding: {
+      name: "迅速なオンボーディング",
       description: (
         <>
-          <p className="mb-4">効果的な面接に必要なすべてが1か所に：</p>
+          <p className="mb-4">
+            事前審査済みのプロフェッショナルで即座にプロジェクトを開始：
+          </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>品質保証付きHDビデオ通話</li>
-            <li>安全なストレージを備えた自動録画</li>
-            <li>コンテンツ分析付きリアルタイム文字起こし</li>
-            <li>標準化された質問テンプレート</li>
-            <li>面接中の共有メモ</li>
+            <li>検証済みスキルとポートフォリオレビュー</li>
+            <li>経歴と参照チェック</li>
+            <li>即時可用性確認</li>
+            <li>契約と合意のテンプレート</li>
+            <li>安全な支払い設定</li>
           </ul>
-          <p>Zoom、Teamsなどの外部ツールが不要になります。</p>
+          <p>オンボーディング時間を数週間から数日に短縮。</p>
         </>
       ),
-      stats: "面接セッションの効率が40％向上",
+      stats: "プロジェクト開始が70%高速化",
     },
-    evaluation: {
-      name: "共同評価",
+    management: {
+      name: "プロジェクト管理",
       description: (
         <>
-          <p className="mb-4">私たちの評価システムでより客観的な決定を：</p>
+          <p className="mb-4">
+            プロジェクトを成功裏に管理するために必要なすべて：
+          </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>ポジション別標準化スコアカード</li>
-            <li>採用チームからの非同期フィードバック</li>
-            <li>候補者の並列比較</li>
-            <li>文化的適合性分析</li>
-            <li>技術テストとの統合</li>
+            <li>統合コミュニケーションツール</li>
+            <li>進捗追跡とマイルストーン</li>
+            <li>時間追跡と生産性指標</li>
+            <li>ファイル共有とコラボレーション</li>
+            <li>品質保証チェックポイント</li>
           </ul>
-          <p>無意識のバイアスを減らし、採用品質を向上させます。</p>
+          <p>単一プラットフォームでの完全なプロジェクト可視性と制御。</p>
         </>
       ),
-      stats: "意思決定プロセスに60％少ない時間",
+      stats: "プロジェクト成功率40%向上",
     },
     buttons: {
-      liveDemo: "ライブデモを見る",
-      documentation: "技術文書",
+      findTalent: "今すぐ人材を見つける",
+      viewCases: "事例研究を見る",
     },
+    techStack: "あらゆる技術のエキスパートとおつなぎします",
+    techCategories: [
+      {
+        icon: <Code className="w-6 h-6" />,
+        name: "Web開発",
+        skills: ["React", "Vue", "Angular", "Node.js", "Python", "PHP"]
+      },
+      {
+        icon: <Smartphone className="w-6 h-6" />,
+        name: "モバイル開発",
+        skills: ["iOS", "Android", "Flutter", "React Native", "Kotlin", "Swift"]
+      },
+      {
+        icon: <Cloud className="w-6 h-6" />,
+        name: "クラウド & DevOps",
+        skills: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform"]
+      },
+      {
+        icon: <Database className="w-6 h-6" />,
+        name: "データサイエンス & AI",
+        skills: ["Python", "R", "TensorFlow", "PyTorch", "SQL", "ML"]
+      },
+      {
+        icon: <Palette className="w-6 h-6" />,
+        name: "UI/UXデザイン",
+        skills: ["Figma", "Sketch", "Adobe XD", "プロトタイピング", "ユーザー調査"]
+      },
+      {
+        icon: <Globe className="w-6 h-6" />,
+        name: "デジタルマーケティング",
+        skills: ["SEO", "PPC", "ソーシャルメディア", "コンテンツ戦略", "分析"]
+      },
+    ],
   },
   zh: {
-    title: "最完整的科技招聘平台",
-    scheduling: {
-      name: "智能调度",
+    title: "AI驱动的项目人才匹配",
+    matching: {
+      name: "智能匹配",
       description: (
         <>
-          <p className="mb-4">我们的调度系统彻底改变了您协调面试的方式：</p>
+          <p className="mb-4">
+            我们的AI算法分析您的项目需求并找到完美的人才匹配：
+          </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>与Google日历、Outlook等自动同步</li>
-            <li>候选人根据您的可用性选择时间</li>
-            <li>自动邮件和短信提醒</li>
-            <li>面试间隔时间配置</li>
-            <li>智能屏蔽非工作时间</li>
+            <li>高级技能和经验匹配</li>
+            <li>可用性和时区对齐</li>
+            <li>项目复杂性评估</li>
+            <li>文化契合和工作风格兼容性</li>
+            <li>预算和费率优化</li>
           </ul>
-          <p>减少80%的协调时间，消除无尽的邮件往来。</p>
+          <p>比传统方法快5倍找到合适人才。</p>
         </>
       ),
-      stats: "95%的面试安排无冲突",
+      stats: "人才项目匹配准确率95%",
     },
-    interviews: {
-      name: "集成面试",
+    onboarding: {
+      name: "快速入职",
       description: (
         <>
-          <p className="mb-4">在一个地方获得有效面试所需的一切：</p>
+          <p className="mb-4">
+            使用经过预先审核的专业人士立即启动您的项目：
+          </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>高清视频通话，质量有保障</li>
-            <li>自动录制，安全存储</li>
-            <li>实时转录与内容分析</li>
-            <li>标准化问题模板</li>
-            <li>面试中共享笔记</li>
+            <li>验证技能和作品集审查</li>
+            <li>背景和参考检查</li>
+            <li>即时可用性确认</li>
+            <li>合同和协议模板</li>
+            <li>安全支付设置</li>
           </ul>
-          <p>无需使用Zoom、Teams等外部工具。</p>
+          <p>将入职时间从数周减少到仅几天。</p>
         </>
       ),
-      stats: "面试效率提高40%",
+      stats: "项目启动速度快70%",
     },
-    evaluation: {
-      name: "协作评估",
+    management: {
+      name: "项目管理",
       description: (
         <>
-          <p className="mb-4">使用我们的评估系统做出更客观的决定：</p>
+          <p className="mb-4">
+            成功管理项目所需的一切：
+          </p>
           <ul className="list-disc pl-5 space-y-2 mb-6">
-            <li>按职位标准化的评分卡</li>
-            <li>招聘团队的异步反馈</li>
-            <li>候选人并列比较</li>
-            <li>文化兼容性分析</li>
-            <li>与您的技术测试集成</li>
+            <li>集成沟通工具</li>
+            <li>进度跟踪和里程碑</li>
+            <li>时间跟踪和生产力指标</li>
+            <li>文件共享和协作</li>
+            <li>质量保证检查点</li>
           </ul>
-          <p>减少无意识偏见，提高招聘质量。</p>
+          <p>在一个平台中实现完整的项目可见性和控制。</p>
         </>
       ),
-      stats: "决策过程时间减少60%",
+      stats: "项目成功率提高40%",
     },
     buttons: {
-      liveDemo: "查看实时演示",
-      documentation: "技术文档",
+      findTalent: "立即寻找人才",
+      viewCases: "查看案例研究",
     },
+    techStack: "我们为您连接所有技术领域的专家",
+    techCategories: [
+      {
+        icon: <Code className="w-6 h-6" />,
+        name: "Web开发",
+        skills: ["React", "Vue", "Angular", "Node.js", "Python", "PHP"]
+      },
+      {
+        icon: <Smartphone className="w-6 h-6" />,
+        name: "移动开发",
+        skills: ["iOS", "Android", "Flutter", "React Native", "Kotlin", "Swift"]
+      },
+      {
+        icon: <Cloud className="w-6 h-6" />,
+        name: "云与DevOps",
+        skills: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform"]
+      },
+      {
+        icon: <Database className="w-6 h-6" />,
+        name: "数据科学与AI",
+        skills: ["Python", "R", "TensorFlow", "PyTorch", "SQL", "ML"]
+      },
+      {
+        icon: <Palette className="w-6 h-6" />,
+        name: "UI/UX设计",
+        skills: ["Figma", "Sketch", "Adobe XD", "原型设计", "用户研究"]
+      },
+      {
+        icon: <Globe className="w-6 h-6" />,
+        name: "数字营销",
+        skills: ["SEO", "PPC", "社交媒体", "内容策略", "分析"]
+      },
+    ],
   },
 };
 
@@ -352,27 +513,30 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
 
   const features = [
     {
-      name: t.scheduling.name,
-      description: t.scheduling.description,
-      image: "/screenshots/scheduling.webp",
-      stats: t.scheduling.stats,
+      name: t.matching.name,
+      description: t.matching.description,
+      image: "/screenshots/ai-matching.webp",
+      stats: t.matching.stats,
+      icon: <Brain className="w-6 h-6" />
     },
     {
-      name: t.interviews.name,
-      description: t.interviews.description,
-      image: "/screenshots/interview.webp",
-      stats: t.interviews.stats,
+      name: t.onboarding.name,
+      description: t.onboarding.description,
+      image: "/screenshots/onboarding.webp",
+      stats: t.onboarding.stats,
+      icon: <Rocket className="w-6 h-6" />
     },
     {
-      name: t.evaluation.name,
-      description: t.evaluation.description,
-      image: "/screenshots/evaluation.webp",
-      stats: t.evaluation.stats,
+      name: t.management.name,
+      description: t.management.description,
+      image: "/screenshots/project-management.webp",
+      stats: t.management.stats,
+      icon: <BarChart3 className="w-6 h-6" />
     },
   ];
 
   return (
-    <section id="product-showcase" className="py-24 bg-linear-to-br bg-gray-50">
+    <section id="product-showcase" className="py-24 bg-gray-50 to-primary-50/30">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-start gap-12">
           {/* Left panel (content) */}
@@ -388,18 +552,18 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
             </motion.h2>
 
             <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-              <TabList className="flex space-x-1 rounded-xl bg-primary-900/10 p-1 mb-8">
+              <TabList className="flex space-x-1 rounded-xl bg-primary-100 p-1 mb-8">
                 {features.map((feature) => (
                   <Tab
                     key={feature.name}
                     className={({ selected }) =>
-                      `w-full rounded-lg py-3 text-sm font-medium leading-5 transition-colors ${
-                        selected
-                          ? "bg-white shadow-lg text-primary-700"
-                          : "text-gray-700 hover:bg-white/70"
+                      `w-full rounded-lg py-3 px-4 text-sm font-medium leading-5 transition-colors flex items-center justify-center gap-2 ${selected
+                        ? "bg-white shadow-lg text-primary-700"
+                        : "text-gray-700 hover:bg-white/70"
                       }`
                     }
                   >
+                    {feature.icon}
                     {feature.name}
                   </Tab>
                 ))}
@@ -421,11 +585,11 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
                         {feature.stats}
                       </div>
                       <div className="flex flex-col sm:flex-row gap-4">
-                        <button className="px-8 py-3 bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-lg font-medium hover:from-primary-700 hover:to-primary-800 transition-colors shadow-lg hover:shadow-xl">
-                          {t.buttons.liveDemo}
+                        <button className="px-8 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl">
+                          {t.buttons.findTalent}
                         </button>
                         <button className="px-8 py-3 border-2 border-primary-600 text-primary-700 rounded-lg font-medium hover:bg-primary-50 transition-colors">
-                          {t.buttons.documentation}
+                          {t.buttons.viewCases}
                         </button>
                       </div>
                     </div>
@@ -433,26 +597,70 @@ export function ProductShowcase({ language }: ProductShowcaseProps) {
                 ))}
               </TabPanels>
             </TabGroup>
+
+            {/* Tech Stack Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="mt-12"
+            >
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                {t.techStack}
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {t.techCategories.map((category) => (
+                  <div key={category.name} className="bg-white p-4 rounded-lg shadow-xs border border-gray-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="text-primary-600">{category.icon}</div>
+                      <span className="font-medium text-gray-900">{category.name}</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      {category.skills.slice(0, 3).map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                      {category.skills.length > 3 && (
+                        <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-full">
+                          +{category.skills.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
           {/* Right panel (image) */}
-          <div className="lg:w-1/2 h-full min-h-[500px] lg:min-h-[600px] sticky top-6">
+          <div className="lg:w-1/2 h-full min-h-[600px] lg:min-h-[700px] sticky top-6">
             <motion.div
               key={selectedIndex}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 h-full"
+              className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 h-full bg-white"
             >
-              <img
-                src={features[selectedIndex].image}
-                alt={features[selectedIndex].name}
-                className="w-full h-full object-contain object-top bg-white p-4"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent p-6">
-                <p className="text-white font-medium text-lg">
-                  {features[selectedIndex].name} • ProMeets
-                </p>
+              <div className="h-full flex items-center justify-center p-8">
+                <div className="text-center">
+                  <div className="w-20 h-20 mx-auto mb-6 bg-primary-100 rounded-full flex items-center justify-center">
+                    {features[selectedIndex].icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    {features[selectedIndex].name}
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    {features[selectedIndex].stats}
+                  </p>
+                  <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-700">
+                    AI-powered matching and project management platform
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>

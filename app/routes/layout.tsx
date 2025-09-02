@@ -13,7 +13,7 @@ export default function Layout() {
     <>
       <Header language={language} />
       <main>
-        <div className="pt-28" />
+        <div className="pt-20" />
         <Outlet />
         <CallToAction language={language} />
       </main>

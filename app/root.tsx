@@ -6,11 +6,11 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { LinksFunction, LoaderFunctionArgs } from "react-router";
 import { languageLoader } from "./loaders/language";
 import "tiptap-extension-resizable-image/styles.css";
 import "./tailwind.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -38,6 +38,16 @@ export const loader = async (args: LoaderFunctionArgs) => {
         "https://www.linkedin.com/company/pro-meets",
       PUBLIC_STRIPE_PUBLISHABLE_KEY:
         process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "",
+
+      JULIO_TORRES_LINKEDIN:
+        process.env.PUBLIC_JULIO_TORRES_LINKEDIN ??
+        "https://www.linkedin.com/in/julio-cesar-torres-moreno/",
+      JULIO_TORRES_GITHUB: process.env.PUBLIC_JULIO_TORRES_GITHUB ?? "",
+      JULIO_TORRES_EMAIL: process.env.PUBLIC_JULIO_TORRES_EMAIL ?? "",
+      LEONARDO_TORRES_LINKEDIN:
+        process.env.PUBLIC_LEONARDO_TORRES_LINKEDIN ?? "",
+      LEONARDO_TORRES_EMAIL:
+        process.env.PUBLIC_LEONARDO_TORRES_EMAIL ?? "",
     },
   };
 };
@@ -64,13 +74,7 @@ export function Layout({ children }: LayoutProps) {
   );
 }
 
-export function ErrorBoundary() {
-  return (
-    <Layout>
-      <h1 className="text-red-500">Something went wrong</h1>
-    </Layout>
-  );
-}
+export { ErrorBoundary } from '~/components/ErrorBoundary';
 
 export default function App() {
   const { ENV, language } = useLoaderData<typeof loader>();

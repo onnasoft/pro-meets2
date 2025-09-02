@@ -1,201 +1,275 @@
-import { Building, UserCheck, Users, Clock, BarChart2 } from "lucide-react";
+import {
+  Building,
+  Target,
+  Rocket,
+  Globe,
+  Cloud,
+  Brain,
+  ArrowRight
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { Language } from "pro-meets-core";
 
 const translations = {
   en: {
-    title: "Who benefits from ProMeets?",
-    subtitle:
-      "Designed specifically for the needs of technical and high-growth teams",
+    title: "Who Benefits from Our AI Matching Platform?",
+    subtitle: "Designed for companies and teams that need to find the perfect talent for their projects",
     beneficiaries: [
       {
-        title: "Tech Companies",
-        description:
-          "Hire developers and technical profiles 3x faster with our specialized workflow.",
-        stats: "65% reduction in time-to-hire",
+        title: "Tech Startups",
+        description: "Quickly find specialized developers and technical talent for your MVP and growth projects.",
+        stats: "Find talent 5x faster than traditional methods",
+        icon: <Rocket className="w-6 h-6" />,
+        industries: ["SaaS", "FinTech", "HealthTech", "EdTech"]
       },
       {
-        title: "TA Teams",
-        description:
-          "Automate 80% of repetitive tasks and focus on strategy and candidate experience.",
-        stats: "40+ hours saved monthly",
+        title: "Enterprise Teams",
+        description: "Scale your development capacity with vetted experts for specific projects and initiatives.",
+        stats: "40% cost reduction on project staffing",
+        icon: <Building className="w-6 h-6" />,
+        industries: ["Finance", "Healthcare", "E-commerce", "Manufacturing"]
       },
       {
-        title: "Hiring Teams",
-        description:
-          "Make collaborative decisions with standardized evaluation and side-by-side comparison.",
-        stats: "60% fewer follow-up meetings",
+        title: "Digital Agencies",
+        description: "Find the right specialists for each client project without long recruitment cycles.",
+        stats: "2x more projects delivered with same team size",
+        icon: <Globe className="w-6 h-6" />,
+        industries: ["Marketing", "Design", "Development", "Consulting"]
       },
       {
-        title: "Growing Startups",
-        description:
-          "Scale your hiring process without increasing your People Ops team.",
-        stats: "2x more hires with same team",
+        title: "Product Teams",
+        description: "Augment your team with specialized skills for specific features or technical challenges.",
+        stats: "70% faster time-to-market for new features",
+        icon: <Target className="w-6 h-6" />,
+        industries: ["Mobile Apps", "Web Platforms", "AI/ML", "IoT"]
       },
       {
-        title: "HR Leaders",
-        description:
-          "Access real-time dashboards with key metrics from the entire hiring funnel.",
-        stats: "30% improvement in hiring quality",
+        title: "IT Departments",
+        description: "Quickly find experts for infrastructure, security, and digital transformation projects.",
+        stats: "60% reduction in project onboarding time",
+        icon: <Cloud className="w-6 h-6" />,
+        industries: ["Cloud Migration", "DevOps", "Cybersecurity", "Data Engineering"]
+      },
+      {
+        title: "Innovation Labs",
+        description: "Access cutting-edge expertise for R&D projects and experimental initiatives.",
+        stats: "3x more innovation projects completed annually",
+        icon: <Brain className="w-6 h-6" />,
+        industries: ["AI Research", "Blockchain", "AR/VR", "Biotech"]
       },
     ],
-    ctaTitle: "Don't see your use case?",
-    ctaDescription:
-      "We've helped more than 20 different industries optimize their recruitment.",
-    ctaButton: "Talk to a specialist",
+    ctaTitle: "Not sure if our platform fits your needs?",
+    ctaDescription: "We've helped companies across 30+ industries find perfect talent matches for their projects",
+    ctaButton: "Schedule a Consultation",
+    ctaSecondary: "View Industry Case Studies"
   },
   es: {
-    title: "¿Quién se beneficia con ProMeets?",
-    subtitle:
-      "Diseñado específicamente para las necesidades de equipos técnicos y de alto crecimiento",
+    title: "¿Quién se Beneficia de Nuestra Plataforma de Matching con IA?",
+    subtitle: "Diseñada para empresas y equipos que necesitan encontrar el talento perfecto para sus proyectos",
     beneficiaries: [
       {
-        title: "Empresas de Tecnología",
-        description:
-          "Contrata desarrolladores y perfiles técnicos 3x más rápido con nuestro flujo especializado.",
-        stats: "Reducción de 65% en time-to-hire",
+        title: "Startups Tecnológicas",
+        description: "Encuentra rápidamente desarrolladores especializados y talento técnico para tu MVP y proyectos de crecimiento.",
+        stats: "Encuentra talento 5x más rápido que métodos tradicionales",
+        icon: <Rocket className="w-6 h-6" />,
+        industries: ["SaaS", "FinTech", "HealthTech", "EdTech"]
       },
       {
-        title: "Equipos de TA",
-        description:
-          "Automatiza el 80% de tareas repetitivas y enfócate en la estrategia y experiencia del candidato.",
-        stats: "40+ horas ahorradas mensualmente",
+        title: "Equipos Enterprise",
+        description: "Escala tu capacidad de desarrollo con expertos verificados para proyectos e iniciativas específicas.",
+        stats: "40% reducción de costos en staffing de proyectos",
+        icon: <Building className="w-6 h-6" />,
+        industries: ["Finanzas", "Salud", "E-commerce", "Manufactura"]
       },
       {
-        title: "Equipos de Contratación",
-        description:
-          "Toma decisiones colaborativas con evaluación estandarizada y comparación lado a lado.",
-        stats: "60% menos reuniones de seguimiento",
+        title: "Agencias Digitales",
+        description: "Encuentra los especialistas adecuados para cada proyecto de cliente sin largos ciclos de reclutamiento.",
+        stats: "2x más proyectos entregados con mismo tamaño de equipo",
+        icon: <Globe className="w-6 h-6" />,
+        industries: ["Marketing", "Diseño", "Desarrollo", "Consultoría"]
       },
       {
-        title: "Startups en Crecimiento",
-        description:
-          "Escala tu proceso de contratación sin aumentar tu equipo de People Ops.",
-        stats: "2x más contrataciones con mismo equipo",
+        title: "Equipos de Producto",
+        description: "Aumenta tu equipo con habilidades especializadas para features específicas o desafíos técnicos.",
+        stats: "70% más rápido time-to-market para nuevas features",
+        icon: <Target className="w-6 h-6" />,
+        industries: ["Apps Móviles", "Plataformas Web", "AI/ML", "IoT"]
       },
       {
-        title: "Líderes de RH",
-        description:
-          "Acceso a dashboards en tiempo real con métricas clave de todo el funnel de contratación.",
-        stats: "30% mejora en calidad de contratación",
+        title: "Departamentos de TI",
+        description: "Encuentra rápidamente expertos para infraestructura, seguridad y proyectos de transformación digital.",
+        stats: "60% reducción en tiempo de onboarding de proyectos",
+        icon: <Cloud className="w-6 h-6" />,
+        industries: ["Migración Cloud", "DevOps", "Ciberseguridad", "Ingeniería de Datos"]
+      },
+      {
+        title: "Labs de Innovación",
+        description: "Accede a expertise de vanguardia para proyectos de R&D e iniciativas experimentales.",
+        stats: "3x más proyectos de innovación completados anualmente",
+        icon: <Brain className="w-6 h-6" />,
+        industries: ["Investigación AI", "Blockchain", "AR/VR", "Biotecnología"]
       },
     ],
-    ctaTitle: "¿No ves tu caso de uso?",
-    ctaDescription:
-      "Hemos ayudado a más de 20 industrias diferentes a optimizar su reclutamiento.",
-    ctaButton: "Hablar con un especialista",
+    ctaTitle: "¿No estás seguro si nuestra plataforma se adapta a tus necesidades?",
+    ctaDescription: "Hemos ayudado a empresas en 30+ industrias a encontrar matches perfectos de talento para sus proyectos",
+    ctaButton: "Agendar Consulta",
+    ctaSecondary: "Ver Casos de Estudio por Industria"
   },
   fr: {
-    title: "Qui bénéficie de ProMeets ?",
-    subtitle:
-      "Conçu spécifiquement pour les besoins des équipes techniques et à croissance rapide",
+    title: "Qui Bénéficie de Notre Plateforme de Matching IA ?",
+    subtitle: "Conçue pour les entreprises et équipes qui doivent trouver les talents parfaits pour leurs projets",
     beneficiaries: [
       {
-        title: "Entreprises Technologiques",
-        description:
-          "Embauchez des développeurs et profils techniques 3x plus vite avec notre flux spécialisé.",
-        stats: "Réduction de 65% du délai d'embauche",
+        title: "Startups Technologiques",
+        description: "Trouvez rapidement des développeurs spécialisés et des talents techniques pour votre MVP et projets de croissance.",
+        stats: "Trouvez des talents 5x plus vite que les méthodes traditionnelles",
+        icon: <Rocket className="w-6 h-6" />,
+        industries: ["SaaS", "FinTech", "HealthTech", "EdTech"]
       },
       {
-        title: "Équipes de Recrutement",
-        description:
-          "Automatisez 80% des tâches répétitives et concentrez-vous sur la stratégie et l'expérience candidat.",
-        stats: "40+ heures économisées mensuellement",
+        title: "Équipes Enterprise",
+        description: "Étendez votre capacité de développement avec des experts vérifiés pour des projets et initiatives spécifiques.",
+        stats: "40% de réduction des coûts de staffing projet",
+        icon: <Building className="w-6 h-6" />,
+        industries: ["Finance", "Santé", "E-commerce", "Manufacture"]
       },
       {
-        title: "Équipes d'Embauche",
-        description:
-          "Prenez des décisions collaboratives avec évaluation standardisée et comparaison côte à côte.",
-        stats: "60% moins de réunions de suivi",
+        title: "Agences Digitales",
+        description: "Trouvez les spécialistes appropriés pour chaque projet client sans longs cycles de recrutement.",
+        stats: "2x plus de projets livrés avec la même taille d'équipe",
+        icon: <Globe className="w-6 h-6" />,
+        industries: ["Marketing", "Design", "Développement", "Consulting"]
       },
       {
-        title: "Startups en Croissance",
-        description:
-          "Étendez votre processus d'embauche sans augmenter votre équipe People Ops.",
-        stats: "2x plus d'embauches avec la même équipe",
+        title: "Équipes Produit",
+        description: "Augmentez votre équipe avec des compétences spécialisées pour des fonctionnalités spécifiques ou défis techniques.",
+        stats: "70% plus rapide time-to-market pour nouvelles fonctionnalités",
+        icon: <Target className="w-6 h-6" />,
+        industries: ["Apps Mobiles", "Plateformes Web", "IA/ML", "IoT"]
       },
       {
-        title: "Responsables RH",
-        description:
-          "Accédez à des tableaux de bord en temps réel avec les métriques clés de tout l'entonnoir de recrutement.",
-        stats: "30% d'amélioration de la qualité d'embauche",
+        title: "Départments IT",
+        description: "Trouvez rapidement des experts pour l'infrastructure, sécurité et projets de transformation digitale.",
+        stats: "60% de réduction du temps d'onboarding projet",
+        icon: <Cloud className="w-6 h-6" />,
+        industries: ["Migration Cloud", "DevOps", "Cybersécurité", "Ingénierie Données"]
+      },
+      {
+        title: "Labs d'Innovation",
+        description: "Accédez à une expertise de pointe pour projets R&D et initiatives expérimentales.",
+        stats: "3x plus de projets d'innovation complétés annuellement",
+        icon: <Brain className="w-6 h-6" />,
+        industries: ["Recherche IA", "Blockchain", "AR/VR", "Biotechnologie"]
       },
     ],
-    ctaTitle: "Vous ne voyez pas votre cas d'utilisation ?",
-    ctaDescription:
-      "Nous avons aidé plus de 20 industries différentes à optimiser leur recrutement.",
-    ctaButton: "Parler à un spécialiste",
+    ctaTitle: "Vous ne savez pas si notre plateforme correspond à vos besoins ?",
+    ctaDescription: "Nous avons aidé des entreprises de 30+ industries à trouver des matches de talent parfaits pour leurs projets",
+    ctaButton: "Planifier une Consultation",
+    ctaSecondary: "Voir les Études de Cas par Industrie"
   },
   jp: {
-    title: "ProMeetsの恩恵を受けるのは誰？",
-    subtitle: "技術チームと急成長チームのニーズに特化して設計",
+    title: "当社のAIマッチングプラットフォームの恩恵を受けるのは？",
+    subtitle: "プロジェクトに完璧な人材を見つける必要がある企業とチームのために設計",
     beneficiaries: [
       {
-        title: "テクノロジー企業",
-        description:
-          "専門化されたワークフローで開発者や技術プロファイルを3倍速く採用。",
-        stats: "採用時間65%削減",
+        title: "テクノロジースタートアップ",
+        description: "MVPや成長プロジェクトのための専門的な開発者と技術人材を素早く見つけます。",
+        stats: "従来の方法より5倍速く人材を発見",
+        icon: <Rocket className="w-6 h-6" />,
+        industries: ["SaaS", "FinTech", "HealthTech", "EdTech"]
       },
       {
-        title: "TAチーム",
-        description: "反復タスクの80%を自動化し、戦略と候補者体験に集中。",
-        stats: "月40時間以上節約",
+        title: "エンタープライズチーム",
+        description: "特定のプロジェクトとイニシアチブのための検証済みエキスパートで開発能力を拡張。",
+        stats: "プロジェクト人員配置コスト40%削減",
+        icon: <Building className="w-6 h-6" />,
+        industries: ["金融", "医療", "Eコマース", "製造"]
       },
       {
-        title: "採用チーム",
-        description: "標準化された評価と並列比較で共同意思決定を実現。",
-        stats: "フォローアップ会議60%削減",
+        title: "デジタルエージェンシー",
+        description: "長い採用サイクルなしで各クライアントプロジェクトに適した専門家を見つけます。",
+        stats: "同じチームサイズで2倍以上のプロジェクトを納品",
+        icon: <Globe className="w-6 h-6" />,
+        industries: ["マーケティング", "デザイン", "開発", "コンサルティング"]
       },
       {
-        title: "成長中のスタートアップ",
-        description: "People Opsチームを増やすことなく採用プロセスを拡張。",
-        stats: "同じチームで2倍の採用",
+        title: "プロダクトチーム",
+        description: "特定の機能や技術的課題のために専門スキルでチームを強化。",
+        stats: "新機能の市場投入時間70%短縮",
+        icon: <Target className="w-6 h-6" />,
+        industries: ["モバイルアプリ", "Webプラットフォーム", "AI/ML", "IoT"]
       },
       {
-        title: "HRリーダー",
-        description:
-          "採用ファネル全体の主要メトリクスをリアルタイムでダッシュボード確認。",
-        stats: "採用品質30%向上",
+        title: "IT部門",
+        description: "インフラ、セキュリティ、デジタル変革プロジェクトの専門家を素早く見つけます。",
+        stats: "プロジェクトオンボーディング時間60%削減",
+        icon: <Cloud className="w-6 h-6" />,
+        industries: ["クラウド移行", "DevOps", "サイバーセキュリティ", "データエンジニアリング"]
+      },
+      {
+        title: "イノベーションラボ",
+        description: "R&Dプロジェクトと実験的イニシアチブのための最先端の専門知識にアクセス。",
+        stats: "年間完了イノベーションプロジェクト3倍増",
+        icon: <Brain className="w-6 h-6" />,
+        industries: ["AI研究", "ブロックチェーン", "AR/VR", "バイオテクノロジー"]
       },
     ],
-    ctaTitle: "該当するユースケースが見つかりませんか？",
-    ctaDescription: "20以上の異なる業界の採用最適化を支援してきました。",
-    ctaButton: "専門家と話す",
+    ctaTitle: "当社のプラットフォームがご要件に合うか不明ですか？",
+    ctaDescription: "30以上の業界の企業がプロジェクトに完璧な人材マッチを見つけるのを支援してきました",
+    ctaButton: "相談を予約する",
+    ctaSecondary: "業界別事例研究を見る"
   },
   zh: {
-    title: "谁从ProMeets中受益？",
-    subtitle: "专为技术团队和高速增长团队的需求设计",
+    title: "谁从我们的AI匹配平台中受益？",
+    subtitle: "专为需要为项目找到完美人才的公司和团队设计",
     beneficiaries: [
       {
-        title: "科技公司",
-        description:
-          "通过我们的专业工作流程，以3倍速度招聘开发人员和技术人才。",
-        stats: "减少65%的招聘时间",
+        title: "科技初创公司",
+        description: "快速为您的MVP和增长项目找到专业开发人员和技术人才。",
+        stats: "比传统方法快5倍找到人才",
+        icon: <Rocket className="w-6 h-6" />,
+        industries: ["SaaS", "金融科技", "医疗科技", "教育科技"]
       },
       {
-        title: "招聘团队",
-        description: "自动化80%重复性任务，专注于策略和候选人体验。",
-        stats: "每月节省40+小时",
+        title: "企业团队",
+        description: "为特定项目和计划使用经过审查的专家来扩展您的开发能力。",
+        stats: "项目人员配置成本降低40%",
+        icon: <Building className="w-6 h-6" />,
+        industries: ["金融", "医疗", "电子商务", "制造"]
       },
       {
-        title: "招聘小组",
-        description: "通过标准化评估和并列比较做出协作决策。",
-        stats: "减少60%的跟进会议",
+        title: "数字机构",
+        description: "无需漫长的招聘周期即可为每个客户项目找到合适的专家。",
+        stats: "相同团队规模交付2倍以上项目",
+        icon: <Globe className="w-6 h-6" />,
+        industries: ["营销", "设计", "开发", "咨询"]
       },
       {
-        title: "成长中的初创公司",
-        description: "无需增加人事团队即可扩展招聘流程。",
-        stats: "相同团队实现2倍招聘量",
+        title: "产品团队",
+        description: "为特定功能或技术挑战增加专业技能的团队成员。",
+        stats: "新功能上市时间加快70%",
+        icon: <Target className="w-6 h-6" />,
+        industries: ["移动应用", "Web平台", "AI/ML", "物联网"]
       },
       {
-        title: "人力资源主管",
-        description: "访问实时仪表板，查看整个招聘漏斗的关键指标。",
-        stats: "招聘质量提高30%",
+        title: "IT部门",
+        description: "快速找到基础设施、安全和数字化转型项目的专家。",
+        stats: "项目入职时间减少60%",
+        icon: <Cloud className="w-6 h-6" />,
+        industries: ["云迁移", "DevOps", "网络安全", "数据工程"]
+      },
+      {
+        title: "创新实验室",
+        description: "获取研发项目和实验性计划的前沿专业知识。",
+        stats: "年度完成创新项目增加3倍",
+        icon: <Brain className="w-6 h-6" />,
+        industries: ["AI研究", "区块链", "AR/VR", "生物技术"]
       },
     ],
-    ctaTitle: "没有看到您的用例？",
-    ctaDescription: "我们已经帮助20多个不同行业优化了招聘流程。",
-    ctaButton: "与专家交流",
+    ctaTitle: "不确定我们的平台是否适合您的需求？",
+    ctaDescription: "我们已经帮助30多个行业的公司为他们的项目找到完美的人才匹配",
+    ctaButton: "安排咨询",
+    ctaSecondary: "查看行业案例研究"
   },
 };
 
@@ -205,13 +279,6 @@ interface WhoBenefitsProps {
 
 export function WhoBenefits({ language }: WhoBenefitsProps) {
   const t = translations[language] || translations.en;
-  const icons = [
-    <Building key="building" className="w-8 h-8" />,
-    <UserCheck key="usercheck" className="w-8 h-8" />,
-    <Users key="users" className="w-8 h-8" />,
-    <Clock key="clock" className="w-8 h-8" />,
-    <BarChart2 key="barchart2" className="w-8 h-8" />,
-  ];
 
   return (
     <section id="who-benefits" className="py-20 bg-white">
@@ -237,7 +304,7 @@ export function WhoBenefits({ language }: WhoBenefitsProps) {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {t.beneficiaries.map((beneficiary, index) => (
             <motion.div
               key={beneficiary.title}
@@ -246,23 +313,71 @@ export function WhoBenefits({ language }: WhoBenefitsProps) {
               transition={{ duration: 0.3, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
-              className="bg-white p-8 rounded-xl shadow-xs border border-gray-100 hover:shadow-md transition-all"
+              className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all group"
             >
-              <div className="w-14 h-14 bg-primary-50 rounded-lg flex items-center justify-center mb-6 text-primary-600">
-                {icons[index]}
+              {/* Icon */}
+              <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                {beneficiary.icon}
               </div>
+
+              {/* Title and Description */}
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 {beneficiary.title}
               </h3>
-              <p className="text-gray-600 mb-4">{beneficiary.description}</p>
-              <div className="px-4 py-2 bg-gray-100 rounded-lg inline-block">
-                <p className="text-sm font-medium text-gray-700">
+              <p className="text-gray-600 mb-6">{beneficiary.description}</p>
+
+              {/* Stats */}
+              <div className="px-4 py-3 bg-primary-50 rounded-lg mb-4">
+                <p className="text-sm font-medium text-primary-700">
                   {beneficiary.stats}
                 </p>
+              </div>
+
+              {/* Industries */}
+              <div className="flex flex-wrap gap-2">
+                {beneficiary.industries.slice(0, 3).map((industry) => (
+                  <span
+                    key={industry}
+                    className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                  >
+                    {industry}
+                  </span>
+                ))}
+                {beneficiary.industries.length > 3 && (
+                  <span className="px-3 py-1 bg-gray-100 text-gray-500 text-sm rounded-full">
+                    +{beneficiary.industries.length - 3}
+                  </span>
+                )}
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-8 md:p-12 text-white text-center"
+        >
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+            {t.ctaTitle}
+          </h3>
+          <p className="text-xl mb-8 opacity-90">
+            {t.ctaDescription}
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="px-8 py-3 bg-white text-primary-700 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition-colors flex items-center justify-center">
+              {t.ctaButton}
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </button>
+            <button className="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-primary-700 transition-colors">
+              {t.ctaSecondary}
+            </button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
