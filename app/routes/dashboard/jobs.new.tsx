@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { ContractType, Create, createJob, EducationLevel, Job, JobStatus, JobType } from "pro-meets-core";
+import { ContractType, Create, createJob, EducationLevel, Job, JobStatus, JobType } from "@onnasoft/pro-meets-core";
 import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import JobForm from "~/components/jobs/JobForm";

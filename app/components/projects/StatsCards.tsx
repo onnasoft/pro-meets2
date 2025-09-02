@@ -1,4 +1,4 @@
-import { statusOrganization } from "pro-meets-core";
+import { statusOrganization } from "@onnasoft/pro-meets-core";
 import translations from "./translations";
 
 interface StatsCardsProps {

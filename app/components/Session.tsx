@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import useAuthStore from "~/store/auth";
 import { jwtDecode } from "jwt-decode";
-import { refreshToken } from "pro-meets-core";
+import { refreshToken } from "@onnasoft/pro-meets-core";
 
 export default function Session() {
   const auth = useAuthStore();

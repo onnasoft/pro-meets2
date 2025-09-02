@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { HeartPulse, Shield, Smartphone, Car, GraduationCap, Globe, Code2 } from "lucide-react";
-import { Language } from "pro-meets-core";
+import { Language } from "@onnasoft/pro-meets-core";
 
 const translations = {
   en: {

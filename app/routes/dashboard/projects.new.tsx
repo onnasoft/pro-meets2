@@ -10,7 +10,7 @@ import { useRequireOrganization } from "~/hooks/require-organization";
 import useErrorStore from "~/store/error";
 import { DashboardOutletContext } from "~/types/dashboard";
 import Title from "~/components/Title";
-import { Create, createMedia, createProject, In, MemberRole, MemberStatus, Project, ProjectStatus } from "pro-meets-core";
+import { Create, createMedia, createProject, In, MemberRole, MemberStatus, Project, ProjectStatus } from "@onnasoft/pro-meets-core";
 
 export default function NewProjectPage() {
   useRequireOrganization();

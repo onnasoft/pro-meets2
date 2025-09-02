@@ -12,7 +12,7 @@ import CompanyField from "./fields/CompanyField";
 import TermsField from "./fields/TermsField";
 import { useGoogleLogin } from "@react-oauth/google";
 import useAuthStore from "~/store/auth";
-import { Language, OAuthGoogleLogin, register } from "pro-meets-core";
+import { Language, OAuthGoogleLogin, register } from "@onnasoft/pro-meets-core";
 
 interface SignUpFormProps {
   readonly language: Language;

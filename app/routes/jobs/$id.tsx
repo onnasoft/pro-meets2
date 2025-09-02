@@ -4,7 +4,7 @@ import Header from "~/components/Header";
 import { languageLoader } from "~/loaders/language";
 import { useState } from "react";
 import HTMLView from "~/components/HTMLView";
-import { ContractType, EducationLevel, getJob, JobStatus, JobType, Language } from "pro-meets-core";
+import { ContractType, EducationLevel, getJob, JobStatus, JobType, Language } from "@onnasoft/pro-meets-core";
 
 interface LoaderData {
   language: Language;

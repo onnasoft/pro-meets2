@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import { Language } from "pro-meets-core";
+import { Language } from "@onnasoft/pro-meets-core";
 
 const translations = {
   es: {

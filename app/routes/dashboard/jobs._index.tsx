@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { deleteJob, Job } from "pro-meets-core";
+import { deleteJob, Job } from "@onnasoft/pro-meets-core";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import JobsTable from "~/components/jobs/JobsTable";

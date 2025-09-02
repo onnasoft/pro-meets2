@@ -1,7 +1,7 @@
 import { Video } from "lucide-react";
 import { Link } from "react-router";
 import config from "~/config";
-import { Language } from "pro-meets-core";
+import { Language } from "@onnasoft/pro-meets-core";
 
 const translations = {
   en: {

@@ -18,7 +18,7 @@ import { DashboardOutletContext } from "~/types/dashboard";;
 import Title from "~/components/Title";
 import { useJobs } from "~/hooks/jobs";
 import JobsManager from "~/components/projects/JobsManager";
-import { createMedia, getProject, In, MemberRole, MemberStatus, Project, ProjectStatus, Update, updateProject } from "pro-meets-core";
+import { createMedia, getProject, In, MemberRole, MemberStatus, Project, ProjectStatus, Update, updateProject } from "@onnasoft/pro-meets-core";
 
 export async function loader(args: LoaderFunctionArgs) {
   try {

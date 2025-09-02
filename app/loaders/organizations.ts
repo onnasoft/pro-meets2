@@ -1,4 +1,4 @@
-import { getOrganizations, MemberStatus, Organization } from "pro-meets-core";
+import { getOrganizations, MemberStatus, Organization } from "@onnasoft/pro-meets-core";
 import { LoaderFunctionArgs, redirect } from "react-router";
 import logger from "~/utils/logger";
 

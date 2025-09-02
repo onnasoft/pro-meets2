@@ -1,4 +1,4 @@
-import { ContractType, EducationLevel, JobStatus, JobType } from "pro-meets-core";
+import { ContractType, EducationLevel, JobStatus, JobType } from "@onnasoft/pro-meets-core";
 
 const translations = {
   en: {

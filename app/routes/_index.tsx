@@ -1,5 +1,8 @@
 
 import Hero from "~/components/sections/Hero";
+import useAuthStore from "~/store/auth";
+import Header from "~/components/Header";
+import Footer from "~/components/Footer";
 import { MetaFunction, useLoaderData } from "react-router";
 import { KeyBenefits } from "~/components/sections/KeyBenefits";
 import { ProductShowcase } from "~/components/sections/ProductShowcase";
@@ -9,8 +12,8 @@ import { WhoBenefits } from "~/components/sections/WhoBenefits";
 import { FrequentAskedQuestions } from "~/components/sections/FrequentAskedQuestions";
 import { Pricing } from "~/components/sections/Pricing";
 import { languageLoader } from "~/loaders/language";
-
-export { languageLoader as loader } from "~/loaders/language";
+import { CallToAction } from "~/components/sections/CallToAction";
+import SocialNetwork from "~/components/social-network/SocialNetwork";
 
 const metaTranslations = {
   en: {
@@ -100,19 +103,32 @@ export const meta: MetaFunction<typeof languageLoader> = ({ loaderData }) => {
   ];
 };
 
+export const loader = languageLoader;
+
 export default function IndexPage() {
   const { language } = useLoaderData<typeof languageLoader>();
+  const isAuthenticated = useAuthStore(({ isAuthenticated }) => isAuthenticated);
+
+  if (isAuthenticated()) {
+    return <SocialNetwork />;
+  }
 
   return (
     <>
-      <Hero language={language} />
-      <KeyBenefits language={language} />
-      <ProductShowcase language={language} />
-      <CompetitorComparison language={language} />
-      <WorkflowIntegration language={language} />
-      <WhoBenefits language={language} />
-      <FrequentAskedQuestions language={language} />
-      <Pricing language={language} />
+      <Header language={language} />
+      <main>
+        <div className="pt-20" />
+        <Hero language={language} />
+        <KeyBenefits language={language} />
+        <ProductShowcase language={language} />
+        <CompetitorComparison language={language} />
+        <WorkflowIntegration language={language} />
+        <WhoBenefits language={language} />
+        <FrequentAskedQuestions language={language} />
+        <Pricing language={language} />
+        <CallToAction language={language} />
+      </main>
+      <Footer language={language} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { ProjectStatus } from "pro-meets-core";
+import { ProjectStatus } from "@onnasoft/pro-meets-core";
 import translations from "./translations";
 
 interface ProjectStatusBadgeProps {

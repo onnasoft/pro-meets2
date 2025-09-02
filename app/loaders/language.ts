@@ -1,4 +1,4 @@
-import { defaultLanguage, Language, languages } from "pro-meets-core";
+import { defaultLanguage, Language, languages } from "@onnasoft/pro-meets-core";
 import { LoaderFunctionArgs } from "react-router";
 
 interface LoaderData {

@@ -7,7 +7,7 @@ import {
 
 import { User, Shield, Briefcase } from "lucide-react";
 import { getAvatarUrl } from "~/utils/gravatar";
-import { getOrganizationsMembers, Language, MemberRole } from "pro-meets-core";
+import { getOrganizationsMembers, Language, MemberRole } from "@onnasoft/pro-meets-core";
 
 const translations = {
   en: {

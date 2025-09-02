@@ -9,7 +9,7 @@ import { getOrganizationSchema } from "~/components/organization/schema";
 import { DashboardOutletContext } from "~/types/dashboard";
 import useErrorStore from "~/store/error";
 import Title from "~/components/Title";
-import { Create, createMedia, createOrganization, Organization, OrganizationPlan } from "pro-meets-core";
+import { Create, createMedia, createOrganization, Organization, OrganizationPlan } from "@onnasoft/pro-meets-core";
 
 export { languageLoader as loader } from "~/loaders/language";
 

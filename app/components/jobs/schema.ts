@@ -1,6 +1,6 @@
 import Joi from "joi";
 import translations from "./translations";
-import { ContractType, EducationLevel, JobStatus, JobType } from "pro-meets-core";
+import { ContractType, EducationLevel, JobStatus, JobType } from "@onnasoft/pro-meets-core";
 
 export const getJobSchema = (t: typeof translations.en) =>
   Joi.object({

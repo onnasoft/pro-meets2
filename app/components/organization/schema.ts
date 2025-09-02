@@ -1,6 +1,6 @@
 import Joi from "joi";
 import translations from "./translations";
-import { OrganizationPlan } from "pro-meets-core";
+import { OrganizationPlan } from "@onnasoft/pro-meets-core";
 
 export const getOrganizationSchema = (t: typeof translations.en) =>
   Joi.object({

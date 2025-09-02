@@ -11,6 +11,11 @@ interface AuthState {
 
 const cookieStorage = {
   getItem: (name: string): string | null => {
+    if (typeof document === "undefined") {
+      const cookies: Record<string, string> = (global as any)["cookies"];
+      return cookies[name] || null;
+    }
+
     const regex = new RegExp("(^| )" + name + "=([^;]+)");
     const match = regex.exec(document.cookie);
     return match ? decodeURIComponent(match[2]) : null;

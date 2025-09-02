@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getOrganizationMembers, getOrganizationsMembers } from "pro-meets-core";
+import { getOrganizationMembers, getOrganizationsMembers } from "@onnasoft/pro-meets-core";
 
 export function useOrganizationsMembers(
   params: Parameters<typeof getOrganizationsMembers>[0]

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProject, getProjects } from "pro-meets-core";
+import { getProject, getProjects } from "@onnasoft/pro-meets-core";
 
 export function useProjects(params?: Parameters<typeof getProjects>[0]) {
   return useQuery({

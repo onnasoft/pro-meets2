@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router";
-import { Job, JobStatus } from "pro-meets-core";
+import { Job, JobStatus } from "@onnasoft/pro-meets-core";
 import { DashboardOutletContext } from "~/types/dashboard";
 import useConfirmationStore from "~/store/confirmation";
 

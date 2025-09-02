@@ -4,7 +4,7 @@ import { UserMenu } from "./UserMenu";
 import translations from "./translations";
 import { Menu } from "lucide-react";
 import useMobileMenuStore from "~/store/menu";
-import { Organization, User } from "pro-meets-core";
+import { Organization, User } from "@onnasoft/pro-meets-core";
 
 interface HeaderProps {
   readonly organizations: Organization[];

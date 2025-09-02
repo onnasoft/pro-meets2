@@ -26,6 +26,16 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async (args: LoaderFunctionArgs) => {
+  const cookieHeader = args.request.headers.get("Cookie") || "";
+  const cookies = Object.fromEntries(
+    cookieHeader.split("; ").map((c) => {
+      const [k, v] = c.split("=");
+      return [k, decodeURIComponent(v)];
+    })
+  );
+
+  (global as any)["cookies"] = cookies;
+
   const { language } = await languageLoader(args);
   return {
     language,

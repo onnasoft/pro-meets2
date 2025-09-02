@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { TrendingUp, Target, Users, Clock, Award, Star, BarChart3, CheckCircle } from "lucide-react";
-import { Language } from "pro-meets-core";
+import { Language } from "@onnasoft/pro-meets-core";
 
 const translations = {
   en: {

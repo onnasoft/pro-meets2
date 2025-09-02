@@ -1,4 +1,4 @@
-import { OrganizationPlan } from "pro-meets-core";
+import { OrganizationPlan } from "@onnasoft/pro-meets-core";
 import { BadgeCheck, CreditCard, Building2 } from "lucide-react";
 import translations from "./translations";
 import { useOutletContext, useNavigate } from "react-router";

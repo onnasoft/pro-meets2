@@ -1,7 +1,7 @@
 import { Calendar, Users } from "lucide-react";
 import { ProjectStatusBadge } from "./ProjectStatusBadge";
 import translations from "./translations";
-import { Project, ProjectStatus,JobStatus } from "pro-meets-core";
+import { Project, ProjectStatus,JobStatus } from "@onnasoft/pro-meets-core";
 import HTMLView from "../HTMLView";
 import { Link } from "react-router";
 

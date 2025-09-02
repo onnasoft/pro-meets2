@@ -24,7 +24,7 @@ import { useOutletContext } from "react-router";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { ResizableImage } from 'tiptap-extension-resizable-image';
 import config from "~/config";
-import { createMedia } from "pro-meets-core";
+import { createMedia } from "@onnasoft/pro-meets-core";
 
 interface ToolbarButtonProps {
   readonly onClick: () => void;

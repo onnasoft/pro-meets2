@@ -13,7 +13,7 @@ import {
   Star
 } from "lucide-react";
 import useLanguageStore from "~/store/language";
-import { Language } from "pro-meets-core";
+import { Language } from "@onnasoft/pro-meets-core";
 
 const translations = {
   en: {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CirclePlus, Pencil, X } from "lucide-react";
 import useErrorStore from "~/store/error";
-import { createOrganizationMember, MemberRole, Organization, OrganizationMember } from "pro-meets-core";
+import { createOrganizationMember, MemberRole, Organization, OrganizationMember } from "@onnasoft/pro-meets-core";
 
 interface RoleOption {
   value: MemberRole;

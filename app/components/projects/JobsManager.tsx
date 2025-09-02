@@ -8,7 +8,7 @@ import translations from "../jobs/translations";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { getJobSchema } from "../jobs/schema";
 import { useQueryClient } from "@tanstack/react-query";
-import { ContractType, Create, createJob, deleteJob, EducationLevel, Job, JobStatus, JobType, Project, Update, updateJob } from "pro-meets-core";
+import { ContractType, Create, createJob, deleteJob, EducationLevel, Job, JobStatus, JobType, Project, Update, updateJob } from "@onnasoft/pro-meets-core";
 
 interface JobsManagerProps {
   readonly project: Project;

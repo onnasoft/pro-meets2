@@ -10,7 +10,7 @@ import { useOrganizations } from "~/hooks/organizations";
 import { DashboardOutletContext } from "~/types/dashboard";
 import useErrorStore from "~/store/error";
 import useConfirmationStore from "~/store/confirmation";
-import { deleteOrganizationMember, Equal, MemberStatus } from "pro-meets-core";
+import { deleteOrganizationMember, Equal, MemberStatus } from "@onnasoft/pro-meets-core";
 
 export { languageLoader as loader } from "~/loaders/language";
 

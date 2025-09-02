@@ -1,4 +1,4 @@
-import { verifyEmail } from "pro-meets-core";
+import { verifyEmail } from "@onnasoft/pro-meets-core";
 import { LoaderFunctionArgs, Link, useLoaderData } from "react-router";
 import { languageLoader } from "~/loaders/language";
 

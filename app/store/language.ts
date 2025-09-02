@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { defaultLanguage, Language } from "pro-meets-core";
+import { defaultLanguage, Language } from "@onnasoft/pro-meets-core";
 
 const cookieStorage = {
   getItem: (name: string): string | null => {

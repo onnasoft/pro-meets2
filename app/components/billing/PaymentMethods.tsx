@@ -3,7 +3,7 @@ import translations from "./translations";
 import { useEffect, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useQueryClient } from "@tanstack/react-query";
-import { attachPaymentMethod, createSetupIntent, detachPaymentMethod, PaymentMethod, setDefaultPaymentMethod } from "pro-meets-core";
+import { attachPaymentMethod, createSetupIntent, detachPaymentMethod, PaymentMethod, setDefaultPaymentMethod } from "@onnasoft/pro-meets-core";
 
 interface PaymentMethodsProps {
   readonly translations: typeof translations.en.paymentMethods;

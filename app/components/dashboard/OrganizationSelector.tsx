@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import translations from "./translations";
 import useOrganizationStore from "~/store/organization";
-import { Organization, updateOrganization } from "pro-meets-core";
+import { Organization, updateOrganization } from "@onnasoft/pro-meets-core";
 
 interface OrganizationSelectorProps {
   readonly organizations: Organization[];

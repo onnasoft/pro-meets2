@@ -1,4 +1,4 @@
-import { ContractType, EducationLevel, Job, JobStatus, JobType, Project } from "pro-meets-core";
+import { ContractType, EducationLevel, Job, JobStatus, JobType, Project } from "@onnasoft/pro-meets-core";
 import HTMLEditor from "~/components/HTMLEditor";
 import translations from "~/components/jobs/translations";
 import config from "~/config";

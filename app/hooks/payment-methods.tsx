@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPaymentMethods } from "pro-meets-core";
+import { getPaymentMethods } from "@onnasoft/pro-meets-core";
 
 export function usePaymentMethods() {
   return useQuery({

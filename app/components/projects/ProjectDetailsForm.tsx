@@ -1,6 +1,6 @@
 import { User, Calendar, Flag } from "lucide-react";
 import { useEffect, useState } from "react";
-import { OrganizationMember, ProjectStatus } from "pro-meets-core";
+import { OrganizationMember, ProjectStatus } from "@onnasoft/pro-meets-core";
 
 interface Translations {
   fields: {

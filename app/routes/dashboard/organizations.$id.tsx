@@ -16,7 +16,7 @@ import MembersManager from "~/components/organization/MembersManager";
 import { DashboardOutletContext } from "~/types/dashboard";
 import useErrorStore from "~/store/error";
 import Title from "~/components/Title";
-import { createMedia, getOrganization, In, MemberRole, MemberStatus, Organization, OrganizationPlan, Update, updateOrganization } from "pro-meets-core";
+import { createMedia, getOrganization, In, MemberRole, MemberStatus, Organization, OrganizationPlan, Update, updateOrganization } from "@onnasoft/pro-meets-core";
 
 interface LoaderData {
   organization: Organization;

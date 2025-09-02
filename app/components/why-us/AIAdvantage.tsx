@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Brain, Target, Zap, Shield, BarChart3, Clock, Sparkles } from "lucide-react";
-import { Language } from "pro-meets-core";
+import { Language } from "@onnasoft/pro-meets-core";
 
 const translations = {
   en: {

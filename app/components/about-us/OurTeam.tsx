@@ -1,6 +1,8 @@
-  import { motion } from "framer-motion";
-import { Code, Scale, Mail, Linkedin, Github, MapPin } from "lucide-react";
-import { Language } from "pro-meets-core";
+import { motion } from "framer-motion";
+import { Code, Scale, Mail, MapPin } from "lucide-react";
+import { Language } from "@onnasoft/pro-meets-core";
+import { SiGithub, SiLinkedin } from "react-icons/si";
+import config from "~/config";
 
 const translations = {
   en: {
@@ -13,9 +15,9 @@ const translations = {
         description: "Software Developer with a Master's in AI and 10+ years of experience. Passionate about creating solutions that simplify developers' lives through intelligent technology.",
         expertise: ["Artificial Intelligence", "Software Architecture", "Machine Learning", "Cloud Computing"],
         image: "/team/julio-cesar.jpg", // Placeholder path
-        linkedin: "https://linkedin.com/in/julio-cesar",
-        github: "https://github.com/julio-cesar",
-        email: "julio@promeets.com"
+        linkedin: config.juliorTorresLinkedIn,
+        github: config.juliorTorresGithub,
+        email: config.juliorTorresEmail
       },
       {
         name: "Leonardo de los Angeles Torres Moreno",
@@ -23,8 +25,8 @@ const translations = {
         description: "Experienced lawyer specializing in technology law and business regulations. Ensures our platform operates with the highest standards of compliance and user protection.",
         expertise: ["Technology Law", "Business Compliance", "Data Protection", "Contract Law"],
         image: "/team/leonardo.jpg", // Placeholder path
-        linkedin: "https://linkedin.com/in/leonardo-torres",
-        email: "leonardo@promeets.com"
+        linkedin: config.leonardoTorresLinkedIn,
+        email: config.leonardoTorresEmail
       }
     ],
     values: {
@@ -270,12 +272,12 @@ export function OurTeam({ language }: OurTeamProps) {
 
           {/* Team Members */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-            {t.members.map((member, index) => (
+            {t.members.map((member) => (
               <motion.div
-                key={index}
+                key={member.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+                transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
                 className="text-center"
               >
@@ -287,33 +289,33 @@ export function OurTeam({ language }: OurTeamProps) {
                     <Scale className="w-12 h-12 text-primary-600" />
                   )}
                 </div>
-                
+
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
                   {member.name}
                 </h3>
-                
+
                 <div className="flex items-center justify-center gap-2 mb-4">
                   <MapPin className="w-4 h-4 text-gray-500" />
                   <span className="text-sm text-gray-600">Colombia</span>
                 </div>
-                
+
                 <p className="text-lg text-primary-600 font-semibold mb-4">
                   {member.role}
                 </p>
-                
+
                 <p className="text-gray-700 mb-6 leading-relaxed">
                   {member.description}
                 </p>
-                
+
                 {/* Expertise */}
                 <div className="mb-6">
                   <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
                     Expertise
                   </h4>
                   <div className="flex flex-wrap justify-center gap-2">
-                    {member.expertise.map((skill, skillIndex) => (
+                    {member.expertise.map((skill) => (
                       <span
-                        key={skillIndex}
+                        key={skill}
                         className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
                       >
                         {skill}
@@ -321,7 +323,7 @@ export function OurTeam({ language }: OurTeamProps) {
                     ))}
                   </div>
                 </div>
-                
+
                 {/* Social Links */}
                 <div className="flex justify-center gap-4">
                   <a
@@ -330,16 +332,16 @@ export function OurTeam({ language }: OurTeamProps) {
                   >
                     <Mail className="w-5 h-5" />
                   </a>
-                  
+
                   <a
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors"
                   >
-                    <Linkedin className="w-5 h-5" />
+                    <SiLinkedin className="w-5 h-5" />
                   </a>
-                  
+
                   {member.github && (
                     <a
                       href={member.github}
@@ -347,7 +349,7 @@ export function OurTeam({ language }: OurTeamProps) {
                       rel="noopener noreferrer"
                       className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200 hover:text-gray-800 transition-colors"
                     >
-                      <Github className="w-5 h-5" />
+                      <SiGithub className="w-5 h-5" />
                     </a>
                   )}
                 </div>
@@ -365,11 +367,11 @@ export function OurTeam({ language }: OurTeamProps) {
             <h3 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12">
               {t.values.title}
             </h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {t.values.items.map((value, index) => (
                 <motion.div
-                  key={index}
+                  key={value.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -382,11 +384,11 @@ export function OurTeam({ language }: OurTeamProps) {
                     {index === 2 && <Mail className="w-6 h-6" />}
                     {index === 3 && <MapPin className="w-6 h-6" />}
                   </div>
-                  
+
                   <h4 className="text-lg font-semibold text-gray-900 mb-3">
                     {value.title}
                   </h4>
-                  
+
                   <p className="text-gray-600 text-sm">
                     {value.description}
                   </p>

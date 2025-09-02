@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { Create, getJob, Job, updateJob } from "pro-meets-core";
+import { Create, getJob, Job, updateJob } from "@onnasoft/pro-meets-core";
 import { useState } from "react";
 import {
   LoaderFunctionArgs,

@@ -1,6 +1,6 @@
 import { Download, Folder, Share2, Star, Trash2 } from "lucide-react";
 import { getFileIcon } from "./utils";
-import { Document } from "pro-meets-core";
+import { Document } from "@onnasoft/pro-meets-core";
 
 interface DocumentRowProps {
   readonly item: Document;

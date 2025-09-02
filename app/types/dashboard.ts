@@ -1,4 +1,4 @@
-import { Language, Organization, User } from "pro-meets-core";
+import { Language, Organization, User } from "@onnasoft/pro-meets-core";
 
 export interface DashboardOutletContext {
   user: User;

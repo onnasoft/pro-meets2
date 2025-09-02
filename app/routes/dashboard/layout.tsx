@@ -18,7 +18,7 @@ import useOrganizationStore from "~/store/organization";
 import ErrorDialog from "~/components/ErrorDialog";
 import MobileShadow from "~/components/MobileShadow";
 import ConfirmationDialog from "~/components/ConfirmationDialog";
-import { Language, Organization, User } from "pro-meets-core";
+import { Language, Organization, User } from "@onnasoft/pro-meets-core";
 
 interface LoaderData {
   language: Language;

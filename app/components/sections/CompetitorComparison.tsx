@@ -1,7 +1,7 @@
 import { Check, X, ChevronDown, Star, Zap, Users, Clock, Target } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Language } from "pro-meets-core";
+import { Language } from "@onnasoft/pro-meets-core";
 
 
 // Add the missing icon imports at the top

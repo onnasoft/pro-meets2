@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import useMobileMenuStore from "~/store/menu";
 import { useOrganizationStatus } from "~/hooks/organizations";
-import { Organization, User } from "pro-meets-core";
+import { Organization, User } from "@onnasoft/pro-meets-core";
 
 interface SidebarProps {
   readonly user: User;

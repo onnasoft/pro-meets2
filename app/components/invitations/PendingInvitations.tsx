@@ -3,7 +3,7 @@ import translations from "./translations";
 import { EmptyState } from "./EmptyState";
 import { getAvatarUrl } from "~/utils/gravatar";
 import { useQueryClient } from "@tanstack/react-query";
-import { deleteOrganizationMember, MemberRole, MemberStatus, OrganizationMember, updateOrganizationMember } from "pro-meets-core";
+import { deleteOrganizationMember, MemberRole, MemberStatus, OrganizationMember, updateOrganizationMember } from "@onnasoft/pro-meets-core";
 
 interface PendingInvitationsProps {
   readonly translations: typeof translations.en;

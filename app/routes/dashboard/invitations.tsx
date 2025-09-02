@@ -8,7 +8,7 @@ import PendingInvitations from "~/components/invitations/PendingInvitations";
 import PreviousInvitations from "~/components/invitations/PreviousInvitations";
 import { DashboardOutletContext } from "~/types/dashboard";
 import { useQuery } from "@tanstack/react-query";
-import { getOrganizationsMembers, MemberRole, MemberStatus } from "pro-meets-core"
+import { getOrganizationsMembers, MemberRole, MemberStatus } from "@onnasoft/pro-meets-core"
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);

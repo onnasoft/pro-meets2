@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Rocket, ChevronRight, Brain, Zap, Star } from "lucide-react";
-import { Language } from "pro-meets-core";
+import { Language } from "@onnasoft/pro-meets-core";
 
 const translations = {
   en: {

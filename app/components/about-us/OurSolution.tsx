@@ -13,7 +13,7 @@ import {
   Database,
   Lock
 } from "lucide-react";
-import { Language } from "pro-meets-core";
+import { Language } from "@onnasoft/pro-meets-core";
 import { SiHttpie } from "react-icons/si";
 
 const translations = {

@@ -1,4 +1,4 @@
-import { resendVerification } from "pro-meets-core";
+import { resendVerification } from "@onnasoft/pro-meets-core";
 import { LoaderFunction, redirect } from "react-router";
 
 export const loader: LoaderFunction = async ({ params }) => {

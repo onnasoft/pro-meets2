@@ -3,7 +3,7 @@ import { useLoaderData, Link } from "react-router";
 import { ActionFunction } from "react-router";
 import { languageLoader } from "~/loaders/language";
 import { CheckCircle, AlertCircle } from "lucide-react";
-import { forgotPassword } from "pro-meets-core";
+import { forgotPassword } from "@onnasoft/pro-meets-core";
 
 export { languageLoader as loader } from "~/loaders/language";
 

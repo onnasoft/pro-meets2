@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useGoogleLogin } from "@react-oauth/google";
 import useAuthStore from "~/store/auth";
-import { Language, login, OAuthGoogleLogin } from "pro-meets-core";
+import { Language, login, OAuthGoogleLogin } from "@onnasoft/pro-meets-core";
 
 interface LoginFormProps {
   readonly language: Language;

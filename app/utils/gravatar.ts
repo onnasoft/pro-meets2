@@ -1,7 +1,7 @@
-import { User } from "pro-meets-core";
+import { User } from "@onnasoft/pro-meets-core";
 
-export function getAvatarUrl(user: User, size: number = 200): string {
-  if (user.avatarUrl) {
+export function getAvatarUrl(user?: User, size: number = 200): string {
+  if (user?.avatarUrl) {
     return user.avatarUrl;
   }
 
