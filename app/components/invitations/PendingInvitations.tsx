@@ -45,7 +45,7 @@ export default function PendingInvitations({
                 <img
                   src={
                     invite.organization?.logoUrl ??
-                    getAvatarUrl(invite.organization?.owner!)
+                    getAvatarUrl(invite.organization?.owner)
                   }
                   alt={invite.organization?.name}
                   className="h-12 w-12 rounded-md mr-4"
