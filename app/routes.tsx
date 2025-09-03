@@ -5,6 +5,11 @@ export default [
 
   index('./routes/_index.tsx'),
 
+  route('/', './routes/social-network/layout.tsx', [
+    route('/profile', './routes/social-network/profile.tsx'),
+    route('/settings', './routes/social-network/settings.tsx'),
+  ]),
+
   route('/', './routes/layout.tsx', [
     route('/blog', './routes/blog.tsx'),
     route('/about-us', './routes/about.tsx'),
