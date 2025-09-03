@@ -124,8 +124,8 @@ export default function UserProfilePage() {
   const profile = mockProfile;
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
-      <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 space-y-8">
+    <div className="p-4">
+      <div className="bg-white rounded-lg p-6 space-y-8">
         {/* Personal Information */}
         <PersonalInformation translations={t} profile={profile} />
 

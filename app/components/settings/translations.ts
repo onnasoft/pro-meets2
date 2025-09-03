@@ -46,6 +46,30 @@ const translations = {
       noWebhooks: "No webhooks configured",
       delete: "Delete",
     },
+    password: {
+      title: "Password",
+      currentPassword: {
+        label: "Current Password",
+        placeholder: "Enter your current password",
+      },
+      newPassword: {
+        label: "New Password",
+        placeholder: "Enter your new password",
+        requirements: "Must be at least 8 characters long and include a number.",
+      },
+      confirmPassword: {
+        label: "Confirm Password",
+        placeholder: "Re-enter your new password",
+      },
+      strength: {
+        weak: "Weak",
+        medium: "Medium",
+        strong: "Strong",
+      },
+      updateButton: "Update Password",
+      successMessage: "Password updated successfully.",
+      errorMessage: "Failed to update password.",
+    }
   },
   es: {
     title: "Configuración del Sistema",
@@ -94,6 +118,30 @@ const translations = {
       noWebhooks: "No hay webhooks configurados",
       delete: "Eliminar",
     },
+    password: {
+      title: "Contraseña",
+      currentPassword: {
+        label: "Contraseña actual",
+        placeholder: "Introduce tu contraseña actual",
+      },
+      newPassword: {
+        label: "Nueva contraseña",
+        placeholder: "Introduce tu nueva contraseña",
+        requirements: "Debe tener al menos 8 caracteres y incluir un número.",
+      },
+      confirmPassword: {
+        label: "Confirmar contraseña",
+        placeholder: "Vuelve a introducir tu nueva contraseña",
+      },
+      strength: {
+        weak: "Débil",
+        medium: "Medio",
+        strong: "Fuerte",
+      },
+      updateButton: "Actualizar contraseña",
+      successMessage: "Contraseña actualizada con éxito.",
+      errorMessage: "Error al actualizar la contraseña.",
+    }
   },
   fr: {
     title: "Paramètres du système",
@@ -141,6 +189,30 @@ const translations = {
       add: "Ajouter",
       noWebhooks: "Aucun webhook configuré",
       delete: "Supprimer",
+    },
+    password: {
+      title: "Mot de passe",
+      currentPassword: {
+        label: "Mot de passe actuel",
+        placeholder: "Entrez votre mot de passe actuel",
+      },
+      newPassword: {
+        label: "Nouveau mot de passe",
+        placeholder: "Entrez votre nouveau mot de passe",
+        requirements: "Doit comporter au moins 8 caractères et inclure un chiffre.",
+      },
+      confirmPassword: {
+        label: "Confirmer le mot de passe",
+        placeholder: "Ressaisissez votre nouveau mot de passe",
+      },
+      strength: {
+        weak: "Faible",
+        medium: "Moyen",
+        strong: "Fort",
+      },
+      updateButton: "Mettre à jour le mot de passe",
+      successMessage: "Mot de passe mis à jour avec succès.",
+      errorMessage: "Échec de la mise à jour du mot de passe.",
     },
   },
   jp: {
@@ -190,6 +262,30 @@ const translations = {
       noWebhooks: "設定されたウェブフックがありません",
       delete: "削除",
     },
+    password: {
+      title: "パスワード",
+      currentPassword: {
+        label: "現在のパスワード",
+        placeholder: "現在のパスワードを入力してください",
+      },
+      newPassword: {
+        label: "新しいパスワード",
+        placeholder: "新しいパスワードを入力してください",
+        requirements: "8文字以上で、数字を含める必要があります。",
+      },
+      confirmPassword: {
+        label: "パスワードの確認",
+        placeholder: "新しいパスワードを再入力してください",
+      },
+      strength: {
+        weak: "弱い",
+        medium: "普通",
+        strong: "強い",
+      },
+      updateButton: "パスワードを更新",
+      successMessage: "パスワードが正常に更新されました。",
+      errorMessage: "パスワードの更新に失敗しました。",
+    },
   },
   zh: {
     title: "系统设置",
@@ -236,6 +332,30 @@ const translations = {
       add: "添加",
       noWebhooks: "没有配置的webhooks",
       delete: "删除",
+    },
+    password: {
+      title: "密码",
+      currentPassword: {
+        label: "当前密码",
+        placeholder: "请输入您的当前密码",
+      },
+      newPassword: {
+        label: "新密码",
+        placeholder: "请输入您的新密码",
+        requirements: "必须至少包含8个字符，并且包含数字。",
+      },
+      confirmPassword: {
+        label: "确认密码",
+        placeholder: "请重新输入您的新密码",
+      },
+      strength: {
+        weak: "弱",
+        medium: "中",
+        strong: "强",
+      },
+      updateButton: "更新密码",
+      successMessage: "密码更新成功。",
+      errorMessage: "密码更新失败。",
     },
   },
 };

@@ -1,5 +1,5 @@
 import { Language, User } from "@onnasoft/pro-meets-core";
-import { LoaderFunctionArgs, Outlet, redirect, useOutletContext } from "react-router";
+import { LoaderFunctionArgs, Outlet, redirect, useLoaderData } from "react-router";
 import SocialNetworkLayout from "~/components/social-network/SocialNetworkLayout";
 import { languageLoader } from "~/loaders/language";
 import { sessionLoader } from "~/loaders/session";
@@ -38,7 +38,7 @@ export async function loader(args: LoaderFunctionArgs) {
 }
 
 export default function Layout() {
-  const { user, language } = useOutletContext<LoaderData>();
+  const { user, language } = useLoaderData<typeof loader>();
 
   return (
     <SocialNetworkLayout>
