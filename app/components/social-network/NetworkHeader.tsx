@@ -6,19 +6,11 @@ import { Link } from 'react-router';
 
 interface NetworkHeaderProps {
   currentUser: UserType;
-  unreadCount: number;
-  onChatClick: () => void;
-  onProfileClick?: () => void;
-  onSettingsClick?: () => void;
   onLogout?: () => void;
 }
 
 export const NetworkHeader: React.FC<NetworkHeaderProps> = ({
   currentUser,
-  unreadCount,
-  onChatClick,
-  onProfileClick,
-  onSettingsClick,
   onLogout
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { FloatingChatSystem, useChatSystem } from '~/components/social-network/FloatingChatBox';
 import { currentUser } from '~/components/social-network/data/mockData';
 import { NetworkHeader } from '~/components/social-network/NetworkHeader';
@@ -9,7 +8,6 @@ interface SocialNetworkLayoutProps {
 }
 
 export default function SocialNetworkLayout({ children }: SocialNetworkLayoutProps) {
-  const [showChatList, setShowChatList] = useState(false);
   const { chats, startChat, closeChat, addMessage, activeChatId, setActiveChat } = useChatSystem();
 
   const availableUsers = [currentUser]
@@ -31,8 +29,6 @@ export default function SocialNetworkLayout({ children }: SocialNetworkLayoutPro
 
       <NetworkHeader
         currentUser={currentUser}
-        unreadCount={0}
-        onChatClick={() => setShowChatList(!showChatList)}
       />
 
       <FloatingChatSystem

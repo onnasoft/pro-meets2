@@ -97,7 +97,7 @@ export function PasswordSection({
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
               placeholder={translations.currentPassword.placeholder}
-              className="w-full p-3 border border-gray-300 rounded-lg pr-10"
+              className="w-full p-3 border border-gray-300 rounded-lg pr-10 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               required
             />
             <button
@@ -122,7 +122,7 @@ export function PasswordSection({
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder={translations.newPassword.placeholder}
-              className="w-full p-3 border border-gray-300 rounded-lg pr-10"
+              className="w-full p-3 border border-gray-300 rounded-lg pr-10 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               required
             />
             <button
@@ -183,7 +183,7 @@ export function PasswordSection({
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder={translations.confirmPassword.placeholder}
-                  className={`w-full p-3 border rounded-lg pr-10 ${confirmPasswordBorderClass}`}
+                  className={`w-full p-3 border rounded-lg pr-10 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-primary-500 ${confirmPasswordBorderClass}`}
                   required
                 />
               );

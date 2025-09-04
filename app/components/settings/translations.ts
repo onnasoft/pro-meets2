@@ -55,7 +55,8 @@ const translations = {
       newPassword: {
         label: "New Password",
         placeholder: "Enter your new password",
-        requirements: "Must be at least 8 characters long and include a number.",
+        requirements:
+          "Must be at least 8 characters long and include a number.",
       },
       confirmPassword: {
         label: "Confirm Password",
@@ -69,7 +70,19 @@ const translations = {
       updateButton: "Update Password",
       successMessage: "Password updated successfully.",
       errorMessage: "Failed to update password.",
-    }
+    },
+    language: {
+      title: "Language",
+      description: "Select your preferred language",
+      languages: {
+        en: { name: "English", nativeName: "English" },
+        es: { name: "Spanish", nativeName: "Español" },
+        fr: { name: "French", nativeName: "Français" },
+        ja: { name: "Japanese", nativeName: "日本語" },
+        zh: { name: "Chinese", nativeName: "中文" },
+      },
+      changeNote: "Changing your language will update the interface language.",
+    },
   },
   es: {
     title: "Configuración del Sistema",
@@ -141,7 +154,19 @@ const translations = {
       updateButton: "Actualizar contraseña",
       successMessage: "Contraseña actualizada con éxito.",
       errorMessage: "Error al actualizar la contraseña.",
-    }
+    },
+    language: {
+      title: "Idioma",
+      description: "Selecciona tu idioma preferido",
+      languages: {
+        en: { name: "English", nativeName: "English" },
+        es: { name: "Spanish", nativeName: "Español" },
+        fr: { name: "French", nativeName: "Français" },
+        ja: { name: "Japanese", nativeName: "日本語" },
+        zh: { name: "Chinese", nativeName: "中文" },
+      },
+      changeNote: "Cambiar tu idioma actualizará el idioma de la interfaz.",
+    },
   },
   fr: {
     title: "Paramètres du système",
@@ -199,7 +224,8 @@ const translations = {
       newPassword: {
         label: "Nouveau mot de passe",
         placeholder: "Entrez votre nouveau mot de passe",
-        requirements: "Doit comporter au moins 8 caractères et inclure un chiffre.",
+        requirements:
+          "Doit comporter au moins 8 caractères et inclure un chiffre.",
       },
       confirmPassword: {
         label: "Confirmer le mot de passe",
@@ -213,6 +239,18 @@ const translations = {
       updateButton: "Mettre à jour le mot de passe",
       successMessage: "Mot de passe mis à jour avec succès.",
       errorMessage: "Échec de la mise à jour du mot de passe.",
+    },
+    language: {
+      title: "Langue",
+      description: "Sélectionnez votre langue préférée",
+      languages: {
+        en: { name: "English", nativeName: "English" },
+        es: { name: "Spanish", nativeName: "Español" },
+        fr: { name: "French", nativeName: "Français" },
+        ja: { name: "Japanese", nativeName: "日本語" },
+        zh: { name: "Chinese", nativeName: "中文" },
+      },
+      changeNote: "Changer votre langue mettra à jour la langue de l'interface.",
     },
   },
   jp: {
@@ -286,6 +324,18 @@ const translations = {
       successMessage: "パスワードが正常に更新されました。",
       errorMessage: "パスワードの更新に失敗しました。",
     },
+    language: {
+      title: "言語",
+      description: "お好みの言語を選択してください",
+      languages: {
+        en: { name: "English", nativeName: "English" },
+        es: { name: "Spanish", nativeName: "Español" },
+        fr: { name: "French", nativeName: "Français" },
+        ja: { name: "Japanese", nativeName: "日本語" },
+        zh: { name: "Chinese", nativeName: "中文" },
+      },
+      changeNote: "言語を変更すると、インターフェースの言語が更新されます。",
+    },
   },
   zh: {
     title: "系统设置",
@@ -356,6 +406,18 @@ const translations = {
       updateButton: "更新密码",
       successMessage: "密码更新成功。",
       errorMessage: "密码更新失败。",
+    },
+    language: {
+      title: "语言",
+      description: "选择您的首选语言",
+      languages: {
+        en: { name: "English", nativeName: "English" },
+        es: { name: "Spanish", nativeName: "Español" },
+        fr: { name: "French", nativeName: "Français" },
+        ja: { name: "Japanese", nativeName: "日本語" },
+        zh: { name: "Chinese", nativeName: "中文" },
+      },
+      changeNote: "更改语言将更新界面的语言。",
     },
   },
 };

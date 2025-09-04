@@ -3,6 +3,8 @@ import { languageLoader } from "~/loaders/language";
 import { NotificationsSection } from "~/components/settings/NotificationsSection";
 import translations from "~/components/settings/translations";
 import { useState } from "react";
+import { PasswordSection } from "~/components/settings/PasswordSection";
+import { LanguageSection } from "~/components/settings/LanguageSection";
 
 export { languageLoader as loader } from "~/loaders/language";
 
@@ -17,6 +19,22 @@ export default function SettingsPage() {
   return (
     <div className="p-4 flex-1">
       <div className="space-y-8">
+        <PasswordSection
+          translations={t.password}
+          onPasswordUpdate={async (currentPassword, newPassword) => {
+            // Handle password update logic here
+            return true;
+          }}
+        />
+
+        <LanguageSection
+          translations={t.language}
+          currentLanguage={language}
+          onLanguageChange={(lang) => {
+            // Handle language change logic here
+          }}
+        />
+
         <NotificationsSection
           translations={t.notifications}
           emailEnabled={emailEnabled}
