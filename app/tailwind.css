@@ -81,9 +81,9 @@
 
 /* Estilos base del editor */
 .ProseMirror {
-  min-height: 300px;
   padding: 1rem;
   outline: none;
+  overflow-y: auto;
 }
 
 /* Encabezados */

@@ -41,7 +41,7 @@ export default function FileUploadDialog({
     }
   }, []);
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDragOver = (e: React.DragEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsDragging(true);
   };
@@ -50,7 +50,7 @@ export default function FileUploadDialog({
     setIsDragging(false);
   };
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDrop = (e: React.DragEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsDragging(false);
     if (e.dataTransfer.files) {
@@ -87,7 +87,7 @@ export default function FileUploadDialog({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <div className="fixed inset-0 bg-black/20" />
         </TransitionChild>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -110,15 +110,21 @@ export default function FileUploadDialog({
                     {title}
                   </DialogTitle>
 
-                  <div
-                    className={`border-2 border-dashed rounded-lg p-6 text-center ${
+                  <button
+                    type="button"
+                    className={`border-2 border-dashed rounded-lg p-6 text-center w-full ${
                       isDragging
                         ? "border-primary-500 bg-primary-50"
                         : "border-gray-300"
                     }`}
+                    aria-label="File upload dropzone"
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
+                    onClick={() => {
+                      // Focus the hidden file input when the dropzone is clicked
+                      document.getElementById("file-upload-input")?.click();
+                    }}
                   >
                     <div className="flex flex-col items-center justify-center space-y-2">
                       <UploadCloud className="h-10 w-10 text-gray-400" />
@@ -128,6 +134,7 @@ export default function FileUploadDialog({
                           Select files
                         </span>
                         <input
+                          id="file-upload-input"
                           type="file"
                           className="hidden"
                           accept={accept}
@@ -136,7 +143,7 @@ export default function FileUploadDialog({
                         />
                       </label>
                     </div>
-                  </div>
+                  </button>
 
                   {files.length > 0 && (
                     <div className="space-y-2">
