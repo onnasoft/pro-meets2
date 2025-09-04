@@ -3,10 +3,11 @@ interface HTMLViewProps {
   readonly value?: string;
 }
 
-export default function HTMLView({ value }: HTMLViewProps) {
-  return (
-    <div className="html-view">
-      <div className="ProseMirror" dangerouslySetInnerHTML={{ __html: value ?? "" }} />
-    </div>
-  );
-}
+const HTMLView = ({ value }: HTMLViewProps) => (
+  <div
+    className="html-view"
+    dangerouslySetInnerHTML={{ __html: value ?? "" }}
+  />
+);
+
+export default HTMLView;

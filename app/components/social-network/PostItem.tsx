@@ -2,6 +2,7 @@ import React from 'react';
 import { Heart, MessageSquare, Share } from 'lucide-react';
 import { getAvatarUrl } from '~/utils/gravatar';
 import { Post } from '@onnasoft/pro-meets-core';
+import HTMLView from '../HTMLView';
 
 interface PostItemProps {
   post: Post;
@@ -29,7 +30,9 @@ export const PostItem: React.FC<PostItemProps> = ({ post, onLike }) => {
             <span className="text-gray-400">·</span>
             <span className="text-gray-500 text-sm">{post.timestamp}</span>
           </div>
-          <p className="text-gray-800 mb-4">{post.content}</p>
+          <p className="text-gray-800 mb-4">
+            <HTMLView value={post.content} />
+          </p>
           
           <div className="flex gap-6 text-gray-500">
             <button

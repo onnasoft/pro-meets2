@@ -1,23 +1,33 @@
 import React, { useRef, useState } from 'react';
-import { User } from '@onnasoft/pro-meets-core';
+import { createPost, User } from '@onnasoft/pro-meets-core';
 import { getAvatarUrl } from '~/utils/gravatar';
 import HTMLEditor, { HTMLEditorHandle } from '../HTMLEditor';
+import { useQueryClient } from '@tanstack/react-query';
+import useErrorStore from '~/store/error';
 
 interface PostCreatorProps {
-  currentUser: User;
-  onSubmit: (content: string) => void;
+  readonly currentUser: User;
 }
 
-export const PostCreator: React.FC<PostCreatorProps> = ({ currentUser, onSubmit }) => {
+export const PostCreator: React.FC<PostCreatorProps> = ({ currentUser }) => {
   const editorRef = useRef<HTMLEditorHandle>(null);
   const [newPost, setNewPost] = useState('');
+  const queryClient = useQueryClient();
+  const { setError } = useErrorStore();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newPost.trim()) return;
-    onSubmit(newPost);
-    setNewPost('');
-    editorRef.current?.clearContent();
+    try {
+      await createPost({
+        content: newPost
+      });
+      setNewPost('');
+      editorRef.current?.clearContent();
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+    } catch (error) {
+      setError("Error creating post", (error as Error).message);
+    }
   };
 
   return (

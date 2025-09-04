@@ -759,8 +759,8 @@
     which "^3.0.0"
 
 "@onnasoft/pro-meets-core@https://github.com/juliotorresmoreno/pro-meets-core.git":
-  version "0.0.6"
-  resolved "https://github.com/juliotorresmoreno/pro-meets-core.git#b31f2913996e80c648521fca12bccb94e8abb35b"
+  version "0.0.7"
+  resolved "https://github.com/juliotorresmoreno/pro-meets-core.git#5fd9ac8af20a9d0e2395e34e005bf27688e4503c"
   dependencies:
     "@stripe/stripe-js" "^7.9.0"
     "@types/node" "^24.3.0"

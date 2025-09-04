@@ -87,7 +87,7 @@
 }
 
 /* Encabezados */
-.ProseMirror h1 {
+.ProseMirror h1, .html-view h1 {
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.2;
@@ -95,7 +95,7 @@
   color: #1a1a1a;
 }
 
-.ProseMirror h2 {
+.ProseMirror h2, .html-view h2 {
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.3;
@@ -103,7 +103,7 @@
   color: #1e293b;
 }
 
-.ProseMirror h3 {
+.ProseMirror h3, .html-view h3 {
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.4;
@@ -111,7 +111,7 @@
   color: #334155;
 }
 
-.ProseMirror h4 {
+.ProseMirror h4, .html-view h4 {
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 1.4;
@@ -119,7 +119,7 @@
   color: #475569;
 }
 
-.ProseMirror h5 {
+.ProseMirror h5, .html-view h5 {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.4;
@@ -127,7 +127,7 @@
   color: #64748b;
 }
 
-.ProseMirror h6 {
+.ProseMirror h6, .html-view h6 {
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.4;
@@ -136,41 +136,41 @@
 }
 
 /* Listas con viñetas */
-.ProseMirror ul {
+.ProseMirror ul, .html-view ul {
   padding-left: 1.5rem;
   margin: 0.75rem 0;
   list-style-type: disc;
 }
 
-.ProseMirror ul li {
+.ProseMirror ul li, .html-view ul li {
   margin: 0.25rem 0;
   padding-left: 0.25rem;
 }
 
 /* Listas numeradas */
-.ProseMirror ol {
+.ProseMirror ol, .html-view ol {
   padding-left: 1.5rem;
   margin: 0.75rem 0;
   list-style-type: decimal;
 }
 
-.ProseMirror ol li {
+.ProseMirror ol li, .html-view ol li {
   margin: 0.25rem 0;
   padding-left: 0.25rem;
 }
 
 /* Elementos interactivos */
-.ProseMirror a {
+.ProseMirror a, .html-view a {
   color: #2563eb;
   text-decoration: underline;
 }
 
-.ProseMirror a:hover {
+.ProseMirror a:hover, .html-view a:hover {
   color: #1d4ed8;
 }
 
 /* Separador horizontal */
-.ProseMirror hr {
+.ProseMirror hr, .html-view hr {
   margin: 1rem 0;
   border: none;
   border-top: 1px solid #e2e8f0;
