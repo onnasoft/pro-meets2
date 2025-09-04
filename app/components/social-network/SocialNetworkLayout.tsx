@@ -9,7 +9,6 @@ interface SocialNetworkLayoutProps {
 
 export default function SocialNetworkLayout({ children }: SocialNetworkLayoutProps) {
   const { chats, startChat, closeChat, addMessage, activeChatId, setActiveChat } = useChatSystem();
-
   const availableUsers = [currentUser]
 
   return (
