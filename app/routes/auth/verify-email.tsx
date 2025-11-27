@@ -74,7 +74,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     return { success: false, language }
   }
 
-  const isValid = await verifyEmail(token);
+  const isValid = await verifyEmail(token)
+    .then(() => true)
+    .catch(() => false);
 
   return { success: isValid, language };
 };
