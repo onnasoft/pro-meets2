@@ -1,6 +1,5 @@
 
 import Hero from "~/components/sections/Hero";
-import useAuthStore from "~/store/auth";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import { MetaFunction, useLoaderData } from "react-router";
@@ -13,7 +12,6 @@ import { FrequentAskedQuestions } from "~/components/sections/FrequentAskedQuest
 import { Pricing } from "~/components/sections/Pricing";
 import { languageLoader } from "~/loaders/language";
 import { CallToAction } from "~/components/sections/CallToAction";
-import SocialNetwork from "~/components/social-network/SocialNetwork";
 
 const metaTranslations = {
   en: {
@@ -107,11 +105,6 @@ export const loader = languageLoader;
 
 export default function IndexPage() {
   const { language } = useLoaderData<typeof languageLoader>();
-  const isAuthenticated = useAuthStore(({ isAuthenticated }) => isAuthenticated);
-
-  if (isAuthenticated()) {
-    return <SocialNetwork />;
-  }
 
   return (
     <>

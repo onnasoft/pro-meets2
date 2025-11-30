@@ -5,6 +5,7 @@ import Footer from "~/components/Footer";
 import { MetaFunction, useLoaderData, LoaderFunctionArgs, Link } from "react-router";
 import { languageLoader } from "~/loaders/language";
 import { useJobs } from "~/hooks/jobs";
+import commonTranslations, { formatDate } from "./translations";
 
 const translations = {
   en: {
@@ -26,6 +27,8 @@ const translations = {
     noJobsFound: "No jobs found matching your criteria",
     filters: "Filters",
     clearAll: "Clear All",
+    postedOn: "Posted on",
+    ...commonTranslations.en
   },
   es: {
     title: "Oportunidades Laborales",
@@ -46,6 +49,8 @@ const translations = {
     noJobsFound: "No se encontraron empleos que coincidan",
     filters: "Filtros",
     clearAll: "Limpiar todo",
+    postedOn: "Publicado el",
+    ...commonTranslations.es
   },
   fr: {
     title: "Opportunités d'emploi",
@@ -66,6 +71,8 @@ const translations = {
     noJobsFound: "Aucun emploi trouvé correspondant à vos critères",
     filters: "Filtres",
     clearAll: "Tout effacer",
+    postedOn: "Publié le",
+    ...commonTranslations.fr
   },
   jp: {
     title: "求人情報",
@@ -86,6 +93,8 @@ const translations = {
     noJobsFound: "条件に一致する求人は見つかりませんでした",
     filters: "フィルター",
     clearAll: "すべてクリア",
+    postedOn: "投稿日",
+    ...commonTranslations.jp
   },
   zh: {
     title: "职位机会",
@@ -106,6 +115,8 @@ const translations = {
     noJobsFound: "未找到符合您条件的职位",
     filters: "筛选",
     clearAll: "清除所有",
+    postedOn: "发布于",
+    ...commonTranslations.zh
   }
 };
 
@@ -291,7 +302,7 @@ export default function JobsPage() {
                                 {job.salaryMin} ~ {job.salaryMax}
                               </span>
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                {job.contractType}
+                                {t.contractTypes[job.contractType]}
                               </span>
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
                                 {job.experienceRequired}
@@ -302,13 +313,12 @@ export default function JobsPage() {
                       </div>
                       <div className="mt-4 md:mt-0 md:ml-4 flex flex-col items-end">
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800 mb-2">
-                          {job.type}
+                          {t.jobTypes[job.type]}
                         </span>
-                        <span className="text-sm text-gray-500 mb-3">{job.postedAt}</span>
+                        <span className="text-sm text-gray-500 mb-3">
+                          {formatDate(job.postedAt, language)}
+                        </span>
                         <div className="flex space-x-2">
-                          <button className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors">
-                            {t.applyNow}
-                          </button>
                           <Link to={`/jobs/${job.id}`} className="px-4 py-2 border border-primary-600 text-primary-600 rounded-md hover:bg-primary-50 transition-colors">
                             {t.viewDetails}
                           </Link>

@@ -49,6 +49,7 @@ export default [
     route('notifications', './routes/dashboard/notifications.tsx'),
     route('organizations/new', './routes/dashboard/organizations.new.tsx'),
     route('organizations/:id', './routes/dashboard/organizations.$id.tsx'),
+    route('profile', './routes/dashboard/profile.tsx'),
     route('projects', './routes/dashboard/projects._index.tsx'),
     route('projects/new', './routes/dashboard/projects.new.tsx'),
     route('projects/:id', './routes/dashboard/projects.$id.tsx'),

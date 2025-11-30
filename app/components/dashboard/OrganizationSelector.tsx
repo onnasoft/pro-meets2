@@ -56,7 +56,7 @@ export function OrganizationSelector({
         </button>
 
         {isOpen && (
-          <div className="absolute left-0 mt-2 w-[230px] md:w-[380px] origin-top-left bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-hidden z-50 divide-y divide-gray-100 border border-gray-200">
+          <div className="absolute left-0 mt-2 w-[230px] md:w-[380px] origin-top-left bg-white rounded-lg shadow-xl ring-opacity-5 focus:outline-hidden z-50 divide-y divide-gray-100 border border-gray-200">
             <div className="px-5 py-3 bg-gray-50 rounded-t-lg">
               <p className="text-sm font-semibold text-gray-900">
                 {translations.organizations.title}
